@@ -19,6 +19,9 @@ Foodie's Archive (Website) which is a comprehensive food website built using PHP
 # Installation and Setup Guide
 
 ## Prerequisites
-
+Before setting up the project be sure you have the following tools installed:
+1. PHP
+   - PHP version 8.0 or higher
+2. Laravel
 
 ## Steps to setup the project
