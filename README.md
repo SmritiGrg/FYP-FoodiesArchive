@@ -11,8 +11,20 @@
 Foodie's Archive (Website) which is a comprehensive food website built using PHP and laravel as its framework, a platform showcasing Nepal’s diverse foods, drinks, eateries, restaurants, etc. with their reviews, location, and likes. For this project I will be using Laravel which is a full stack web application PHP framework and MYSQL as the database management system.
 
 # Key Features
-1. hello
-2. ff
+1. **User Management:**
+   - allows users signup, signin and delete account.
+   - allows users to have username and password.
+   - allows users to edit their profile.
+   - allows users to like, comment, ask questions, bookmark and share their favourite foods.
+   - addition to regular features it allows premium users to post their favourite food's photos, location, total rating and comment, like other premium users posts.
+   - allows user to see their history of their likes and comments.
+   - users get notification if their are any new updates on new foods and replies on their reviews. 
+2. **Content Features:**
+3. **Interaction Features:**
+4. **Location and Map Integration:**
+5. **Payment Feature:**
+6. **:**
+7. **:**
 
 # Folder Structure
 
@@ -37,7 +49,7 @@ Before setting up the project be sure you have the following tools installed:
 2. **Navigate to the project directory:**
     ```bash
     cd FYP-FoodiesArchive
-   ```
+    ```
 3. **Install Composer Dependencies:**
    - this command ensures that the project has all the dependencies and libraries installed
     ```bash
