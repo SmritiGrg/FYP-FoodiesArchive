@@ -15,16 +15,19 @@ Foodie's Archive (Website) which is a comprehensive food website built using PHP
    - allows users signup, signin and delete account.
    - allows users to have username and password.
    - allows users to edit their profile.
-   - allows users to like, comment, ask questions, bookmark and share their favourite foods.
-   - addition to regular features it allows premium users to post their favourite food's photos, location, total rating and comment, like other premium users posts.
    - allows user to see their history of their likes and comments.
    - users get notification if their are any new updates on new foods and replies on their reviews. 
 2. **Content Features:**
+   - Information about various places of Nepal, giving descriptions, ratings and locations.
 3. **Interaction Features:**
+   - allows users to like, comment, ask questions, bookmark and share their favourite foods.
+   - addition to regular features it allows premium users to post their favourite food's photos, location, total rating and comment, like other premium users posts.
 4. **Location and Map Integration:**
+   - A user-friendly map that displays food places and helps users find nearby food options.
 5. **Payment Feature:**
-6. **:**
-7. **:**
+   - Payment feature for those users who want to post their own favorite foods.
+6. **Admin Panel:**
+   - Admin will be able to maintain and update all the operations like contents, payments, etc.
 
 # Folder Structure
 
