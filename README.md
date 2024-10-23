@@ -31,7 +31,8 @@ Foodie's Archive (Website) which is a comprehensive food website built using PHP
    - Admin will be able to maintain and update all the operations like contents, payments, etc.
 
 # Folder Structure
-
+In short about the main folders:
+- `database/README` contains the business rules and entity relationship diagram.
 # Installation and Setup Guide
 
 ## Prerequisites
