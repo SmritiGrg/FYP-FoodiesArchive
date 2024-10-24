@@ -4,51 +4,89 @@
 
 ## Business Rules
 
-
 1. ### Admin
     - **Properties:**
         - Admin has a full name, email and password.
-        - Admin manages the posts, users, questions and answers and payments.
+        - Admin manages the posts, users, questions, answers and payments.
         - Admin can create, edit, delete posts.
     - **Uniqueness:**
         - Admin's email should be unique.
     - **Mandatory & Optional:**
-        - Mandatory: Admin's email and first name should be mandatory.
+        - **Mandatory:** Admin's email, first name, last name, and password should be mandatory.
+        - **Optional:** Admin's profile image.
     - **Relationship:**
-        - Admin manages multiple users.
-        - Admin manages payment.
-        - Admin uploads food posts.
+        - Admin manages many users.
+        - Admin manages many payment.
+        - Admin uploads many food posts.
 2. ### User
     - **Properties:**
-        - A user has a username, email, password. 
+        - A user has a username, first name, last name, address, email, image, role and password.
+        - A user can be a premium user or a regular user.
+        - A user can like, give review, share, bookmark, and ask questions.
+        - A premium user makes payment to upload valid food posts.
+        - A premium user can post their favorite foods while a regular user cannot.
+        - A user can view food's post by admin and premium users.
+        - A user gets notification of all the newly uploaded posts, and replies to their questions.
     - **Uniqueness:**
+        - Each user must have unique username and email. 
     - **Mandatory & Optional:**
+        - **Mandatory:** username, email, first name, last name, address and password.
+        - **Optional:**  profile image.
     - **Relationship:**
+        - A user can review many food posts.
+        - A user can like many food posts.
+        - A user can bookmark many food posts.
+        - A user can ask many questions.
+        - A premium user can have many posts. 
 3. ### Restaurant
     - **Properties:**
+        -  A restaurant has name, location, and phone number.
+        -  A restaurant contains many foods.
     - **Uniqueness:**
+        - Each restaurant's phone number should be unique. 
     - **Mandatory & Optional:**
+        - **Mandatory:** name, location and phone number.
     - **Relationship:**
-4. ### Food
+        - A restaurant has many foods.
+        - A restaurant belongs to a location.
+4. ### Food Category
     - **Properties:**
-    - **Uniqueness:**
+        - Food category has name. 
     - **Mandatory & Optional:**
+        - **Mandatory:** name
     - **Relationship:**
-5. ### Food Category
+        -  A food category contains many foods.
+5. ### Food
     - **Properties:**
+        - A food has name, description, price, restaurant, rating, image, and location.
+        - A food is categorized under many food categories.
     - **Uniqueness:**
+        - none 
     - **Mandatory & Optional:**
+        - **Mandatory:** name, location, price, restaurant, image, and rating.
+        - **Optional:**  description
     - **Relationship:**
+        - Many food belongs to one restaurant.
+        - A food is categoeized under many food category.
+        - A food can have many likes.
+        - A food can have many reviews.
+        - A food can be bookmarked.
+        - A food can be liked by many users.
+        - A food can be review by many users.
 6. ### Location
     - **Properties:**
+        - A location has address, city, and province. 
     - **Uniqueness:**
     - **Mandatory & Optional:**
+        - **Mandatory:** address, city, and province.
     - **Relationship:**
+        - A location can have many restaurants. 
 7. ### Like
     - **Properties:**
     - **Uniqueness:**
     - **Mandatory & Optional:**
     - **Relationship:**
+        - A  
 8. ### Review
     - **Properties:**
     - **Uniqueness:**
