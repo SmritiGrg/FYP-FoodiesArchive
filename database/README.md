@@ -58,8 +58,9 @@
         -  A food category contains many foods.
 5. ### Food
     - **Properties:**
-        - A food has name, description, price, restaurant, rating, image, and location.
+        - A food has name, description, price, restaurant, rating, comment, like count, image, created_at and location.
         - A food is categorized under many food categories.
+        - A food post contain its name, description(optional), price, image, location, restaurant name a timestamp for when it was created.
     - **Uniqueness:**
         - none 
     - **Mandatory & Optional:**
@@ -83,19 +84,29 @@
         - A location can have many restaurants. 
 7. ### Like
     - **Properties:**
-    - **Uniqueness:**
+        -  Like has it like_id, food_id, and user_id.
     - **Mandatory & Optional:**
+        - **Mandatory:** like_id, food_id, and user_id.
     - **Relationship:**
-        - A  
+        - Many likes belongs to one food.
+        - Many likes are done by one user.
 8. ### Review
     - **Properties:**
+        - A review has review_id, rating, comment, created_at, user_id, and food_id.
+        - A review has a content (250 characters) and a timestamp for when it was created. 
     - **Uniqueness:**
     - **Mandatory & Optional:**
+        - **Mandatory:** rating
+        - **Optional:** comment
     - **Relationship:**
+        - Many reviews can be done by one user.
+        - Many reviews belongs to one food. 
 9. ### Bookmark
     - **Properties:**
-    - **Uniqueness:**
+        -  
     - **Mandatory & Optional:**
+        - **Mandatory:** rating
+        - **Optional:** comment
     - **Relationship:**
 10. ### Post
     - **Properties:**
