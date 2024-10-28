@@ -8,7 +8,7 @@
 - [Installation and Setup Guide](#installation-and-setup-guide)
 
 # About the Project
-Foodie's Archive (Website) which is a comprehensive food website built using PHP and laravel as its framework, a platform showcasing Nepal’s diverse foods, drinks, eateries, restaurants, etc. with their reviews, location, and likes. For this project I will be using Laravel which is a full stack web application PHP framework and MYSQL as the database management system.
+Foodie's Archive (Website) which is a comprehensive food website(like content creating of foods) built using PHP and laravel as its framework, a platform showcasing Nepal’s diverse foods, drinks, eateries, restaurants, etc. with their reviews, location, and likes. For this project I will be using Laravel which is a full stack web application PHP framework and MYSQL as the database management system.
 
 # Key Features
 1. **User Management:**
