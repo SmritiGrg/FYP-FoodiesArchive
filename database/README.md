@@ -8,7 +8,7 @@
     - **Properties:**
         - Admin has a full name, email and password.
         - Admin manages the posts, users, questions, answers and payments.
-        - Admin can create, edit, delete posts.
+        - Admin can create, edit, delete.
     - **Uniqueness:**
         - Admin's email should be unique.
     - **Mandatory & Optional:**
@@ -38,15 +38,7 @@
         - User &harr; Bookmark: A user can bookmark many food posts. This is a **one-to-many** relationship.
         - User &harr; Question: A user can ask many questions. This is a **one-to-many** relationship.
         - A premium user can upload many food posts.
-3. ### Location
-    - **Properties:**
-        - A location has address, city, and province. 
-    - **Uniqueness:**
-    - **Mandatory & Optional:**
-        - **Mandatory:** address, city, and province.
-    - **Relationship:**
-        - Location &harr; Restaurant: A location can have many restaurants. 
-4. ### Restaurant
+3. ### Restaurant
     - **Properties:**
         -  A restaurant has name, phone_number, email, location_id, website_link, open_time, and close_time.
         -  A restaurant contains many foods.
@@ -58,7 +50,7 @@
     - **Relationship:**
         - Restaurant &harr; Food: A restaurant has many foods.
         - Restaurant &harr; Location: A restaurant belongs to a location.
-5. ### Food Category
+4. ### Food Category
     - **Properties:**
         - Food category has name.
         - Each food are assigned to one or many categtories to make it easy for users to browse.
@@ -68,7 +60,7 @@
         - **Mandatory:** name
     - **Relationship:**
         - Food Category &harr; Food:  Food category contains many foods, and a food can belong to many categories.This is a **many-to-many** relationship. 
-6. ### Food
+5. ### Food
     - **Properties:**
         - A food has name, description, price, restaurant, rating, comment, like count, image, created_at and location.
         - A food is categorized under many food categories.
@@ -84,32 +76,25 @@
         - Food &harr; Like: A food can be liked by many users, and each like belongs to a single food. This is a **one-to-many** relationship.
         - Food &harr; Review: A food can be reviewed multiple times by different users, and each review belongs to a single food. This is a **one-to-many** relationship.
         - Food &harr; Bookmark: A food can be bookmarked.
-7. ### FoodCategory_Food
+6. ### FoodCategory_Food
    - - **Properties:**
         -  This entity handles the many-to-many relationship between foodcategory and food.
     - **Mandatory & Optional:**
         - **Mandatory:** foodcategory_food, food_id, and category_id.
     - **Relationship:**
         - FoodCategory &harr; FoodCategory_Food: Each category can have many food linked through the FoodCategory_Food entity.
-8. ### Like
+7. ### Review
     - **Properties:**
-        -  Like has it like_id, food_id, and user_id.
+        -  Like has it review_id,  rating, comment, food_id, created_at and user_id.
+        -  A review has a content (250 characters) and a timestamp for when it was created.
+        -  Rating has 5 stars.
     - **Mandatory & Optional:**
-        - **Mandatory:** like_id, food_id, and user_id.
-    - **Relationship:**
-        - Like &harr; Food: Many likes belongs to one food.
-        - Like &harr; User: Many likes are done by one user.
-9. ### Review
-    - **Properties:**
-        - A review has review_id, rating, comment, created_at, user_id, and food_id.
-        - A review has a content (250 characters) and a timestamp for when it was created. 
-    - **Mandatory & Optional:**
-        - **Mandatory:** rating
+        - **Mandatory:** review_id,  rating, food_id, created_at and user_id.
         - **Optional:** comment
     - **Relationship:**
-        - Review &harr; User: Many reviews can be done by one user.
-        - Review &harr; Food: Many reviews belongs to one food. 
-10. ### Bookmark
+        - Like &harr; Food: Many likes and reviews belongs to one food.
+        - Like &harr; User: Many likes and reviews are done by one user.
+8. ### Bookmark
     - **Properties:**
         - Bookmark is a place where user can easily access/save their favorite foods.
     - **Mandatory & Optional:**
@@ -117,7 +102,7 @@
         - **Optional:** None
     - **Relationship:**
         - Bookmark &harr; Food: A bookmark can have multiple food posts.
-11. ### Payment
+9. ### Payment
     - **Properties:**
         - Payment process is initiated when users want to post their own foods.
         - Payment contains payment_id, user_id, amount, payment_method, status, and created_at.
@@ -128,7 +113,7 @@
         - all the attributes are mandatory. 
     - **Relationship:**
         - User &harr; Payment: User makes payment for premium feature.
-12. ### Question  
+10. ### Question  
     - **Properties:**
         -  Question contain question_id, user_id, content, food_id and created_at.
         -  Q&A section is there for every food post.
@@ -138,7 +123,7 @@
     - **Relationship:**
         - Question &harr; Answer: Questions can have multiple answers.
         - Question &harr; User: Many questions are asked by a user. 
-13. ### Answer
+11. ### Answer
     - **Properties:**
         - An answer contain answer_id, user_id, question_id, content, and created_at.
     - **Uniqueness:**
@@ -150,3 +135,4 @@
         - Ansers &harr; Question: Many answers has one question. 
 
 ## Entity Relationship Diagram (ERD)
+![ERD](./FoodiesArchive_erd.png)
