@@ -64,9 +64,11 @@ Before setting up the project be sure you have the following tools installed:
     ```bash
     cp .env.example .env
    ```
-5. **Create Database:**
-   - Start XAMPP and run  MySQL and Apache.
-   - Open phpMyAdmin and create a database name "foodies_archive".
+5. **For Frontend packages:**
+   ```bash
+   npm install
+   npm run build
+   ```
     
 6. **Run migration to set up database tables:**
    ```bash
