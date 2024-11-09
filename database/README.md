@@ -85,7 +85,7 @@
         - FoodCategory &harr; FoodCategory_Food: Each category can have many food linked through the FoodCategory_Food entity.
 7. ### Review
     - **Properties:**
-        -  Like has it review_id,  rating, comment, food_id, created_at and user_id.
+        -  Like has it review_id, like(boolean), rating, comment, food_id, created_at and user_id.
         -  A review has a content (250 characters) and a timestamp for when it was created.
         -  Rating has 5 stars.
     - **Mandatory & Optional:**
@@ -105,8 +105,8 @@
 9. ### Payment
     - **Properties:**
         - Payment process is initiated when users want to post their own foods.
-        - Payment contains payment_id, user_id, amount, payment_method, status, and created_at.
-        - Payment can be done using esewa or khalti. 
+        - Payment contains payment_id, user_id, amount_paid, khalti_transaction_id, status, created_at and updated_at.
+        - Payment can be done using khalti. 
     - **Uniqueness:**
         - payment_id 
     - **Mandatory & Optional:**
