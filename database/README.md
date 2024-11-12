@@ -4,53 +4,44 @@
 
 ## Business Rules
 
-1. ### Admin
+1. ### Users
     - **Properties:**
-        - Admin has a full name, email and password.
-        - Admin manages the posts, users, questions, answers and payments.
-        - Admin can create, edit, delete.
-    - **Uniqueness:**
-        - Admin's email should be unique.
-    - **Mandatory & Optional:**
-        - **Mandatory:** Admin's email, first name, last name, and password should be mandatory.
-        - **Optional:** Admin's profile image.
-    - **Relationship:**
-        - Admin &harr; User: Admin manages many users.
-        - Admin &harr; Payment: Admin manages many payment.
-        - Admin &harr; Food: Admin uploads many food posts.
-2. ### User
-    - **Properties:**
-        - A user has a username, first name, last name, address, email, image, role and password.
-        - A user can be a premium user or a regular user.
-        - A user can like, give review, share, bookmark, and ask questions.
-        - A premium user makes payment to upload valid food posts.
-        - A premium user can post their favorite foods while a regular user cannot.
-        - A user can view food's post by admin and premium users.
+        - Users has first_name, last_name, username, email, password, image, role, and default_address.
+        - User is categorized in three roles - admin, visitor, and content creator. 
+        - Admin manages the posts, users, questions, answers and subscription.
+        - Admin and content creator can create and post food posts.
+        - Visitor and content creator can like, review, share and bookmark food posts.
+        - Visitor and content creator can also ask questions and write answers on the food post.
+        - Content creator has the ability to join a foodie community where they can create and post foods.
+        - Content creator can create food post only after subscribing to the subscription.
+        - Content creator can make payment through khalti as the payment gateway.
         - A user gets notification of all the newly uploaded posts, and replies to their questions.
+        - Visitor and Content creator can write only one review to a single food post.
+        - Same visitor and content creator cannot review the same food post.
     - **Uniqueness:**
-        - Each user must have unique username and email. 
+        - username and email.
     - **Mandatory & Optional:**
-        - **Mandatory:** username, email, first name, last name, address and password.
-        - **Optional:**  profile image.
+        - **Mandatory:** first_name, last_name, username, email, password, and default_address.
+        - **Optional:** image
     - **Relationship:**
-        - User &harr; Review: A user can write many reviews. This is a **one-to-many** relationship. 
-        - User &harr; Like: A user can like many food posts. This is a **one-to-many** relationship.
-        - User &harr; Bookmark: A user can bookmark many food posts. This is a **one-to-many** relationship.
-        - User &harr; Question: A user can ask many questions. This is a **one-to-many** relationship.
-        - A premium user can upload many food posts.
-3. ### Restaurant
+        - Users &harr; Reviews: Each user can write multilpe reviews overall, but only one review per food post. This is a **one-to-many** relationship. 
+        - Users &harr; Food_posts: A User can create multiple food post and a food post belongs to a specific user. This is a **one-to-many** relationship.
+        - Users &harr; Food_posts: A User can  bookmark many food posts, and a food post is bookmarked by many users. This a **many-to-many** relationship.
+        - Users &harr; Subscription_plan: A User can  subscribe to one subscription plan, and a subscription plan belongs to a specific user. This a **one-to-one** relationship.
+        - Users &harr; Questions: A User can  ask many questions, and a question belongs to a specific user. This a **one-to-many** relationship.
+       - Users &harr; Answers: A User can  write many answers, but each answer is written by a single user. This a **one-to-many** relationship.
+2. ### Restaurants
     - **Properties:**
-        -  A restaurant has name, phone_number, email, location_id, website_link, open_time, and close_time.
+        -  A restaurant has name, phone_number, email, website_link, province, city, address, image, open_time, and close_time.
         -  A restaurant contains many foods.
     - **Uniqueness:**
-        - Each restaurant's phone number should be unique. 
+        - phone_number
     - **Mandatory & Optional:**
-        - **Mandatory:** name, location and phone number.
-        - **Optional:** website
+        - **Mandatory:** name, phone_number, province, city, address
+        - **Optional:** email, website_link, province, city, address, image, open_time, and close_time.
     - **Relationship:**
-        - Restaurant &harr; Food: A restaurant has many foods.
-        - Restaurant &harr; Location: A restaurant belongs to a location.
-4. ### Food Category
+        - Restaurants &harr; Food_posts: A restaurant contains many food posts and each food post uniquely belongs to a single restaurant. This a **one-to-many** relationship.
+4. ### Category
     - **Properties:**
         - Food category has name.
         - Each food are assigned to one or many categtories to make it easy for users to browse.
@@ -60,22 +51,18 @@
         - **Mandatory:** name
     - **Relationship:**
         - Food Category &harr; Food:  Food category contains many foods, and a food can belong to many categories.This is a **many-to-many** relationship. 
-5. ### Food
+5. ### Food_posts
     - **Properties:**
-        - A food has name, description, price, restaurant, rating, comment, like count, image, created_at and location.
-        - A food is categorized under many food categories.
-        - A food post contain its name, description(optional), price, image, location, restaurant name a timestamp for when it was created.
+        - A food post has name, description, price, restaurant_id, and image.
+        - A food post is categorized under many food categories.
+        - A food post contain its name, description, price, image, and a timestamp for when it was created.
     - **Uniqueness:**
-        - none 
+        - food_post_id 
     - **Mandatory & Optional:**
-        - **Mandatory:** name, location, price, restaurant, image, and rating.
+        - **Mandatory:** name, price, restaurant_id, and image.
         - **Optional:**  description
     - **Relationship:**
-        - Food &harr; Restaurant: Many food belongs to one restaurant. This is a **many-to-one** relationship.
-        - Food &harr; Food Category: A food is categoeized under many food category. This is a **one-to-many** relationship.
-        - Food &harr; Like: A food can be liked by many users, and each like belongs to a single food. This is a **one-to-many** relationship.
-        - Food &harr; Review: A food can be reviewed multiple times by different users, and each review belongs to a single food. This is a **one-to-many** relationship.
-        - Food &harr; Bookmark: A food can be bookmarked.
+        - Food_post &harr; Reviews: A food post can have many reviews, but each review is unique to a specific user. This is a **one-to-many** relationship.
 6. ### FoodCategory_Food
    - - **Properties:**
         -  This entity handles the many-to-many relationship between foodcategory and food.
@@ -83,56 +70,57 @@
         - **Mandatory:** foodcategory_food, food_id, and category_id.
     - **Relationship:**
         - FoodCategory &harr; FoodCategory_Food: Each category can have many food linked through the FoodCategory_Food entity.
-7. ### Review
+7. ### Reviews
     - **Properties:**
-        -  Like has it review_id, like(boolean), rating, comment, food_id, created_at and user_id.
+        -  Review has review_id, like(boolean), stars, content, food_id, and user_id.
         -  A review has a content (250 characters) and a timestamp for when it was created.
         -  Rating has 5 stars.
     - **Mandatory & Optional:**
-        - **Mandatory:** review_id,  rating, food_id, created_at and user_id.
-        - **Optional:** comment
+        - **Mandatory:** review_id,  like(boolean), stars, content, food_id, and user_id.
     - **Relationship:**
-        - Like &harr; Food: Many likes and reviews belongs to one food.
-        - Like &harr; User: Many likes and reviews are done by one user.
-8. ### Bookmark
+        - Reviews &harr; Food_post: Many reviews belongs to one food post.
+8. ### Subscription_Plan
+    - **Properties:**
+        - Subscription_Plan is shown when users want to join the foodie community where they can create and post foods.
+        - Subscription_Plan has subscription_plan_id, plan_name, amount, description, start-date, status, and user_id.
+        - There is only one subscription plan which is life time access.
+        - To subscribe to subscription plan payement most be done.
+    - **Uniqueness:**
+        - user_id 
+    - **Mandatory & Optional:**
+        - **Mandatory:** subscription_plan_id, plan_name, amount, description, start-date, status, and user_id. 
+    - **Relationship:**
+        - Subscription_Plan &harr; Payment: Each subscription has one payment. This is **one-to-one** relationship.
+9. ### Payment
+    - **Properties:**
+        - Payment has payment_id, amount_paid, khalti_transaction_id, status, and payment_date.
+        - Payment can be done using khalti as the payment gateway. 
+    - **Uniqueness:**
+        - payment_id, khalti_transaction_id
+    - **Mandatory & Optional:**
+        - all the attributes are mandatory. 
+10. ### Questions
+    - **Properties:**
+        -  Question contain question_id, user_id, content, and food_id.
+        -  Q&A section is there for every food post.
+    - **Mandatory & Optional:**
+        - **Mandatory:** question_id, user_id, food_id, content.
+        - **Optional:** None
+    - **Relationship:**
+        - Question &harr; Answer: Each question has multiple answers, and each answer belongs to a specific question. This is **one-to-many** relationship.
+11. ### Answers
+    - **Properties:**
+        - An answer contain answer_id, user_id, question_id, and content.
+    - **Mandatory & Optional:**
+        - **Mandatory:** answer_id, user_id, question_id, and content.
+12. ### Bookmark
     - **Properties:**
         - Bookmark is a place where user can easily access/save their favorite foods.
     - **Mandatory & Optional:**
         - **Mandatory:** bookmark_id, user_id, food_id
         - **Optional:** None
     - **Relationship:**
-        - Bookmark &harr; Food: A bookmark can have multiple food posts.
-9. ### Payment
-    - **Properties:**
-        - Payment process is initiated when users want to post their own foods.
-        - Payment contains payment_id, user_id, amount_paid, khalti_transaction_id, status, created_at and updated_at.
-        - Payment can be done using khalti. 
-    - **Uniqueness:**
-        - payment_id 
-    - **Mandatory & Optional:**
-        - all the attributes are mandatory. 
-    - **Relationship:**
-        - User &harr; Payment: User makes payment for premium feature.
-10. ### Question  
-    - **Properties:**
-        -  Question contain question_id, user_id, content, food_id and created_at.
-        -  Q&A section is there for every food post.
-    - **Mandatory & Optional:**
-        - **Mandatory:** question_id, user_id, food_id, content, and created_at.
-        - **Optional:** None
-    - **Relationship:**
-        - Question &harr; Answer: Questions can have multiple answers.
-        - Question &harr; User: Many questions are asked by a user. 
-11. ### Answer
-    - **Properties:**
-        - An answer contain answer_id, user_id, question_id, content, and created_at.
-    - **Uniqueness:**
-    - **Mandatory & Optional:**
-        - **Mandatory:** answer_id, user_id, question_id, content, and created_at.
-        - **Optional:** None
-    - **Relationship:**
-        - Answer &harr; User: Multiple answers are gave by a user.
-        - Ansers &harr; Question: Many answers has one question. 
+        - Bookmark &harr; Food_posts: A bookmark can have multiple food posts.
 
 ## Entity Relationship Diagram (ERD)
 ![ERD](./FoodiesArchive_erd.png)
