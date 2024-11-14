@@ -38,7 +38,7 @@
         - phone_number
     - **Mandatory & Optional:**
         - **Mandatory:** name, phone_number, province, city, address
-        - **Optional:** email, website_link, province, city, address, image, open_time, and close_time.
+        - **Optional:** email, website_link, city, longitude, latitide, image, open_time, and close_time.
     - **Relationship:**
         - Restaurants &harr; Food_posts: A restaurant contains many food posts and each food post uniquely belongs to a single restaurant. This a **one-to-many** relationship.
 4. ### Category
@@ -82,7 +82,7 @@
 8. ### Subscription_Plan
     - **Properties:**
         - Subscription_Plan is shown when users want to join the foodie community where they can create and post foods.
-        - Subscription_Plan has subscription_plan_id, plan_name, amount, description, start-date, status, and user_id.
+        - Subscription_Plan has subscription_plan_id, plan_name, amount, features, and type.
         - There is only one subscription plan which is life time access.
         - To subscribe to subscription plan payement most be done.
     - **Uniqueness:**
@@ -91,7 +91,15 @@
         - **Mandatory:** subscription_plan_id, plan_name, amount, description, start-date, status, and user_id. 
     - **Relationship:**
         - Subscription_Plan &harr; Payment: Each subscription has one payment. This is **one-to-one** relationship.
-9. ### Payment
+9. ### User_Subscription
+    - **Properties:**
+        - User_Subscription has user_subscription_id, user_id, subscription_plan_id, status, start_date, and end_date.
+        - It contains the details of the user who subscribed to the subscription.
+    - **Uniqueness:**
+        - user_subscription_id 
+    - **Mandatory & Optional:**
+        - **Mandatory:**  user_subscription_id, user_id, subscription_plan_id, status, start_date, and end_date.
+10. ### Payment
     - **Properties:**
         - Payment has payment_id, amount_paid, khalti_transaction_id, status, and payment_date.
         - Payment can be done using khalti as the payment gateway. 
@@ -99,7 +107,7 @@
         - payment_id, khalti_transaction_id
     - **Mandatory & Optional:**
         - all the attributes are mandatory. 
-10. ### Questions
+11. ### Questions
     - **Properties:**
         -  Question contain question_id, user_id, content, and food_id.
         -  Q&A section is there for every food post.
@@ -108,12 +116,12 @@
         - **Optional:** None
     - **Relationship:**
         - Question &harr; Answer: Each question has multiple answers, and each answer belongs to a specific question. This is **one-to-many** relationship.
-11. ### Answers
+12. ### Answers
     - **Properties:**
         - An answer contain answer_id, user_id, question_id, and content.
     - **Mandatory & Optional:**
         - **Mandatory:** answer_id, user_id, question_id, and content.
-12. ### Bookmark
+13. ### Bookmark
     - **Properties:**
         - Bookmark is a place where user can easily access/save their favorite foods.
     - **Mandatory & Optional:**
@@ -123,4 +131,4 @@
         - Bookmark &harr; Food_posts: A bookmark can have multiple food posts.
 
 ## Entity Relationship Diagram (ERD)
-![ERD](./FoodiesArchive_erd.png)
+![ERD]()
