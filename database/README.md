@@ -131,4 +131,4 @@
         - Bookmark &harr; Food_posts: A bookmark can have multiple food posts.
 
 ## Entity Relationship Diagram (ERD)
-![ERD]()
+![ERD](erd_FoodiesArchive.png)
