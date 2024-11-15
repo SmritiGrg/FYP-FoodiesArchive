@@ -24,7 +24,8 @@
         - **Mandatory:** first_name, last_name, username, email, password, and default_address.
         - **Optional:** image
     - **Relationship:**
-        - Users &harr; Reviews: Each user can write multilpe reviews overall, but only one review per food post. This is a **one-to-many** relationship. 
+        - Users &harr; Reviews: Each user can write multilpe reviews overall, but only one review per food post. This is a **one-to-many** relationship.
+        - Users &harr; Likes: Each user can like many food posts. This is a **one-to-many** relationship.
         - Users &harr; Food_posts: A User can create multiple food post and a food post belongs to a specific user. This is a **one-to-many** relationship.
         - Users &harr; Food_posts: A User can  bookmark many food posts, and a food post is bookmarked by many users. This a **many-to-many** relationship.
         - Users &harr; Subscription_plan: A User can  subscribe to one subscription plan, and a subscription plan belongs to a specific user. This a **one-to-one** relationship.
@@ -79,7 +80,15 @@
         - **Mandatory:** review_id,  like(boolean), stars, content, food_id, and user_id.
     - **Relationship:**
         - Reviews &harr; Food_post: Many reviews belongs to one food post.
-8. ### Subscription_Plan
+8. ### Likes
+        -  Likes has like_id, like, food_id, and user_id.
+        -  Attribute like can be active and inactive.
+    - **Mandatory & Optional:**
+        - **Mandatory:** like_id, like, food_id, and user_id.
+    - **Relationship:**
+        - Likes &harr; Food_post: Many likes belongs to one food post.
+   
+10. ### Subscription_Plan
     - **Properties:**
         - Subscription_Plan is shown when users want to join the foodie community where they can create and post foods.
         - Subscription_Plan has subscription_plan_id, plan_name, amount, features, and type.
