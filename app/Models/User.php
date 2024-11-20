@@ -48,4 +48,9 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function foodPosts(): void
+    {
+        $this->hasMany(FoodPosts::class, 'user_id', 'id');
+    }
 }

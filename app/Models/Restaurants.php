@@ -22,4 +22,9 @@ class Restaurants extends Model
         'open_time',
         'close_time'
     ];
+
+    public function foodPosts(): void
+    {
+        $this->hasMany(FoodPosts::class, 'restaurant_id', 'id');
+    }
 }
