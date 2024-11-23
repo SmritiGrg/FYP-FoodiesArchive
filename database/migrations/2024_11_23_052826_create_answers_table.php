@@ -11,12 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('sub_categories', function (Blueprint $table) {
+        Schema::create('answers', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('image');
-            $table->foreignId('main_cat_id');
-            $table->foreign('main_cat_id')->references('id')->on('main_categories')->onDelete('cascade');
+            $table->text('content');
+
+            $table->foreignId('question_id');
+            $table->foreign('question_id')->references('id')->on('questions')->onDelete('cascade');
+
+            $table->foreignId('user_id');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -26,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('sub_categories');
+        Schema::dropIfExists('answers');
     }
 };

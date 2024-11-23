@@ -5,15 +5,16 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Reviews extends Model
+class SubscriptionUser extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'review',
-        'stars',
-        'user_id',
-        'food_post_id'
+        'start_date',
+        'end_date',
+        'status',
+        'subscription_id',
+        'user_id'
     ];
 
     public function users(): void
@@ -21,8 +22,8 @@ class Reviews extends Model
         $this->belongsTo(User::class, 'user_id', 'id');
     }
 
-    public function food_posts(): void
+    public function subscription_plan(): void
     {
-        $this->belongsTo(FoodPost::class, 'food_post_id', 'id');
+        $this->belongsTo(SubscriptionPlan::class, 'subscription_id', 'id');
     }
 }

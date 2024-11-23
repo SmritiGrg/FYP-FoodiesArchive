@@ -51,6 +51,21 @@ class User extends Authenticatable
 
     public function foodPosts(): void
     {
-        $this->hasMany(FoodPosts::class, 'user_id', 'id');
+        $this->hasMany(FoodPost::class, 'user_id', 'id');
+    }
+
+    public function questions(): void
+    {
+        $this->hasMany(Questions::class, 'user_id', 'id');
+    }
+
+    public function answers(): void
+    {
+        $this->hasMany(Answers::class, 'user_id', 'id');
+    }
+
+    public function reviews(): void
+    {
+        $this->hasMany(Reviews::class, 'user_id', 'id');
     }
 }

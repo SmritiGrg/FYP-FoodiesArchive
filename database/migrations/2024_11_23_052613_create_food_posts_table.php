@@ -17,15 +17,15 @@ return new class extends Migration
             $table->text('description');
             $table->decimal('price', 4, 2);
             $table->string('image');
-            
+
             $table->foreignId('restaurant_id');
             $table->foreign('restaurant_id')->references('id')->on('restaurants')->onDelete('cascade');
-            
+
+            $table->foreignId('food_type_id');
+            $table->foreign('food_type_id')->references('id')->on('food_types')->onDelete('cascade');
+
             $table->foreignId('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            
-            $table->foreignId('sub_cat_id');
-            $table->foreign('sub_cat_id')->references('id')->on('sub_categories')->onDelete('cascade');
             $table->timestamps();
         });
     }

@@ -5,24 +5,27 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Reviews extends Model
+class Questions extends Model
 {
     use HasFactory;
-
     protected $fillable = [
-        'review',
-        'stars',
-        'user_id',
-        'food_post_id'
+        'content',
+        'food_post_id',
+        'user_id'
     ];
+
+    public function foodPosts(): void
+    {
+        $this->belongsTo(FoodPost::class, 'food_post_id', 'id');
+    }
 
     public function users(): void
     {
         $this->belongsTo(User::class, 'user_id', 'id');
     }
 
-    public function food_posts(): void
+    public function answers(): void
     {
-        $this->belongsTo(FoodPost::class, 'food_post_id', 'id');
+        $this->hasMany(Answers::class, 'user_id', 'id');
     }
 }

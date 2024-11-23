@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class MainCategory extends Model
+class FoodType extends Model
 {
     use HasFactory;
 
@@ -14,8 +14,8 @@ class MainCategory extends Model
         'image'
     ];
 
-    public function sub_categories(): void
+    public function food_posts(): void
     {
-        $this->hasMany(SubCategory::class, 'main_cat_id', 'id');
+        $this->hasMany(FoodPost::class, 'food_type_id', 'id');
     }
 }

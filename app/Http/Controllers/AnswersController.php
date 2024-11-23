@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\FoodPosts;
+use App\Models\Answers;
 use Illuminate\Http\Request;
 
-class FoodPostsController extends Controller
+class AnswersController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -34,7 +34,7 @@ class FoodPostsController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(FoodPosts $foodPosts)
+    public function show(Answers $answers)
     {
         //
     }
@@ -42,7 +42,7 @@ class FoodPostsController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(FoodPosts $foodPosts)
+    public function edit(Answers $answers)
     {
         //
     }
@@ -50,7 +50,7 @@ class FoodPostsController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, FoodPosts $foodPosts)
+    public function update(Request $request, Answers $answers)
     {
         //
     }
@@ -58,7 +58,7 @@ class FoodPostsController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(FoodPosts $foodPosts)
+    public function destroy(Answers $answers)
     {
         //
     }

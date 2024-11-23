@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\MainCategory;
+use App\Models\FoodPost;
 use Illuminate\Http\Request;
 
-class MainCategoryController extends Controller
+class FoodPostController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -34,7 +34,7 @@ class MainCategoryController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(MainCategory $mainCategory)
+    public function show(FoodPost $foodPost)
     {
         //
     }
@@ -42,7 +42,7 @@ class MainCategoryController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(MainCategory $mainCategory)
+    public function edit(FoodPost $foodPost)
     {
         //
     }
@@ -50,7 +50,7 @@ class MainCategoryController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, MainCategory $mainCategory)
+    public function update(Request $request, FoodPost $foodPost)
     {
         //
     }
@@ -58,7 +58,7 @@ class MainCategoryController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(MainCategory $mainCategory)
+    public function destroy(FoodPost $foodPost)
     {
         //
     }
