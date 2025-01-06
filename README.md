@@ -19,15 +19,18 @@ Foodie's Archive (Website) which is a comprehensive food website(like content cr
 2. **Content Features:**
    - Information about various places of Nepal, giving descriptions, ratings and locations.
 3. **Interaction Features:**
+   - allows user to join foodie community where all the posts by the users are posted.
    - allows users to like, comment, ask questions, bookmark and share their favourite foods.
-   - addition to regular features it allows premium users to post their favourite food's photos, location, total rating and comment, like other premium users posts.
-4. **Location and Map Integration:**
+   - allows users to post their favourite food's photos, location, total rating, comment and like.
+   - users can earn main points for uploading post, giving reviews and a certain number of badges for achievements.
+   - addition to regular features it allows subscribers to get premium badges which can and recognition, encouraging user engagement and more subscriptions.
+5. **Location and Map Integration:**
    - A user-friendly map that displays food places and helps users find nearby food options.
-5. **Payment Feature:**
-   - Payment feature for those users who want to post their own favorite foods.
-6. **Notification Features:**
+6. **Payment Feature:**
+   - Payment feature for those users who wants to access premium features.
+7. **Notification Features:**
    - users get notification if their are any new updates on new foods and replies on their reviews.
-7. **Admin Panel:**
+8. **Admin Panel:**
    - Admin will be able to maintain and update all the operations like contents, payments, etc.
 
 # Folder Structure

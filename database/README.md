@@ -7,14 +7,14 @@
 1. ### Users
     - **Properties:**
         - Users has first_name, last_name, username, email, password, image, role, and default_address.
-        - User is categorized in three roles - admin, visitor, and content creator. 
+        - User is categorized in three roles - admin, visitor, and subscribers. 
         - Admin manages the posts, users, questions, answers and subscription.
-        - Admin and content creator can create and post food posts.
-        - Visitor and content creator can like, review, share and bookmark food posts.
-        - Visitor and content creator can also ask questions and write answers on the food post.
-        - Content creator has the ability to join a foodie community where they can create and post foods.
-        - Content creator can create food post only after subscribing to the subscription.
-        - Content creator can make payment through khalti as the payment gateway.
+        - Admin and visitors can create and post food posts.
+        - Users can like, review, share and bookmark food posts.
+        - Users can also ask questions and write answers on the food post.
+        - Users has the ability to join a foodie community where they can create and post foods.
+        - After subscribing to subscription users can get access to premium features.
+        - Subscribers can make payment through khalti as the payment gateway.
         - A user gets notification of all the newly uploaded posts, and replies to their questions.
         - Visitor and Content creator can write only one review to a single food post.
         - Same visitor and content creator cannot review the same food post.
