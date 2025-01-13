@@ -11,6 +11,9 @@
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+        integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
@@ -30,7 +33,7 @@
     </body> --}}
 
 <body class="font-sans text-gray-900 antialiased">
-    <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-amber-100">
+    <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-white">
         {{-- <div>
                 <a href="/">
                     <img src="{{ asset('assets/img/Logo_Crafts-removebg.png') }}" alt="" width="150px"
@@ -38,7 +41,7 @@
                 </a>
             </div> --}}
         <div
-            class="flex flex-col lg:flex-row w-full sm:max-w-5xl mt-6 bg-white shadow-lg overflow-hidden sm:rounded-lg border border-gray-200">
+            class="w-11/12 flex flex-col lg:flex-row sm:max-w-5xl mt-6 bg-white shadow-lg overflow-hidden sm:rounded-lg border border-gray-200 mx-4 sm:mx-auto">
             {{ $slot }}
         </div>
     </div>

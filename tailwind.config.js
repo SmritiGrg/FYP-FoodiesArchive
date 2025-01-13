@@ -13,9 +13,16 @@ export default {
         extend: {
             fontFamily: {
                 sans: ['Figtree', ...defaultTheme.fontFamily.sans],
+                poppins: ['Poppins', 'sans-serif'],
             },
+            colors: {
+                customYellow: '#F2B203',
+                hovercustomYellow: '#F6C133',
+                bgPurple: '#F5EFFF',
+            }
         },
     },
 
     plugins: [forms],
 };
+6
