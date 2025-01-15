@@ -31,11 +31,18 @@ class UserFactory extends Factory
             'email' => $this->faker->unique()->safeEmail(),
             'password' => static::$password ??= Hash::make('password'),
             'image' => $this->faker->imageUrl(),
-            'role' => $this->faker->randomElement(['admin', 'creator', 'premium_user']),
+            'role' => $this->assignRole(),
             'email_verified_at' => now(),
             'remember_token' => Str::random(10),
         ];
     }
+
+    private function assignRole()
+    {
+        // Return one of the roles except 'admin'
+        return $this->faker->randomElement(['creator', 'premium_user']);
+    }
+
 
     /**
      * Indicate that the model's email address should be unverified.
@@ -46,6 +53,4 @@ class UserFactory extends Factory
             'email_verified_at' => null,
         ]);
     }
-
-    
 }

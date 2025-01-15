@@ -12,7 +12,7 @@
     </div>
     <div class="w-full lg:w-2/3 py-9 px-9 border-l rounded-2xl shadow-lg bg-bgPurple">
         <div class="flex justify-center mb-6">
-            <a href=""> <img src="{{ asset('assets/img/secondary_FA-Logo-removebg-preview.png') }}" alt="Logo"
+            <a href="/"> <img src="{{ asset('assets/img/secondary_FA-Logo-removebg-preview.png') }}" alt="Logo"
                     style="width: 70px; height: 50px;"></a>
         </div>
         <h1 class="text-3xl font-bold text-center text-gray-700 mb-6 tracking-wider font-poppins">Welcome Back</h1>

@@ -19,6 +19,7 @@ export default {
                 customYellow: '#F2B203',
                 hovercustomYellow: '#F6C133',
                 bgPurple: '#F5EFFF',
+                bgGray: "#F1F1F1",
             }
         },
     },
