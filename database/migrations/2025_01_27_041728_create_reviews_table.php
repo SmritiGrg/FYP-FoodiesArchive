@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('reviews', function (Blueprint $table) {
             $table->id();
             $table->text('review');
-            $table->integer('star');
+            $table->integer('rating');
             $table->foreignId('food_post_id');
             $table->foreign('food_post_id')->references('id')->on('food_posts')->onDelete('cascade');
 

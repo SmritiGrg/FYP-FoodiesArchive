@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\FoodType;
+use App\Models\CuisineTypes;
 use Illuminate\Http\Request;
 
-class FoodTypeController extends Controller
+class CuisineTypesController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -34,7 +34,7 @@ class FoodTypeController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(FoodType $foodType)
+    public function show(CuisineTypes $cuisineTypes)
     {
         //
     }
@@ -42,7 +42,7 @@ class FoodTypeController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(FoodType $foodType)
+    public function edit(CuisineTypes $cuisineTypes)
     {
         //
     }
@@ -50,7 +50,7 @@ class FoodTypeController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, FoodType $foodType)
+    public function update(Request $request, CuisineTypes $cuisineTypes)
     {
         //
     }
@@ -58,7 +58,7 @@ class FoodTypeController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(FoodType $foodType)
+    public function destroy(CuisineTypes $cuisineTypes)
     {
         //
     }

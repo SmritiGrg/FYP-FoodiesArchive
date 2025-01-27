@@ -24,7 +24,9 @@ class User extends Authenticatable implements CanResetPassword
         'email',
         'password',
         'image',
-        'role'
+        'role',
+        'streak_count',
+        'last_activity_date',
     ];
 
     /**
@@ -50,9 +52,26 @@ class User extends Authenticatable implements CanResetPassword
         ];
     }
 
+    // Users this user is following.
+    public function followings()
+    {
+        return $this->hasMany(Follows::class, 'follower_id');
+    }
+
+    // Users following this user.
+    public function followers()
+    {
+        return $this->hasMany(Follows::class, 'followed_id');
+    }
+
+    public function restaurants()
+    {
+        return $this->hasMany(Restaurants::class, 'added_by_user_id');
+    }
+
     public function foodPosts(): void
     {
-        $this->hasMany(FoodPost::class, 'user_id', 'id');
+        $this->hasMany(FoodPosts::class, 'user_id', 'id');
     }
 
     public function questions(): void
@@ -68,5 +87,16 @@ class User extends Authenticatable implements CanResetPassword
     public function reviews(): void
     {
         $this->hasMany(Reviews::class, 'user_id', 'id');
+    }
+    public function likes(): void
+    {
+        $this->hasMany(Likes::class, 'user_id', 'id');
+    }
+
+    public function badges()
+    {
+        return $this->belongsToMany(Badges::class, 'user_badges')
+            ->withPivot('awarded_date')
+            ->withTimestamps();
     }
 }

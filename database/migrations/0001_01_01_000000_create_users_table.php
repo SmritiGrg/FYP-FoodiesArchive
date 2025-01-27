@@ -21,6 +21,8 @@ return new class extends Migration
             $table->string('password');
             $table->string('image')->nullable();
             $table->enum('role', ['admin', 'creator', 'premium_user'])->default('creator');
+            $table->integer('streak_count')->default(0);
+            $table->date('last_activity_date')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

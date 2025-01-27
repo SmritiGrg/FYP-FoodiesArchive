@@ -5,18 +5,19 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class FoodPost extends Model
+class FoodPosts extends Model
 {
     use HasFactory;
 
     protected $fillable = [
         'name',
-        'description',
+        'review',
         'price',
         'image',
         'restaurant_id',
         'user_id',
-        'food_type_id'
+        'food_type_id',
+        'cuisine_type_id'
     ];
 
     // relationship between restaurant and food post
@@ -45,14 +46,18 @@ class FoodPost extends Model
         $this->hasMany(Questions::class, 'food_post_id', 'id');
     }
 
-    public function categories()
-    {
-        return $this->belongsToMany(Category::class, 'category_food', 'food_post_id', 'category_id');
-    }
-
     public function food_type(): void
     {
-        $this->belongsTo(FoodType::class, 'food_type_id', 'id');
+        $this->belongsTo(FoodTypes::class, 'food_type_id', 'id');
+    }
+    public function cusine_type(): void
+    {
+        $this->belongsTo(CuisineTypes::class, 'cuisine_type_id', 'id');
+    }
+
+    public function tags(): void
+    {
+        $this->belongsTo(Tags::class, 'tag_id', 'id');
     }
 
     public function reviews(): void

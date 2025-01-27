@@ -11,20 +11,19 @@ class Restaurants extends Model
 
     protected $fillable = [
         'name',
-        'phone_number',
-        'email',
-        'website_link',
-        'city',
         'longitude',
         'latitude',
-        'image',
-        'map',
-        'open_time',
-        'close_time'
+        'added_by_user_id',
+        'status',
     ];
+
+    public function addedByUser()
+    {
+        return $this->belongsTo(User::class, 'added_by_user_id');
+    }
 
     public function foodPosts(): void
     {
-        $this->hasMany(FoodPost::class, 'restaurant_id', 'id');
+        $this->hasMany(FoodPosts::class, 'restaurant_id', 'id');
     }
 }

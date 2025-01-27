@@ -11,12 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('subscription_plans', function (Blueprint $table) {
+        Schema::create('badges', function (Blueprint $table) {
             $table->id();
-            $table->string('plan');
-            $table->integer('amount');
-            $table->text('features');
-            $table->string('type');
+            $table->string('name');
+            $table->integer('streak_criteria');
+            $table->string('image')->nullable();
             $table->timestamps();
         });
     }
@@ -26,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('subscription_plans');
+        Schema::dropIfExists('badges');
     }
 };

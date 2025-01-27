@@ -12,14 +12,15 @@ class Payment extends Model
     protected $fillable =
     [
         'amount_paid',
+        'payment_method',
         'khalti_transaction_id',
         'status',
         'payment_date',
-        'subscription_user_id'
+        'subscriber_id'
     ];
 
-    public function subscription_users(): void
+    public function subscribers(): void
     {
-        $this->belongsTo(SubscriptionUser::class, 'subscription_user_id', 'id');
+        $this->belongsTo(UserSubscriber::class, 'subscriber_id', 'id');
     }
 }

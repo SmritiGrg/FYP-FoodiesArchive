@@ -11,7 +11,7 @@ class Reviews extends Model
 
     protected $fillable = [
         'review',
-        'star',
+        'rating',
         'user_id',
         'food_post_id'
     ];
@@ -23,6 +23,6 @@ class Reviews extends Model
 
     public function food_posts(): void
     {
-        $this->belongsTo(FoodPost::class, 'food_post_id', 'id');
+        $this->belongsTo(FoodPosts::class, 'food_post_id', 'id');
     }
 }

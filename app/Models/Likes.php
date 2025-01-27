@@ -10,7 +10,6 @@ class Likes extends Model
     use HasFactory;
 
     protected $fillable = [
-        'likes',
         'user_id',
         'food_post_id'
     ];
@@ -24,6 +23,6 @@ class Likes extends Model
     // each like belongs to a food post
     public function foodPosts(): void
     {
-        $this->belongsTo(FoodPost::class, 'food_post_id', 'id');
+        $this->belongsTo(FoodPosts::class, 'food_post_id', 'id');
     }
 }

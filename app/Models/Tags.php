@@ -5,16 +5,16 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Category extends Model
+class Tags extends Model
 {
     use HasFactory;
 
     protected $fillable = [
         'name',
-        'image'
     ];
-    public function food_posts()
+
+    public function foodPosts()
     {
-        return $this->belongsToMany(FoodPost::class, 'category_food', 'category_id', 'food_post_id');
+        return $this->hasMany(FoodPosts::class);
     }
 }

@@ -5,13 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class SubscriptionUser extends Model
+class UserSubscriber extends Model
 {
     use HasFactory;
 
     protected $fillable = [
         'start_date',
-        'end_date',
         'status',
         'subscription_id',
         'user_id'

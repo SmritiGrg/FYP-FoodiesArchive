@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Likess;
+use App\Models\UserBadges;
 use Illuminate\Http\Request;
 
-class LikessController extends Controller
+class UserBadgesController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -34,7 +34,7 @@ class LikessController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Likess $likess)
+    public function show(UserBadges $userBadges)
     {
         //
     }
@@ -42,7 +42,7 @@ class LikessController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Likess $likess)
+    public function edit(UserBadges $userBadges)
     {
         //
     }
@@ -50,7 +50,7 @@ class LikessController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Likess $likess)
+    public function update(Request $request, UserBadges $userBadges)
     {
         //
     }
@@ -58,7 +58,7 @@ class LikessController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Likess $likess)
+    public function destroy(UserBadges $userBadges)
     {
         //
     }

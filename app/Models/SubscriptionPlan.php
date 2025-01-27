@@ -10,14 +10,13 @@ class SubscriptionPlan extends Model
     use HasFactory;
 
     protected $fillable = [
-        'plan_name',
         'amaount',
         'features',
         'type'
     ];
 
-    public function subscription_user(): void
+    public function subscribers(): void
     {
-        $this->hasMany(SubscriptionUser::class, 'subscription_id', 'id');
+        $this->hasMany(UserSubscriber::class, 'subscription_id', 'id');
     }
 }

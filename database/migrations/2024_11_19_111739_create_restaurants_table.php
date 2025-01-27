@@ -14,16 +14,11 @@ return new class extends Migration
         Schema::create('restaurants', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('phone_number')->nullable();
-            $table->string('email')->unique();
-            $table->string('website_link')->nullable();
-            $table->string('city');
             $table->decimal('longitude', 10, 7);
             $table->decimal('latitude', 10, 7);
-            $table->string('image')->nullable();
-            $table->text('map');
-            $table->time('open_time');
-            $table->time('close_time');
+            $table->foreignId('added_by_user_id');
+            $table->foreign('added_by_user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->enum('status', ['approved', 'pending', 'rejected'])->default('pending');
             $table->timestamps();
         });
     }

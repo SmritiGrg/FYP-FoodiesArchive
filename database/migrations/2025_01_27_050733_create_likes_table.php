@@ -11,13 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('subscription_users', function (Blueprint $table) {
+        Schema::create('likes', function (Blueprint $table) {
             $table->id();
-            $table->dateTime('start_date');
-            $table->dateTime('end_date')->nullable();
-            $table->enum('status', ['Active', 'Inactive', 'Cancelled']);
-            $table->foreignId('subscription_id');
-            $table->foreign('subscription_id')->references('id')->on('subscription_plans')->onDelete('cascade');
+            $table->foreignId('food_post_id');
+            $table->foreign('food_post_id')->references('id')->on('food_posts')->onDelete('cascade');
 
             $table->foreignId('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
@@ -30,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('subscription_users');
+        Schema::dropIfExists('likes');
     }
 };

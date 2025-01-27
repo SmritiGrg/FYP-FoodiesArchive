@@ -14,11 +14,12 @@ return new class extends Migration
         Schema::create('payments', function (Blueprint $table) {
             $table->id();
             $table->integer('amount_paid');
+            $table->string('payment_method');
             $table->string('khalti_transaction_id');
             $table->enum('status', ['Paid', 'Pending', 'Failed']);
             $table->dateTime('payment_date');
-            $table->foreignId('subscription_user_id');
-            $table->foreign('subscription_user_id')->references('id')->on('subscription_users')->onDelete('cascade');
+            $table->foreignId('subscriber_id');
+            $table->foreign('subscriber_id')->references('id')->on('user_subscribers')->onDelete('cascade');
             $table->timestamps();
         });
     }
