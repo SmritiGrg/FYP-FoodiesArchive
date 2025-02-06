@@ -1,14 +1,14 @@
 <?php
 
 use App\Models\FoodPost;
+use App\Models\FoodPosts;
 use App\Models\User;
 
 test('a user info can be updated', function () {
     $user = User::factory()->create();
 
     $updatedData = [
-        'first_name' => 'Updated First Name',
-        'last_name' => 'Updated Last Name',
+        'full_name' => 'Updated Full Name',
         'username' => 'Updated Username',
         'email' => 'updatedemail@gmail.com',
         'image' => 'updatedImage.png',
@@ -18,8 +18,7 @@ test('a user info can be updated', function () {
         ->assertRedirect(route('profile'));
 
     expect(User::find($user->id))
-        ->first_name->toEqual('Updated First Cafe')
-        ->last_name->toEqual('Updated Last Cafe')
+        ->full_name->toEqual('Updated Full Cafe')
         ->username->toEqual('Updated Username')
         ->email->toEqual('updatedemail@gmail.com')
         ->image->toEqual('updateImage');
@@ -39,7 +38,7 @@ test('a user can be deleted', function () {
 
 test('user can bookmark a food post', function () {
     $user = User::factory()->create();
-    $foodPost = FoodPost::factory()->create();
+    $foodPost = FoodPosts::factory()->create();
 
     $this->actingAs($user)->post(route('food_post.bookmark', $foodPost->id))
         ->assertDatabaseHas('bookmarks', [

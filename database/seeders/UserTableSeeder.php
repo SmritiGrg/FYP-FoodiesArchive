@@ -15,8 +15,7 @@ class UserTableSeeder extends Seeder
     public function run(): void
     {
         User::create([
-            'first_name' => 'Admin',
-            'last_name' => 'User',
+            'full_name' => 'Admin User',
             'username' => 'adminn',
             'email' => 'admin@gmail.com',
             'password' => Hash::make('admin123'),
@@ -24,14 +23,13 @@ class UserTableSeeder extends Seeder
             'role' => 'admin',
         ]);
         User::create([
-            'first_name' => 'Customer',
-            'last_name' => 'User',
-            'username' => 'contentuser',
+            'full_name' => 'Smriti Gurung',
+            'username' => 'smrii28',
             'email' => 'gurungsm.10@gmail.com',
             'password' => Hash::make('customer123'),
-            'image' => 'customer.jpg',
-            'role' => 'creator',
+            'image' => 'smrii28-profile-1738587162.jpg',
+            'role' => 'visitor',
         ]);
-        User::factory()->count(18)->create();
+        // User::factory()->count(18)->create();
     }
 }

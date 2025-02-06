@@ -33,9 +33,9 @@
         <form method="POST" action="{{ route('password.email') }}" class="space-y-6">
             @csrf
             <div>
-                <x-input-label for="email" :value="__('Email')" />
+                <x-input-label for="email" value="Email" />
                 <x-text-input id="email" class="block mt-1 w-full " type="text" name="email" :value="old('email')"
-                    :error="$errors->has('email')" autofocus autocomplete="username" />
+                    :error="$errors->has('email')" autofocus/>
                 <x-input-error :messages="$errors->get('email')" class="mt-2 " />
             </div>
 

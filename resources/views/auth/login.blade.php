@@ -24,7 +24,7 @@
             <div>
                 <x-input-label for="email" :value="__('Email')" />
                 <x-text-input id="email" class="block mt-1 w-full " type="text" name="email" :value="old('email')"
-                    :error="$errors->has('email')" autofocus autocomplete="username" />
+                    :error="$errors->has('email')" autofocus />
                 <x-input-error :messages="$errors->get('email')" class="mt-2 " />
             </div>
 
@@ -59,12 +59,10 @@
             </div>
 
             <div class="mt-4 text-center">
-                @if (Route::has('password.request'))
                     <a class="underline text-sm text-gray-400 hover:text-gray-500 rounded-md font-poppins"
                         href="{{ route('password.request') }}">
                         Forgot your password?
                     </a>
-                @endif
             </div>
 
             <div class="flex flex-col items-center justify-center mt-5">
@@ -73,7 +71,7 @@
                 </x-primary-button>
                 <p class="text-sm text-gray-500 mt-4 font-poppins">Don't have an account?<a
                         class="underline font-semibold text-base text-zinc-600 hover:text-zinc-800 font-poppins"
-                        href="{{ route('register') }}">
+                        href="register">
                         Register
                     </a></p>
             </div>

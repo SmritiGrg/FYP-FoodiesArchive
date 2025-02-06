@@ -22,7 +22,7 @@
                 <i class="bi bi-person-circle fs-2"></i>
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <li><a class="dropdown-item" href="/login">Profile</a></li>
+                <li><a class="dropdown-item" href="/profile">Profile</a></li>
                 {{-- <li><a class="dropdown-item" href="/register">LogOut</a></li> --}}
                 <form method="POST" action="{{ route('logout') }}">
                     @csrf

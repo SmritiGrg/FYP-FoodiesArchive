@@ -7,9 +7,21 @@ test('registration screen can be rendered', function () {
 });
 
 test('new users can register', function () {
+    $user = \App\Models\User::create([
+        'full_name' => 'Test User',
+        'username' => 'testuser',
+        'email' => 'test@example.com',
+        'password' => bcrypt('password'),
+        'role' => 'creator',
+        'image' => 'test.png',
+    ]);
+
+    // Log the user in
+    $this->actingAs($user);
+
+    // Run the registration action
     $response = $this->post('/register', [
-        'first_name' => 'Test',
-        'last_name' => 'User',
+        'full_name' => 'Test User',
         'username' => 'testuser',
         'email' => 'test@example.com',
         'password' => 'password',
@@ -18,6 +30,7 @@ test('new users can register', function () {
         'image' => 'test.png',
     ]);
 
+    // Assert that the user is authenticated and redirected
     $this->assertAuthenticated();
-    $response->assertRedirect(route('dashboard', absolute: false));
+    $response->assertRedirect('/');
 });

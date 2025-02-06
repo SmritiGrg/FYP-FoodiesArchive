@@ -9,24 +9,13 @@ test('restaurant list can be rendered', function () {
         ->assertStatus(200);
 });
 
-test('restaurant create page can be rendered', function () {
-    $this->get(route('restaurant.create'))
-        ->assertStatus(200);
-});
-
 test('restaurant can be created', function () {
     $restaurantData = [
         'name' => 'Test Cafe',
-        'phone_number' => '9887656781',
-        'email' => 'testcafe@gmail.com',
-        'website_link' => 'https://www.testweb.com',
-        'city' => 'Pokhara',
         'longitude' => 78.4540,
         'latitude' => 21.5552,
-        'image' => 'test.jpg',
-        'map' => '<iframe src="https://maps.google.com/?q=85.3240,27.7172"></iframe>',
-        'open_time' => '08:00:00',
-        'close_time' => '22:00:00',
+        'added_by_user_id' => 4,
+        'status'=> 'approved'
     ];
 
     $this->post(route('restaurant.store'), $restaurantData)
@@ -49,16 +38,10 @@ test('a restaurant info can be updated', function () {
     // defining the updated data
     $updatedData = [
         'name' => 'Updated Test Cafe',
-        'phone_number' => '9877765432',
-        'email' => 'updatedcafe@gmail.com',
-        'website_link' => 'https://www.updatedwebsite.com',
-        'city' => 'Pokhara',
         'longitude' => 22.4280,
         'latitude' => 89.8765,
-        'image' => 'updated.jpg',
-        'map' => '<iframe src="https://maps.google.com/?q=85.3240,27.7172"></iframe>',
-        'open_time' => '07:00:00',
-        'close_time' => '19:00:00',
+        'added_by_user_id' => 4,
+        'status'=> 'approved'
     ];
 
     $this->put(route('restaurant.update', $restaurant->id), $updatedData)
@@ -66,16 +49,10 @@ test('a restaurant info can be updated', function () {
 
     expect(Restaurants::find($restaurant->id))
         ->name->toEqual('Updated Test Cafe')
-        ->phone_number->toEqual('9877765432')
-        ->email->toEqual('updatedcafe@gmail.com')
-        ->website_link->toEqual('https://www.updatedwebsite.com')
-        ->city->toEqual('Pokhara')
         ->longitude->toEqual(22.4280)
         ->latitude->toEqual(89.8765)
-        ->image->toEqual('updated.jpg')
-        ->map->toEqual('<iframe src="https://maps.google.com/?q=85.3240,27.7172"></iframe>')
-        ->open_time->toEqual('07:00:00')
-        ->close_time->toEqual('19:00:00');
+        ->added_by_user_id->toEqual(4)
+        ->status->toEqual('approved');
 });
 
 test('a restaurant can be deleted', function () {

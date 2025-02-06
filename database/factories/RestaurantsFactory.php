@@ -17,17 +17,11 @@ class RestaurantsFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => $this->faker->company(), // Generates a restaurant name
-            'phone_number' => $this->faker->phoneNumber(), // Generates a random phone number
-            'email' => $this->faker->unique()->safeEmail(), // Generates a unique email address
-            'website_link' => $this->faker->url(), // Generates a random website URL
-            'city' => $this->faker->city(), // Generates a city name
+            'name' => $this->faker->company(), // Generates a random company name
             'longitude' => $this->faker->longitude(), // Generates a random longitude
             'latitude' => $this->faker->latitude(), // Generates a random latitude
-            'image' => $this->faker->imageUrl(640, 480, 'restaurants', true, 'Restaurant'), // Generates a placeholder image URL
-            'map' => $this->faker->url(), // Generates a random map link (can be customized)
-            'open_time' => $this->faker->time('H:i'), // Generates a random opening time
-            'close_time' => $this->faker->time('H:i'), // Generates a random closing time
+            'added_by_user_id' => \App\Models\User::factory(), // Assumes a relationship with the User model
+            'status' => $this->faker->randomElement(['approved', 'pending', 'rejected']), // Example status values
         ];
     }
 }

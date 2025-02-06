@@ -13,6 +13,6 @@ class RestaurantTableSeeder extends Seeder
      */
     public function run(): void
     {
-        Restaurants::factory()->count(15)->create();
+        Restaurants::factory()->count(5)->create();
     }
 }
