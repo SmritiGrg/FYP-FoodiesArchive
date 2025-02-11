@@ -1,22 +1,5 @@
-<x-app-layout>
 
-    @guest
-        <li class="nav-item mt-3">
-            <a class="nav-link2" href="register" id = "signup">
-                Sign Up
-            </a>
-        </li>
-    @endguest
-    @auth
-        <li><a class="dropdown-item" href="/profile">Profile</a></li>
-        {{-- <li><a class="dropdown-item" href="/register">LogOut</a></li> --}}
-        <form method="POST" action="{{ route('logout') }}">
-            @csrf
-            <button type="submit">Logout</button>
-        </form>
-        <h2>Welcome, {{ Auth::user()->full_name }}</h2>
-        <img src="{{ asset('uploads/profile-images/' . auth()->user()->image) }}" alt="Profile" class="w-20 h-20 rounded-full" >
-    @endauth
+<x-app-layout>
     <h1>HELLO WELCOME TO FOODIE'S Archive normal user</h1>
     
     @if (session('status'))

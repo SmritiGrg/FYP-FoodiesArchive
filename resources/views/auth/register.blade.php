@@ -9,7 +9,7 @@
                     class="text-black bg-customYellow hover:bg-hovercustomYellow font-poppins font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2">LOGIN</button></a>
         </div>
     </div>
-    <div class="w-full lg:w-2/3 py-9 px-9 border-l rounded-2xl shadow-lg bg-bgPurple">
+    <div class="w-full lg:w-2/3 py-9 px-20 border-l rounded-2xl shadow-lg bg-bgPurple">
         <div class="flex justify-center mb-6">
             <a href="/"> <img src="{{ asset('assets/img/secondary_FA-Logo-removebg-preview.png') }}" alt="Logo"
                     style="width: 70px; height: 50px;"></a>
