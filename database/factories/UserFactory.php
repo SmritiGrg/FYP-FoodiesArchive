@@ -25,12 +25,14 @@ class UserFactory extends Factory
     public function definition(): array
     {
         return [
-            'full_name' => $this->faker->fullName(),
+            'full_name' => $this->faker->name(),
             'username' => $this->faker->userName(),
             'email' => $this->faker->unique()->safeEmail(),
             'password' => static::$password ??= Hash::make('password'),
             'image' => $this->faker->imageUrl(),
             'role' => $this->assignRole(),
+            'streak_count' => $this->faker->numberBetween(0, 200),
+            'last_activity_date' => $this->faker->optional()->dateTimeThisYear(),
             'email_verified_at' => now(),
             'remember_token' => Str::random(10),
         ];
@@ -39,7 +41,7 @@ class UserFactory extends Factory
     private function assignRole()
     {
         // Return one of the roles except 'admin'
-        return $this->faker->randomElement(['creator', 'premium_user']);
+        return $this->faker->randomElement(['visitor', 'premium_user']);
     }
 
 

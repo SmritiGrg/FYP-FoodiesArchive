@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('food_posts', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->integer('rating');
             $table->text('review');
             $table->integer('price');
             $table->string('image');

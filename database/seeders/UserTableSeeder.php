@@ -29,7 +29,9 @@ class UserTableSeeder extends Seeder
             'password' => Hash::make('customer123'),
             'image' => 'smrii28-profile-1738587162.jpg',
             'role' => 'visitor',
+            'streak_count' => 50,
+            'last_activity_date' => now(),
         ]);
-        // User::factory()->count(18)->create();
+        User::factory()->count(50)->create();
     }
 }

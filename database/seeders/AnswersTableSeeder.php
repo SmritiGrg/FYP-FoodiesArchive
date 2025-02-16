@@ -2,17 +2,17 @@
 
 namespace Database\Seeders;
 
-use App\Models\Likes;
+use App\Models\Answers;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class LikeTableSeeder extends Seeder
+class AnswersTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
      */
     public function run(): void
     {
-        Likes::factory()->count(50)->create();
+        Answers::factory()->count(25)->create();
     }
 }
