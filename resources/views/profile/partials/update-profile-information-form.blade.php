@@ -18,20 +18,27 @@
         @method('patch')
         <div class="flex flex-col items-center justify-center text-center relative">
             <div class="relative">
-                <img id="profilePreview" src="{{ asset('uploads/profile-images/' . auth()->user()->image) }}" alt="Profile" class="rounded-full ring-4 ring-gray-300 object-cover" style="width: 150px; height: 150px;">
+                <img id="profilePreview" src="{{ asset('uploads/profile-images/' . auth()->user()->image) }}" alt="Profile" class="rounded-full ring-4 ring-gray-300 object-cover cursor-pointer" style="width: 150px; height: 150px;" onclick="openModal()">
                 
                 <!-- Hidden file input -->
                 <input type="file" id="image" name="image" class="hidden" accept="image/*" onchange="previewImage(event)">
-        
+            
                 <label for="image" class="absolute top-0 right-0 bg-gray-800 text-white p-1 rounded-full cursor-pointer hover:bg-gray-700 transition" style="width: 35px; height: 35px;">
                     <i class="fa-solid fa-pen"></i>
                 </label>
             </div>
-        
+
             <h5 class="mt-2 font-semibold">{{ Auth::user()->full_name }}</h5>
             <h5 class="text-gray-500">{{ Auth::user()->username }}</h5>
-            
         </div>
+
+        <!-- Modal for profile image -->
+        <div id="profileModal" class="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center invisible opacity-0 transition-all duration-300" onclick="closeModal(event)" style="margin: 0; padding: 0;">
+            <div class="relative">
+                <img id="modalImage" src="{{ asset('uploads/profile-images/' . auth()->user()->image) }}" alt="Profile" class="rounded-full object-cover" style="width: 400px; height: 400px;">
+            </div>
+        </div>
+
         <div>
             <x-input-label for="full_name" value="Full Name" />
             <x-text-input id="full_name" name="full_name" type="text" class="mt-1 block w-full" :value="old('full_name', $user->full_name)" autofocus  />

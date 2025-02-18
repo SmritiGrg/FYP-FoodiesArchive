@@ -1,5 +1,5 @@
-import defaultTheme from 'tailwindcss/defaultTheme';
-import forms from '@tailwindcss/forms';
+import defaultTheme from "tailwindcss/defaultTheme";
+import forms from "@tailwindcss/forms";
 
 /** @type {import('tailwindcss').Config} */
 export default {
@@ -21,10 +21,13 @@ export default {
                 bgPurple: "#F5EFFF",
                 bgGray: "#F1F1F1",
                 lightgray: "#A6A6A6",
+                darkPurple: "#2E073F",
+                darkRed: "#AD192A",
+                lightRed: "#B5535E",
             },
         },
     },
 
     plugins: [forms],
 };
-6
+6;

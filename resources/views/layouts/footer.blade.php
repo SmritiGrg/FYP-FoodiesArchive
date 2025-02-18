@@ -9,11 +9,11 @@
                         alt="Foodie's Archive Logo"
                     />
                     </a>
-                    <p class="text-lightgray text-base font-poppins">
+                    <p class="text-lightgray text-sm font-poppins">
                     Bringing food lovers together, discover authentic tastes, share
                     your Foodie Adventures and stunning foodie spreads today.
                     </p>
-                    <p class="text-lightgray text-base mt-2 font-poppins">
+                    <p class="text-lightgray text-sm mt-2 font-poppins">
                     Sign up now and discover the best food reviews in Nepal
                     </p>
                 </div>
@@ -26,21 +26,21 @@
                     <li>
                         <a
                         href="#"
-                        class="text-lightgray hover:text-gray-500 text-base hover:underline font-poppins"
+                        class="text-lightgray hover:text-gray-500 text-sm hover:underline font-poppins"
                         >Create Post</a
                         >
                     </li>
                     <li>
                         <a
                         href="#"
-                        class="text-lightgray hover:text-gray-500 text-base hover:underline font-poppins"
+                        class="text-lightgray hover:text-gray-500 text-sm hover:underline font-poppins"
                         >Write Review</a
                         >
                     </li>
                     <li>
                         <a
                         href="#"
-                        class="text-lightgray hover:text-gray-500 text-base hover:underline font-poppins"
+                        class="text-lightgray hover:text-gray-500 text-sm hover:underline font-poppins"
                         >Build Streaks</a
                         >
                     </li>
@@ -55,21 +55,21 @@
                     <li>
                         <a
                         href="#"
-                        class="text-lightgray hover:text-gray-500 text-base hover:underline font-poppins"
+                        class="text-lightgray hover:text-gray-500 text-sm hover:underline font-poppins"
                         >Discover</a
                         >
                     </li>
                     <li>
                         <a
                         href="#"
-                        class="text-lightgray hover:text-gray-500 text-base hover:underline font-poppins"
+                        class="text-lightgray hover:text-gray-500 text-sm hover:underline font-poppins"
                         >Post a food</a
                         >
                     </li>
                     <li>
                         <a
                         href="#"
-                        class="text-lightgray hover:text-gray-500 text-base hover:underline font-poppins"
+                        class="text-lightgray hover:text-gray-500 text-sm hover:underline font-poppins"
                         >About us</a
                         >
                     </li>
@@ -83,14 +83,14 @@
                     <ul class="space-y-2">
                     <a href=""
                         ><li
-                        class="text-lightgray text-base font-poppins hover:text-gray-500"
+                        class="text-lightgray text-sm font-poppins hover:text-gray-500"
                         >
                         +977 9812354678
                         </li></a
                     >
                     <a href=""
                         ><li
-                        class="text-lightgray text-base font-poppins underline hover:text-gray-500"
+                        class="text-lightgray text-sm font-poppins underline hover:text-gray-500"
                         >
                         foodiearchive@gmail.com
                         </li></a
@@ -145,11 +145,71 @@
         });
 
 
-        document
-            .getElementById("menu-toggle")
-            .addEventListener("click", function () {
+        document.getElementById("menu-toggle").addEventListener("click", function () {
                 document.getElementById("mobile-menu").classList.toggle("hidden");
-            });
+        });
+
+        //  Modal JavaScript to trigger 
+        document.addEventListener("DOMContentLoaded", function() {
+            @if(session('showProfileImageModal'))
+                document.querySelector('.fixed').classList.remove('hidden');
+            @endif
+        });
+
+        function closeModal() {
+            document.querySelector('.fixed').classList.add('hidden');
+        }
+
+        //////////  FOR PROFILE MODAL
+
+        // Open the modal when the profile image is clicked
+        function openModal() {
+            const modal = document.getElementById('profileModal');
+            modal.classList.remove('invisible', 'opacity-0');
+            modal.classList.add('visible', 'opacity-100');
+        }
+
+        // Close the modal when the user clicks anywhere outside the image
+        function closeModal(event) {
+            if (event.target === document.getElementById('profileModal')) {
+                const modal = document.getElementById('profileModal');
+                modal.classList.remove('visible', 'opacity-100');
+                modal.classList.add('invisible', 'opacity-0');
+            }
+        }
+
+
+        ////////////// FOR LIKE button
+        // Select the elements
+        const unlikeHeart = document.querySelector('.unlike-heart');
+        const likeHeart = document.querySelector('.like-heart');
+
+        // Add click event to toggle classes
+        unlikeHeart.addEventListener('click', () => {
+            unlikeHeart.classList.toggle('active');
+            likeHeart.classList.toggle('active');
+        });
+
+        likeHeart.addEventListener('click', () => {
+            unlikeHeart.classList.toggle('active');
+            likeHeart.classList.toggle('active');
+        });
+
+        ////////////// FOR BOOKMARK BUTTON
+        // Select the elements
+        const notBookmarked = document.querySelector('.not-bookmarked');
+        const bookmarked = document.querySelector('.bookmarked');
+
+        // Add click event to toggle classes
+        notBookmarked.addEventListener('click', () => {
+            notBookmarked.classList.toggle('active');
+            bookmarked.classList.toggle('active');
+        });
+
+        bookmarked.addEventListener('click', () => {
+            notBookmarked.classList.toggle('active');
+            bookmarked.classList.toggle('active');
+        });
     </script>
 </body>
 

@@ -1,17 +1,23 @@
 <header>
-    <nav class="bg-white">
+    <nav class="bg-white fixed">
         <div class="max-w-screen-xl mx-auto flex items-center justify-between p-4">
             <!-- Hamburger Menu (Visible only on md and smaller screens) -->
             <button id="menu-toggle" class="md:hidden text-2xl text-gray-900">
                 &#9776;
             </button>
 
-            <!-- Logo (Centered on small screens) -->
-            <a href="#" class="flex items-center">
+            <a href="#" class="flex items-center ">
+                <!-- Logo for larger screens -->
                 <img
-                src="{{ asset('assets/img/FoodiesArchive_Logo-removebg-preview.png') }}"
-                class="h-10"
-                alt="Foodie's Archive Logo"
+                    src="{{ asset('assets/img/FoodiesArchive_Logo-removebg-preview.png') }}"
+                    class="h-10 hidden sm:block"
+                    alt="Foodie's Archive Logo"
+                />
+                <!-- Logo for small screens -->
+                <img
+                    src="{{ asset('assets/img/secondary_FA-Logo-removebg-preview.png') }}"
+                    class="block sm:hidden ml-9"
+                    alt="Foodie's Archive Small Logo" style="width: 55px; height: 35px;"
                 />
             </a>
 
@@ -48,11 +54,11 @@
                     >Log In</a
                     >
 
-                    <a
-                    href="register"
-                    class="bg-customYellow text-black text-base px-4 py-2 rounded-full font-base hover:bg-hovercustomYellow transition font-semibold"
-                    >Sign Up</a
-                    >
+                    <a href="register" class="bg-customYellow text-black text-sm px-3 py-1 sm:text-base sm:px-4 sm:py-2 rounded-full hover:bg-hovercustomYellow transition font-semibold">
+                        Sign Up
+                    </a>
+
+
                 @endguest
                 @auth
                     <div class="relative inline-block text-left border-l-2 border-gray-300 pl-4">
@@ -64,7 +70,7 @@
                             >
                                 <img
                                 class="w-10 h-10 rounded-full object-cover"
-                                src="../images/black-widow.jpg"
+                                src="{{ asset('uploads/profile-images/' . auth()->user()->image) }}"
                                 alt="user photo"
                                 />
                             </button>

@@ -1,0 +1,74 @@
+nav {
+    width: 100%;
+    z-index: 10; 
+}
+
+
+#search-bar:focus {
+    border-color: transparent;
+}
+
+span i.unlike-heart.active {
+    display: none;
+}
+
+/* Show the like heart and add the animation when active */
+span i.like-heart.active {
+    display: inline-block;
+    animation: pop 0.5s ease forwards; /* Add the pop animation */
+}
+
+i.not-bookmarked.active {
+    display: none;
+}
+
+i.bookmarked.active {
+    display: inline-block;/* Add the pop animation */
+}
+
+@keyframes pop {
+    0% {
+        transform: scale(1); /* Normal size */
+    }
+    50% {
+        transform: scale(1.4); /* Slightly larger */
+    }
+    100% {
+        transform: scale(1); /* Back to normal size */
+    }
+}
+
+.step ul{
+    text-align: center;
+}
+
+.step ul li p{
+    margin: auto;
+}
+
+.step ul li{
+    display: inline-block;
+    width: 200px;
+    position: relative;
+}
+
+.dot::after{
+    content: '';
+    background: black;
+    height: 2px;
+    width: 205px;
+    display: block;
+    position: absolute;
+    left:0;
+    top: 7px;
+    z-index: 0;
+}
+
+.step ul li:first-child .dot::after{
+    width: 105px;
+    left: 100px;
+}
+
+.step ul li:last-child .dot::after{
+    width: 105px;
+}
