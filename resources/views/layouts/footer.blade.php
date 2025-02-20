@@ -127,6 +127,64 @@
             reader.readAsDataURL(event.target.files[0]);
         }
 
+        ///////////// CAROUSEL JS
+        let currentSlideID = 1;
+        const totalSlides = document.getElementById('slider').childElementCount;
+        let slideInterval;
+
+        function goToSlide(slideID) {
+            currentSlideID = slideID;
+            showSlide();
+            resetAutoSlide(); 
+        }
+
+        function showSlide() {
+            const slides = document.getElementById('slider').getElementsByTagName('li');
+            const buttons = document.querySelectorAll('.carousel-button');
+
+            // Show the correct slide
+            for (let index = 0; index < totalSlides; index++) {
+                const element = slides[index];
+                if (currentSlideID === index + 1) {
+                    element.classList.remove('hidden');
+                } else {
+                    element.classList.add('hidden');
+                }
+            }
+
+            // Update button colors
+            buttons.forEach((button, index) => {
+                if (currentSlideID === index + 1) {
+                    button.classList.add('bg-yellow-400');
+                    button.classList.remove('bg-gray-400');
+                } else {
+                    button.classList.add('bg-gray-400');
+                    button.classList.remove('bg-yellow-400');
+                }
+            });
+        }
+
+        function nextSlide() {
+            currentSlideID = currentSlideID >= totalSlides ? 1 : currentSlideID + 1;
+            showSlide();
+        }
+
+        function startAutoSlide() {
+            slideInterval = setInterval(nextSlide, 4000); // Slide every 4 seconds
+        }
+
+        function resetAutoSlide() {
+            clearInterval(slideInterval); // Stop the current interval
+            startAutoSlide(); // Start a new interval
+        }
+
+        // Initialize the carousel
+        showSlide();
+        startAutoSlide();
+
+    ////////////// END CAROUSELL
+
+
         document.addEventListener("DOMContentLoaded", function () {
             const userMenuButton = document.getElementById("user-menu-button");
             const userMenu = document.querySelector('[role="menu"]'); 

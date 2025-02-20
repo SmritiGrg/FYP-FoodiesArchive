@@ -6,7 +6,7 @@
                 &#9776;
             </button>
 
-            <a href="#" class="flex items-center ">
+            <a href="/" class="flex items-center ">
                 <!-- Logo for larger screens -->
                 <img
                     src="{{ asset('assets/img/FoodiesArchive_Logo-removebg-preview.png') }}"
@@ -43,8 +43,8 @@
             <!-- Right Icons -->
             <div class="flex items-center space-x-4">
                 <!-- Bookmark Icon (Hidden on md screens and below) -->
-                <a href="#" class="hidden md:block">
-                <i class="fa-regular fa-bookmark text-xl"></i>
+                <a href="bookmark" class="hidden md:block">
+                    <i class="fa-regular fa-bookmark text-xl hover:text-gray-500"></i>
                 </a>
                 @guest
                     <!-- Log In & Sign Up -->
@@ -76,9 +76,7 @@
                             </button>
                         </div>
 
-                        <div
-                        class="absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white ring-1 shadow-lg ring-black/5 focus:outline-hidden hidden"
-                        role="menu"
+                        <div class="absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white ring-1 shadow-lg ring-black/5 focus:outline-hidden hidden" role="menu"
                         aria-orientation="vertical"
                         aria-labelledby="menu-button"
                         tabindex="-1"

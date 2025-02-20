@@ -22,6 +22,7 @@ export default {
                 bgGray: "#F1F1F1",
                 lightgray: "#A6A6A6",
                 darkPurple: "#2E073F",
+                lightPurple: "#441856",
                 darkRed: "#AD192A",
                 lightRed: "#B5535E",
             },
