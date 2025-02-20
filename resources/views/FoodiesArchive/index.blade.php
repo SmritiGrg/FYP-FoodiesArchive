@@ -65,7 +65,7 @@
             
             <div class="mt-4 sm:hidden px-4">
                 <button 
-                    class="w-full max-w-2xl font-poppins bg-customYellow text-black text-base px-4 py-3 rounded-full font-medium hover:bg-hovercustomYellow transition"
+                    class="w-full max-w-2xl font-poppins bg-customYellow text-black text-base px-2 py-1 rounded-full font-medium hover:bg-hovercustomYellow transition"
                 >
                     Search
                 </button>
@@ -76,9 +76,9 @@
             </p>
             <a 
                 href="#" 
-                class="text-xs sm:text-sm md:text-base text-darkRed font-medium underline font-poppins hover:text-lightRed"
+                class="text-xs sm:text-sm md:text-base text-darkRed font-medium underline font-poppins hover:text-lightRed hvr-icon-forward"
             >
-                Post Your First Food
+                Post Your First Food <i class="fa-solid fa-arrow-right ml-2 hvr-icon"></i>
             </a>
         </div>
     </section>
@@ -96,103 +96,102 @@
                 </p>
             </div>
 
-            <div class="lg:px-24">
+            <div class="lg:px-24 md:px-5">
                 <div class="relative">
                     <ul id="slider">
                         <li>
-                            <div class="flex flex-col lg:flex-row items-center mt-10 bg-purple-50 rounded-lg shadow-md">
+                            <div class="flex flex-col md:flex-row items-center mt-10 bg-purple-50 rounded-lg shadow-md">
                                 <!-- Text Section -->
-                                <div class="lg:w-1/2 pl-24">
-                                    <h2 class="text-6xl font-bold text-darkPurple font-poppins">
+                                <div class="w-full md:w-1/2 p-6 md:pl-24">
+                                    <h2 class="text-5xl md:text-4xl lg:text-5xl font-bold text-darkPurple font-poppins" data-aos="fade-down">
                                         Upload <span class="text-customYellow">Food</span>
                                     </h2>
-                                    <p class="text-gray-600 mt-4 font-poppins">
+                                    <p class="text-lg md:text-base lg:text-lg text-gray-600 mt-4 font-poppins" data-aos="fade-up">
                                         Create, and step into a world <br>
-                                        of Food, Friends, and Fun on 
-                                        <br>Foodie's Archive.
+                                        of Food, Friends, and Fun on <br>Foodie's Archive.
                                     </p>
-                                    <button class="bg-darkPurple text-white py-2 px-6 mt-6 rounded-3xl hover:bg-lightPurple font-poppins">
+                                    <button class="bg-darkPurple text-white py-2 px-4 md:px-6 mt-6 rounded-3xl hover:bg-lightPurple font-poppins text-sm md:text-base" data-aos="zoom-in">
                                         Start posting Food
                                     </button>
                                 </div>
                                 <!-- Image Section -->
-                                <div class="lg:w-1/2 lg:mt-0 py-12 flex justify-center">
-                                    <img src="{{asset('assets/img/laphing.jpg')}}" alt="Delicious Food" class="w-full max-w-sm h-96 object-cover">
+                                <div class="w-full py-10 md:w-1/2 md:py-12 flex justify-center" data-aos="fade-up">
+                                    <img src="{{asset('assets/img/laphing.jpg')}}" alt="Delicious Food" class="w-64 md:w-80 lg:w-full max-w-sm h-72 md:h-80 lg:h-96 object-cover rounded-lg">
                                 </div>
                             </div>
                         </li>
 
                         <li class="hidden">
-                            <div class="flex flex-col lg:flex-row items-center mt-10 bg-purple-50 rounded-lg shadow-md">
+                            <div class="flex flex-col md:flex-row items-center mt-10 bg-purple-50 rounded-lg shadow-md">
                                 <!-- Text Section -->
-                                <div class="lg:w-1/2 pl-24">
-                                    <h2 class="text-5xl font-bold text-darkPurple font-poppins">
+                                <div class="w-full md:w-1/2 p-6 md:pl-24">
+                                    <h2 class="text-5xl md:text-4xl lg:text-5xl font-bold text-darkPurple font-poppins">
                                         Social <span class="text-customYellow">Interactions</span>
                                     </h2>
-                                    <p class="text-gray-600 mt-4 font-poppins">
+                                    <p class="text-lg md:text-base lg:text-lg text-gray-600 mt-4 font-poppins">
                                         Write review, like, follow and share food post.
                                     </p>
                                 </div>
                                 <!-- Image Section -->
-                                <div class="lg:w-1/2 lg:mt-0 py-12 flex justify-center">
-                                    <img src="{{asset('assets/img/laphing.jpg')}}" alt="Delicious Food" class="w-full max-w-sm h-96 object-cover">
+                                <div class="w-full py-10 md:w-1/2 md:py-12 flex justify-center">
+                                    <img src="{{asset('assets/img/laphing.jpg')}}" alt="Delicious Food" class="w-64 md:w-80 lg:w-full max-w-sm h-72 md:h-80 lg:h-96 object-cover rounded-lg">
                                 </div>
                             </div>
                         </li>
 
                         <li class="hidden">
-                            <div class="flex flex-col lg:flex-row items-center mt-10 bg-purple-50 rounded-lg shadow-md">
+                            <div class="flex flex-col md:flex-row items-center mt-10 bg-purple-50 rounded-lg shadow-md">
                                 <!-- Text Section -->
-                                <div class="lg:w-1/2 pl-24">
-                                    <h2 class="text-5xl font-bold text-darkPurple font-poppins">
+                                <div class="w-full md:w-1/2 p-6 md:pl-24">
+                                    <h2 class="text-5xl md:text-4xl lg:text-5xl font-bold text-darkPurple font-poppins">
                                         Ask and <span class="text-customYellow">answer</span>
                                     </h2>
-                                    <p class="text-gray-600 mt-4 font-poppins">
+                                    <p class="text-lg md:text-base lg:text-lg text-gray-600 mt-4 font-poppins">
                                         Ask questions related to food, restaurants <br>
                                         and other topics.
                                     </p>
                                 </div>
                                 <!-- Image Section -->
-                                <div class="lg:w-1/2 lg:mt-0 py-12 flex justify-center">
-                                    <img src="{{asset('assets/img/sandwich.png')}}" alt="Delicious Food" class="w-full max-w-sm h-96 object-cover">
+                                <div class="w-full py-10 md:w-1/2 md:py-12 flex justify-center">
+                                    <img src="{{asset('assets/img/sandwich.png')}}" alt="Delicious Food" class="w-64 md:w-80 lg:w-full max-w-sm h-72 md:h-80 lg:h-96 object-cover rounded-lg">
                                 </div>
                             </div>
                         </li>
 
                         <li class="hidden">
-                            <div class="flex flex-col lg:flex-row items-center mt-10 bg-purple-50 rounded-lg shadow-md">
+                            <div class="flex flex-col md:flex-row items-center mt-10 bg-purple-50 rounded-lg shadow-md">
                                 <!-- Text Section -->
-                                <div class="lg:w-1/2 pl-24">
-                                    <h2 class="text-5xl font-bold text-darkPurple font-poppins">
+                                <div class="w-full md:w-1/2 p-6 md:pl-24">
+                                    <h2 class="text-5xl md:text-4xl lg:text-5xl font-bold text-darkPurple font-poppins">
                                         Discover through <span class="text-customYellow">Map</span>
                                     </h2>
-                                    <p class="text-gray-600 mt-4 font-poppins">
+                                    <p class="text-lg md:text-base lg:text-lg text-gray-600 mt-4 font-poppins">
                                         Discover restaurants and foods nearby. 
                                     </p>
                                 </div>
                                 <!-- Image Section -->
-                                <div class="lg:w-1/2 lg:mt-0 py-12 flex justify-center">
-                                    <img src="{{asset('assets/img/Map_Carousel.png')}}" alt="Delicious Food" class="w-full max-w-sm h-96 object-cover">
+                                <div class="w-full py-10 md:w-1/2 md:py-12 flex justify-center">
+                                    <img src="{{asset('assets/img/Map_Carousel.png')}}" alt="Delicious Food" class="w-64 md:w-80 lg:w-full max-w-sm h-72 md:h-80 lg:h-96 object-cover rounded-lg">
                                 </div>
                             </div>
                         </li>
 
                         <li class="hidden">
-                            <div class="flex flex-col lg:flex-row items-center mt-10 bg-purple-50 rounded-lg shadow-md">
+                            <div class="flex flex-col md:flex-row items-center mt-10 bg-purple-50 rounded-lg shadow-md">
                                 <!-- Text Section -->
-                                <div class="lg:w-1/2 pl-24">
-                                    <h2 class="text-5xl font-bold text-darkPurple font-poppins">
+                                <div class="w-full md:w-1/2 p-6 md:pl-24">
+                                    <h2 class="text-5xl md:text-4xl lg:text-5xl font-bold text-darkPurple font-poppins">
                                         Build your <span class="text-customYellow">Streaks</span>
                                     </h2>
-                                    <p class="text-gray-600 mt-4 font-poppins">
+                                    <p class="text-lg md:text-base lg:text-lg text-gray-600 mt-4 font-poppins">
                                         Post and review consistently to increase
                                         your streak and earn exclusive badges 
                                         that showcase your foodie skills. 
                                     </p>
                                 </div>
                                 <!-- Image Section -->
-                                <div class="lg:w-1/2 lg:mt-0 py-12 flex justify-center">
-                                    <img src="{{asset('assets/img/Chicken-Kimbap-1.png')}}" alt="Delicious Food" class="w-full max-w-sm h-96 object-cover">
+                                <div class="w-full py-10 md:w-1/2 md:py-12 flex justify-center">
+                                    <img src="{{asset('assets/img/Chicken-Kimbap-1.png')}}" alt="Delicious Food" class="w-64 md:w-80 lg:w-full max-w-sm h-72 md:h-80 lg:h-96 object-cover rounded-lg">
                                 </div>
                             </div>
                         </li>
@@ -213,11 +212,11 @@
     <section> 
         <div class="py-7">
             <div class="flex flex-col justify-center items-center">
-                <h1 class="text-2xl font-semibold text-customYellow font-poppins">Getting Started is Easy</h1>
-                <p class="bg-black text-white py-2 px-4 mt-4 font-semibold font-poppins">How it Works</p>
+                <h1 class="text-2xl font-semibold text-customYellow font-poppins" data-aos="fade-up">Getting Started is Easy</h1>
+                <p class="bg-black text-white py-2 px-4 mt-4 font-semibold font-poppins" data-aos="zoom-in">How it Works</p>
             </div>
-            <div class="px-24" >
-                <div class="step my-10 bg-bgPurple p-7 rounded-xl shadow-md">
+            <div class="px-24">
+                <div class="step my-10 bg-bgPurple p-7 rounded-xl shadow-md" data-aos="fade-up">
                 <ul>
                     <li>
                         <p class="w-4 h-4 rounded-full bg-black dot">-</p>
@@ -247,25 +246,53 @@
         <div class="py-7">
             <!-- Title Section -->
             <div class="flex flex-col justify-center items-center">
-                <h1 class="text-2xl font-semibold text-customYellow font-poppins text-center">
+                <h1 class="text-2xl font-semibold text-customYellow font-poppins text-center" data-aos="fade-up">
                     Explore the Most Popular Dishes Among Our Foodies
                 </h1>
-                <p class="bg-black text-white py-2 px-4 mt-4 font-semibold font-poppins">
+                <p class="bg-black text-white py-2 px-4 mt-4 font-semibold font-poppins" data-aos="fade-up">
                     Popular Foods By Users
                 </p>
             </div>
 
             <!-- Cards Section -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 mt-3 px-4 sm:px-8 lg:px-20">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 mt-3 px-4 sm:px-8 lg:px-20" data-aos="fade-up">
                 <!-- Card 1 -->
                 <div class="bg-white overflow-hidden">
                     <div class="flex justify-between items-center p-4">
                         <div class="flex items-center">
                             <a href="">
-                                <img src="{{asset('uploads/profile-images/aries28-profile-1739687395.png')}}" alt="Smriti Gurung" class="w-10 h-10 rounded-full object-cover object-center hover:opacity-75 transition-opacity duration-300" />
+                                <img src="{{asset('uploads/profile-images/aries28-profile-1739687395.png')}}" alt="Smriti Gurung" class="w-10 h-10 rounded-full object-cover object-center hover:opacity-80 transition-opacity duration-300" />
                             </a>
-                            <div class="ml-3">
-                                <p class="font-semibold text-base">Smriti Gurung</p>
+                            <div class="ml-3 relative group">
+                                <a href="" class="font-semibold text-base hover:text-gray-500">Smriti Gurung</a>
+                                <!-- Modal -->
+                                <div class="absolute hidden group-hover:block w-60 p-4 bg-white shadow-lg rounded-lg z-10 border border-gray-200">
+                                    <div class="flex items-center space-x-4">
+                                        <img src="{{asset('uploads/profile-images/aries28-profile-1739687782.png')}}" alt="User Avatar" class="w-12 h-12 rounded-full object-cover">
+                                        <div>
+                                            <a href="" class="font-semibold text-sm font-poppins">Smriti Gurung</a>
+                                            <p class="text-gray-500 text-xs font-poppins">Smrii</p>
+                                            <p class="border border-gray-300 rounded-full text-sm w-16 pl-2 mt-2"><i class="fa-solid fa-fire-flame-curved text-red-400"></i> 50</p>
+                                        </div>
+                                    </div>
+                                    <div class="flex justify-between text-center mt-4">
+                                        <!-- Posts -->
+                                        <div>
+                                            <p class="font-bold text-sm font-poppins">14</p>
+                                            <p class="text-gray-500 text-xs font-poppins">Posts</p>
+                                        </div>
+                                        <!-- Followers -->
+                                        <div>
+                                            <p class="font-bold text-sm font-poppins">30</p>
+                                            <p class="text-gray-500 text-xs font-poppins">Followers</p>
+                                        </div>
+                                        <!-- Following -->
+                                        <div>
+                                            <p class="font-bold text-sm font-poppins">15</p>
+                                            <p class="text-gray-500 text-xs font-poppins">Following</p>
+                                        </div>
+                                    </div>
+                                </div>
                                 <p class="font-medium text-sm">Smrii</p>
                                 <p class="text-gray-500 text-xs">1 month ago</p>
                             </div>
@@ -454,18 +481,18 @@
         <div class="py-7">
             <!-- Title Section -->
             <div class="flex flex-col justify-center items-center">
-                <h1 class="text-2xl font-semibold text-customYellow font-poppins text-center">
+                <h1 class="text-2xl font-semibold text-customYellow font-poppins text-center" data-aos="fade-up">
                     Meet the contributors shaping the Foodie’s Archive!
                 </h1>
-                <p class="bg-black text-white py-2 px-4 mt-4 font-semibold font-poppins">
+                <p class="bg-black text-white py-2 px-4 mt-4 font-semibold font-poppins" data-aos="fade-up">
                     Top Contributors
                 </p>
             </div>
             
-            <div class="mt-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-18 px-14 sm:px-14 lg:px-24 lg:gap-14">
+            <div class="mt-8 grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-5 px-14 sm:px-14 lg:px-24 lg:gap-14 md:gap-3" data-aos="fade-up">
                 <!-- Card 1 -->
-                <div class="bg-white rounded-lg p-5 flex" style="box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;">
-                    <img src="{{asset('uploads/profile-images/aries28-profile-1739687395.png')}}" alt="Foodie_King" class="w-16 h-16 rounded-full object-cover mr-4">
+                <div class="bg-white rounded-lg p-5 flex md:flex-col md:items-center md:text-center lg:flex-row lg:items-start lg:text-left hvr-grow" style="box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;">
+                    <img src="{{asset('uploads/profile-images/aries28-profile-1739687395.png')}}" alt="Foodie_King" class="w-16 h-16 rounded-full object-cover mr-6">
                     <div>
                         <h2 class="text-lg font-semibold">Foodie_King</h2>
                         <p class="text-gray-600">Total streak: 500</p>
@@ -476,8 +503,8 @@
                 </div>
 
                 <!-- Card 2 -->
-                <div class="bg-white rounded-lg p-5 flex" style="box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;">
-                    <img src="{{asset('uploads/profile-images/aries28-profile-1739687395.png')}}" alt="Smrii_g" class="w-16 h-16 rounded-full object-cover mr-4">
+                <div class="bg-white rounded-lg p-5 flex md:flex-col md:items-center md:text-center lg:flex-row lg:items-start lg:text-left hvr-grow" style="box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;">
+                    <img src="{{asset('uploads/profile-images/aries28-profile-1739687395.png')}}" alt="Smrii_g" class="w-16 h-16 rounded-full object-cover mr-6">
                     <div>
                         <h2 class="text-lg font-semibold">Smrii_g</h2>
                         <p class="text-gray-600">Total streak: 470</p>
@@ -488,8 +515,8 @@
                 </div>
 
                 <!-- Card 3 -->
-                <div class="bg-white rounded-lg p-5 flex" style="box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;">
-                    <img src="{{asset('uploads/profile-images/aries28-profile-1739687395.png')}}" alt="Ramm_44" class="w-16 h-16 rounded-full object-cover mr-4">
+                <div class="bg-white rounded-lg p-5 flex md:flex-col md:items-center md:text-center lg:flex-row lg:items-start lg:text-left hvr-grow" style="box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;">
+                    <img src="{{asset('uploads/profile-images/aries28-profile-1739687395.png')}}" alt="Ramm_44" class="w-16 h-16 rounded-full object-cover mr-6">
                     <div>
                         <h2 class="text-lg font-semibold">Ramm_44</h2>
                         <p class="text-gray-600">Total streak: 500</p>

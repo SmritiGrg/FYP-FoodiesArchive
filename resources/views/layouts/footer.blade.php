@@ -268,6 +268,12 @@
             notBookmarked.classList.toggle('active');
             bookmarked.classList.toggle('active');
         });
+
+        ////// ANIMATE ON SCROLL
+        AOS.init({
+            duration: 2000,
+            once: false,     
+        });
     </script>
 </body>
 

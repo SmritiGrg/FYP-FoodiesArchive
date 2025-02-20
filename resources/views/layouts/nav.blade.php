@@ -22,7 +22,7 @@
             </a>
 
             <!-- Navigation Links (Hidden on md and smaller screens) -->
-            <div id="nav-links" class="hidden md:flex space-x-12">
+            <div id="nav-links" class="hidden md:flex space-x-4 lg:space-x-12">
                 <a
                 href="#"
                 class="text-gray-900 hover:text-customYellow text-base font-semibold font-poppins"
@@ -123,7 +123,7 @@
         </div>
 
         <!-- Mobile Dropdown Menu -->
-        <div id="mobile-menu" class="hidden md:hidden bg-lightgray p-4">
+        <div id="mobile-menu" class="hidden md:hidden bg-white p-4 shadow-lg">
             <a href="#" class="block py-2 text-gray-900 hover:text-customYellow"
                 >Discover</a
             >
