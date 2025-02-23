@@ -119,6 +119,18 @@
             }
         }, 3000); // Hide after 2 seconds
 
+        ////// SEARCH BAR WHEN SCROLLING JS
+        window.addEventListener("scroll", function () {
+            let searchBar = document.getElementById("search-bar2");
+            if (window.scrollY > 50) {
+                searchBar.classList.remove("hidden");
+            } else {
+                searchBar.classList.add("hidden");
+            }
+        });
+        /////// END
+
+
         function previewImage(event) {
             const reader = new FileReader();
             reader.onload = function () {
@@ -127,7 +139,7 @@
             reader.readAsDataURL(event.target.files[0]);
         }
 
-        ///////////// CAROUSEL JS
+        ///////////// CAROUSEL JS IMAGE
         let currentSlideID = 1;
         const totalSlides = document.getElementById('slider').childElementCount;
         let slideInterval;
@@ -271,9 +283,69 @@
 
         ////// ANIMATE ON SCROLL
         AOS.init({
-            duration: 2000,
+            duration: 1000,
             once: false,     
         });
+
+        ////// REVIEW SLIDER START
+        (function () {
+            let currentSlide = 0;
+            const reviewCarousel = document.querySelector('#reviewCarousel');
+            if (!reviewCarousel) return;
+
+            const slides = reviewCarousel.querySelectorAll('#reviewSlider li');
+            const totalSlides = slides.length;
+            const buttons = reviewCarousel.querySelectorAll('.review-button');
+
+            function showSlide(index) {
+                slides.forEach((slide, i) => {
+                    slide.classList.toggle('hidden', i !== index);
+                });
+                updateActiveButton(index);
+            }
+
+            function updateActiveButton(index) {
+                buttons.forEach((button, i) => {
+                    button.classList.toggle('bg-yellow-400', i === index);
+                    button.classList.toggle('bg-gray-400', i !== index);
+                });
+            }
+
+            function reviewGoToSlide(slideIndex) {
+                if (slideIndex >= 1 && slideIndex <= totalSlides) {
+                    currentSlide = slideIndex - 1;
+                    showSlide(currentSlide);
+                }
+            }
+
+            setInterval(() => {
+                currentSlide = (currentSlide + 1) % totalSlides;
+                showSlide(currentSlide);
+            }, 5000);
+
+            buttons.forEach((button, index) => {
+                button.addEventListener('click', () => reviewGoToSlide(index + 1));
+            });
+
+            showSlide(currentSlide);
+        })();
+
+
+
+        /////// BOOKMARK MODAL
+        function openModal() {
+            const modal = document.getElementById('foodModal');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('foodModal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+            document.body.style.overflow = 'auto';
+        }
     </script>
 </body>
 

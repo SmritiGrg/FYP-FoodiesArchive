@@ -100,7 +100,7 @@
                 <div class="relative">
                     <ul id="slider">
                         <li>
-                            <div class="flex flex-col md:flex-row items-center mt-10 bg-purple-50 rounded-lg shadow-md">
+                            <div class="flex flex-col md:flex-row items-center mt-10 bg-bgPurple rounded-lg shadow-md">
                                 <!-- Text Section -->
                                 <div class="w-full md:w-1/2 p-6 md:pl-24">
                                     <h2 class="text-5xl md:text-4xl lg:text-5xl font-bold text-darkPurple font-poppins" data-aos="fade-down">
@@ -213,31 +213,71 @@
         <div class="py-7">
             <div class="flex flex-col justify-center items-center">
                 <h1 class="text-2xl font-semibold text-customYellow font-poppins" data-aos="fade-up">Getting Started is Easy</h1>
-                <p class="bg-black text-white py-2 px-4 mt-4 font-semibold font-poppins" data-aos="zoom-in">How it Works</p>
+                <p class="bg-black text-white py-2 px-4 mt-4 font-semibold font-poppins" data-aos="fade-up">How it Works</p>
             </div>
-            <div class="px-24">
-                <div class="step my-10 bg-bgPurple p-7 rounded-xl shadow-md" data-aos="fade-up">
-                <ul>
-                    <li>
-                        <p class="w-4 h-4 rounded-full bg-black dot">-</p>
-                        <p class="pt-4">Sign Up</p>
-                    </li>
-                    <li>
-                        <p class="w-4 h-4 rounded-full bg-black dot">-</p>
-                        <p class="pt-4">Explore</p>
-                    </li>
-                    <li>
-                        <p class="w-4 h-4 rounded-full bg-black dot">-</p>
-                        <p class="pt-4">Engage</p>
-                    </li>
-                    <li>
-                        <p class="w-4 h-4 rounded-full bg-black dot">-</p>
-                        <p class="pt-4">Discover</p>
-                    </li>
-                </ul>
+            <div class="px-3 sm:px-6 lg:px-24 md:px-11 mt-10" data-aos="fade-up">
+                <div class="bg-bgPurple py-10 px-5 rounded-lg shadow-md">
+                    <ul class="mx-auto grid max-w-md grid-cols-1 gap-10 lg:max-w-5xl lg:grid-cols-4">
+                        <li class="flex-start group relative flex lg:flex-col">
+                            <span
+                                class="absolute left-[18px] top-14 h-[calc(100%_-_32px)] w-px bg-gray-300 lg:right-0 lg:left-auto lg:top-[18px] lg:h-px lg:w-[calc(100%_-_72px)]"
+                                aria-hidden="true"></span>
+                            <div
+                                class="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full border-2 border-customYellow transition-all duration-200 group-hover:bg-customYellow">
+                            </div>
+                            <div class="ml-6 lg:ml-0 lg:mt-10">
+                                <h3
+                                    class="text-xl font-bold text-gray-900 before:mb-2 before:block before:font-mono before:text-sm before:text-gray-500">
+                                    Sign Up
+                                </h3>
+                                <h4 class="mt-2 text-base text-gray-700">Create your account to explore and share delicious food experiences.</h4>
+                            </div>
+                        </li>
+                        <li class="flex-start group relative flex lg:flex-col">
+                            <span
+                                class="absolute left-[18px] top-14 h-[calc(100%_-_32px)] w-px bg-gray-300 lg:right-0 lg:left-auto lg:top-[18px] lg:h-px lg:w-[calc(100%_-_72px)]"
+                                aria-hidden="true"></span>
+                            <div
+                                class="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full border-2 border-customYellow transition-all duration-200 group-hover:bg-customYellow">
+                            </div>
+                            <div class="ml-6 lg:ml-0 lg:mt-10">
+                                <h3
+                                    class="text-xl font-bold text-gray-900 before:mb-2 before:block before:font-mono before:text-sm before:text-gray-500">
+                                    Explore
+                                </h3>
+                                <h4 class="mt-2 text-base text-gray-700">Discover authentic Nepali cuisines, hidden gems, and trending food spots.</h4>
+                            </div>
+                        </li>
+                        <li class="flex-start group relative flex lg:flex-col">
+                            <span
+                                class="absolute left-[18px] top-14 h-[calc(100%_-_32px)] w-px bg-gray-300 lg:right-0 lg:left-auto lg:top-[18px] lg:h-px lg:w-[calc(100%_-_72px)]"
+                                aria-hidden="true"></span>
+                            <div
+                                class="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full border-2 border-customYellow transition-all duration-200 group-hover:bg-customYellow">
+                            </div>
+                            <div class="ml-6 lg:ml-0 lg:mt-10">
+                                <h3
+                                    class="text-xl font-bold text-gray-900 before:mb-2 before:block before:font-mono before:text-sm before:text-gray-500">
+                                    Discover
+                                </h3>
+                                <h4 class="mt-2 text-base text-gray-700">Find nearby restaurants and food stalls using our interactive map feature.</h4>
+                            </div>
+                        </li>
+                        <li class="flex-start group relative flex lg:flex-col">
+                            <div
+                                class="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full border-2 border-customYellow transition-all duration-200 group-hover:bg-customYellow">
+                            </div>
+                            <div class="ml-6 lg:ml-0 lg:mt-10">
+                                <h3
+                                    class="text-xl font-bold text-gray-900 before:mb-2 before:block before:font-mono before:text-sm before:text-gray-500">
+                                    Engage
+                                </h3>
+                                <h4 class="mt-2 text-base text-gray-700">Share your experiences, post food reviews, and connect with fellow foodies.</h4>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
             </div>
-            </div>
-            
         </div>
     </section> 
 
@@ -529,5 +569,80 @@
         </div>
     </section>
 
-    
+    {{----- SIXTH SECTION OF LANDING PAGE -----}}
+    <section id="reviewCarousel">
+        <div class="py-7">
+            <div class="flex justify-center items-center">
+                <p class="bg-black text-white py-2 px-4 mt-4 font-semibold font-poppins" data-aos="fade-up">
+                    What others say
+                </p>
+            </div>
+            <div class="px-5 lg:px-24 md:px-5">
+                <div class="relative">
+                    <ul id="reviewSlider">
+                        <li>
+                            <div class="flex flex-col justify-center mt-6 bg-purple-100 py-10 lg:py-20 px-10 sm:px-32 rounded-xl w-full shadow-lg text-center h-[400px] sm:h-[400px]">
+                                <div class="flex justify-center mb-3">
+                                    <i class="fa-solid fa-star text-customYellow text-2xl"></i>
+                                    <i class="fa-solid fa-star text-customYellow text-2xl pl-2"></i>
+                                    <i class="fa-solid fa-star text-customYellow text-2xl pl-2"></i>
+                                    <i class="fa-solid fa-star text-customYellow text-2xl pl-2"></i>
+                                    <i class="fa-regular fa-star text-customYellow text-2xl pl-2"></i>
+                                </div>
+
+                                <p class="font-medium text-sm lg:text-base font-poppins flex-grow" style="color: #252525">
+                                    <i class="fa-solid fa-quote-left text-darkPurple" style="padding-right: 9px; font-size: 30px"></i>
+                                    This platform has transformed the way I discover and share my
+                                    foods. It’s amazing to discover authentic Nepali cuisines and hidden
+                                    gems from different corners of the country. The map feature is a
+                                    bonus for finding nearby places.  
+                                    <i class="fa-solid fa-quote-right text-darkPurple" style="padding-left: 9px; font-size: 30px;"></i>
+                                </p>
+
+                                <div class="flex items-center justify-center mt-2">
+                                    <img src="{{asset('uploads/profile-images/aries28-profile-1739687395.png')}}" class="w-10 h-10 rounded-full object-cover" />
+                                    <div class="ml-3 text-left">
+                                        <a href="" class="text-gray-900 font-medium font-poppin text-sm lg:text-base">Aries Gurung</a>
+                                        <p class="text-gray-500 text-sm font-poppins">Aries_g</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="hidden">
+                            <div class="flex flex-col justify-center mt-6 bg-purple-100 py-10 lg:py-20 px-10 sm:px-32 rounded-xl w-full shadow-lg text-center h-[400px] sm:h-[400px]">
+                                <div class="flex justify-center mb-3">
+                                    <i class="fa-solid fa-star text-customYellow text-2xl"></i>
+                                    <i class="fa-solid fa-star text-customYellow text-2xl pl-2"></i>
+                                    <i class="fa-solid fa-star text-customYellow text-2xl pl-2"></i>
+                                    <i class="fa-regular fa-star text-customYellow text-2xl pl-2"></i>
+                                    <i class="fa-regular fa-star text-customYellow text-2xl pl-2"></i>
+                                </div>
+
+                                <p class="font-medium text-sm lg:text-base font-poppins" style="color: #252525">
+                                    <i class="fa-solid fa-quote-left text-darkPurple" style="padding-right: 9px; font-size: 30px"></i>
+                                    This platform has transformed the way I discover and share my
+                                    foods. It’s amazing to discover authentic Nepali cuisines and hidden.
+                                    <i class="fa-solid fa-quote-right text-darkPurple" style="padding-left: 9px; font-size: 30px;"></i>
+                                </p>
+
+                                <div class="flex items-center justify-center mt-2">
+                                    <img src="{{asset('uploads/profile-images/aries28-profile-1739687395.png')}}" class="w-10 h-10 rounded-full object-cover" />
+                                    <div class="ml-3 text-left">
+                                        <a href="" class="text-gray-900 font-medium font-poppins text-sm lg:text-base">Smriti Gurung</a>
+                                        <p class="text-gray-500 text-sm font-poppins">smrii_28</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                    <div class="absolute bottom-0 left-1/2 transform -translate-x-1/2 flex space-x-2 py-4">
+                        <button onclick="reviewGoToSlide(1)" class="review-button w-3 h-3 rounded-full bg-gray-400 hover:bg-yellow-400"></button>
+                        <button onclick="reviewGoToSlide(2)" class="review-button w-3 h-3 rounded-full bg-gray-400 hover:bg-yellow-400"></button>
+                        <button onclick="reviewGoToSlide(3)" class="review-button w-3 h-3 rounded-full bg-gray-400 hover:bg-yellow-400"></button>
+                        <button onclick="reviewGoToSlide(4)" class="review-button w-3 h-3 rounded-full bg-gray-400 hover:bg-yellow-400"></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 </x-app-layout>

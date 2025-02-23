@@ -2,7 +2,7 @@
     <nav class="bg-white fixed">
         <div class="max-w-screen-xl mx-auto flex items-center justify-between p-4">
             <!-- Hamburger Menu (Visible only on md and smaller screens) -->
-            <button id="menu-toggle" class="md:hidden text-2xl text-gray-900">
+            <button id="menu-toggle" class="lg:hidden text-lg sm:text-2xl text-gray-900">
                 &#9776;
             </button>
 
@@ -16,48 +16,55 @@
                 <!-- Logo for small screens -->
                 <img
                     src="{{ asset('assets/img/secondary_FA-Logo-removebg-preview.png') }}"
-                    class="block sm:hidden ml-9"
+                    class="block sm:hidden"
                     alt="Foodie's Archive Small Logo" style="width: 55px; height: 35px;"
                 />
             </a>
 
+            <div id="search-bar2" class="hidden transition-all duration-300">
+                <div class="relative w-full max-w-2xl">
+
+                    <div class="absolute left-4 top-1/2 transform -translate-y-1/2 text-black cursor-pointer">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </div>
+
+                    <input 
+                        id="search-bar"
+                        type="text" 
+                        placeholder="Discover foods..." 
+                        class="w-52 md:w-80 pl-9 text-gray-800 font-poppins rounded-full border border-gray-300 text-sm"
+                    />
+                </div>
+            </div>
+
             <!-- Navigation Links (Hidden on md and smaller screens) -->
-            <div id="nav-links" class="hidden md:flex space-x-4 lg:space-x-12">
-                <a
-                href="#"
-                class="text-gray-900 hover:text-customYellow text-base font-semibold font-poppins"
-                >Discover</a
-                >
-                <a
-                href="#"
-                class="text-gray-900 hover:text-customYellow text-base font-semibold font-poppins"
-                >Post a Food</a
-                >
-                <a
-                href="#"
-                class="text-gray-900 hover:text-customYellow text-base font-semibold font-poppins"
-                >About us</a
-                >
+            <div id="nav-links" class="hidden lg:flex space-x-4 lg:space-x-6 xl:space-x-12">
+                <a href="#" class="text-gray-900 hover:text-customYellow text-base font-semibold font-poppins lg:text-sm xl:text-base">Discover</a>
+                <a href="#" class="text-gray-900 hover:text-customYellow text-base font-semibold font-poppins lg:text-sm xl:text-base">Post a Food</a>
+                <a href="#" class="text-gray-900 hover:text-customYellow text-base font-semibold font-poppins lg:text-sm xl:text-base">About us</a>
             </div>
 
             <!-- Right Icons -->
             <div class="flex items-center space-x-4">
                 <!-- Bookmark Icon (Hidden on md screens and below) -->
-                <a href="bookmark" class="hidden md:block">
+                <a href="bookmark" class="hidden lg:block">
                     <i class="fa-regular fa-bookmark text-xl hover:text-gray-500"></i>
                 </a>
                 @guest
                     <!-- Log In & Sign Up -->
                     <a
                     href="login"
-                    class="hidden md:block text-gray-900 font-semibold hover:text-gray-600 border-l-2 border-gray-300 pl-4"
+                    class="hidden lg:block text-gray-900 font-semibold hover:text-gray-600 border-l-2 border-gray-300 pl-4"
                     >Log In</a
                     >
 
-                    <a href="register" class="bg-customYellow text-black text-sm px-3 py-1 sm:text-base sm:px-4 sm:py-2 rounded-full hover:bg-hovercustomYellow transition font-semibold">
+                    <a href="register" class="hidden sm:block bg-customYellow text-black text-sm px-3 py-1 sm:text-base sm:px-4 sm:py-2 rounded-full hover:bg-hovercustomYellow transition font-semibold">
                         Sign Up
                     </a>
 
+                    <a href="register" class="sm:hidden border-l-2 border-gray-300 pl-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-8"><path stroke-linecap="round" stroke-linejoin="round" d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" /></svg>
+                    </a>
 
                 @endguest
                 @auth
@@ -123,15 +130,18 @@
         </div>
 
         <!-- Mobile Dropdown Menu -->
-        <div id="mobile-menu" class="hidden md:hidden bg-white p-4 shadow-lg">
-            <a href="#" class="block py-2 text-gray-900 hover:text-customYellow"
+        <div id="mobile-menu" class="hidden lg:hidden bg-white p-4 shadow-lg text-center">
+            <a href="#" class="block py-2 text-gray-900 hover:text-customYellow text-base font-poppins font-medium"
                 >Discover</a
             >
-            <a href="#" class="block py-2 text-gray-900 hover:text-customYellow"
+            <a href="#" class="block py-2 text-gray-900 hover:text-customYellow text-base font-poppins font-medium"
                 >Post a Food</a
             >
-            <a href="#" class="block py-2 text-gray-900 hover:text-customYellow"
+            <a href="#" class="block py-2 text-gray-900 hover:text-customYellow text-base font-poppins font-medium"
                 >About us</a
+            >
+            <a href="bookmark" class="block py-2 text-gray-900 hover:text-customYellow text-base font-poppins font-medium"
+                >Bookmark</a
             >
         </div>
     </nav>
