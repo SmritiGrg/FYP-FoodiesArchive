@@ -6,7 +6,10 @@ nav {
 }
 
 #search-bar:focus {
-    border-color: transparent;
+    /* border-color: transparent; */
+    outline: none;
+    border: none;
+    box-shadow: none;
 }
 
 span i.unlike-heart.active {

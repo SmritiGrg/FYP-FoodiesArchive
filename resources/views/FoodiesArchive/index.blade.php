@@ -516,7 +516,7 @@
         </div>
     </section>
 
-    {{----- FIFTH SECTION OF LANDING PAGE -----}}
+    {{----- FIFTH SECTION OF LANDING PAGE TOP CONTRIBUTORS -----}}
     <section>
         <div class="py-7">
             <!-- Title Section -->
