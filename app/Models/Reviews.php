@@ -16,12 +16,12 @@ class Reviews extends Model
         'food_post_id'
     ];
 
-    public function users(): void
+    public function user(): void
     {
         $this->belongsTo(User::class, 'user_id', 'id');
     }
 
-    public function food_posts(): void
+    public function food_post(): void
     {
         $this->belongsTo(FoodPosts::class, 'food_post_id', 'id');
     }

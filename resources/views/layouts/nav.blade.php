@@ -23,23 +23,24 @@
 
             <div id="search-bar2" class="hidden transition-all duration-300">
                 <div class="relative w-full max-w-2xl">
-
-                    <div class="absolute left-4 top-1/2 transform -translate-y-1/2 text-black cursor-pointer">
-                        <i class="fa-solid fa-magnifying-glass"></i>
-                    </div>
-
-                    <input 
-                        id="search-bar"
-                        type="text" 
-                        placeholder="Discover foods..." 
-                        class="w-52 md:w-80 pl-9 text-gray-800 font-poppins rounded-full border border-gray-300 text-sm"
-                    />
+                    <form action="{{ route('search.food') }}" method="GET">
+                        <div class="absolute left-4 top-1/2 transform -translate-y-1/2 text-black cursor-pointer">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </div>
+                        <input 
+                            id="search-bar"
+                            type="text" 
+                            name="query"
+                            placeholder="Discover foods..." 
+                            class="w-52 md:w-80 pl-9 text-gray-800 font-poppins rounded-full border border-gray-300 text-sm"
+                        />
+                    </form>
                 </div>
             </div>
 
             <!-- Navigation Links (Hidden on md and smaller screens) -->
             <div id="nav-links" class="hidden lg:flex space-x-4 lg:space-x-6 xl:space-x-12">
-                <a href="#" class="text-gray-900 hover:text-customYellow text-base font-semibold font-poppins lg:text-sm xl:text-base">Discover</a>
+                <a href="discover" class="text-gray-900 hover:text-customYellow text-base font-semibold font-poppins lg:text-sm xl:text-base">Discover</a>
                 <a href="#" class="text-gray-900 hover:text-customYellow text-base font-semibold font-poppins lg:text-sm xl:text-base">Post a Food</a>
                 <a href="#" class="text-gray-900 hover:text-customYellow text-base font-semibold font-poppins lg:text-sm xl:text-base">About us</a>
             </div>
@@ -131,7 +132,7 @@
 
         <!-- Mobile Dropdown Menu -->
         <div id="mobile-menu" class="hidden lg:hidden bg-white p-4 shadow-lg text-center">
-            <a href="#" class="block py-2 text-gray-900 hover:text-customYellow text-base font-poppins font-medium"
+            <a href="discover" class="block py-2 text-gray-900 hover:text-customYellow text-base font-poppins font-medium"
                 >Discover</a
             >
             <a href="#" class="block py-2 text-gray-900 hover:text-customYellow text-base font-poppins font-medium"

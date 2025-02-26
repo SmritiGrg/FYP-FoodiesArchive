@@ -12,6 +12,77 @@ nav {
     box-shadow: none;
 }
 
+/* START CATEGORY SLIDER */
+@keyframes slide {
+    from {
+        transform: translateX(0);
+    }
+    to {
+        transform: translateX(-50%);
+    }
+}
+
+.categories:before,
+.categories:after {
+    position: absolute;
+    top: 0;
+    width: 90px;
+    height: 100%;
+    content: "";
+    z-index: 2;
+}
+
+.categories:before {
+    left: 0;
+    background: linear-gradient(to left, rgba(255, 255, 255, 0), white);
+}
+
+.categories:after {
+    right: 0;
+    background: linear-gradient(to right, rgba(255, 255, 255, 0), white);
+}
+
+.categories:hover .categories-slide {
+    animation-play-state: paused;
+}
+
+.categories-slide {
+    display: flex;
+    gap: 8px;
+    flex-wrap: nowrap;
+    animation: 25s slide infinite linear;
+}
+
+.categories-slide div {
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    cursor: pointer;
+}
+
+.group1 {
+    position: relative;
+    overflow: hidden;
+}
+
+.group1:hover .overlay {
+    opacity: 1;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1.2rem;
+    font-weight: 800;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+}
+/* END FOR CATEGORY SLIDER */
+
 span i.unlike-heart.active {
     display: none;
 }
@@ -75,4 +146,16 @@ i.bookmarked.active {
 
 .step ul li:last-child .dot::after {
     width: 105px;
+}
+
+.loader {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    padding-top: 19%;
+    background-color: black;
+    opacity: 80%;
+    padding-left: 50%;
+    z-index: 100;
+    margin: 0 auto;
 }

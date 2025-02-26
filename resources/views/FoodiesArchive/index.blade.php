@@ -40,35 +40,75 @@
                 Discover Authentic Tastes, Share Your Foodie Adventures.
             </p>
             
-            <div class="mt-10 flex justify-center px-4 sm:px-0">
+            {{-- <div class="mt-10 flex justify-center px-4 sm:px-0">
                 <div class="relative w-full max-w-2xl">
-
-                    <div class="absolute left-4 top-1/2 transform -translate-y-1/2 text-black cursor-pointer">
-                        <i class="fa-solid fa-magnifying-glass"></i>
-                    </div>
-
-                    <input 
-                        id="search-bar"
-                        type="text" 
-                        placeholder="Discover foods..." 
-                        class="w-full p-4 pr-4 sm:pr-20 pl-9 text-gray-800 font-poppins rounded-full border border-gray-300 "
-                        style="box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;"
-                    />
-
-                    <button 
-                        class="hidden sm:block absolute right-2 top-2 bottom-2 font-poppins bg-customYellow text-black text-base px-4 py-2 rounded-full font-medium hover:bg-hovercustomYellow transition"
-                    >
-                        Search
-                    </button>
+                    <form action="{{ route('search.food') }}" method="GET">
+                        <input 
+                            id="search-bar"
+                            type="text" 
+                            name="query"
+                            placeholder="Discover foods..." 
+                            class="w-full p-4 pr-4 sm:pr-20 pl-9 text-gray-800 font-poppins rounded-full border border-gray-300 "
+                            style="box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;"
+                        />
+                        <div class="absolute left-4 top-7 sm:top-1/2 transform -translate-y-1/2 text-black cursor-pointer">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </div>
+                        <button type="submit"
+                            class="hidden sm:block absolute right-2 top-2 bottom-2 font-poppins bg-customYellow text-black text-base px-4 py-2 rounded-full font-medium hover:bg-hovercustomYellow transition"
+                        >
+                            Search
+                        </button>
+                        <div class="mt-4 sm:hidden px-4">
+                            <button type="submit"
+                                class="w-full font-poppins bg-customYellow text-black text-base px-2 py-1 rounded-full font-medium hover:bg-hovercustomYellow transition"
+                            >
+                                Search
+                            </button>
+                        </div>
+                    </form>
                 </div>
-            </div>
-            
-            <div class="mt-4 sm:hidden px-4">
-                <button 
-                    class="w-full max-w-2xl font-poppins bg-customYellow text-black text-base px-2 py-1 rounded-full font-medium hover:bg-hovercustomYellow transition"
-                >
-                    Search
-                </button>
+            </div> --}}
+
+            <div class="mt-10 flex justify-center px-4 sm:px-0" id="search-container">
+                <div class="relative w-full max-w-2xl">
+                    <form action="{{ route('search.food') }}" method="GET">
+                        <input 
+                            id="search-bar"
+                            type="text" 
+                            name="query"
+                            placeholder="Discover foods..." 
+                            class="w-full p-4 pr-4 sm:pr-20 pl-9 text-gray-800 font-poppins rounded-full border border-gray-300 focus:outline-none"
+                            style="box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;"
+                            onfocus="showModal()"
+                            onblur="hideModal()"
+                        />
+                        <div class="absolute left-4 top-7 sm:top-1/2 transform -translate-y-1/2 text-black cursor-pointer">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </div>
+                        <button type="submit"
+                            class="hidden sm:block absolute right-2 top-2 bottom-2 font-poppins bg-customYellow text-black text-base px-4 py-2 rounded-full font-medium hover:bg-hovercustomYellow transition"
+                        >
+                            Search
+                        </button>
+                        <div class="mt-4 sm:hidden px-4">
+                            <button type="submit"
+                                class="w-full font-poppins bg-customYellow text-black text-base px-2 py-1 rounded-full font-medium hover:bg-hovercustomYellow transition"
+                            >
+                                Search
+                            </button>
+                        </div>
+                    </form>
+
+                    <!-- Modal -->
+                    <div id="search-modal" class="absolute left-0 mt-2 w-full z-50 bg-white rounded-xl shadow-md hidden">
+                        <div class="p-4 flex items-center">
+                            <i class="fa-solid fa-location-arrow text-base"></i>
+                            <span class="pl-3">Nearby</span>
+                        </div>
+                        <!-- Add more content to your modal as needed -->
+                    </div>
+                </div>
             </div>
 
             <p class="mt-5 text-base sm:text-lg md:text-xl text-darkRed font-semibold font-poppins">
@@ -83,9 +123,72 @@
         </div>
     </section>
 
+    {{----- SECOND SECTION OF LANDING PAGE CATEGORY SLIDER-----}}
+    <section class="px-5 md:px-24 pb-5 sm:pb-16">
+        <div class="relative main-category rounded-b-[50px] bg-bgPurple py-7 px-6 sm:rounded-b-[100px] text-center h-[40vh] ">
+            <h2 class="text-2xl sm:text-4xl font-bold text-darkPurple font-poppins pt-5">Craving something specific?</h2>
+            <p class="text-base sm:text-2xl text-darkPurple mt-3 font-semibold" style="letter-spacing: 2px">
+                Search by different Categories and Start Exploring
+            </p>
+
+            <div class="absolute left-1/2 transform -translate-x-1/2 top-52 w-[85%] h-60 overflow-hidden categories">
+                <div class="flex gap-8 categories-slide w-max">
+                    <div class="relative w-52 h-52 rounded-xl overflow-hidden group1">
+                        <img src="{{asset('assets/img/Breakfast2.png')}}" class="w-full h-full object-cover" />
+                        <div class="overlay">Breakfast</div>
+                    </div>
+                    <div class="relative w-52 h-52 rounded-xl overflow-hidden group1">
+                        <img src="{{asset('assets/img/Dinner.jpg')}}" class="w-full h-full object-cover" />
+                        <div class="overlay">Dinner</div>
+                    </div>
+                    <div class="w-52 h-52 rounded-xl overflow-hidden group1">
+                        <img src="{{asset('assets/img/Japanese.jpg')}}" class="w-full h-full object-cover" />
+                        <div class="overlay">Japanese</div>
+                    </div>
+                    <div class="w-52 h-52 rounded-xl overflow-hidden group1">
+                        <img src="{{asset('assets/img/Chatpat.jpg')}}" class="w-full h-full object-cover" />
+                        <div class="overlay">Street Food</div>
+                    </div>
+                    <div class="w-52 h-52 rounded-xl overflow-hidden group1">
+                        <img src="{{asset('assets/img/Dessert.jpg')}}" class="w-full h-full object-cover" />
+                        <div class="overlay">Dessert</div>
+                    </div>
+                    <div class="w-52 h-52 rounded-xl overflow-hidden group1">
+                        <img src="{{asset('assets/img/Drink.jpg')}}" class="w-full h-full object-cover" />
+                        <div class="overlay">Drink</div>
+                    </div>
+                    <div class="w-52 h-52 rounded-xl overflow-hidden group1">
+                        <img src="{{asset('assets/img/Breakfast2.png')}}" class="w-full h-full object-cover" />
+                        <div class="overlay">Breakfast</div>
+                    </div>
+                    <div class="w-52 h-52 rounded-xl overflow-hidden group1">
+                        <img src="{{asset('assets/img/Dinner.jpg')}}" class="w-full h-full object-cover" />
+                        <div class="overlay">Dinner</div>
+                    </div>
+                    <div class="w-52 h-52 rounded-xl overflow-hidden group1">
+                        <img src="{{asset('assets/img/Japanese.jpg')}}" class="w-full h-full object-cover" />
+                        <div class="overlay">Japanese</div>
+                    </div>
+                    <div class="w-52 h-52 rounded-xl overflow-hidden group1">
+                        <img src="{{asset('assets/img/Chatpat.jpg')}}" class="w-full h-full object-cover" />
+                        <div class="overlay">Street Food</div>
+                    </div>
+                    <div class="w-52 h-52 rounded-xl overflow-hidden group1">
+                        <img src="{{asset('assets/img/Dessert.jpg')}}" class="w-full h-full object-cover" />
+                        <div class="overlay">Dessert</div>
+                    </div>
+                    <div class="w-52 h-52 rounded-xl overflow-hidden group1">
+                        <img src="{{asset('assets/img/Drink.jpg')}}" class="w-full h-full object-cover" />
+                        <div class="overlay">Drink</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     {{----- SECOND SECTION OF LANDING PAGE CAROUSEL -----}}
     <section>
-        <div class="py-7">
+        <div class="pb-7 pt-32">
             <!-- Title Section -->
             <div class="flex flex-col justify-center items-center">
                 <h1 class="text-2xl font-semibold text-customYellow font-poppins text-center">
@@ -122,7 +225,7 @@
                         </li>
 
                         <li class="hidden">
-                            <div class="flex flex-col md:flex-row items-center mt-10 bg-purple-50 rounded-lg shadow-md">
+                            <div class="flex flex-col md:flex-row items-center mt-10 bg-bgPurple rounded-lg shadow-md">
                                 <!-- Text Section -->
                                 <div class="w-full md:w-1/2 p-6 md:pl-24">
                                     <h2 class="text-5xl md:text-4xl lg:text-5xl font-bold text-darkPurple font-poppins">
@@ -140,7 +243,7 @@
                         </li>
 
                         <li class="hidden">
-                            <div class="flex flex-col md:flex-row items-center mt-10 bg-purple-50 rounded-lg shadow-md">
+                            <div class="flex flex-col md:flex-row items-center mt-10 bg-bgPurple rounded-lg shadow-md">
                                 <!-- Text Section -->
                                 <div class="w-full md:w-1/2 p-6 md:pl-24">
                                     <h2 class="text-5xl md:text-4xl lg:text-5xl font-bold text-darkPurple font-poppins">
@@ -159,7 +262,7 @@
                         </li>
 
                         <li class="hidden">
-                            <div class="flex flex-col md:flex-row items-center mt-10 bg-purple-50 rounded-lg shadow-md">
+                            <div class="flex flex-col md:flex-row items-center mt-10 bg-bgPurple rounded-lg shadow-md">
                                 <!-- Text Section -->
                                 <div class="w-full md:w-1/2 p-6 md:pl-24">
                                     <h2 class="text-5xl md:text-4xl lg:text-5xl font-bold text-darkPurple font-poppins">
@@ -177,7 +280,7 @@
                         </li>
 
                         <li class="hidden">
-                            <div class="flex flex-col md:flex-row items-center mt-10 bg-purple-50 rounded-lg shadow-md">
+                            <div class="flex flex-col md:flex-row items-center mt-10 bg-bgPurple rounded-lg shadow-md">
                                 <!-- Text Section -->
                                 <div class="w-full md:w-1/2 p-6 md:pl-24">
                                     <h2 class="text-5xl md:text-4xl lg:text-5xl font-bold text-darkPurple font-poppins">
@@ -296,222 +399,80 @@
 
             <!-- Cards Section -->
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 mt-3 px-4 sm:px-8 lg:px-20" data-aos="fade-up">
-                <!-- Card 1 -->
-                <div class="bg-white overflow-hidden">
-                    <div class="flex justify-between items-center p-4">
-                        <div class="flex items-center">
-                            <a href="">
-                                <img src="{{asset('uploads/profile-images/aries28-profile-1739687395.png')}}" alt="Smriti Gurung" class="w-10 h-10 rounded-full object-cover object-center hover:opacity-80 transition-opacity duration-300" />
-                            </a>
-                            <div class="ml-3 relative group">
-                                <a href="" class="font-semibold text-base hover:text-gray-500">Smriti Gurung</a>
-                                <!-- Modal -->
-                                <div class="absolute hidden group-hover:block w-60 p-4 bg-white shadow-lg rounded-lg z-10 border border-gray-200">
+                @foreach($topFoods as $food)
+                    <!-- Card 1 -->
+                    <div class="bg-white overflow-hidden">
+                        <div class="flex justify-between items-center p-4">
+                            <div class="flex items-center">
+                                <a href="">
+                                    <img src="{{asset('uploads/profile-images/aries28-profile-1739687395.png')}}" alt="user" class="w-10 h-10 rounded-full object-cover object-center hover:opacity-80 transition-opacity duration-300" />
+                                </a>
+                                <div class="ml-3 relative group">
+                                    <a href="" class="font-medium text-sm hover:text-gray-500">{{$food->user->full_name}}</a>
+                                    <!-- Modal -->
+                                    <div class="absolute hidden group-hover:block w-60 p-4 bg-white shadow-lg rounded-lg z-10 border border-gray-200">
+                                        <div class="flex items-center space-x-4">
+                                            <img src="{{asset('uploads/profile-images/' . $food->user->image)}}" alt="User Avatar" class="w-12 h-12 rounded-full object-cover">
+                                            <div>
+                                                <a href="" class="font-semibold text-sm font-poppins">{{$food->user->full_name}}</a>
+                                                <p class="text-gray-500 text-xs font-poppins">{{$food->user->username}}</p>
+                                                <p class="border border-gray-300 rounded-full text-sm w-16 pl-2 mt-2"><i class="fa-solid fa-fire-flame-curved text-red-400"></i> {{$food->user->streak_count}}</p>
+                                            </div>
+                                        </div>
+                                        <div class="flex justify-between text-center mt-4">
+                                            <!-- Posts -->
+                                            <div>
+                                                <p class="font-bold text-sm font-poppins">14</p>
+                                                <p class="text-gray-500 text-xs font-poppins">Posts</p>
+                                            </div>
+                                            <!-- Followers -->
+                                            <div>
+                                                <p class="font-bold text-sm font-poppins">30</p>
+                                                <p class="text-gray-500 text-xs font-poppins">Followers</p>
+                                            </div>
+                                            <!-- Following -->
+                                            <div>
+                                                <p class="font-bold text-sm font-poppins">15</p>
+                                                <p class="text-gray-500 text-xs font-poppins">Following</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <p class="font-medium text-sm text-gray-500">{{$food->user->username}}</p>
+                                    <p class="text-gray-500 text-xs">{{ $food->created_at->diffForHumans() }}</p>
+                                </div>
+                            </div>
+                            <button class="font-poppins bg-customYellow text-black text-sm px-5 py-1 rounded-full font-medium hover:bg-hovercustomYellow">Follow</button>
+                        </div>
+
+                        <div class="px-4">
+                            <img src="{{ asset('uploads/' . $food->image) }}" alt="Food Img" class="w-full h-72 object-cover object-center rounded-xl"/>
+                            <div class="mt-2">
+                                <div class="flex justify-between items-center mt-2 mb-2">
                                     <div class="flex items-center space-x-4">
-                                        <img src="{{asset('uploads/profile-images/aries28-profile-1739687782.png')}}" alt="User Avatar" class="w-12 h-12 rounded-full object-cover">
-                                        <div>
-                                            <a href="" class="font-semibold text-sm font-poppins">Smriti Gurung</a>
-                                            <p class="text-gray-500 text-xs font-poppins">Smrii</p>
-                                            <p class="border border-gray-300 rounded-full text-sm w-16 pl-2 mt-2"><i class="fa-solid fa-fire-flame-curved text-red-400"></i> 50</p>
-                                        </div>
+                                        <span class="text-black text-base">
+                                            <i class="unlike-heart fa-regular fa-heart text-lg hover:text-gray-500 cursor-pointer"></i>
+                                            <i class="fa-solid fa-heart text-lg like-heart text-red-500 hidden cursor-pointer"></i> {{$food->likes->count()}}
+                                        </span>
+
+                                        <span class="text-black text-base">
+                                            <i class="fa-regular fa-comment text-lg hover:text-gray-500 cursor-pointer"></i> {{$food->reviews->count()}}
+                                        </span>
                                     </div>
-                                    <div class="flex justify-between text-center mt-4">
-                                        <!-- Posts -->
-                                        <div>
-                                            <p class="font-bold text-sm font-poppins">14</p>
-                                            <p class="text-gray-500 text-xs font-poppins">Posts</p>
-                                        </div>
-                                        <!-- Followers -->
-                                        <div>
-                                            <p class="font-bold text-sm font-poppins">30</p>
-                                            <p class="text-gray-500 text-xs font-poppins">Followers</p>
-                                        </div>
-                                        <!-- Following -->
-                                        <div>
-                                            <p class="font-bold text-sm font-poppins">15</p>
-                                            <p class="text-gray-500 text-xs font-poppins">Following</p>
-                                        </div>
-                                    </div>
+                                    <i class="not-bookmarked fa-regular fa-bookmark text-lg hover:text-gray-500 cursor-pointer"></i>
+                                    <i class="bookmarked fa-solid fa-bookmark text-lg text-black hidden cursor-pointer"></i>
                                 </div>
-                                <p class="font-medium text-sm">Smrii</p>
-                                <p class="text-gray-500 text-xs">1 month ago</p>
-                            </div>
-                        </div>
-                        <button class="font-poppins bg-customYellow text-black text-sm px-5 py-1 rounded-full font-medium hover:bg-hovercustomYellow">Follow</button>
-                    </div>
-
-                    <div class="px-4">
-                        <img src="{{asset('assets/img/laphing.jpg')}}" alt="Chicken Thakali Set" class="w-full h-72 object-cover object-center rounded-xl"/>
-                        <div class="mt-2">
-                            <div class="flex justify-between items-center mt-2 mb-2">
-                                <div class="flex items-center space-x-4">
-                                    <span class="text-black text-base">
-                                        <i class="unlike-heart fa-regular fa-heart text-lg hover:text-gray-500 cursor-pointer"></i>
-                                        <i class="fa-solid fa-heart text-lg like-heart text-red-500 hidden cursor-pointer"></i> 5.5K
-                                    </span>
-
-                                    <span class="text-black text-base">
-                                        <i class="fa-regular fa-comment text-lg hover:text-gray-500 cursor-pointer"></i> 500
-                                    </span>
+                                <span class="bg-green-100 text-green-700 text-xs font-semibold py-1 px-2 rounded">{{$food->tag->name}}</span>
+                                <div class="flex justify-between items-center mt-2">
+                                    <a href="" class="text-lg font-bold hover:text-gray-600">{{$food->name}}</a>
+                                    <span class="text-customYellow font-normal"><i class="fa-solid fa-star pr-1" id="star"></i>5.0</span>
                                 </div>
-                                <i class="not-bookmarked fa-regular fa-bookmark text-lg hover:text-gray-500 cursor-pointer"></i>
-                                <i class="bookmarked fa-solid fa-bookmark text-lg text-black hidden cursor-pointer"></i>
-                            </div>
-                            <span class="bg-green-100 text-green-700 text-xs font-semibold py-1 px-2 rounded"> Highly Recommended</span>
-                            <div class="flex justify-between items-center mt-2">
-                                <a href="" class="text-lg font-bold hover:text-gray-600">Chicken Thakali Set</a>
-                                <span class="text-customYellow font-normal"><i class="fa-solid fa-star pr-1" id="star"></i>5.0</span>
-                            </div>
-                            <p class="text-black text-sm">Rs. 700</p>
-                            <p class="text-gray-500 mt-1 text-sm">Best Thakali restaurant for me. Enjoyed good food with family.</p>
-                            <a href="" class="font-medium text-sm underline hover:text-gray-600">See More</a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Card 2 -->
-                <div class="bg-white overflow-hidden">
-                    <div class="flex justify-between items-center p-4">
-                        <div class="flex items-center">
-                            <img
-                                src="{{asset('uploads/profile-images/aries28-profile-1739687395.png')}}"
-                                alt="Smriti Gurung"
-                                class="w-10 h-10 rounded-full"
-                            />
-                            <div class="ml-3">
-                                <p class="font-semibold text-base">Smriti Gurung</p>
-                                <p class="font-medium text-sm">Smrii</p>
-                                <p class="text-gray-500 text-xs">1 month ago</p>
+                                <p class="text-black text-sm">Rs. {{$food->price}}</p>
+                                <p class="text-gray-500 mt-1 text-sm">{{$food->review}}</p>
+                                <a href="" class="font-medium text-sm underline hover:text-gray-600">See More</a>
                             </div>
                         </div>
-                        <button class="font-poppins bg-customYellow text-black text-sm px-5 py-1 rounded-full font-medium hover:bg-hovercustomYellow">Follow</button>
                     </div>
-
-                    <div class="px-4">
-                        <img src="{{asset('assets/img/laphing.jpg')}}" alt="Chicken Thakali Set" class="w-full h-72 object-cover rounded-xl"/>
-                        <div class="mt-2">
-                            <div class="flex justify-between items-center mt-2 mb-2">
-                                <div class="flex items-center space-x-4">
-                                    <span class="text-black text-base">
-                                        <i class="unlike-heart fa-regular fa-heart text-lg hover:text-gray-500 cursor-pointer"></i>
-                                        <i class="fa-solid fa-heart text-lg like-heart text-red-500 hidden cursor-pointer"></i> 5.5K
-                                    </span>
-
-                                    <span class="text-black text-base">
-                                        <i class="fa-regular fa-comment text-lg hover:text-gray-500 cursor-pointer"></i> 500
-                                    </span>
-                                </div>
-                                <i class="not-bookmarked fa-regular fa-bookmark text-lg hover:text-gray-500 cursor-pointer"></i>
-                                <i class="bookmarked fa-solid fa-bookmark text-lg text-black hidden cursor-pointer"></i>
-                            </div>
-                            <span class="bg-green-100 text-green-700 text-xs font-semibold py-1 px-2 rounded"> Highly Recommended</span>
-                            <div class="flex justify-between items-center mt-2">
-                                <a href="" class="text-lg font-bold hover:text-gray-600">Mixed Laphing</a>
-                                <span class="text-customYellow font-normal"><i class="fa-solid fa-star pr-1" id="star"></i>5.0</span>
-                            </div>
-                            <p class="text-black text-sm">Rs. 700</p>
-                            <p class="text-gray-500 mt-1 text-sm">Best Thakali restaurant for me. Enjoyed good food with family.</p>
-                            <a href="" class="font-medium text-sm underline hover:text-gray-600">See More</a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Card 3 -->
-                <div class="bg-white overflow-hidden">
-                    <div class="flex justify-between items-center p-4">
-                        <div class="flex items-center">
-                            <img
-                                src="{{asset('uploads/profile-images/aries28-profile-1739687395.png')}}"
-                                alt="Smriti Gurung"
-                                class="w-10 h-10 rounded-full"
-                            />
-                            <div class="ml-3">
-                                <p class="font-semibold text-base">Smriti Gurung</p>
-                                <p class="font-medium text-sm">Smrii</p>
-                                <p class="text-gray-500 text-xs">1 month ago</p>
-                            </div>
-                        </div>
-                        <button class="font-poppins bg-customYellow text-black text-sm px-5 py-1 rounded-full font-medium hover:bg-hovercustomYellow transition">Follow</button>
-                    </div>
-
-                    <div class="px-4">
-                        <img src="{{asset('assets/img/Chicken-Kimbap-1.png')}}" alt="Chicken Thakali Set" class="w-full h-72 object-cover rounded-xl"/>
-                        <div class="mt-2">
-                            <div class="flex justify-between items-center mt-2 mb-2">
-                                <div class="flex items-center space-x-4">
-                                    <span class="text-black text-base">
-                                        <i class="unlike-heart fa-regular fa-heart text-lg hover:text-gray-500 cursor-pointer"></i>
-                                        <i class="fa-solid fa-heart text-lg like-heart text-red-500 hidden cursor-pointer"></i> 5.5K
-                                    </span>
-
-                                    <span class="text-black text-base">
-                                        <i class="fa-regular fa-comment text-lg hover:text-gray-500 cursor-pointer"></i> 500
-                                    </span>
-                                </div>
-                                <i class="not-bookmarked fa-regular fa-bookmark text-lg hover:text-gray-500 cursor-pointer"></i>
-                                <i class="bookmarked fa-solid fa-bookmark text-lg text-black hidden cursor-pointer"></i>
-                            </div>
-                            <span class="bg-green-100 text-green-700 text-xs font-semibold py-1 px-2 rounded">Must Try</span>
-                            <div class="flex justify-between items-center mt-2">
-                                <a href="" class="text-lg font-bold hover:text-gray-600">Chicken Thakali Set</a>
-                                <span class="text-customYellow font-normal"><i class="fa-solid fa-star pr-1" id="star"></i>5.0</span>
-                            </div>
-                            <p class="text-black text-sm">Rs. 700</p>
-                            <p class="text-gray-500 mt-1 text-sm">Best Thakali restaurant for me. Enjoyed good food with family.</p>
-                            <a href="" class="font-medium text-sm underline hover:text-gray-600">See More</a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Card 4 -->
-                <div class="bg-white overflow-hidden">
-                    <div class="flex justify-between items-center p-4">
-                        <div class="flex items-center">
-                            <img
-                                src="{{asset('uploads/profile-images/aries28-profile-1739687395.png')}}"
-                                alt="Smriti Gurung"
-                                class="w-10 h-10 rounded-full"
-                            />
-                            <div class="ml-3">
-                                <p class="font-semibold text-base">Smriti Gurung</p>
-                                <p class="font-medium text-sm">Smrii</p>
-                                <p class="text-gray-500 text-xs">1 month ago</p>
-                            </div>
-                        </div>
-                        <button class="font-poppins bg-customYellow text-black text-sm px-5 py-1 rounded-full font-medium hover:bg-hovercustomYellow transition">Follow</button>
-                    </div>
-
-                    <div class="px-4">
-                        <img src="{{asset('assets/img/sandwich.png')}}" alt="Chicken Thakali Set" class="w-full h-72 object-cover rounded-xl"/>
-                        <div class="mt-2">
-                            <div class="flex justify-between items-center mt-2 mb-2">
-                                <div class="flex items-center space-x-4">
-                                    <span class="text-black text-base">
-                                        <i class="unlike-heart fa-regular fa-heart text-lg hover:text-gray-500 cursor-pointer"></i>
-                                        <i class="fa-solid fa-heart text-lg like-heart text-red-500 hidden cursor-pointer"></i> 5.5K
-                                    </span>
-
-                                    <span class="text-black text-base">
-                                        <i class="fa-regular fa-comment text-lg hover:text-gray-500 cursor-pointer"></i> 500
-                                    </span>
-                                </div>
-                                <i class="not-bookmarked fa-regular fa-bookmark text-lg hover:text-gray-500 cursor-pointer"></i>
-                                <i class="bookmarked fa-solid fa-bookmark text-lg text-black hidden cursor-pointer"></i>
-                            </div>
-                            <span class="bg-green-100 text-green-700 text-xs font-semibold py-1 px-2 rounded"> Highly Recommended</span>
-                            <div class="flex justify-between items-center mt-2">
-                                <a href="" class="text-lg font-bold hover:text-gray-600">Chicken Thakali Set</a>
-                                <span class="text-customYellow font-normal"><i class="fa-solid fa-star pr-1" id="star"></i>5.0</span>
-                            </div>
-                            <p class="text-black text-sm">Rs. 700</p>
-                            <p class="text-gray-500 mt-1 text-sm">Had Tornado Chicken Sandwich and Cheesy Chicken 
-                                Sandwich. Both were too good to be true. The brown bread was perfectly crunchy and the taste of 
-                                mayonnaise was yummy.
-                            </p>
-                            <a href="" class="font-medium text-sm underline hover:text-gray-600">See More</a>
-                        </div>
-                    </div>
-                </div>
+                @endforeach
             </div>
         </div>
     </section>
@@ -581,7 +542,7 @@
                 <div class="relative">
                     <ul id="reviewSlider">
                         <li>
-                            <div class="flex flex-col justify-center mt-6 bg-purple-100 py-10 lg:py-20 px-10 sm:px-32 rounded-xl w-full shadow-lg text-center h-[400px] sm:h-[400px]">
+                            <div class="flex flex-col justify-center mt-6 bg-bgPurple py-10 lg:py-20 px-10 sm:px-32 rounded-xl w-full shadow-lg text-center h-[400px] sm:h-[400px]">
                                 <div class="flex justify-center mb-3">
                                     <i class="fa-solid fa-star text-customYellow text-2xl"></i>
                                     <i class="fa-solid fa-star text-customYellow text-2xl pl-2"></i>
@@ -609,7 +570,7 @@
                             </div>
                         </li>
                         <li class="hidden">
-                            <div class="flex flex-col justify-center mt-6 bg-purple-100 py-10 lg:py-20 px-10 sm:px-32 rounded-xl w-full shadow-lg text-center h-[400px] sm:h-[400px]">
+                            <div class="flex flex-col justify-center mt-6 bg-bgPurple py-10 lg:py-20 px-10 sm:px-32 rounded-xl w-full shadow-lg text-center h-[400px] sm:h-[400px]">
                                 <div class="flex justify-center mb-3">
                                     <i class="fa-solid fa-star text-customYellow text-2xl"></i>
                                     <i class="fa-solid fa-star text-customYellow text-2xl pl-2"></i>

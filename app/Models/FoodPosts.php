@@ -17,51 +17,55 @@ class FoodPosts extends Model
         'restaurant_id',
         'user_id',
         'food_type_id',
-        'cuisine_type_id'
+        'cuisine_type_id',
+        'tag_id'
     ];
 
-    // relationship between restaurant and food post
-    // many food post belongs to a user
-    public function restaurants(): void
+    // Many food posts belong to a restaurant
+    public function restaurant()
     {
-        $this->belongsTo(Restaurants::class, 'restaurant_id', 'id');
+        return $this->belongsTo(Restaurants::class, 'restaurant_id', 'id');
     }
 
-    // relationship between user and food post
-    // a food post is created/uploaded by a user
-    public function users(): void
+    // A food post is created/uploaded by a user
+    public function user()
     {
-        $this->belongsTo(User::class, 'user_id', 'id');
+        return $this->belongsTo(User::class, 'user_id', 'id');
     }
 
-    // relationship between like andd foodPost 
-    // a food post can have many likes
-    public function likes(): void
+    // A food post can have many likes
+    public function likes()
     {
-        $this->hasMany(Likes::class, 'food_post_id', 'id');
+        return $this->hasMany(Likes::class, 'food_post_id', 'id');
     }
 
-    public function questions(): void
+    // A food post can have many questions
+    public function questions()
     {
-        $this->hasMany(Questions::class, 'food_post_id', 'id');
+        return $this->hasMany(Questions::class, 'food_post_id', 'id');
     }
 
-    public function food_type(): void
+    // A food post belongs to a food type
+    public function foodType()
     {
-        $this->belongsTo(FoodTypes::class, 'food_type_id', 'id');
-    }
-    public function cusine_type(): void
-    {
-        $this->belongsTo(CuisineTypes::class, 'cuisine_type_id', 'id');
+        return $this->belongsTo(FoodTypes::class, 'food_type_id', 'id');
     }
 
-    public function tags(): void
+    // A food post belongs to a cuisine type
+    public function cuisineType()
     {
-        $this->belongsTo(Tags::class, 'tag_id', 'id');
+        return $this->belongsTo(CuisineTypes::class, 'cuisine_type_id', 'id');
     }
 
-    public function reviews(): void
+    // A food post can have many reviews
+    public function reviews()
     {
-        $this->hasMany(Reviews::class, 'food_post_id', 'id');
+        return $this->hasMany(Reviews::class, 'food_post_id', 'id');
     }
+
+    public function tag()
+    {
+        return $this->belongsTo(Tags::class, 'tag_id', 'id');
+    }
+
 }

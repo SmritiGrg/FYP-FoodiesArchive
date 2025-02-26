@@ -346,6 +346,18 @@
             modal.classList.remove('flex');
             document.body.style.overflow = 'auto';
         }
+        //// END BOOKMARK MODAL
+
+
+        /////// SEARCH BAR MODAL
+        function showModal() {
+            document.getElementById('search-modal').classList.remove('hidden');
+        }
+
+        function hideModal() {
+            document.getElementById('search-modal').classList.add('hidden');
+        }
+        /////// END SEARCH BAR MODAL
     </script>
 </body>
 
