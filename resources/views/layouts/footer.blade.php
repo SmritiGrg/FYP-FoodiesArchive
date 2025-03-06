@@ -284,7 +284,7 @@
         ////// ANIMATE ON SCROLL
         AOS.init({
             duration: 1000,
-            once: false,     
+            once: true,     
         });
 
         ////// REVIEW SLIDER START
@@ -358,6 +358,16 @@
             document.getElementById('search-modal').classList.add('hidden');
         }
         /////// END SEARCH BAR MODAL
+
+
+        /////// DISCOVER PAGE CATEGORY SCROLLING
+        document.getElementById('left-btn').addEventListener('click', function() {
+            document.getElementById('sliderCategory').scrollBy({ left: -200, behavior: 'smooth' });
+        });
+        
+        document.getElementById('right-btn').addEventListener('click', function() {
+            document.getElementById('sliderCategory').scrollBy({ left: 200, behavior: 'smooth' });
+        });
     </script>
 </body>
 

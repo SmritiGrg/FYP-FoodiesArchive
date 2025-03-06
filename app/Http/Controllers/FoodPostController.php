@@ -5,9 +5,13 @@ namespace App\Http\Controllers;
 use App\Models\CuisineTypes;
 use App\Models\FoodPosts;
 use App\Models\FoodTypes;
+use App\Models\Restaurants;
+use App\Models\Tags;
 use App\Models\User;
 use Illuminate\Contracts\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Auth;
 
 class FoodPostController extends Controller
 {
@@ -24,7 +28,11 @@ class FoodPostController extends Controller
      */
     public function create()
     {
-        //
+        $restaurants = Restaurants::all();
+        $foodtypes = FoodTypes::all();
+        $cuisinetypes = CuisineTypes::all();
+        $tags = Tags::all();
+        return view('FoodiesArchive.postFood', compact('restaurants', 'foodtypes', 'cuisinetypes', 'tags'));
     }
 
     /**
@@ -32,7 +40,36 @@ class FoodPostController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // dd($request);
+
+        $foodPost = new FoodPosts();
+        $request->validate([
+            'image' => 'required|image|mimes:jpeg,png,jpg|max:2048',
+            'name' => 'required',
+            'price' => 'required|numeric|min:0',
+            'review' => 'required|string|max:100',
+            'restaurant_id' => 'required',
+            'cuisine_type_id' => 'required',
+            'food_type_id' => 'required',
+            'tag_id' => 'required',
+
+        ]);
+
+        $fileName = Str::slug($request->name) . '-' . time() . '.' . $request->image->extension();
+        $request->file('image')->move(public_path('uploads/'), $fileName);
+        $foodPost->image = $fileName;
+        $foodPost->rating = $request->rating ?? 0; // Default to 0 if no rating is provided
+
+        $foodPost->name = $request->name;
+        $foodPost->price = $request->price;
+        $foodPost->review = $request->review;
+        $foodPost->restaurant_id = $request->restaurant_id;
+        $foodPost->cuisine_type_id = $request->cuisine_type_id;
+        $foodPost->food_type_id = $request->food_type_id;
+        $foodPost->tag_id = $request->tag_id;
+        $foodPost->user_id = Auth::user()->id;
+        $foodPost->save();
+        return redirect('/')->with('message', 'Post uploaded Succesfully');
     }
 
     /**
@@ -92,8 +129,8 @@ class FoodPostController extends Controller
             ->get();
 
         $users = User::where('full_name', 'LIKE', "%$search%")
-        ->orWhere('username', 'LIKE', "%$search%")
-        ->get();
+            ->orWhere('username', 'LIKE', "%$search%")
+            ->get();
 
         return view('FoodiesArchive.search', compact('result', 'users', 'search', 'foodTypes', 'cuisineTypes'));
     }

@@ -17,6 +17,7 @@ export default {
             },
             colors: {
                 customYellow: "#F2B203",
+                yellowStroke: "#FFD256",
                 hovercustomYellow: "#F6C133",
                 bgPurple: "#F5EFFF",
                 bgGray: "#F1F1F1",
@@ -25,6 +26,7 @@ export default {
                 lightPurple: "#441856",
                 darkRed: "#AD192A",
                 lightRed: "#B5535E",
+                stepGray: "#CECCD0",
             },
         },
     },

@@ -12,6 +12,7 @@ class FoodPosts extends Model
     protected $fillable = [
         'name',
         'review',
+        'rating',
         'price',
         'image',
         'restaurant_id',
@@ -67,5 +68,4 @@ class FoodPosts extends Model
     {
         return $this->belongsTo(Tags::class, 'tag_id', 'id');
     }
-
 }

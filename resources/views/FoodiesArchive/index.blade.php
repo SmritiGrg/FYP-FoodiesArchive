@@ -115,7 +115,7 @@
                 Begin Your Culinary Journey Today.
             </p>
             <a 
-                href="#" 
+                href="postFood" 
                 class="text-xs sm:text-sm md:text-base text-darkRed font-medium underline font-poppins hover:text-lightRed hvr-icon-forward"
             >
                 Post Your First Food <i class="fa-solid fa-arrow-right ml-2 hvr-icon"></i>
@@ -209,13 +209,13 @@
                                     <h2 class="text-5xl md:text-4xl lg:text-5xl font-bold text-darkPurple font-poppins" data-aos="fade-down">
                                         Upload <span class="text-customYellow">Food</span>
                                     </h2>
-                                    <p class="text-lg md:text-base lg:text-lg text-gray-600 mt-4 font-poppins" data-aos="fade-up">
+                                    <p class="text-lg md:text-base lg:text-lg text-gray-600 mt-4 font-poppins mb-4" data-aos="fade-up">
                                         Create, and step into a world <br>
                                         of Food, Friends, and Fun on <br>Foodie's Archive.
                                     </p>
-                                    <button class="bg-darkPurple text-white py-2 px-4 md:px-6 mt-6 rounded-3xl hover:bg-lightPurple font-poppins text-sm md:text-base" data-aos="zoom-in">
+                                    <a href="postFood" class="bg-darkPurple text-white py-2 px-4 md:px-6 mt-6 rounded-3xl hover:bg-lightPurple font-poppins text-sm md:text-base inline-block" data-aos="fade-up">
                                         Start posting Food
-                                    </button>
+                                    </a>
                                 </div>
                                 <!-- Image Section -->
                                 <div class="w-full py-10 md:w-1/2 md:py-12 flex justify-center" data-aos="fade-up">
@@ -463,8 +463,14 @@
                                 </div>
                                 <span class="bg-green-100 text-green-700 text-xs font-semibold py-1 px-2 rounded">{{$food->tag->name}}</span>
                                 <div class="flex justify-between items-center mt-2">
-                                    <a href="" class="text-lg font-bold hover:text-gray-600">{{$food->name}}</a>
-                                    <span class="text-customYellow font-normal"><i class="fa-solid fa-star pr-1" id="star"></i>5.0</span>
+                                    <a href="" class="text-base font-bold hover:text-gray-600">{{$food->name}}</a>
+                                    <div class="flex">
+                                        <img src="{{asset('assets/img/cutlery (1).png')}}" class="bg-customYellow p-1 rounded-md"
+                                            style="height: 25px; width: 25px" alt="">
+                                        <span class="text-customYellow font-normal pl-2">
+                                            5.0
+                                        </span>
+                                    </div>
                                 </div>
                                 <p class="text-black text-sm">Rs. {{$food->price}}</p>
                                 <p class="text-gray-500 mt-1 text-sm">{{$food->review}}</p>
@@ -491,41 +497,20 @@
             </div>
             
             <div class="mt-8 grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-5 px-14 sm:px-14 lg:px-24 lg:gap-14 md:gap-3" data-aos="fade-up">
-                <!-- Card 1 -->
-                <div class="bg-white rounded-lg p-5 flex md:flex-col md:items-center md:text-center lg:flex-row lg:items-start lg:text-left hvr-grow" style="box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;">
-                    <img src="{{asset('uploads/profile-images/aries28-profile-1739687395.png')}}" alt="Foodie_King" class="w-16 h-16 rounded-full object-cover mr-6">
-                    <div>
-                        <h2 class="text-lg font-semibold">Foodie_King</h2>
-                        <p class="text-gray-600">Total streak: 500</p>
-                        <p class="text-gray-600">Total posts: 200</p>
-                        <p class="text-gray-600">Total reviews: 300</p>
-                        <a href="" class="font-medium text-sm underline hover:text-gray-600">See Badges</a>
+                @foreach($topContributors as $user)
+                    <!-- Card 1 -->
+                    <div class="bg-white rounded-lg p-5 flex md:flex-col md:items-center md:text-center lg:flex-row lg:items-start lg:text-left hvr-grow" style="box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;">
+                        <img src="{{asset('uploads/profile-images/aries28-profile-1739687395.png')}}" alt="Foodie_King" class="w-16 h-16 rounded-full object-cover mr-6">
+                        <div>
+                            <h2 class="text-lg font-semibold">{{ $user->username }}</h2>
+                            <p class="text-gray-600">Total streak: 500</p>
+                            <p class="text-gray-600">Total posts: 200</p>
+                            <p class="text-gray-600">Total reviews: 300</p>
+                            <a href="" class="font-medium text-sm underline hover:text-gray-600">See Badges</a>
+                        </div>
                     </div>
-                </div>
-
-                <!-- Card 2 -->
-                <div class="bg-white rounded-lg p-5 flex md:flex-col md:items-center md:text-center lg:flex-row lg:items-start lg:text-left hvr-grow" style="box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;">
-                    <img src="{{asset('uploads/profile-images/aries28-profile-1739687395.png')}}" alt="Smrii_g" class="w-16 h-16 rounded-full object-cover mr-6">
-                    <div>
-                        <h2 class="text-lg font-semibold">Smrii_g</h2>
-                        <p class="text-gray-600">Total streak: 470</p>
-                        <p class="text-gray-600">Total posts: 200</p>
-                        <p class="text-gray-600">Total reviews: 200</p>
-                        <a href="" class="font-medium text-sm underline hover:text-gray-600">See Badges</a>
-                    </div>
-                </div>
-
-                <!-- Card 3 -->
-                <div class="bg-white rounded-lg p-5 flex md:flex-col md:items-center md:text-center lg:flex-row lg:items-start lg:text-left hvr-grow" style="box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;">
-                    <img src="{{asset('uploads/profile-images/aries28-profile-1739687395.png')}}" alt="Ramm_44" class="w-16 h-16 rounded-full object-cover mr-6">
-                    <div>
-                        <h2 class="text-lg font-semibold">Ramm_44</h2>
-                        <p class="text-gray-600">Total streak: 500</p>
-                        <p class="text-gray-600">Total posts: 200</p>
-                        <p class="text-gray-600">Total reviews: 300</p>
-                        <a href="" class="font-medium text-sm underline hover:text-gray-600">See Badges</a>
-                    </div>
-                </div>
+                @endforeach
+                
             </div>
         </div>
     </section>
