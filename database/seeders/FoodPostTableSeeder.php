@@ -43,7 +43,7 @@ class FoodPostTableSeeder extends Seeder
             'created_at' => now()->subDays(20),
             'updated_at' => now()->subDays(20),
         ]);
-        
+
         FoodPosts::create([
             'name' => 'Sel Roti and Aalu Achaar',
             'rating' => 3,
@@ -94,7 +94,7 @@ class FoodPostTableSeeder extends Seeder
             'rating' => 4,
             'review' => 'Sweet steamed dumplings filled with molasses, a must-try!',
             'price' => 120,
-            'image' => 'yomari.jpg',
+            'image' => 'laphing.jpg',
             'restaurant_id' => 19,
             'food_type_id' => 3,
             'cuisine_type_id' => 1,
@@ -123,7 +123,7 @@ class FoodPostTableSeeder extends Seeder
             'rating' => 5,
             'review' => 'Fresh and flavorful sushi rolls with a variety of toppings.',
             'price' => 1200,
-            'image' => 'sushi.jpg',
+            'image' => 'California-Roll.jpg',
             'restaurant_id' => 8,
             'food_type_id' => 2,
             'cuisine_type_id' => 7,
@@ -168,10 +168,10 @@ class FoodPostTableSeeder extends Seeder
             'rating' => 4,
             'review' => 'Classic Chinese dish with a perfect balance of sweetness and tanginess.',
             'price' => 550,
-            'image' => 'sweet_sour_chicken.jpg',
+            'image' => 'sandwich.png',
             'restaurant_id' => 15,
             'food_type_id' => 2,
-            'cuisine_type_id' => 6, 
+            'cuisine_type_id' => 6,
             'tag_id' => 6,
             'user_id' => 14,
             'created_at' => now()->subDays(5),
@@ -276,7 +276,7 @@ class FoodPostTableSeeder extends Seeder
             'image' => 'panipuri.jpg',
             'restaurant_id' => 2,
             'food_type_id' => 3,
-            'cuisine_type_id' => 8, 
+            'cuisine_type_id' => 8,
             'tag_id' => 11,
             'user_id' => 21,
             'created_at' => now()->subDays(12),

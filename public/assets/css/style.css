@@ -1,5 +1,7 @@
 @import "~hover.css/css/hover-min.css";
 
+
+
 nav {
     width: 100%;
     z-index: 10;
@@ -158,4 +160,17 @@ i.bookmarked.active {
     padding-left: 50%;
     z-index: 100;
     margin: 0 auto;
+}
+
+.rating-title {
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    height: 20px; /* Ensures title space is reserved */
+}
+.rating label img {
+    transition: background-color 0.3s;
+}
+.highlight {
+    background-color: #f2b203 !important;
 }

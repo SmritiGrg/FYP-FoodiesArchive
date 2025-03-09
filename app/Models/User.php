@@ -68,28 +68,28 @@ class User extends Authenticatable implements CanResetPassword
         return $this->hasMany(Restaurants::class, 'added_by_user_id');
     }
 
-    public function foodPosts(): void
+    public function foodPosts()
     {
-        $this->hasMany(FoodPosts::class, 'user_id', 'id');
+        return $this->hasMany(FoodPosts::class, 'user_id', 'id');
     }
 
-    public function questions(): void
+    public function questions()
     {
-        $this->hasMany(Questions::class, 'user_id', 'id');
+        return $this->hasMany(Questions::class, 'user_id', 'id');
     }
 
-    public function answers(): void
+    public function answers()
     {
-        $this->hasMany(Answers::class, 'user_id', 'id');
+        return $this->hasMany(Answers::class, 'user_id', 'id');
     }
 
-    public function reviews(): void
+    public function reviews()
     {
-        $this->hasMany(Reviews::class, 'user_id', 'id');
+        return $this->hasMany(Reviews::class, 'user_id', 'id');
     }
-    public function likes(): void
+    public function likes()
     {
-        $this->hasMany(Likes::class, 'user_id', 'id');
+        return $this->hasMany(Likes::class, 'user_id', 'id');
     }
 
     public function badges()

@@ -39,36 +39,6 @@
             <p class="mt-3 text-xs sm:text-sm md:text-base text-gray-600 font-poppins">
                 Discover Authentic Tastes, Share Your Foodie Adventures.
             </p>
-            
-            {{-- <div class="mt-10 flex justify-center px-4 sm:px-0">
-                <div class="relative w-full max-w-2xl">
-                    <form action="{{ route('search.food') }}" method="GET">
-                        <input 
-                            id="search-bar"
-                            type="text" 
-                            name="query"
-                            placeholder="Discover foods..." 
-                            class="w-full p-4 pr-4 sm:pr-20 pl-9 text-gray-800 font-poppins rounded-full border border-gray-300 "
-                            style="box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;"
-                        />
-                        <div class="absolute left-4 top-7 sm:top-1/2 transform -translate-y-1/2 text-black cursor-pointer">
-                            <i class="fa-solid fa-magnifying-glass"></i>
-                        </div>
-                        <button type="submit"
-                            class="hidden sm:block absolute right-2 top-2 bottom-2 font-poppins bg-customYellow text-black text-base px-4 py-2 rounded-full font-medium hover:bg-hovercustomYellow transition"
-                        >
-                            Search
-                        </button>
-                        <div class="mt-4 sm:hidden px-4">
-                            <button type="submit"
-                                class="w-full font-poppins bg-customYellow text-black text-base px-2 py-1 rounded-full font-medium hover:bg-hovercustomYellow transition"
-                            >
-                                Search
-                            </button>
-                        </div>
-                    </form>
-                </div>
-            </div> --}}
 
             <div class="mt-10 flex justify-center px-4 sm:px-0" id="search-container">
                 <div class="relative w-full max-w-2xl">
@@ -405,14 +375,14 @@
                         <div class="flex justify-between items-center p-4">
                             <div class="flex items-center">
                                 <a href="">
-                                    <img src="{{asset('uploads/profile-images/aries28-profile-1739687395.png')}}" alt="user" class="w-10 h-10 rounded-full object-cover object-center hover:opacity-80 transition-opacity duration-300" />
+                                    <img src="{{asset('uploads/profile-images/'. $food->user->image)}}" alt="profile" class="w-10 h-10 rounded-full object-cover object-center hover:opacity-80 transition-opacity duration-300" />
                                 </a>
                                 <div class="ml-3 relative group">
                                     <a href="" class="font-medium text-sm hover:text-gray-500">{{$food->user->full_name}}</a>
                                     <!-- Modal -->
                                     <div class="absolute hidden group-hover:block w-60 p-4 bg-white shadow-lg rounded-lg z-10 border border-gray-200">
                                         <div class="flex items-center space-x-4">
-                                            <img src="{{asset('uploads/profile-images/' . $food->user->image)}}" alt="User Avatar" class="w-12 h-12 rounded-full object-cover">
+                                            <img src="{{asset('uploads/profile-images/' . $food->user->image)}}" alt="profile" class="w-12 h-12 rounded-full object-cover">
                                             <div>
                                                 <a href="" class="font-semibold text-sm font-poppins">{{$food->user->full_name}}</a>
                                                 <p class="text-gray-500 text-xs font-poppins">{{$food->user->username}}</p>
@@ -422,17 +392,17 @@
                                         <div class="flex justify-between text-center mt-4">
                                             <!-- Posts -->
                                             <div>
-                                                <p class="font-bold text-sm font-poppins">14</p>
+                                                <p class="font-bold text-sm font-poppins">{{ $food->user->foodposts->count() }}</p>
                                                 <p class="text-gray-500 text-xs font-poppins">Posts</p>
                                             </div>
                                             <!-- Followers -->
                                             <div>
-                                                <p class="font-bold text-sm font-poppins">30</p>
+                                                <p class="font-bold text-sm font-poppins">{{ $food->user->followers->count() }}</p>
                                                 <p class="text-gray-500 text-xs font-poppins">Followers</p>
                                             </div>
                                             <!-- Following -->
                                             <div>
-                                                <p class="font-bold text-sm font-poppins">15</p>
+                                                <p class="font-bold text-sm font-poppins">{{ $food->user->followings->count() }}</p>
                                                 <p class="text-gray-500 text-xs font-poppins">Following</p>
                                             </div>
                                         </div>
@@ -461,7 +431,7 @@
                                     <i class="not-bookmarked fa-regular fa-bookmark text-lg hover:text-gray-500 cursor-pointer"></i>
                                     <i class="bookmarked fa-solid fa-bookmark text-lg text-black hidden cursor-pointer"></i>
                                 </div>
-                                <span class="bg-green-100 text-green-700 text-xs font-semibold py-1 px-2 rounded">{{$food->tag->name}}</span>
+                                <span class="bg-green-100 text-green-700 text-xs font-medium py-1 px-2 rounded">{{$food->tag->name}}</span>
                                 <div class="flex justify-between items-center mt-2">
                                     <a href="" class="text-base font-bold hover:text-gray-600">{{$food->name}}</a>
                                     <div class="flex">
@@ -497,20 +467,19 @@
             </div>
             
             <div class="mt-8 grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-5 px-14 sm:px-14 lg:px-24 lg:gap-14 md:gap-3" data-aos="fade-up">
-                @foreach($topContributors as $user)
+                @foreach($topContributors as $topContributor)
                     <!-- Card 1 -->
                     <div class="bg-white rounded-lg p-5 flex md:flex-col md:items-center md:text-center lg:flex-row lg:items-start lg:text-left hvr-grow" style="box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;">
-                        <img src="{{asset('uploads/profile-images/aries28-profile-1739687395.png')}}" alt="Foodie_King" class="w-16 h-16 rounded-full object-cover mr-6">
+                        <img src="{{asset('uploads/profile-images/'. $topContributor->image)}}" alt="profile" class="w-16 h-16 rounded-full object-cover mr-6">
                         <div>
-                            <h2 class="text-lg font-semibold">{{ $user->username }}</h2>
-                            <p class="text-gray-600">Total streak: 500</p>
-                            <p class="text-gray-600">Total posts: 200</p>
-                            <p class="text-gray-600">Total reviews: 300</p>
+                            <h2 class="text-lg font-semibold">{{ $topContributor->username }}</h2>
+                            <p class="text-gray-600">Total streak: {{ $topContributor->streak_count }}</p>
+                            <p class="text-gray-600">Total posts: {{ $topContributor->foodPosts->count() }}</p>
+                            <p class="text-gray-600">Total reviews: {{ $topContributor->reviews->count() }}</p>
                             <a href="" class="font-medium text-sm underline hover:text-gray-600">See Badges</a>
                         </div>
                     </div>
                 @endforeach
-                
             </div>
         </div>
     </section>

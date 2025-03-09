@@ -127,7 +127,7 @@
                                             {{-- Display the rating as stars --}}
                                             @php
                                                 $userRatingValue = round($food->rating);
-                                                $formattedRating = number_format($userRatingValue, 1);
+                                                // $formattedRating = number_format($userRatingValue, 1);
                                             @endphp
 
                                             <div class="flex items-center mr-2 my-2">
@@ -146,7 +146,7 @@
                                                             alt="Empty">
                                                     @endif
                                                 @endfor
-                                                <p class="ml-2 text-black">{{ $formattedRating }}</p>
+                                                <p class="ml-2 text-lightgray font-normal text-sm">{{ $food->reviews->count() }} Reviews</p>
                                             </div>
                                             <p class="font-medium">Rs.{{$food->price}}</p>
                                             <p class="text-gray-600 text-sm mt-2">{{$food->review}}</p>
