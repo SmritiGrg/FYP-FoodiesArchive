@@ -171,7 +171,7 @@
         </div>
     </section> --}}
 
-    <section class="pt-36 pb-32">
+    <section class="pt-40 pb-32">
         <div class="flex flex-col items-center justify-center">
             <div class="w-full max-w-lg">
                 <!-- Multistep Form -->
@@ -298,7 +298,7 @@
                             <h2 class="text-3xl font-extrabold text-darkPurple font-poppins">Upload Photo</h2>
                             <p class="text-gray-600 mt-2 font-poppins">Upload clear food image</p>
 
-                            {{-- <div class="mt-3 w-[60vh] h-[65vh]">
+                            <div class="mt-3 w-[60vh] h-[65vh]">
                                 <label for="drop_image" class="flex flex-col items-center justify-center w-[60vh] h-[65vh] 
                                             border-2 border-gray-300 border-dashed cursor-pointer bg-gray-50 hover:bg-gray-100">
                                     <div id="image-container" class="flex flex-col items-center justify-center pt-5 pb-6" >
@@ -319,11 +319,13 @@
                                 @error('image')
                                     <p class="text-sm text-red-600 space-y-1 font-poppins">{{ $message }}</p>
                                 @enderror
-                            </div> --}}
-                            <label for="image">
+                            </div>
+                            {{-- <label for="image">
                                 <input type="file" name="image" id="image">    
-                            </label>
-                            
+                            </label> --}}
+                            {{-- @error('image')
+                                        <p class="text-sm text-red-600 space-y-1 font-poppins">{{$message}}</p>
+                                    @enderror --}}
                         </div>
                     @endif
 
@@ -338,6 +340,9 @@
                                 <textarea placeholder="This is a very tasty food..." id="review"
                                     class="w-full mt-1 p-2 border border-gray-300 rounded-md focus:outline-none"
                                     name="review" rows="4"></textarea>
+                                    @error('review')
+                                        <p class="text-sm text-red-600 space-y-1 font-poppins">{{$message}}</p>
+                                    @enderror
                             </div>
 
                             <div class="mt-3">
@@ -396,6 +401,9 @@
                                     </div>
                                     <div id="rating-title" class="rating-title text-gray-700 pt-1 font-normal"></div>
                                 </div>
+                                @error('rating')
+                                    <p class="text-sm text-red-600 space-y-1 font-poppins">{{$message}}</p>
+                                @enderror
                             </div>
                         </div>
                     @endif

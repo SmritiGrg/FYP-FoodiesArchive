@@ -85,7 +85,7 @@
                 Begin Your Culinary Journey Today.
             </p>
             <a 
-                href="postFood" 
+                href="{{ route('foodpost.create') }}" 
                 class="text-xs sm:text-sm md:text-base text-darkRed font-medium underline font-poppins hover:text-lightRed hvr-icon-forward"
             >
                 Post Your First Food <i class="fa-solid fa-arrow-right ml-2 hvr-icon"></i>
@@ -399,7 +399,7 @@
                                             <div>
                                                 <p class="font-bold text-sm font-poppins">{{ $food->user->followers->count() }}</p>
                                                 <p class="text-gray-500 text-xs font-poppins">Followers</p>
-                                            </div>
+                                            </div> 
                                             <!-- Following -->
                                             <div>
                                                 <p class="font-bold text-sm font-poppins">{{ $food->user->followings->count() }}</p>
@@ -438,7 +438,7 @@
                                         <img src="{{asset('assets/img/cutlery (1).png')}}" class="bg-customYellow p-1 rounded-md"
                                             style="height: 25px; width: 25px" alt="">
                                         <span class="text-customYellow font-normal pl-2">
-                                            5.0
+                                            {{ number_format($food->rating, 1) }}
                                         </span>
                                     </div>
                                 </div>

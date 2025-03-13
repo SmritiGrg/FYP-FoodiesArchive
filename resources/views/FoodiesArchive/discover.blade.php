@@ -87,8 +87,6 @@
                 
                 <!-- Main Content -->
                 <div class="w-3/4">
-                    
-                    
                     <!-- Food Cards -->
                     <div class="space-y-6">
                         @foreach($foods as $food)
@@ -106,7 +104,8 @@
                                         </div>
                                         <button class="bg-customYellow text-black text-sm px-5 py-1 rounded-full font-medium hover:bg-hovercustomYellow">Follow</button>
                                     </div>
-                                    <img src="{{ asset('uploads/' . $food->image) }}" class="w-full h-96 rounded-lg object-cover">
+                                    {{-- <img src="{{ asset('food_img/' . $food->image) }}" class="w-full h-96 rounded-lg object-cover"> --}}
+                                    <img src="{{ asset($food->image) }}" class="w-full h-96 rounded-lg object-cover">
                                     <div class="flex justify-between items-center mt-2 mb-2">
                                         <div class="flex items-center space-x-4">
                                             <span class="text-black text-base">
@@ -126,7 +125,7 @@
                                     <div>
                                         <span class="bg-green-100 text-green-700 text-xs font-semibold py-1 px-2 rounded">{{$food->tag->name}}</span>
                                         <div class="flex justify-between">
-                                            <a href="" class="text-lg font-medium font-poppins mt-2">{{$food->name}}</a>
+                                            <a href="{{route('food.details', $food->id)}}" class="text-lg font-medium font-poppins mt-2">{{$food->name}}</a>
                                             <a href="" class="border-2 border-gray-400 rounded-3xl py-2 px-4 text-xs font-poppins hover:bg-black hover:text-white transition">
                                                 <i class="fa-solid fa-location-dot text-customYellow mr-2"></i>See Location
                                             </a>
@@ -158,7 +157,7 @@
                                             <p class="ml-2 text-lightgray font-normal text-sm">{{ $food->reviews->count() }} Reviews</p>
                                         </div>
 
-                                        <p class="font-medium">Rs.{{$food->price}}</p>
+                                        <p class="font-medium">Rs. {{$food->price}}</p>
                                         <p class="text-gray-600 text-sm mt-2">{{$food->review}}</p>
                                         <a href="" class="font-medium text-sm underline hover:text-gray-600">See More</a>
                                     </div>

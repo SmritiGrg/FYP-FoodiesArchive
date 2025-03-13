@@ -62,10 +62,33 @@ class FoodPostController extends Controller
         } elseif ($currentStep == 4) {
             $request->session()->put('tag_id', $request->input('tag_id'));
         } elseif ($currentStep == 5) {
-            $request->session()->put('image', $request->input('image'));
-        }
-        $this->validateStep($request, $currentStep);
+            $request->validate([
+                'image' => $request->session()->has('image') ? 'nullable|image|mimes:jpeg,png,jpg|max:2048' : 'required|image|mimes:jpeg,png,jpg|max:2048',
+            ]);
 
+            if ($request->hasFile('image')) {
+                $file = $request->file('image');
+
+                // Delete the previous image if it exists
+                if ($request->session()->has('image')) {
+                    $oldImagePath = public_path($request->session()->get('image'));
+                    if (file_exists($oldImagePath)) {
+                        unlink($oldImagePath);
+                    }
+                }
+
+                $foodName = Str::slug($request->session()->get('name'));
+                // Generate a new filename
+                $filename = "food_img_{$foodName}_" . time() . '.' . $file->getClientOriginalExtension();
+
+                $file->move(public_path('food_img'), $filename);
+
+                // Store only the relative path in session
+                $request->session()->put('image', 'food_img/' . $filename);
+            }
+        }
+        // dd('Before Increment:', $request);
+        $this->validateStep($request,  $currentStep);
         // Increase step
         $currentStep++;
         if ($currentStep > $totalSteps) {
@@ -114,12 +137,9 @@ class FoodPostController extends Controller
             ];
         } elseif ($step == 5) {
             $rules = [
-                'image' => 'required|image|mimes:jpeg,png,jpg|max:2048',
-            ];
-        } elseif ($step == 6) {
-            $rules = [
-                'review' => 'required|string|max:100',
-                'rating' => 'required|integer|min:1|max:5',
+                'image' => $request->session()->has('image')
+                    ? 'nullable' // Image is optional if already in session
+                    : 'required' // Image is required if not in session
             ];
         }
         $request->validate($rules);
@@ -162,6 +182,12 @@ class FoodPostController extends Controller
     public function store(Request $request)
     {
         // Get all session data for the food post
+        // dd($request);
+        $request->validate([
+            'review' => 'required|string|max:100',
+            'rating' => 'required|integer|min:1|max:5',
+        ]);
+
         $data = [
             'name' => $request->session()->get('name'),
             'price' => $request->session()->get('price'),
@@ -172,16 +198,9 @@ class FoodPostController extends Controller
             'image' => $request->session()->get('image'),
         ];
 
-        dd($request);
+        // dd($request);
         // Create new food post
         $foodPost = new FoodPosts();
-
-        // Handle the image upload
-        if ($request->hasFile('image')) {
-            $fileName = Str::slug($data['name']) . '-' . time() . '.' . $data['image']->extension();
-            $request->file('image')->move(public_path('uploads/'), $fileName);
-            $foodPost->image = $fileName;
-        }
 
         // Store the rest of the form data
         $foodPost->name = $data['name'];
@@ -192,6 +211,7 @@ class FoodPostController extends Controller
         $foodPost->cuisine_type_id = $data['cuisine_type_id'];
         $foodPost->food_type_id = $data['food_type_id'];
         $foodPost->tag_id = $data['tag_id'];
+        $foodPost->image = $data['image'];
         $foodPost->user_id = Auth::user()->id;
 
         // Save to database
@@ -207,9 +227,21 @@ class FoodPostController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(FoodPosts $foodPost)
+    public function show($id)
     {
-        //
+        $singlePost = FoodPosts::findOrFail($id);
+
+        $similarPosts = FoodPosts::where('id', '!=', $id)
+            ->where(function ($query) use ($singlePost) {
+                $query->where('cuisine_type_id', $singlePost->cuisine_type_id)
+                    ->orWhere('food_type_id', $singlePost->food_type_id)
+                    ->orWhere('name', 'LIKE', '%' . $singlePost->name . '%');
+            })
+            ->inRandomOrder()
+            ->limit(4)
+            ->get();
+
+        return view('FoodiesArchive.singlePost', compact('singlePost', 'similarPosts'));
     }
 
     /**

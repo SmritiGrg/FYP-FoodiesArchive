@@ -19,6 +19,7 @@ Route::get('/bookmark', [FrontendController::class, 'bookmark']);
 Route::get('/search', [FoodPostController::class, 'search'])->name('search.food');
 Route::get('/writeReviewSearch', [FoodPostController::class, 'searchForReview'])->name('search.review');
 
+Route::get('/postDetails/{id}', [FoodPostController::class, 'show'])->name('food.details');
 
 Route::get('/dashboard', function () {
     return view('dashboard');

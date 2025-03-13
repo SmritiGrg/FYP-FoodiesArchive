@@ -108,12 +108,11 @@
                                         <img src="{{asset('uploads/profile-images/' . Auth::user()->image) }}" alt="" class="w-16 h-16 rounded-full object-cover mr-3">
                                         <div>
                                             <span class="block text-sm text-gray-900">{{ Auth::user()->full_name }}</span>
-                                            <span class="block text-sm text-gray-500 truncate"
+                                            <span class="block text-sm text-gray-500"
                                                 >{{ Auth::user()->username }}</span
                                             >
                                         </div>
                                     </a>
-                                    
                                 </div>
                                 <ul class="py-2" aria-labelledby="user-menu-button">
                                     <li>

@@ -40,19 +40,19 @@
         </div>
 
         <div>
-            <x-input-label for="full_name" value="Full Name" />
+            <label for="full_name" class="block font-medium text-sm text-slate-600">Full Name</label>
             <x-text-input id="full_name" name="full_name" type="text" class="mt-1 block w-full" :value="old('full_name', $user->full_name)" autofocus  />
             <x-input-error class="mt-2" :messages="$errors->get('full_name')" />
         </div>
 
         <div>
-            <x-input-label for="username" value="Username" />
+            <label for="username" class="block font-medium text-sm text-slate-600">Username</label>
             <x-text-input id="username" name="username" type="text" class="mt-1 block w-full" :value="old('username', $user->username)" autofocus />
             <x-input-error class="mt-2" :messages="$errors->get('username')" />
         </div>
 
         <div>
-            <x-input-label for="email" value="Email" />
+            <label for="email" class="block font-medium text-sm text-slate-600">Email</label>
             <x-text-input id="email" name="email" type="email" class="mt-1 block w-full" :value="old('email', $user->email)" />
             <x-input-error class="mt-2" :messages="$errors->get('email')" />
         </div>
@@ -65,7 +65,7 @@
 
 <form action="{{ route('profile.remove-image') }}" method="POST">
     @csrf
-    <button type="submit" class="px-5 py-2.5 text-base font-medium text-indigo-900 focus:outline-none bg-white rounded-lg border border-indigo-200 hover:bg-indigo-100 hover:text-[#202142] focus:z-10 focus:ring-4 focus:ring-indigo-200">
+    <button type="submit" formaction="{{ route('profile.remove-image') }}" class="px-5 py-2.5 text-base font-medium text-indigo-900 focus:outline-none bg-white rounded-lg border border-indigo-200 hover:bg-indigo-100 hover:text-[#202142] focus:z-10 focus:ring-4 focus:ring-indigo-200">
         Remove Picture
     </button>
 </form>
