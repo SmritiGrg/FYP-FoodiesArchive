@@ -105,12 +105,16 @@
                         <a href="" class="w-10 flex justify-center">
                             <i class="fa-solid fa-gear text-darkPurple text-xl"></i>
                         </a>
+                        <a href="{{route('user.calendar')}}" class="w-10 flex justify-center">
+                            <i class="fa-solid fa-calendar-days text-darkPurple text-xl"></i>
+                        </a>
                     </div>
                 </div>
 
-                <div class="absolute top-6 right-6 lg:block hidden">
+                <div class="absolute top-6 right-10 lg:block hidden">
                     <a href="profile" class="px-4 py-1 bg-bgPurple border border-darkPurple rounded hover:bg-darkPurple hover:text-white transition">Edit Profile</a>
                     <a href=""><i class="fa-solid fa-gear pl-3 text-darkPurple text-xl"></i></a>
+                    <a href="{{route('user.calendar')}}"><i class="fa-solid fa-calendar-days pl-3 text-darkPurple text-xl"></i></a>
                 </div>
             </div>
             
@@ -223,8 +227,12 @@
                                 @endforeach
                             </div>
                         @else
-                            <p class="text-gray-500 text-lg mt-4">No posts yet. Share your first food post!</p>
-                            <a href="{{ route('foodpost.create') }}" class="mt-4 px-4 py-2 bg-darkPurple text-white rounded hover:bg-purple-700 transition">Upload Now</a>
+                            <div class="flex-row items-center justify-center">
+                                <div class="text-center">
+                                    <p class="text-gray-500 text-lg mt-4">No posts yet. Share your first food post!</p>
+                                        <a href="{{ route('foodpost.create') }}" class="text-blue-600 underline font-medium hover:text-blue-500">Upload Now</a>
+                                </div>
+                            </div>
                         @endif
                     @endif
                 </div>

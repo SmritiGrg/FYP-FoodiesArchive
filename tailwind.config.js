@@ -27,6 +27,8 @@ export default {
                 darkRed: "#AD192A",
                 lightRed: "#B5535E",
                 stepGray: "#CECCD0",
+                calendarLightYellow: "#FFFDEC",
+                calendarDarkYellow: "#FFD95F",
             },
         },
     },
