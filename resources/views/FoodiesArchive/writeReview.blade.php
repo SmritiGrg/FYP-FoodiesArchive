@@ -47,18 +47,6 @@
                             <i class="fa-solid fa-location-arrow text-base"></i>
                             <span class="pl-3">Nearby</span>
                         </div>
-                        <ul class="p-4">
-                            @foreach($results as $item)
-                                <li class="border-b py-2">
-                                    <a href="{{ route('foodpost.show', $item->id) }}" class="text-gray-800 hover:text-customYellow">
-                                        {{ $item->name }} ({{ $item->restaurant->name }})
-                                    </a>
-                                </li>
-                            @endforeach
-                        </ul>
-                        @if($result->isEmpty())
-                            <div class="p-4 text-center text-gray-500">No results found.</div>
-                        @endif
                     </div>
                 </div>
             </div>

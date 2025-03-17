@@ -145,40 +145,6 @@ class FoodPostController extends Controller
         $request->validate($rules);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    // public function store(Request $request)
-    // {
-    //     dd($request);
-    //     $this->validateStep($request, Session::get('totalSteps', 6));
-
-    //     $foodPost = new FoodPosts();
-
-    //     if ($request->hasFile('image')) {
-    //         $fileName = Str::slug($request->name) . '-' . time() . '.' . $request->image->extension();
-    //         $request->file('image')->move(public_path('uploads/'), $fileName);
-    //         $foodPost->image = $fileName;
-    //     }
-
-    //     $foodPost->name = $request->name;
-    //     $foodPost->price = $request->price;
-    //     $foodPost->review = $request->review;
-    //     $foodPost->rating = $request->rating;
-    //     $foodPost->restaurant_id = $request->restaurant_id;
-    //     $foodPost->cuisine_type_id = $request->cuisine_type_id;
-    //     $foodPost->food_type_id = $request->food_type_id;
-    //     $foodPost->tag_id = $request->tag_id;
-    //     $foodPost->user_id = Auth::user()->id;
-    //     $foodPost->save();
-    //     // dd('Saved successfully');
-
-    //     // Clear session data
-    //     $request->session()->forget(['currentStep', 'totalSteps']);
-
-    //     return redirect('/')->with('message', 'Post uploaded Succesfully');
-    // }
-
     public function store(Request $request)
     {
         // Get all session data for the food post
@@ -320,16 +286,5 @@ class FoodPostController extends Controller
         return redirect()->route('foodpost.create')->with('message', 'Form data has been cleared.');
     }
 
-    public function searchForReview(Request $request)
-    {
-        $search = $request->input('query');
-
-        $results = FoodPosts::where('name', 'like', "%$search%")
-            ->orWhereHas('restaurant', function ($query) use ($search) {
-                $query->where('name', 'like', "%$search%");
-            })
-            ->get();
-
-        return view('FoodiesArchive.writeReview', compact('results', 'search'));
-    }
+    // public function searchForReview(Request $request) {}
 }

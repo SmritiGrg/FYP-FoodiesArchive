@@ -15,14 +15,14 @@ class Likes extends Model
     ];
 
     // each like belongs to a user
-    public function user(): void
+    public function user()
     {
-        $this->belongsTo(User::class, 'user_id', 'id');
+        return $this->belongsTo(User::class, 'user_id', 'id');
     }
 
     // each like belongs to a food post
-    public function foodPost(): void
+    public function foodPost()
     {
-        $this->belongsTo(FoodPosts::class, 'food_post_id', 'id');
+        return $this->belongsTo(FoodPosts::class, 'food_post_id', 'id');
     }
 }

@@ -15,7 +15,7 @@
                         <p class="text-white text-lg font-semibold"><i class="fa-solid fa-heart text-white pr-2"></i>50</p>
                     </div>
             </div>
-            <div class="relative shadow-md overflow-hidden border group">
+            <div class="relative overflow-hidden border group">
                     <img src="{{asset('assets/img/sandwich.png')}}" alt="Food 3" class="w-full h-48 sm:h-72 md:h-96 object-cover">
                     <div class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition duration-300 ease-in-out">
                         <p class="text-white text-lg font-semibold"><i class="fa-solid fa-heart text-white pr-2"></i>50</p>

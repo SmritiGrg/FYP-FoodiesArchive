@@ -3,7 +3,7 @@
         <div class="max-w-screen-xl mx-auto flex items-center justify-between p-4">
             <!-- Hamburger Menu (Visible only on md and smaller screens) -->
             <button id="menu-toggle" class="lg:hidden text-lg sm:text-2xl text-gray-900">
-                &#9776;
+                <i class="fa-solid fa-bars"></i>
             </button>
 
             <a href="/" class="flex items-center ">
@@ -40,10 +40,10 @@
 
             <!-- Navigation Links (Hidden on md and smaller screens) -->
             <div id="nav-links" class="hidden lg:flex space-x-4 lg:space-x-6 xl:space-x-12">
-                <a href="discover" class="text-gray-900 hover:text-customYellow text-base font-semibold font-poppins lg:text-sm xl:text-base">Discover</a>
+                <a href="discover" class="text-gray-900 hover:text-customYellow text-base font-bold lg:text-sm xl:text-base">Discover</a>
                 <div class="relative group">
                     <button
-                        class="text-gray-900 hover:text-customYellow text-base font-semibold font-poppins"
+                        class="text-gray-900 hover:text-customYellow text-base font-bold"
                     >
                         Review
                     </button>
@@ -56,7 +56,7 @@
                         </div>
                     </div>
                 </div>
-                <a href="#" class="text-gray-900 hover:text-customYellow text-base font-semibold font-poppins lg:text-sm xl:text-base">About us</a>
+                <a href="#" class="text-gray-900 hover:text-customYellow text-base font-bold lg:text-sm xl:text-base">About us</a>
             </div>
 
             <!-- Right Icons -->
@@ -82,65 +82,35 @@
                     </a>
                 @endguest
                 @auth
-                    <div class="relative inline-block text-left border-l-2 border-gray-300 pl-4">
-                        <div>
-                            <button
-                                type="button"
-                                class="flex text-sm bg-gray-800 rounded-full md:me-0 focus:ring-4 focus:ring-gray-300"
-                                id="user-menu-button"
-                            >
-                                <img
-                                class="w-10 h-10 rounded-full object-cover"
-                                src="{{ asset('uploads/profile-images/' . auth()->user()->image) }}"
-                                alt="user photo"
-                                />
-                            </button>
-                        </div>
-
-                        <div class="absolute right-0 z-10 mt-2 w-60 origin-top-right rounded-md bg-white ring-1 shadow-lg ring-black/5 focus:outline-hidden hidden" role="menu"
-                        aria-orientation="vertical"
-                        aria-labelledby="menu-button"
-                        tabindex="-1"
-                        >
-                            <div>
-                                <div class="px-4 py-3 hover:bg-gray-100">
-                                    <a href="" class="flex items-center">
-                                        <img src="{{asset('uploads/profile-images/' . Auth::user()->image) }}" alt="" class="w-16 h-16 rounded-full object-cover mr-3">
-                                        <div>
-                                            <span class="block text-sm text-gray-900">{{ Auth::user()->full_name }}</span>
-                                            <span class="block text-sm text-gray-500"
-                                                >{{ Auth::user()->username }}</span
-                                            >
-                                        </div>
-                                    </a>
-                                </div>
-                                <ul class="py-2" aria-labelledby="user-menu-button">
-                                    <li>
-                                        <a
-                                        href="profile"
-                                        class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                                        >My Profile</a
+                    <div class="relative group inline-block border-l-2 border-gray-300 pl-4">
+                        <button class="flex text-sm bg-gray-800 rounded-full md:me-0 border-4 border-gray-300">
+                            <img class="w-10 h-10 rounded-full object-cover" src="{{ asset('uploads/profile-images/' . auth()->user()->image) }}" alt="user photo"/>
+                        </button>
+                        <div class="absolute w-56 top-full right-0 rounded-lg mt-1 shadow-lg p-3 text-start scale-y-0 group-hover:scale-y-100 origin-top duration-200 bg-white">
+                            <div class="hover:bg-gray-100 py-3 px-2">
+                                <a href="/PersonalProfile" class="flex items-center">
+                                    <img src="{{asset('uploads/profile-images/' . Auth::user()->image) }}" alt="" class="w-16 h-16 rounded-full object-cover mr-3">
+                                    <div>
+                                        <span class="block text-sm text-gray-900">{{ Auth::user()->full_name }}</span>
+                                        <span class="block text-sm text-gray-500"
+                                            >{{ Auth::user()->username }}</span
                                         >
-                                    </li>
-                                    <li>
-                                        <a
-                                        href="#"
-                                        class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                                        >Settings</a
-                                        >
-                                    </li>
-                                    <li class="border-t-2">
-                                        <form method="POST" action="{{ route('logout') }}">
-                                            @csrf
-                                            <button
-                                                type="submit"
-                                                class="block w-full text-left px-4 py-2 text-sm text-red-500 hover:bg-gray-100"
-                                            >
-                                                Log out
-                                            </button>
-                                        </form>
-                                    </li>
-                                </ul>
+                                    </div>
+                                </a>        
+                            </div>
+                            <div class="hover:bg-gray-100">
+                                <a href="/PersonalProfile" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" >My Profile </a>        
+                            </div>
+                            <div class="hover:bg-gray-100">
+                                <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" >Settings</a>        
+                            </div>
+                            <div class="hover:bg-gray-100 border-t-2">
+                                <form method="POST" action="{{ route('logout') }}">
+                                    @csrf
+                                    <button type="submit" class="block w-full text-left px-4 py-2 text-sm text-red-500 hover:bg-gray-100">
+                                        Log out
+                                    </button>
+                                </form>        
                             </div>
                         </div>
                     </div>

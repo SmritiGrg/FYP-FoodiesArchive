@@ -24,11 +24,7 @@
                     </h3>
                     <ul class="space-y-2">
                     <li>
-                        <a
-                        href="#"
-                        class="text-lightgray hover:text-gray-500 text-sm hover:underline font-poppins"
-                        >Create Post</a
-                        >
+                        <a href="#" class="text-lightgray hover:text-gray-500 text-sm hover:underline font-poppins">Create Post</a>
                     </li>
                     <li>
                         <a
@@ -229,26 +225,7 @@
         function closeModal() {
             document.querySelector('.fixed').classList.add('hidden');
         }
-
-        //////////  FOR PROFILE MODAL
-
-        // Open the modal when the profile image is clicked
-        function openModal() {
-            const modal = document.getElementById('profileModal');
-            modal.classList.remove('invisible', 'opacity-0');
-            modal.classList.add('visible', 'opacity-100');
-        }
-
-        // Close the modal when the user clicks anywhere outside the image
-        function closeModal(event) {
-            if (event.target === document.getElementById('profileModal')) {
-                const modal = document.getElementById('profileModal');
-                modal.classList.remove('visible', 'opacity-100');
-                modal.classList.add('invisible', 'opacity-0');
-            }
-        }
-
-
+        
         ////////////// FOR LIKE button
         // Select the elements
         const unlikeHeart = document.querySelector('.unlike-heart');

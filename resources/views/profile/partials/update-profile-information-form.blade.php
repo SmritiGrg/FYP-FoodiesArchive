@@ -33,7 +33,7 @@
         </div>
 
         <!-- Modal for profile image -->
-        <div id="profileModal" class="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center invisible opacity-0 transition-all duration-300" onclick="closeModal(event)" style="margin: 0; padding: 0;">
+        <div id="profileModal" class="fixed z-50 inset-0 bg-black bg-opacity-50 flex justify-center items-center invisible opacity-0 transition-all duration-300" onclick="closeModal(event)" style="margin: 0; padding: 0;">
             <div class="relative">
                 <img id="modalImage" src="{{ asset('uploads/profile-images/' . auth()->user()->image) }}" alt="Profile" class="rounded-full object-cover" style="width: 400px; height: 400px;">
             </div>

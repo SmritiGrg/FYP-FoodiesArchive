@@ -43,4 +43,9 @@ class FrontendController extends Controller
     {
         return view('FoodiesArchive.bookmark');
     }
+
+    public function personalProfile()
+    {
+        return view('FoodiesArchive.personalProfile');
+    }
 }
