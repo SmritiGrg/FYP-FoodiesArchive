@@ -29,6 +29,7 @@ export default {
                 stepGray: "#CECCD0",
                 calendarLightYellow: "#FFFDEC",
                 calendarDarkYellow: "#FFD95F",
+                textBlack: "#212427",
             },
         },
     },

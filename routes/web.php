@@ -17,16 +17,19 @@ Route::get('/discover', [FrontendController::class, 'discover']);
 Route::get('/writeReview', [FrontendController::class, 'writeReview']);
 // Route::get('/about', [FrontendController::class, 'about']);
 Route::get('/bookmark', [FrontendController::class, 'bookmark']);
-Route::get('/PersonalProfile', [FrontendController::class, 'personalProfile'])->name('personalProfile');
+
 
 Route::get('/search', [FoodPostController::class, 'search'])->name('search.food');
 // Route::get('/writeReviewSearch', [FoodPostController::class, 'searchForReview'])->name('search.review');
 
-Route::get('/postDetails/{id}', [FoodPostController::class, 'show'])->name('food.details');
+Route::get('/discover/postDetails/{id}', [FoodPostController::class, 'show'])->name('food.details');
+
+Route::get('/userProfile/{id}', [FrontendController::class, 'otherProfile'])->name('otherProfile');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
+
 
 Route::middleware('auth')->group(function () {
     // Route::resource('/foodpost', FoodPostController::class);
@@ -44,8 +47,11 @@ Route::middleware('auth')->group(function () {
     Route::post('/profile', [ProfileController::class, 'removeImage'])->name('profile.remove-image');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-    Route::get('/user/calendar/{month?}/{year?}', [AuthenticatedSessionController::class, 'userCalendar'])->name('user.calendar');
+    Route::get('/PersonalProfile', [FrontendController::class, 'personalProfile'])->name('personalProfile');
+
+    Route::get('/PersonalProfile/calendar/{month?}/{year?}', [AuthenticatedSessionController::class, 'userCalendar'])->name('user.calendar');
 });
+
 
 Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::get('/admin', [AdminController::class, 'index'])->name('admin.index');

@@ -4,20 +4,37 @@
             <!-- Profile Header -->
             <div class="p-6 relative">
                 <div class="flex flex-row space-y-4 sm:space-y-0 sm:space-x-4">
-                    <img src="{{ asset('uploads/profile-images/' . Auth::user()->image) }}" class="w-32 h-32 lg:w-48 lg:h-48 object-cover rounded-full cursor-pointer" alt="Profile Img" onclick="openModal()" id="profilePreview">
+                    <img src="{{ asset('uploads/profile-images/' . $user->image )}}" class="w-32 h-32 lg:w-48 lg:h-48 object-cover rounded-full cursor-pointer" alt="Profile Img" onclick="openModal()" id="profilePreview">
                     
-                    <div class="pt-2 pl-5">
-                        <h2 class="text-lg sm:text-xl font-medium text-textBlack">{{ Auth::user()->full_name }}</h2>
-                        <p class="text-gray-600 text-sm">{{ Auth::user()->username }}</p>
+                    <div class="pt-2 pl-9">
+                        <div class="flex space-x-9">
+                            <h2 class="text-lg sm:text-xl font-medium text-textBlack">{{ $user->full_name }}</h2>
+                            @auth
+                                @php
+                                    $isFollowing = auth()->user()->isFollowing($user->id);
+                                @endphp
+
+                                @if ($isFollowing)
+                                    <button class="py-1 px-5 bg-gray-200 text-sm font-medium rounded-md hover:bg-gray-300">
+                                        Following
+                                    </button>
+                                @else
+                                    <button type="submit" class="py-1 px-5 bg-customYellow text-black text-sm font-medium rounded-md hover:bg-hovercustomYellow">
+                                        Follow
+                                    </button>
+                                @endif
+                            @endauth
+                        </div>
+                        <p class="text-gray-600 text-sm">{{ $user->username }}</p>
                         <div class="flex space-x-2 items-center">
                             <p class="rounded-full w-1 h-1 bg-gray-600"> </p>
-                            <p class="text-gray-600 text-sm">Joined {{ Auth::user()->created_at->format('F Y') }}</p>
+                            <p class="text-gray-600 text-sm">Joined {{ $user->created_at->format('F Y') }}</p>
                         </div>
 
                         <div class="hidden sm:flex items-center mt-4">
                             <i class="fa-solid fa-fire-flame-curved text-red-400 text-2xl pr-3"></i>
                             <div class="pt-1">
-                                <span class="block text-sm text-gray-900 font-medium">{{ Auth::user()->streak_count }}</span>
+                                <span class="block text-sm text-gray-900 font-medium">{{ $user->streak_count }}</span>
                                 <span class="block text-sm text-gray-500">
                                     Total streaks
                                 </span>
@@ -27,11 +44,11 @@
                         <div class="hidden sm:flex space-x-6 mt-5 text-gray-600">
                             <div>
                                 @php
-                                    $totalPosts = Auth::user()->foodPosts->count();
-                                    $totalReviews = Auth::user()->reviews->count();
+                                    $totalPosts = $user->foodPosts->count();
+                                    $totalReviews = $user->reviews->count();
                                     $totalContributions = $totalPosts + $totalReviews;
 
-                                    $totalLikes = Auth::user()->foodPosts->sum(function($post) {
+                                    $totalLikes = $user->foodPosts->sum(function($post) {
                                         return $post->likes->count();
                                     });
                                 @endphp
@@ -39,11 +56,11 @@
                                 <p class="text-gray-500 ">Contributions</p>
                             </div>
                             <div>
-                                <p class="text-darkPurple font-medium">{{ Auth::user()->followers->count() }}</p>
+                                <p class="text-darkPurple font-medium">{{ $user->followers->count() }}</p>
                                 <p class="text-gray-500 font-normal">Followers</p>
                             </div>
                             <div>
-                                <p class="text-darkPurple font-medium">{{ Auth::user()->followings->count() }}</p>
+                                <p class="text-darkPurple font-medium">{{ $user->followings->count() }}</p>
                                 <p class="text-gray-500 font-normal">Following</p>
                             </div>
                             <div>
@@ -57,25 +74,25 @@
                 <!-- Modal for profile image -->
                 <div id="profileModal" class="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center invisible opacity-0 transition-all duration-300 z-50" onclick="closeModal(event)" style="margin: 0; padding: 0;">
                     <div class="relative">
-                        <img id="modalImage" src="{{ asset('uploads/profile-images/' . Auth::user()->image) }}" alt="Profile" class="rounded-full object-cover" style="width: 400px; height: 400px;">
+                        <img id="modalImage" src="{{ asset('uploads/profile-images/' . $user->image) }}" alt="Profile" class="rounded-full object-cover" style="width: 400px; height: 400px;">
                     </div>
                 </div>
                 <div class="flex flex-col sm:hidden sm:space-x-6 mt-1 text-gray-600">
                     <div class="flex items-center justify-center sm:justify-start mt-4">
                         <i class="fa-solid fa-fire-flame-curved text-red-400 text-2xl pr-3"></i>
                         <div class="pt-1">
-                            <span class="block text-sm text-gray-900 font-medium text-center sm:text-left">{{ Auth::user()->streak_count }}</span>
+                            <span class="block text-sm text-gray-900 font-medium text-center sm:text-left">{{ $user->streak_count }}</span>
                             <span class="block text-sm text-gray-500 text-center sm:text-left">Total streaks</span>
                         </div>
                     </div>
                     <div class="flex justify-around sm:space-x-6 w-full sm:w-auto mt-4">
                         <div>
                             @php
-                                $totalPosts = Auth::user()->foodPosts->count();
-                                $totalReviews = Auth::user()->reviews->count();
+                                $totalPosts = $user->foodPosts->count();
+                                $totalReviews = $user->reviews->count();
                                 $totalContributions = $totalPosts + $totalReviews;
 
-                                $totalLikes = Auth::user()->foodPosts->sum(function($post) {
+                                $totalLikes = $user->foodPosts->sum(function($post) {
                                     return $post->likes->count();
                                 });
                             @endphp
@@ -83,11 +100,11 @@
                             <p class="text-gray-500 text-center sm:text-left">Contributions</p>
                         </div>
                         <div>
-                            <p class="text-darkPurple font-medium text-center sm:text-left">{{ Auth::user()->followers->count() }}</p>
+                            <p class="text-darkPurple font-medium text-center sm:text-left">{{ $user->followers->count() }}</p>
                             <p class="text-gray-500 text-center sm:text-left">Followers</p>
                         </div>
                         <div>
-                            <p class="text-darkPurple font-medium text-center sm:text-left">{{ Auth::user()->followings->count() }}</p>
+                            <p class="text-darkPurple font-medium text-center sm:text-left">{{ $user->followings->count() }}</p>
                             <p class="text-gray-500 text-center sm:text-left">Following</p>
                         </div>
                         <div>
@@ -95,26 +112,6 @@
                             <p class="text-gray-500 text-center sm:text-left">Likes</p>
                         </div>
                     </div>
-                </div>
-
-                <div class="lg:hidden mt-5">
-                    <div class="flex items-center space-x-3">
-                        <a href="profile" class="flex-grow px-4 py-2 bg-bgPurple border border-darkPurple rounded text-center hover:bg-darkPurple hover:text-white transition">
-                            Edit Profile
-                        </a>
-                        <a href="" class="w-10 flex justify-center">
-                            <i class="fa-solid fa-gear text-darkPurple text-xl"></i>
-                        </a>
-                        <a href="{{route('user.calendar')}}" class="w-10 flex justify-center">
-                            <i class="fa-solid fa-calendar-days text-darkPurple text-xl"></i>
-                        </a>
-                    </div>
-                </div>
-
-                <div class="absolute top-6 right-10 lg:block hidden">
-                    <a href="profile" class="px-4 py-1 border border-darkPurple rounded hover:bg-darkPurple hover:text-white transition">Edit Profile</a>
-                    <a href=""><i class="fa-solid fa-gear pl-3 text-darkPurple text-xl"></i></a>
-                    <a href="{{route('user.calendar')}}"><i class="fa-solid fa-calendar-days pl-3 text-darkPurple text-xl"></i></a>
                 </div>
             </div>
             
@@ -139,22 +136,21 @@
                 <div class="w-full lg:w-3/4 p-4">
                     <!-- Tabs -->
                     <div class="flex space-x-12 pb-2 text-gray-500 justify-center">
-                        <a href="{{ route('personalProfile', ['tab' => 'posts']) }}" class="font-normal border-b-2 {{ request('tab') == 'posts' || !request('tab') ? 'text-darkPurple border-darkPurple' : 'border-transparent' }}">
+                        <a href="{{ route('otherProfile', ['id' => $user->id, 'tab' => 'posts']) }}" 
+                        class="font-normal border-b-2 {{ request('tab') == 'posts' || !request('tab') ? 'text-darkPurple border-darkPurple' : 'border-transparent' }}">
                             <i class="fa-solid fa-grip text-lg pr-1"></i> POSTS
                         </a>
-                        <a href="{{ route('personalProfile', ['tab' => 'reviews']) }}" class="font-normal border-b-2 {{ request('tab') == 'reviews' ? 'text-darkPurple border-darkPurple' : 'border-transparent' }}">
+                        <a href="{{ route('otherProfile', ['id' => $user->id, 'tab' => 'reviews']) }}" 
+                        class="font-normal border-b-2 {{ request('tab') == 'reviews' ? 'text-darkPurple border-darkPurple' : 'border-transparent' }}">
                             <i class="fa-regular fa-comment text-lg pr-1"></i> REVIEWS
-                        </a>
-                        <a href="{{ route('personalProfile', ['tab' => 'liked']) }}" class="font-normal border-b-2 {{ request('tab') == 'liked' ? 'text-darkPurple border-darkPurple' : 'border-transparent' }}">
-                            <i class="fa-regular fa-heart text-lg pr-1"></i> LIKED
                         </a>
                     </div>
 
                     <!-- Review Sections -->
                     @if(request('tab') == 'reviews')
-                        @if(Auth::user()->reviews->count() > 0)
+                        @if($user->reviews->count() > 0)
                             <div class="space-y-6">
-                                @foreach(Auth::user()->reviews as $review)
+                                @foreach($user->reviews as $review)
                                     <div class="border-b pb-6">
                                         <div class="flex items-start space-x-4">
                                             <!-- Food Image -->
@@ -193,30 +189,12 @@
                         @else
                             <p class="text-gray-500 text-lg mt-4">No reviews yet.</p>
                         @endif
-                    
-                    @elseif(request('tab') == 'liked')
-                        <!-- Liked Posts Section -->
-                        @if(Auth::user()->likes->count() > 0)
-                            <div class="grid grid-cols-3 gap-2">
-                                @foreach(Auth::user()->likes as $likedpost)
-                                    <a href="#modal-{{ $likedpost->foodPost->id }}" class="relative group overflow-hidden border"> 
-                                        <img src="{{ asset($likedpost->foodPost->image) }}" alt="Food" class="w-full h-48 sm:h-72 md:h-96 object-cover">
-                                        <div class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center opacity-0 group-hover:opacity-90 transition duration-300 ease-in-out">
-                                            <p class="text-white text-lg font-semibold"><i class="fa-solid fa-heart text-white pr-2"></i>{{ $likedpost->foodPost->likes->count() }}</p>
-                                        </div>
-                                    </a>
-                                    @include('FoodiesArchive.likedPostModal', ['post' => $likedpost])
-                                @endforeach
-                            </div>
-                        @else
-                            <p class="text-gray-500 text-lg mt-4">No liked posts yet.</p>
-                        @endif
 
                     @else
                         <!-- Posts Section (Default) -->
-                        @if(Auth::user()->foodPosts->count() > 0)
+                        @if($user->foodPosts->count() > 0)
                             <div class="grid grid-cols-3 gap-2">
-                                @foreach(Auth::user()->foodPosts()->orderBy('created_at', 'desc')->get() as $post)
+                                @foreach($user->foodPosts()->orderBy('created_at', 'desc')->get() as $post)
                                     <a href="#modal-{{ $post->id }}" class="relative group overflow-hidden border">                                        
                                         <img src="{{ asset($post->image) }}" alt="Food" class="w-full h-48 sm:h-72 md:h-96 object-cover">
                                         <div class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center opacity-0 group-hover:opacity-90 transition duration-300 ease-in-out">

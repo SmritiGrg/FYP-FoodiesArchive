@@ -48,4 +48,10 @@ class FrontendController extends Controller
     {
         return view('FoodiesArchive.personalProfile');
     }
+
+    public function otherProfile($id)
+    {
+        $user = User::findOrFail($id);
+        return view('FoodiesArchive.otherProfile', compact('user'));
+    }
 }

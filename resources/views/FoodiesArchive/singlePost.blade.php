@@ -1,7 +1,7 @@
 <x-app-layout>
     <section class="pt-20">
         <div class="max-w-7xl mx-auto p-6">
-            <a href="#" class="text-gray-700 font-medium hover:text-gray-500 hvr-icon-back"><i class="fa-solid fa-arrow-left-long hvr-icon"></i> Back</a>
+            <a href="discover" class="text-gray-700 font-medium hover:text-gray-500 hvr-icon-back"><i class="fa-solid fa-arrow-left-long hvr-icon"></i> Back</a>
 
             <h1 class="text-2xl font-bold mt-2">{{$singlePost->name}}</h1>
             <p class="text-gray-600 pt-2">Restaurant: {{$singlePost->restaurant->name}}</p>
@@ -10,7 +10,7 @@
             <div class="grid md:grid-cols-5 gap-8 mt-4 border-b-2 border-gray-100 pb-6">
                 <!-- Left Column - Image & Details (Takes 2/5 of the width) -->
                 <div class="col-span-2">
-                    <img src="{{ asset($singlePost->image) }}" alt="Food img" class="w-full h-96 object-cover rounded-xl" />
+                    <img src="{{ asset($singlePost->image) }}" alt="Food img" class="w-full h-96 object-cover" />
                     
                     <div class="flex items-center justify-between mt-3">
                         <div class="flex items-center gap-5 text-gray-600">
@@ -66,7 +66,7 @@
                         <button class="ml-2 border border-darkPurple text-darkPurple px-4 py-2 rounded-3xl hover:bg-darkPurple hover:text-white">Ask a Question</button>
                     </div>
 
-                    <h3 class="mt-6 text-lg font-semibold">(200 reviews)</h3>
+                    <h3 class="mt-6 text-lg font-medium">({{$singlePost->reviews->count()}} reviews)</h3>
 
                     <!-- Reviews Grid (2 Columns) -->
                     <div class="grid md:grid-cols-2 gap-4 mt-3">

@@ -98,4 +98,9 @@ class User extends Authenticatable implements CanResetPassword
             ->withPivot('awarded_date')
             ->withTimestamps();
     }
+
+    public function isFollowing($userId)
+    {
+        return $this->followings()->where('followed_id', $userId)->exists();
+    }
 }

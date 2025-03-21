@@ -67,13 +67,11 @@
                                     
                                 @endif
                             </td>
-
                             {{-- Start new row after Saturday --}}
                             @if (($day + $startDayOfWeek) % 7 == 0)
                                 </tr><tr>
                             @endif
                         @endfor
-
                         {{-- Empty cells after the last day --}}
                         @for ($i = ($daysInMonth + $startDayOfWeek) % 7; $i < 7 && $i != 0; $i++)
                             <td class="h-24 w-24"></td>

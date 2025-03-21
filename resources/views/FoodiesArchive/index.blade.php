@@ -161,10 +161,10 @@
         <div class="pb-7 pt-32">
             <!-- Title Section -->
             <div class="flex flex-col justify-center items-center">
-                <h1 class="text-2xl font-semibold text-customYellow font-poppins text-center">
+                <h1 class="text-2xl font-semibold text-customYellow text-center">
                     What Makes Foodie's Archive Special?
                 </h1>
-                <p class="bg-black text-white py-2 px-4 mt-4 font-semibold font-poppins">
+                <p class="text-xl text-darkPurple mt-2 font-bold">
                     Explore the Features
                 </p>
             </div>
@@ -176,14 +176,14 @@
                             <div class="flex flex-col md:flex-row items-center mt-10 bg-bgPurple rounded-lg shadow-md">
                                 <!-- Text Section -->
                                 <div class="w-full md:w-1/2 p-6 md:pl-24">
-                                    <h2 class="text-5xl md:text-4xl lg:text-5xl font-bold text-darkPurple font-poppins" data-aos="fade-down">
+                                    <h2 class="text-5xl md:text-4xl lg:text-5xl font-bold text-darkPurple" data-aos="fade-down">
                                         Upload <span class="text-customYellow">Food</span>
                                     </h2>
-                                    <p class="text-lg md:text-base lg:text-lg text-gray-600 mt-4 font-poppins mb-4" data-aos="fade-up">
+                                    <p class="text-lg md:text-base lg:text-lg text-gray-600 mt-4 mb-4" data-aos="fade-up">
                                         Create, and step into a world <br>
                                         of Food, Friends, and Fun on <br>Foodie's Archive.
                                     </p>
-                                    <a href="postFood" class="bg-darkPurple text-white py-2 px-4 md:px-6 mt-6 rounded-3xl hover:bg-lightPurple font-poppins text-sm md:text-base inline-block" data-aos="fade-up">
+                                    <a href="postFood" class="bg-darkPurple text-white py-2 px-4 md:px-6 mt-6 rounded-3xl hover:bg-lightPurple text-sm md:text-base inline-block" data-aos="fade-up">
                                         Start posting Food
                                     </a>
                                 </div>
@@ -198,10 +198,10 @@
                             <div class="flex flex-col md:flex-row items-center mt-10 bg-bgPurple rounded-lg shadow-md">
                                 <!-- Text Section -->
                                 <div class="w-full md:w-1/2 p-6 md:pl-24">
-                                    <h2 class="text-5xl md:text-4xl lg:text-5xl font-bold text-darkPurple font-poppins">
+                                    <h2 class="text-5xl md:text-4xl lg:text-5xl font-bold text-darkPurple">
                                         Social <span class="text-customYellow">Interactions</span>
                                     </h2>
-                                    <p class="text-lg md:text-base lg:text-lg text-gray-600 mt-4 font-poppins">
+                                    <p class="text-lg md:text-base lg:text-lg text-gray-600 mt-4">
                                         Write review, like, follow and share food post.
                                     </p>
                                 </div>
@@ -216,10 +216,10 @@
                             <div class="flex flex-col md:flex-row items-center mt-10 bg-bgPurple rounded-lg shadow-md">
                                 <!-- Text Section -->
                                 <div class="w-full md:w-1/2 p-6 md:pl-24">
-                                    <h2 class="text-5xl md:text-4xl lg:text-5xl font-bold text-darkPurple font-poppins">
+                                    <h2 class="text-5xl md:text-4xl lg:text-5xl font-bold text-darkPurple">
                                         Ask and <span class="text-customYellow">answer</span>
                                     </h2>
-                                    <p class="text-lg md:text-base lg:text-lg text-gray-600 mt-4 font-poppins">
+                                    <p class="text-lg md:text-base lg:text-lg text-gray-600 mt-4">
                                         Ask questions related to food, restaurants <br>
                                         and other topics.
                                     </p>
@@ -235,10 +235,10 @@
                             <div class="flex flex-col md:flex-row items-center mt-10 bg-bgPurple rounded-lg shadow-md">
                                 <!-- Text Section -->
                                 <div class="w-full md:w-1/2 p-6 md:pl-24">
-                                    <h2 class="text-5xl md:text-4xl lg:text-5xl font-bold text-darkPurple font-poppins">
+                                    <h2 class="text-5xl md:text-4xl lg:text-5xl font-bold text-darkPurple">
                                         Discover through <span class="text-customYellow">Map</span>
                                     </h2>
-                                    <p class="text-lg md:text-base lg:text-lg text-gray-600 mt-4 font-poppins">
+                                    <p class="text-lg md:text-base lg:text-lg text-gray-600 mt-4">
                                         Discover restaurants and foods nearby. 
                                     </p>
                                 </div>
@@ -253,10 +253,10 @@
                             <div class="flex flex-col md:flex-row items-center mt-10 bg-bgPurple rounded-lg shadow-md">
                                 <!-- Text Section -->
                                 <div class="w-full md:w-1/2 p-6 md:pl-24">
-                                    <h2 class="text-5xl md:text-4xl lg:text-5xl font-bold text-darkPurple font-poppins">
+                                    <h2 class="text-5xl md:text-4xl lg:text-5xl font-bold text-darkPurple">
                                         Build your <span class="text-customYellow">Streaks</span>
                                     </h2>
-                                    <p class="text-lg md:text-base lg:text-lg text-gray-600 mt-4 font-poppins">
+                                    <p class="text-lg md:text-base lg:text-lg text-gray-600 mt-4">
                                         Post and review consistently to increase
                                         your streak and earn exclusive badges 
                                         that showcase your foodie skills. 
@@ -285,8 +285,8 @@
     <section> 
         <div class="py-7">
             <div class="flex flex-col justify-center items-center">
-                <h1 class="text-2xl font-semibold text-customYellow font-poppins" data-aos="fade-up">Getting Started is Easy</h1>
-                <p class="bg-black text-white py-2 px-4 mt-4 font-semibold font-poppins" data-aos="fade-up">How it Works</p>
+                <h1 class="text-2xl font-semibold text-customYellow" data-aos="fade-up">Getting Started is Easy</h1>
+                <p class="text-xl text-darkPurple mt-2 font-bold" data-aos="fade-up">How it Works</p>
             </div>
             <div class="px-3 sm:px-6 lg:px-24 md:px-11 mt-10" data-aos="fade-up">
                 <div class="bg-bgPurple py-10 px-5 rounded-lg shadow-md">
@@ -362,7 +362,7 @@
                 <h1 class="text-2xl font-semibold text-customYellow font-poppins text-center" data-aos="fade-up">
                     Explore the Most Popular Dishes Among Our Foodies
                 </h1>
-                <p class="bg-black text-white py-2 px-4 mt-4 font-semibold font-poppins" data-aos="fade-up">
+                <p class="text-xl text-darkPurple mt-2 font-bold" data-aos="fade-up">
                     Popular Foods By Users
                 </p>
             </div>
@@ -378,13 +378,37 @@
                                     <img src="{{asset('uploads/profile-images/'. $food->user->image)}}" alt="profile" class="w-10 h-10 rounded-full object-cover object-center hover:opacity-80 transition-opacity duration-300" />
                                 </a>
                                 <div class="ml-3 relative group">
-                                    <a href="" class="font-medium text-sm hover:text-gray-500">{{$food->user->full_name}}</a>
+                                    <div>
+                                        <div class="flex space-x-2 items-center">
+                                        <a href="{{ route('otherProfile', ['id' => $food->user->id]) }}" class="font-medium text-sm hover:text-gray-500">{{$food->user->full_name}}</a>
+                                            <div class="flex space-x-1 items-center">
+                                                <p class="rounded-full w-1 h-1 bg-gray-600"> </p>
+                                                @auth
+                                                    @php
+                                                        $isFollowing = auth()->user()->isFollowing($food->user->id);
+                                                    @endphp
+
+                                                    @if ($isFollowing)
+                                                        <button class="text-customYellow text-sm font-medium">
+                                                            Following
+                                                        </button>
+                                                    @else
+                                                        <button type="submit" class="text-customYellow text-sm font-medium">
+                                                            Follow
+                                                        </button>
+                                                    @endif
+                                                @endauth
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+
                                     <!-- Modal -->
                                     <div class="absolute hidden group-hover:block w-60 p-4 bg-white shadow-lg rounded-lg z-10 border border-gray-200">
                                         <div class="flex items-center space-x-4">
                                             <img src="{{asset('uploads/profile-images/' . $food->user->image)}}" alt="profile" class="w-12 h-12 rounded-full object-cover">
                                             <div>
-                                                <a href="" class="font-semibold text-sm font-poppins">{{$food->user->full_name}}</a>
+                                                <a href="{{ route('otherProfile', ['id' => $food->user->id]) }}" class="font-medium text-sm font-poppins">{{$food->user->full_name}}</a>
                                                 <p class="text-gray-500 text-xs font-poppins">{{$food->user->username}}</p>
                                                 <p class="border border-gray-300 rounded-full text-sm w-16 pl-2 mt-2"><i class="fa-solid fa-fire-flame-curved text-red-400"></i> {{$food->user->streak_count}}</p>
                                             </div>
@@ -411,7 +435,7 @@
                                     <p class="text-gray-500 text-xs">{{ $food->created_at->diffForHumans() }}</p>
                                 </div>
                             </div>
-                            <button class="font-poppins bg-customYellow text-black text-sm px-5 py-1 rounded-full font-medium hover:bg-hovercustomYellow">Follow</button>
+                            {{-- <button class="font-poppins bg-customYellow text-black text-sm px-5 py-1 rounded-full font-medium hover:bg-hovercustomYellow">Follow</button> --}}
                         </div>
 
                         <div class="px-4">
@@ -461,7 +485,7 @@
                 <h1 class="text-2xl font-semibold text-customYellow font-poppins text-center" data-aos="fade-up">
                     Meet the contributors shaping the Foodie’s Archive!
                 </h1>
-                <p class="bg-black text-white py-2 px-4 mt-4 font-semibold font-poppins" data-aos="fade-up">
+                <p class="text-xl text-darkPurple mt-2 font-bold" data-aos="fade-up">
                     Top Contributors
                 </p>
             </div>
@@ -488,7 +512,7 @@
     <section id="reviewCarousel">
         <div class="py-7">
             <div class="flex justify-center items-center">
-                <p class="bg-black text-white py-2 px-4 mt-4 font-semibold font-poppins" data-aos="fade-up">
+                <p class="text-2xl text-darkPurple mt-2 font-semibold" data-aos="fade-up">
                     What others say
                 </p>
             </div>
