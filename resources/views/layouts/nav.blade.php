@@ -49,10 +49,10 @@
                     </button>
                     <div class="absolute w-40 top-full left-0 rounded-lg mt-1 shadow-lg p-3 text-start scale-y-0 group-hover:scale-y-100 origin-top duration-200 bg-white">
                         <div class="hover:bg-gray-100">
-                            <a href="writeReview" class="block text-base font-medium hover:text-customYellow px-2 py-2">Write a Review</a>
+                            <a href="writeReview" class="block text-sm font-medium hover:text-customYellow px-2 py-2">Write a Review</a>
                         </div>
                         <div class="hover:bg-gray-100">
-                            <a href="{{ route('foodpost.create') }}" class="block text-base font-medium hover:text-customYellow px-2 py-2">Upload Post</a>
+                            <a href="{{ route('foodpost.create') }}" class="block text-sm font-medium hover:text-customYellow px-2 py-2">Upload Post</a>
                         </div>
                     </div>
                 </div>
@@ -68,12 +68,12 @@
                 @guest
                     <!-- Log In & Sign Up -->
                     <a
-                    href="login"
+                    href="/login"
                     class="hidden lg:block text-gray-900 font-semibold hover:text-gray-600 border-l-2 border-gray-300 pl-4"
                     >Log In</a
                     >
 
-                    <a href="register" class="hidden sm:block bg-customYellow text-black text-sm px-3 py-1 sm:text-base sm:px-4 sm:py-2 rounded-full hover:bg-hovercustomYellow transition font-semibold">
+                    <a href="/register" class="hidden sm:block bg-customYellow text-black text-sm px-3 py-1 sm:text-base sm:px-4 sm:py-2 rounded-full hover:bg-hovercustomYellow transition font-semibold">
                         Sign Up
                     </a>
 

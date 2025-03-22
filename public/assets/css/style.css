@@ -212,3 +212,7 @@ i.bookmarked.active {
 :target {
     display: flex;
 }
+
+.scrollable-content {
+    scrollbar-width: none;
+}

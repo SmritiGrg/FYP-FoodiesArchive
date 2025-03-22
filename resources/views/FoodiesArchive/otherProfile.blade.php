@@ -9,10 +9,15 @@
                     <div class="pt-2 pl-9">
                         <div class="flex space-x-9">
                             <h2 class="text-lg sm:text-xl font-medium text-textBlack">{{ $user->full_name }}</h2>
-                            @auth
-                                @php
+                            {{-- @auth --}}
+                                {{-- @php
                                     $isFollowing = auth()->user()->isFollowing($user->id);
-                                @endphp
+                                @endphp --}}
+                                @php
+    $authUser = auth()->user();
+    $isFollowing = $authUser ? $authUser->isFollowing($user->id) : false;
+@endphp
+
 
                                 @if ($isFollowing)
                                     <button class="py-1 px-5 bg-gray-200 text-sm font-medium rounded-md hover:bg-gray-300">
@@ -23,7 +28,7 @@
                                         Follow
                                     </button>
                                 @endif
-                            @endauth
+                            {{-- @endauth --}}
                         </div>
                         <p class="text-gray-600 text-sm">{{ $user->username }}</p>
                         <div class="flex space-x-2 items-center">
@@ -159,7 +164,7 @@
                                                 class="w-32 h-32 object-cover">
 
                                             <div>
-                                                <h3 class="text-base sm:text-lg font-semibold">{{ $review->food_post->name }}</h3>
+                                                <h3 class="text-base sm:text-lg font-medium">{{ $review->food_post->name }}</h3>
                                                 <p class="text-xs sm:text-sm text-gray-500"><strong>Restaurant:</strong> {{ $review->food_post->restaurant->name }}</p>
                                                 <p class="text-xs sm:text-sm text-gray-500 mt-1"> {{ $review->food_post->foodType->name }}, {{ $review->food_post->cuisineType->name }}</p>
                                             </div>
@@ -201,14 +206,13 @@
                                             <p class="text-white text-lg font-semibold"><i class="fa-solid fa-heart text-white pr-2"></i>{{ $post->likes->count() }}</p>
                                         </div>
                                     </a>
-                                    @include('FoodiesArchive.foodPostModal', ['post' => $post])
+                                    @include('FoodiesArchive.otherProfileFoodModal', ['post' => $post])
                                 @endforeach
                             </div>
                         @else
                             <div class="flex-row items-center justify-center">
                                 <div class="text-center">
-                                    <p class="text-gray-500 text-lg mt-4">No posts yet. Share your first food post!</p>
-                                        <a href="{{ route('foodpost.create') }}" class="text-blue-600 underline font-medium hover:text-blue-500">Upload Now</a>
+                                    <p class="text-gray-500 text-lg mt-4">No posts yet.</p>
                                 </div>
                             </div>
                         @endif

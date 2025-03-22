@@ -98,7 +98,7 @@
                                                 <img src="{{asset('uploads/profile-images/' . $food->user->image)}}" alt="img" class="w-10 h-10 rounded-full object-cover" />
                                             </a>
                                             <div class="ml-3">
-                                                <a href="" class="font-medium text-base hover:text-gray-500 font-poppins">{{$food->user->full_name}}</a>
+                                                <a href="{{ route('otherProfile', ['id' => $food->user->id]) }}" class="font-medium text-base hover:text-gray-500 font-poppins">{{$food->user->full_name}}</a>
                                                 <p class="text-gray-500 text-xs font-poppins">{{ $food->created_at->diffForHumans() }}</p>
                                             </div>
                                         </div>
@@ -123,7 +123,7 @@
                                 </div>
                                 <div class="w-1/2 flex flex-col justify-between mt-14">
                                     <div>
-                                        <span class="bg-green-100 text-green-700 text-xs font-semibold py-1 px-2 rounded">{{$food->tag->name}}</span>
+                                        <span class="bg-green-100 text-green-700 text-xs font-medium py-1 px-2 rounded">{{$food->tag->name}}</span>
                                         <div class="flex justify-between">
                                             <a href="{{route('food.details', $food->id)}}" class="text-lg font-medium font-poppins mt-2">{{$food->name}}</a>
                                             <a href="" class="border-2 border-gray-400 rounded-3xl py-2 px-4 text-xs font-poppins hover:bg-black hover:text-white transition">

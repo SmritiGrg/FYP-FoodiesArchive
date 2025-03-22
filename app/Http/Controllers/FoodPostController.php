@@ -6,6 +6,7 @@ use App\Models\CuisineTypes;
 use App\Models\FoodPosts;
 use App\Models\FoodTypes;
 use App\Models\Restaurants;
+use App\Models\Reviews;
 use App\Models\Tags;
 use App\Models\User;
 use Illuminate\Contracts\Database\Eloquent\Builder;
@@ -197,6 +198,8 @@ class FoodPostController extends Controller
     {
         $singlePost = FoodPosts::findOrFail($id);
 
+        $reviewsPaginate = Reviews::where('food_post_id', $id)->paginate(5);
+
         $similarPosts = FoodPosts::where('id', '!=', $id)
             ->where(function ($query) use ($singlePost) {
                 $query->where('cuisine_type_id', $singlePost->cuisine_type_id)
@@ -207,7 +210,7 @@ class FoodPostController extends Controller
             ->limit(4)
             ->get();
 
-        return view('FoodiesArchive.singlePost', compact('singlePost', 'similarPosts'));
+        return view('FoodiesArchive.singlePost', compact('singlePost', 'similarPosts', 'reviewsPaginate'));
     }
 
     /**
@@ -285,6 +288,4 @@ class FoodPostController extends Controller
 
         return redirect()->route('foodpost.create')->with('message', 'Form data has been cleared.');
     }
-
-    // public function searchForReview(Request $request) {}
 }

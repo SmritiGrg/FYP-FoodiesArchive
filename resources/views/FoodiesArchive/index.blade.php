@@ -88,7 +88,7 @@
                 href="{{ route('foodpost.create') }}" 
                 class="text-xs sm:text-sm md:text-base text-darkRed font-medium underline font-poppins hover:text-lightRed hvr-icon-forward"
             >
-                Post Your First Food <i class="fa-solid fa-arrow-right ml-2 hvr-icon"></i>
+                Post Your Food <i class="fa-solid fa-arrow-right ml-2 hvr-icon"></i>
             </a>
         </div>
     </section>
@@ -401,7 +401,6 @@
                                             </div>
                                         </div>
                                     </div>
-                                    
 
                                     <!-- Modal -->
                                     <div class="absolute hidden group-hover:block w-60 p-4 bg-white shadow-lg rounded-lg z-10 border border-gray-200">
@@ -457,7 +456,7 @@
                                 </div>
                                 <span class="bg-green-100 text-green-700 text-xs font-medium py-1 px-2 rounded">{{$food->tag->name}}</span>
                                 <div class="flex justify-between items-center mt-2">
-                                    <a href="" class="text-base font-bold hover:text-gray-600">{{$food->name}}</a>
+                                    <a href="{{route('food.details', $food->id)}}" class="text-base font-bold hover:text-gray-600">{{$food->name}}</a>
                                     <div class="flex">
                                         <img src="{{asset('assets/img/cutlery (1).png')}}" class="bg-customYellow p-1 rounded-md"
                                             style="height: 25px; width: 25px" alt="">

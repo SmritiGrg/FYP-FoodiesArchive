@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\FoodPosts;
 use App\Models\Reviews;
 use Illuminate\Http\Request;
 
@@ -61,5 +62,11 @@ class ReviewsController extends Controller
     public function destroy(Reviews $reviews)
     {
         //
+    }
+
+    public function writeReview($food_id)
+    {
+        $foodPost = FoodPosts::find($food_id);
+        return view('FoodiesArchive.singleReview', compact('foodPost'));
     }
 }

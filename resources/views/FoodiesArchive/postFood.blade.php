@@ -302,7 +302,7 @@
                                 <label for="drop_image" class="flex flex-col items-center justify-center w-[60vh] h-[65vh] 
                                             border-2 border-gray-300 border-dashed cursor-pointer bg-gray-50 hover:bg-gray-100">
                                     <div id="image-container" class="flex flex-col items-center justify-center pt-5 pb-6" >
-                                        <i class="fa-solid fa-image text-gray-500 text-5xl mb-5 rotate1"></i>
+                                        <i class="fa-solid fa-image text-gray-500 text-5xl mb-5 rotate-1"></i>
                                         <p class="mb-2 text-sm text-gray-500">
                                             <span class="font-semibold">Click to upload</span>
                                         </p>
@@ -442,8 +442,6 @@
     </section>
 
     <script>
-        
-
         const stars = document.querySelectorAll(".rating-icon");
         const ratingTitle = document.getElementById("rating-title");
         let selectedRating = 0; // To store the selected rating

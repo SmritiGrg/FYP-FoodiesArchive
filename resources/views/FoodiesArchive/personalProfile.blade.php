@@ -35,15 +35,60 @@
                                         return $post->likes->count();
                                     });
                                 @endphp
-                                <p class="text-darkPurple font-medium">{{ $totalContributions }}</p>
+                                <div class="relative group">
+                                    <p class="text-darkPurple font-medium cursor-pointer">{{ $totalContributions }}</p>                                    
+                                    <div class="absolute w-40 top-full left-0 rounded-lg mt-1 shadow-lg p-3 text-start scale-y-0 border-gray-200 group-hover:scale-y-100 origin-top duration-200 bg-white">
+                                        <div class="hover:bg-gray-100 border-b-2 border-gray-200">
+                                            <p class="block text-sm font-normal text-textBlack px-2 py-2"><i class="fa-solid fa-image pr-2"></i>{{$totalPosts}} Posts</p>
+                                        </div>
+                                        <div class="hover:bg-gray-100">
+                                            <p class="block text-sm font-normal text-textBlack px-2 py-2"><i class="fa-regular fa-comment pr-2"></i>{{$totalReviews}} Reviews</p>
+                                        </div>
+                                    </div>
+                                </div>
                                 <p class="text-gray-500 ">Contributions</p>
                             </div>
                             <div>
-                                <p class="text-darkPurple font-medium">{{ Auth::user()->followers->count() }}</p>
+                                <div class="relative group">
+                                    <p class="text-darkPurple font-medium cursor-pointer">{{ Auth::user()->followers->count() }}</p>                                 
+                                    <div class="absolute w-60 top-full left-0 rounded-lg mt-1 shadow-lg p-3 text-start scale-y-0 border-2 border-gray-200 group-hover:scale-y-100 origin-top duration-200 bg-white">
+                                        @if(Auth::user()->followers->count() > 0)
+                                            @foreach(Auth::user()->followers as $follower)
+                                                <a href="{{ route('otherProfile', ['id' => $follower->follower->id]) }}" class="hover:bg-gray-100 border-b border-gray-200 last:border-b-0 flex items-center py-2">
+                                                    <img src="{{ asset('uploads/profile-images/' . $follower->follower->image) }}" alt="" class="w-8 h-8 rounded-full object-cover">
+                                                    <div>
+                                                        <p class="block text-sm font-medium text-textBlack pl-3">{{ $follower->follower->full_name }}</p>
+                                                        <p class="block text-xs font-normal text-lightgray pl-3">{{ $follower->follower->username }}</p>
+                                                    </div>
+                                                </a>
+                                            @endforeach
+                                        @else
+                                            <p class="text-sm text-gray-500 px-2 py-2">No followers yet.</p>
+                                        @endif
+                                    </div>
+                                </div>
                                 <p class="text-gray-500 font-normal">Followers</p>
                             </div>
                             <div>
-                                <p class="text-darkPurple font-medium">{{ Auth::user()->followings->count() }}</p>
+                                
+                                <div class="relative group">
+                                    <p class="text-darkPurple font-medium cursor-pointer">{{ Auth::user()->followings->count() }}</p>                               
+                                    <div class="absolute w-60 top-full left-0 rounded-lg mt-1 shadow-lg p-3 text-start scale-y-0 border-2 border-gray-200 group-hover:scale-y-100 origin-top duration-200 bg-white">
+                                        @if(Auth::user()->followings->count() > 0)
+                                            @foreach(Auth::user()->followings as $following)
+                                                <a href="{{ route('otherProfile', ['id' => $following->following->id]) }}" class="hover:bg-gray-100 border-b border-gray-200 last:border-b-0 flex items-center py-2">
+                                                    <img src="{{ asset('uploads/profile-images/' . $following->following->image) }}" alt="" class="w-8 h-8 rounded-full object-cover">
+                                                    <div>
+                                                        <p class="block text-sm font-medium text-textBlack pl-3">{{ $following->following->full_name }}</p>
+                                                        <p class="block text-xs font-normal text-lightgray pl-3">{{ $following->following->username }}</p>
+                                                    </div>
+                                                </a>
+                                            @endforeach
+                                        @else
+                                            <p class="text-sm text-gray-500 px-2 py-2">No followers yet.</p>
+                                        @endif
+                                    </div>
+                                </div>
                                 <p class="text-gray-500 font-normal">Following</p>
                             </div>
                             <div>
@@ -99,7 +144,7 @@
 
                 <div class="lg:hidden mt-5">
                     <div class="flex items-center space-x-3">
-                        <a href="profile" class="flex-grow px-4 py-2 bg-bgPurple border border-darkPurple rounded text-center hover:bg-darkPurple hover:text-white transition">
+                        <a href="profile" class="flex-grow px-4 py-2 border border-darkPurple rounded text-center hover:bg-darkPurple hover:text-white transition">
                             Edit Profile
                         </a>
                         <a href="" class="w-10 flex justify-center">
@@ -162,8 +207,21 @@
                                                 alt="Food Image" 
                                                 class="w-32 h-32 object-cover">
 
-                                            <div>
-                                                <h3 class="text-base sm:text-lg font-semibold">{{ $review->food_post->name }}</h3>
+                                            <div class="w-full">
+                                                <div class="flex justify-between items-center ">
+                                                    <a href="{{route('food.details', $review->food_post->id)}}" class="text-base sm:text-lg font-medium">{{ $review->food_post->name }}</a>
+                                                    <div class="relative group">
+                                                        <span class="text-textBlack text-lg font-medium hover:text-gray-500 cursor-pointer"><i class="fa-solid fa-ellipsis"></i></span>
+                                                        <div class="absolute w-36 top-full right-0 rounded-lg mt-1 shadow-lg p-3 text-start scale-y-0 border-gray-200 group-hover:scale-y-100 origin-top duration-200 bg-white">
+                                                            <div class="hover:bg-gray-100 border-b-2 border-gray-200 flex justify-center">
+                                                                <a href="" class="block text-sm font-normal text-textBlack px-2 py-2">Edit</a>
+                                                            </div>
+                                                            <div class="hover:bg-gray-100 flex justify-center">
+                                                                <a href="" class="block text-sm font-normal text-red-500 px-2 py-2">Delete</a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                                 <p class="text-xs sm:text-sm text-gray-500"><strong>Restaurant:</strong> {{ $review->food_post->restaurant->name }}</p>
                                                 <p class="text-xs sm:text-sm text-gray-500 mt-1"> {{ $review->food_post->foodType->name }}, {{ $review->food_post->cuisineType->name }}</p>
                                             </div>

@@ -1,7 +1,7 @@
 <x-app-layout>
     <section class="pt-20">
         <div class="max-w-7xl mx-auto p-6">
-            <a href="discover" class="text-gray-700 font-medium hover:text-gray-500 hvr-icon-back"><i class="fa-solid fa-arrow-left-long hvr-icon"></i> Back</a>
+            <a href="/discover" class="text-gray-700 font-medium hover:text-gray-500 hvr-icon-back"><i class="fa-solid fa-arrow-left-long hvr-icon"></i> Back</a>
 
             <h1 class="text-2xl font-bold mt-2">{{$singlePost->name}}</h1>
             <p class="text-gray-600 pt-2">Restaurant: {{$singlePost->restaurant->name}}</p>
@@ -10,7 +10,7 @@
             <div class="grid md:grid-cols-5 gap-8 mt-4 border-b-2 border-gray-100 pb-6">
                 <!-- Left Column - Image & Details (Takes 2/5 of the width) -->
                 <div class="col-span-2">
-                    <img src="{{ asset($singlePost->image) }}" alt="Food img" class="w-full h-96 object-cover" />
+                    <img src="{{ asset($singlePost->image) }}" alt="Food img" class="w-full h-2/4 object-cover rounded-lg" />
                     
                     <div class="flex items-center justify-between mt-3">
                         <div class="flex items-center gap-5 text-gray-600">
@@ -30,7 +30,7 @@
                             <img src="{{asset('uploads/profile-images/' . $singlePost->user->image) }}" alt="" class="w-12 h-12 rounded-full object-cover mr-3">
                             <div>
                                 <p class="text-base text-darkPurple">Uploaded by {{$singlePost->user->username}}</p>
-                                <a href="" class="text-sm text-gray-500 underline hover:text-gray-600">View Profile</a>
+                                <a href="{{ route('otherProfile', ['id' => $singlePost->user->id]) }}" class="text-sm text-gray-500 underline hover:text-gray-600">View Profile</a>
                             </div>
                         </div>
                     </div>
@@ -57,30 +57,30 @@
                         <p class="ml-2 text-darkPurple font-normal text-sm">{{$formattedRating}}</p>
                     </div>
 
-                    <p class="text-xl font-medium mt-2">Rs. {{$singlePost->price}}</p>
-                    <p class="text-gray-500 mt-2 border-b-2 border-gray-100 pb-4">{{$singlePost->review}}</p>
+                    <p class="text-lg font-medium mt-2">Rs. {{$singlePost->price}}</p>
+                    <p class="text-gray-500 mt-2 pb-4">{{$singlePost->review}}</p>
 
-                    <div class="mt-4 border-b-2 border-gray-100 pb-4">
+                    <div class="mt-4 border-t-2 border-gray-100 pb-4 pt-2">
                         <p class="text-xl text-darkPurple font-bold pb-2">Contribute</p>
-                        <button class="bg-darkPurple text-white px-4 py-2 rounded-3xl hover:bg-lightPurple">Write a Review</button>
+                        <a href="{{ route('writeReview', ['food_id' => $singlePost->id]) }}" class="bg-darkPurple text-white px-4 py-2 rounded-3xl hover:bg-lightPurple">Write a Review</a>
                         <button class="ml-2 border border-darkPurple text-darkPurple px-4 py-2 rounded-3xl hover:bg-darkPurple hover:text-white">Ask a Question</button>
                     </div>
 
-                    <h3 class="mt-6 text-lg font-medium">({{$singlePost->reviews->count()}} reviews)</h3>
+                    <h3 class="mt-4 text-lg font-medium">({{$singlePost->reviews->count()}} reviews)</h3>
 
                     <!-- Reviews Grid (2 Columns) -->
-                    <div class="grid md:grid-cols-2 gap-4 mt-3">
-                        @foreach($singlePost->reviews as $review)
-                            <div class="p-3 bg-gray-100 rounded-md">
-                                <div>
-                                    <a href="" class="flex items-center">
-                                        <img src="{{asset('uploads/profile-images/' . $review->user->image) }}" alt="" class="w-10 h-10 rounded-full object-cover mr-3">
-                                        <div>
-                                            <p class="text-base block text-darkPurple">{{$review->user->full_name}}</p>
-                                            <a href="" class="block text-sm text-gray-500 hover:text-gray-600">{{$review->user->username}}</a>
-                                        </div>
-                                    </a>
-                                </div>
+                    <div class="grid md:grid-cols-1 gap-4 mt-3">
+                        @foreach($reviewsPaginate as $review)
+                            <div class="p-3 border-b-2 border-gray-100">
+                                <a href="{{ route('otherProfile', ['id' => $review->user->id]) }}" class="flex items-center">
+                                    <img src="{{asset('uploads/profile-images/' . $review->user->image) }}" alt="" class="w-10 h-10 rounded-full object-cover mr-3">
+                                    <div>
+                                        <span class="block text-sm text-gray-900 font-medium">{{$review->user->full_name}}</span>
+                                        <span class="block text-sm text-gray-500"
+                                            >{{$review->user->username}}</span
+                                        >
+                                    </div>
+                                </a>
                                 @php
                                     $userRatingValue = round($review->rating);
                                     $formattedRating = number_format($userRatingValue, 1);
@@ -104,15 +104,14 @@
                                     @endfor
                                     <p class="ml-2 text-darkPurple font-normal text-sm">{{$formattedRating}}</p>
                                 </div>
-                                <p class="text-sm text-gray-500">{{ $review->created_at->diffForHumans() }}</p>
+                                <p class="text-xs text-gray-500">{{ $review->created_at->diffForHumans() }}</p>
                                 <p class="text-gray-600 mt-2 text-sm">{{ $review->review }}</p>
                             </div>
                         @endforeach
                     </div>
-
-                    @if($singlePost->reviews->count() > 4)
-                        <a href="#" class="text-blue-500 text-sm mt-3 inline-block">Show all reviews</a>
-                    @endif
+                    <div class="mt-4">
+                        {{ $reviewsPaginate->links() }}
+                    </div>
                 </div>
             </div>
 
@@ -121,7 +120,6 @@
                 <h3 class="text-xl font-semibold">Location</h3>
                 <p class="text-gray-600 text-sm"><i class="fa-solid fa-location-dot pr-1"></i> Street no 18, Pokhara 33700</p>
                 <div class="w-full h-96 bg-gray-300 mt-2 rounded-md">
-                    {{-- <img src="/your-map-placeholder.jpg" alt="Map Location" class="w-full h-full object-cover rounded-md" /> --}}
                     <iframe class="w-full h-full object-cover rounded-md" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d219.73573546818173!2d83.95905542858723!3d28.21424598805742!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39959558ac66c7af%3A0x963bdee9ff7501dd!2sKafe%C3%AC%20Joy%20(Cafe)!5e0!3m2!1sen!2snp!4v1741682197379!5m2!1sen!2snp" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                 </div>
             </div>

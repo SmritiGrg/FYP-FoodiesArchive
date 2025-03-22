@@ -1,6 +1,7 @@
 <section>
+    <a href="/PersonalProfile" class="text-gray-700 font-medium hover:text-gray-500 hvr-icon-back"><i class="fa-solid fa-arrow-left-long hvr-icon"></i> Back</a>
     <header>
-        <h2 class="text-lg font-medium text-black">
+        <h2 class="text-lg font-medium text-textBlack">
             {{ __('Profile Information') }}
         </h2>
 

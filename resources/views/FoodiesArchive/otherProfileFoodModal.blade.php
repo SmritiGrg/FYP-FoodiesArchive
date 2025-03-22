@@ -14,59 +14,47 @@
                 </div>
                 <!-- Food Details -->
                 <div class="w-full md:w-1/2 p-6 flex flex-col flex-grow overflow-hidden">
-                    <div class="flex justify-between items-center pb-3 border-b-2 sticky top-0 z-10">
+                    <div class="flex justify-between items-center mb-3 pb-4 border-b-2 sticky top-0 z-10">
                         <div class="flex items-center">
                             <a href="">
-                                <img src="{{ asset('uploads/profile-images/' . Auth::user()->image) }}" alt="img" class="w-10 h-10 rounded-full object-cover" />
+                                <img src="{{ asset('uploads/profile-images/' . $post->user->image) }}" alt="img" class="w-10 h-10 rounded-full object-cover" />
                             </a>
                             <div class="ml-3">
-                                <a href="" class="font-medium text-base hover:text-gray-500">{{Auth::user()->full_name}}</a>
+                                <a href="" class="font-medium text-base hover:text-gray-500">{{$post->user->full_name}}</a>
                                 <p class="text-gray-500 text-xs">{{$post->created_at->diffForHumans()}}</p>
                             </div>
                         </div>
-                        
-                        {{-- THReE BUTTON EDIT DELETE --}}
-                        <div class="relative group">
-                            <span class="text-textBlack text-lg font-medium hover:text-gray-500 cursor-pointer"><i class="fa-solid fa-ellipsis"></i></span>
-                            <div class="absolute w-36 top-full right-0 rounded-lg mt-1 shadow-lg p-3 text-start scale-y-0 border-gray-200 group-hover:scale-y-100 origin-top duration-200 bg-white">
-                                <div class="hover:bg-gray-100 border-b-2 border-gray-200 flex justify-center">
-                                    <a href="" class="block text-sm font-normal text-textBlack px-2 py-2">Edit</a>
-                                </div>
-                                <div class="hover:bg-gray-100 flex justify-center">
-                                    <a href="" class="block text-sm font-normal text-red-500 px-2 py-2">Delete</a>
-                                </div>
-                            </div>
-                        </div>
+                        <button class="bg-customYellow text-black text-sm px-5 py-1 rounded-full font-medium hover:bg-hovercustomYellow">Follow</button>
                     </div>
 
                     <div class="flex-grow overflow-auto scrollable-content pt-3">
                         <h2 class="text-xl font-medium mb-1">{{$post->name}}</h2>
                         <p class="text-gray-700 text-sm">Restaurant: {{$post->restaurant->name}}</p>
-                        <p class="text-gray-700 pb-3 text-sm">{{$post->foodType->name}}, {{$post->cuisineType->name}}</p>
+                        <p class="text-gray-700 mb-3 text-sm">{{$post->foodType->name}}, {{$post->cuisineType->name}}</p>
                         <p class="bg-green-100 text-green-700 text-xs font-medium py-1 px-3 mb-4 rounded w-fit">{{$post->tag->name}}</p>
 
                         @php
-                            $userRatingValue = round($post->rating);
-                            $formattedRating = number_format($userRatingValue, 1);
+                        $userRatingValue = round($post->rating);
+                        $formattedRating = number_format($userRatingValue, 1);
                         @endphp
 
                         <div class="flex items-center mr-2 my-2">
                             @for ($i = 1; $i <= 5; $i++)
-                                @if ($i <= $userRatingValue)
-                                    <!-- Full star if the rating is less than or equal to the user's rating -->
-                                    <img src="{{ asset('assets/img/cutlery (1).png') }}" 
-                                        class="bg-customYellow p-1 rounded-md mr-1" 
-                                        style="height: 25px; width: 25px;" 
-                                        alt="Full">
+                                @if ($i <=$userRatingValue)
+                                <!-- Full star if the rating is less than or equal to the user's rating -->
+                                <img src="{{ asset('assets/img/cutlery (1).png') }}"
+                                    class="bg-customYellow p-1 rounded-md mr-1"
+                                    style="height: 25px; width: 25px;"
+                                    alt="Full">
                                 @else
-                                    <!-- Empty star if the rating is less than the current iteration -->
-                                    <img src="{{ asset('assets/img/cutlery (1).png') }}" 
-                                        class="bg-gray-300 p-1 rounded-md mr-1" 
-                                        style="height: 25px; width: 25px;" 
-                                        alt="Empty">
+                                <!-- Empty star if the rating is less than the current iteration -->
+                                <img src="{{ asset('assets/img/cutlery (1).png') }}"
+                                    class="bg-gray-300 p-1 rounded-md mr-1"
+                                    style="height: 25px; width: 25px;"
+                                    alt="Empty">
                                 @endif
-                            @endfor
-                            <p class="pl-1">{{$formattedRating}}</p>
+                                @endfor
+                                <p class="pl-1">{{$formattedRating}}</p>
                         </div>
                         <p class="font-medium text-lg mb-2">Rs. {{$post->price}}</p>
                         <p class="text-gray-700 pb-6 border-b-2 border-b-gray-100">
@@ -106,7 +94,7 @@
                             @endforeach
                         </div>
                     </div>
-                    
+
                     <div class="mt-auto border-t flex items-center justify-between sticky bottom-0 z-10">
                         <div class="flex items-center space-x-4 my-2">
                             <span class="text-black text-xl">
@@ -130,13 +118,14 @@
             <!-- Profile Section -->
             <div class="flex items-center w-full justify-between my-3">
                 <div class="flex items-center">
-                    <img src="{{ asset('uploads/profile-images/' . Auth::user()->image) }}" alt="img" class="w-8 h-8 rounded-full object-cover">
+                    <img src="{{ asset('uploads/profile-images/' . $post->user->image) }}" alt="img" class="w-8 h-8 rounded-full object-cover">
                     <div class="ml-2">
-                        <a href="" class="text-white text-sm font-medium font-poppins hover:text-gray-200">{{Auth::user()->full_name}}</a>
+                        <a href="" class="text-white text-sm font-medium font-poppins hover:text-gray-200">{{$post->user->full_name}}</a>
                         <p class="text-gray-200 text-xs font-poppins">{{$post->created_at->diffForHumans()}}</p>
                     </div>
                 </div>
                 <button class="bg-customYellow text-black text-xs px-3 py-1 rounded-full font-medium hover:bg-hovercustomYellow font-poppins">Follow</button>
+                
             </div>
 
             <!-- Food Image -->
@@ -154,7 +143,7 @@
                         <span class="text-black text-base font-poppins">
                             <i class="fa-regular fa-comment text-lg hover:text-gray-400 cursor-pointer"></i> {{ $post->reviews->count() }}
                         </span>
-                        
+
                     </div>
                     <div>
                         <i class="fa-regular fa-bookmark text-lg text-black hover:text-gray-400 cursor-pointer"></i>
@@ -172,7 +161,7 @@
                 </div>
                 <p class="text-black text-sm">Rs. {{$post->price}}</p>
                 <p class="text-gray-500 my-1 text-sm">{{$post->review}}</p>
-                
+
             </div>
         </div>
     </div>

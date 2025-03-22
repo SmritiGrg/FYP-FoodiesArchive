@@ -5,6 +5,7 @@ use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\FoodPostController;
 use App\Http\Controllers\FrontendController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ReviewsController;
 use App\Models\FoodPosts;
 use Illuminate\Support\Facades\Route;
 
@@ -50,6 +51,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/PersonalProfile', [FrontendController::class, 'personalProfile'])->name('personalProfile');
 
     Route::get('/PersonalProfile/calendar/{month?}/{year?}', [AuthenticatedSessionController::class, 'userCalendar'])->name('user.calendar');
+
+    Route::get('/write-review/{food_id}', [ReviewsController::class, 'writeReview'])->name('writeReview');
 });
 
 
