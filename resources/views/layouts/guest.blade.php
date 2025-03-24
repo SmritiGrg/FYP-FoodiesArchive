@@ -19,13 +19,13 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
-<body class="font-sans text-gray-900 antialiased">
-    <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-bgGray">
+<body class="text-gray-900 antialiased">
+    {{-- <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-bgGray">
         <div
             class="w-11/12 flex flex-col lg:flex-row sm:max-w-5xl bg-white mt-6 shadow-lg overflow-hidden sm:rounded-lg border border-gray-200 mx-4 sm:mx-auto">
             {{ $slot }}
         </div>
-    </div>
+    </div> --}}
     <script>
         let eyeicon = document.getElementById("eyeicon");
         let confirmEyeicon = document.getElementById("eyeicon_confirm");

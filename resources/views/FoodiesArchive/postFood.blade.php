@@ -1,126 +1,38 @@
 @extends('layouts.postMain')
 @section('container')
+    <section class="pt-10 pb-3 fixed bg-white px-3">
+        <div class="sm:px-6 lg:px-24 md:px-11 mt-10">
+            <ul class="mx-auto grid gap-6 sm:gap-10 max-w-full grid-cols-6">
+                @foreach ([1 => 'Basic Info', 2 => 'Choose the cuisine type', 3 => 'Select the food type', 4 => 'Add relevant tag', 5 => 'Upload Photo', 6 => 'Review and Submit'] as $key => $title)
+                    <li class=" relative">
+                        @if ($key < 6) 
+                            <span class="absolute left-[18px] top-14 h-[calc(100%_-_32px)] w-px
+                                {{ $key < $currentStep ? 'bg-customYellow' : 'bg-gray-300' }} 
+                                lg:right-0 lg:left-auto lg:top-[18px] lg:h-px lg:w-[calc(100%_-_72px)] hidden lg:block" 
+                                aria-hidden="true">
+                            </span>
 
-    <section class="pt-10 pb-5 fixed bg-white right-10">
-        <div class="px-3 sm:px-6 lg:px-24 md:px-11 mt-10">
-            <ul class="mx-auto grid max-w-md grid-cols-1 gap-10 lg:max-w-full lg:grid-cols-6">
-                <li class="flex-start relative flex lg:flex-col">
-                    <span class="absolute left-[18px] top-14 h-[calc(100%_-_32px)] w-px bg-gray-300 lg:right-0 lg:left-auto lg:top-[18px] lg:h-px lg:w-[calc(100%_-_72px)]" aria-hidden="true"></span>
-                    <div class="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-full border-4 border-yellowStroke bg-customYellow text-sm font-bold text-white">
-                        1
-                    </div>
-                    <div class="ml-6 lg:ml-0 lg:mt-2">
-                        <h4 class="text-sm text-gray-700">Basic Info</h4>
-                    </div>
-                </li>
-                <li class="flex-start relative flex lg:flex-col">
-                    <span class="absolute left-[18px] top-14 h-[calc(100%_-_32px)] w-px bg-gray-300 lg:right-0 lg:left-auto lg:top-[18px] lg:h-px lg:w-[calc(100%_-_72px)]" aria-hidden="true"></span>
-                    <div class="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-stepGray text-sm font-bold text-white">
-                        2
-                    </div>
-                    <div class="ml-6 lg:ml-0 lg:mt-2">
-                        <h4 class="text-sm text-gray-700">Choose the cuisine type</h4>
-                    </div>
-                </li>
-                <li class="flex-start relative flex lg:flex-col">
-                    <span class="absolute left-[18px] top-14 h-[calc(100%_-_32px)] w-px bg-gray-300 lg:right-0 lg:left-auto lg:top-[18px] lg:h-px lg:w-[calc(100%_-_72px)]" aria-hidden="true"></span>
-                    <div class="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-stepGray text-sm font-bold text-white">
-                        3
-                    </div>
-                    <div class="ml-6 lg:ml-0 lg:mt-2">
-                        <h4 class="text-sm text-gray-700">Select the food type</h4>
-                    </div>
-                </li>
-                <li class="flex-start relative flex lg:flex-col">
-                    <span class="absolute left-[18px] top-14 h-[calc(100%_-_32px)] w-px bg-gray-300 lg:right-0 lg:left-auto lg:top-[18px] lg:h-px lg:w-[calc(100%_-_72px)]" aria-hidden="true"></span>
-                    <div class="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-stepGray text-sm font-bold text-white">
-                        4
-                    </div>
-                    <div class="ml-6 lg:ml-0 lg:mt-2">
-                        <h4 class="text-sm text-gray-700">Add relevant tag</h4>
-                    </div>
-                </li>
-                <li class="flex-start relative flex lg:flex-col">
-                    <span class="absolute left-[18px] top-14 h-[calc(100%_-_32px)] w-px bg-gray-300 lg:right-0 lg:left-auto lg:top-[18px] lg:h-px lg:w-[calc(100%_-_72px)]" aria-hidden="true"></span>
-                    <div class="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-stepGray text-sm font-bold text-white">
-                        5
-                    </div>
-                    <div class="ml-6 lg:ml-0 lg:mt-2">
-                        <h4 class="text-sm text-gray-700">Upload Photo</h4>
-                    </div>
-                </li>
-                <li class="flex-start relative flex lg:flex-col">
-                    <div class="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-stepGray text-sm font-bold text-white">
-                        6
-                    </div>
-                    <div class="ml-6 lg:ml-0 lg:mt-2">
-                        <h4 class="text-sm text-gray-700">Review and Submit</h4>
-                    </div>
-                </li>
+                            <i class="fa-solid fa-angles-right
+                            {{ $key < $currentStep ? 'text-customYellow' : 'text-gray-300' }}
+                            lg:hidden absolute left-[37px] sm:left-[80px] top-2 text-xs sm:text-sm"
+                            aria-hidden="true"></i>
+                        @endif
+                        <div class="inline-flex w-6 h-6 sm:h-9 sm:w-9 shrink-0 items-center justify-center rounded-full border-4
+                            {{ $key <= $currentStep ? 'border-yellowStroke bg-customYellow text-white' : ($key < $currentStep ? 'bg-customYellow text-white' : 'bg-stepGray text-white') }}
+                            text-xs sm:text-sm font-medium sm:font-bold">
+                            {{ $key }}
+                        </div>
+                        <div class="ml-0 lg:ml-0 lg:mt-2">
+                            <h4 class="text-xs sm:text-sm {{ $key <= $currentStep ? 'font-medium sm:font-bold text-black' : 'text-gray-700' }}">
+                                {{ $title }}
+                            </h4>
+                        </div>
+                    </li>
+                @endforeach
             </ul>
         </div>
     </section>
 
-
-    {{-- <section class="pt-32 pb-40">
-        <form enctype="multipart/form-data" method="post" action="{{ route('foodpost.store') }}">
-            @csrf
-
-            <input type="hidden" name="user_id" value="{{ auth()->id() }}">
-
-            <label for="name">Food Name</label>
-            <input type="text" id="name" name="name" placeholder="Food Name"><br>
-
-            <label for="price">Price</label>
-            <input type="text" id="price" name="price" placeholder="Price"><br>
-
-            <label for="review">Review</label>
-            <textarea name="review" id="review"></textarea><br>
-
-            <label for="restaurant">Restaurant</label>
-            <select name="restaurant_id" id="restaurant">
-                <option value="" disabled selected>Select a restaurant</option>
-                @foreach ($restaurants as $restaurant)
-                    <option value="{{ $restaurant->id }}">{{ $restaurant->name }}</option>
-                @endforeach
-            </select>
-
-            <label for="foodtype" class="form-label">Food Type</label>
-            <select class="form-select" id="foodtype" name="food_type_id">
-                <option value="" disabled selected>Select a food type</option>
-                @foreach ($foodtypes as $foodtype)
-                    <option value="{{ $foodtype->id }}">{{ $foodtype->name }}</option>
-                @endforeach
-            </select> <br>
-
-            <label for="cuisinetype" class="form-label">Cuisine Type</label>
-            <select class="form-select" id="cuisinetype" name="cuisine_type_id">
-                <option value="" disabled selected>Select a cuisine type</option>
-                @foreach ($cuisinetypes as $cuisinetype)
-                    <option value="{{ $cuisinetype->id }}">{{ $cuisinetype->name }}</option>
-                @endforeach
-            </select> <br>
-
-            <label for="tag" class="form-label">Tag</label>
-            <select class="form-select" id="tag" name="tag_id">
-                <option value="" disabled selected>Select a tag</option>
-                @foreach ($tags as $tag)
-                    <option value="{{ $tag->id }}">{{ $tag->name }}</option>
-                @endforeach
-            </select><br>
-
-            <label class="form-label" for="basic-icon-default-company">Image</label>
-                        <div class="input-group input-group-merge">
-                            <span id="basic-icon-default-company2" class="input-group-text"><i
-                                    class="bx bx-buildings"></i></span>
-                            <input type="file" id="basic-icon-default-company" class="form-control" name="image" />
-                        </div>
-
-            <button type="submit" class="font-poppins bg-customYellow text-black text-sm px-4 py-1 rounded-full font-medium hover:bg-hovercustomYellow transition">
-                Upload
-            </button>
-        </form>
-    </section> --}}
 
     {{-- <section class="pt-5">
         <div class="flex flex-col items-center justify-center">
@@ -171,7 +83,7 @@
         </div>
     </section> --}}
 
-    <section class="pt-40 pb-32">
+    <section class="pt-48 sm:pt-40 pb-32 px-2">
         <div class="flex flex-col items-center justify-center">
             <div class="w-full max-w-lg">
                 <!-- Multistep Form -->
@@ -182,8 +94,8 @@
                     <!-- Step 1: Basic Info -->
                     @if ($currentStep == 1)
                         <div id="step1" class="step">
-                            <h2 class="text-3xl font-extrabold text-darkPurple font-poppins">Basic Info</h2>
-                            <p class="text-gray-600 mt-2 font-poppins">Enter the basic information about the food item.</p>
+                            <h2 class="text-2xl sm:text-3xl font-extrabold text-darkPurple font-poppins">Basic Info</h2>
+                            <p class="text-sm sm:text-base text-gray-600 mt-1 sm:mt-2 font-poppins">Enter the basic information about the food item.</p>
                             <div class="mt-3">
                                 <label class="font-medium text-gray-700 font-poppins" for="name">Food Name <span class="text-red-500">*</span></label>
                                 <input type="text" placeholder="Eg: Chicken Burger" id="name" value="{{ old('name') }}"
@@ -232,12 +144,12 @@
                     <!-- Step 2: Choose Cuisine Type -->
                     @if ($currentStep == 2)
                         <div id="step2" class="step">
-                            <h2 class="text-3xl font-extrabold text-darkPurple font-poppins">Choose the cuisine type</h2>
-                            <p class="text-gray-600 mt-2 font-poppins">Select the cuisine type that best describes this food.</p>
+                            <h2 class="text-2xl sm:text-3xl font-extrabold text-darkPurple font-poppins">Choose the cuisine type</h2>
+                            <p class="text-sm sm:text-base text-gray-600 mt-2 font-poppins">Select the cuisine type that best describes this food.</p>
 
-                            <div class="mt-4 grid grid-cols-3 gap-3" role="radiogroup">
+                            <div class="mt-4 grid grid-cols-2 sm:grid-cols-3 gap-3" role="radiogroup">
                                 @foreach ($cuisinetypes as $cuisinetype)
-                                    <label class="cuisine-type-label border border-gray-300 px-4 py-4 rounded-md font-semibold text-center 
+                                    <label class="cuisine-type-label border border-gray-300 px-4 py-4 rounded-md font-medium sm:font-semibold text-center 
                                         hover:outline hover:outline-2 hover:outline-black cursor-pointer">
                                         <input type="radio" name="cuisine_type_id" value="{{ $cuisinetype->id }}" class="hidden">
                                         {{ $cuisinetype->name }}
@@ -253,12 +165,12 @@
                     <!-- Step 3: Choose Food Type -->
                     @if ($currentStep == 3)
                         <div id="step3" class="step">
-                            <h2 class="text-3xl font-extrabold text-darkPurple font-poppins">Choose the food type</h2>
-                            <p class="text-gray-600 mt-2 font-poppins">Choose the appropriate food type.</p>
+                            <h2 class="text-2xl sm:text-3xl font-extrabold text-darkPurple font-poppins">Choose the food type</h2>
+                            <p class="text-sm sm:text-base text-gray-600 mt-2 font-poppins">Choose the appropriate food type.</p>
 
-                            <div class="mt-3 grid grid-cols-3 gap-3" role="radiogroup">
+                            <div class="mt-3 grid grid-cols-2 sm:grid-cols-3 gap-3" role="radiogroup">
                                 @foreach ($foodtypes as $foodtype)
-                                    <label class="food-type-label border border-gray-300 px-4 py-4 rounded-md font-semibold text-center 
+                                    <label class="food-type-label border border-gray-300 px-4 py-4 rounded-md font-medium sm:font-semibold text-center 
                                         hover:outline hover:outline-2 hover:outline-black cursor-pointer">
                                         <input type="radio" name="food_type_id" value="{{ $foodtype->id }}" class="hidden">
                                         {{ $foodtype->name }}
@@ -274,12 +186,12 @@
                     <!-- Step 4: Choose Tag -->
                     @if ($currentStep == 4)
                         <div id="step4" class="step">
-                            <h2 class="text-3xl font-extrabold text-darkPurple font-poppins">Add relevant tags</h2>
-                            <p class="text-gray-600 mt-2 font-poppins">Tag this food  to highlight the best features of this food</p>
+                            <h2 class="text-2xl sm:text-3xl font-extrabold text-darkPurple font-poppins">Add relevant tags</h2>
+                            <p class="text-sm sm:text-base text-gray-600 mt-2 font-poppins">Tag this food  to highlight the best features of this food</p>
 
-                            <div class="mt-3 grid grid-cols-3 gap-3" role="radiogroup">
+                            <div class="mt-3 grid grid-cols-2 sm:grid-cols-3 gap-3" role="radiogroup">
                                 @foreach ($tags as $tag)
-                                    <label class="tag-label border border-gray-300 px-4 py-4 rounded-md font-semibold text-center 
+                                    <label class="tag-label border border-gray-300 px-4 py-4 rounded-md font-medium sm:font-semibold text-center 
                                         hover:outline hover:outline-2 hover:outline-black cursor-pointer">
                                         <input type="radio" name="tag_id" value="{{ $tag->id }}" class="hidden">
                                         {{ $tag->name }}
@@ -295,11 +207,11 @@
                     <!-- Step 5: Upload Image -->
                     @if ($currentStep == 5)
                         <div id="step5" class="step">
-                            <h2 class="text-3xl font-extrabold text-darkPurple font-poppins">Upload Photo</h2>
-                            <p class="text-gray-600 mt-2 font-poppins">Upload clear food image</p>
+                            <h2 class="text-2xl sm:text-3xl font-extrabold text-darkPurple font-poppins">Upload Photo</h2>
+                            <p class="text-sm sm:text-base text-gray-600 mt-2 font-poppins">Upload clear food image</p>
 
-                            <div class="mt-3 w-[60vh] h-[65vh]">
-                                <label for="drop_image" class="flex flex-col items-center justify-center w-[60vh] h-[65vh] 
+                            <div class="mt-3 w-[44vh] h-[50vh] sm:w-[60vh] sm:h-[65vh]">
+                                <label for="drop_image" class="flex flex-col items-center justify-center w-[44vh] h-[50vh] sm:w-[60vh] sm:h-[65vh] 
                                             border-2 border-gray-300 border-dashed cursor-pointer bg-gray-50 hover:bg-gray-100">
                                     <div id="image-container" class="flex flex-col items-center justify-center pt-5 pb-6" >
                                         <i class="fa-solid fa-image text-gray-500 text-5xl mb-5 rotate-1"></i>
@@ -320,20 +232,14 @@
                                     <p class="text-sm text-red-600 space-y-1 font-poppins">{{ $message }}</p>
                                 @enderror
                             </div>
-                            {{-- <label for="image">
-                                <input type="file" name="image" id="image">    
-                            </label> --}}
-                            {{-- @error('image')
-                                        <p class="text-sm text-red-600 space-y-1 font-poppins">{{$message}}</p>
-                                    @enderror --}}
                         </div>
                     @endif
 
                     <!-- Step 6: Review and rating -->
                     @if ($currentStep == 6)
                         <div id="step6" class="step">
-                            <h2 class="text-3xl font-extrabold text-darkPurple font-poppins">Review and Rating</h2>
-                            <p class="text-gray-600 mt-2 font-poppins">Give your honest review and rating</p>
+                            <h2 class="text-2xl sm:text-3xl font-extrabold text-darkPurple font-poppins">Review and Rating</h2>
+                            <p class="text-sm sm:text-base text-gray-600 mt-2 font-poppins">Give your honest review and rating</p>
 
                             <div class="mt-3">
                                 <label class="font-medium text-gray-700 font-poppins" for="review">Write your Review</label>
@@ -380,10 +286,10 @@
                                         </label>
 
                                         <input type="radio" id="star4" class="hidden" name="rating" value="4" />
-                                        <label for="star4" data-title="Average" class="pr-3">
+                                        <label for="star4" data-title="Very Good" class="pr-3">
                                             <img
                                                 src="{{asset('assets/img/cutlery (1).png')}}"
-                                                alt="Average"
+                                                alt="Very Good"
                                                 class="rating-icon bg-gray-300 p-1 rounded-md cursor-pointer"
                                                 style="height: 30px; width: 30px"
                                             />
@@ -408,25 +314,24 @@
                         </div>
                     @endif
 
-                    <div class="fixed bottom-0 left-0 right-0 flex justify-between px-24 bg-gray-100 py-3 border-t-8 border-gray-200">
-                        <button type="submit" formaction="{{ route('foodpost.clearSession') }}"
-                            class="flex items-center space-x-2 text-gray-700 font-medium hover:text-gray-500 hvr-icon-back">
-                            <i class="fa-solid fa-arrow-left-long hvr-icon"></i>
-                            <span>clear</span>
-                        </button>
-
+                    <div class="fixed bottom-0 left-0 right-0 flex justify-between px-2 sm:px-8 md:px-12 lg:px-24 bg-gray-100 py-3 border-t-4 sm:border-t-8 border-gray-200">
                         @if ($currentStep > 1)
                             <button type="submit" formaction="{{ route('foodpost.previous') }}"
                                 class="flex items-center space-x-2 text-gray-700 font-medium hover:text-gray-500 hvr-icon-back">
                                 <i class="fa-solid fa-arrow-left-long hvr-icon"></i>
-                                <span>Back</span>
+                                <span class="text-sm">Back</span>
                             </button>
                         @endif
 
+                        <button type="submit" formaction="{{ route('foodpost.clearSession') }}"
+                            class="text-gray-700 font-medium hover:text-gray-500 text-sm">
+                            Clear
+                        </button>
+
                         @if ($currentStep < 6)
                             <button type="submit" formaction="{{ route('foodpost.next') }}" 
-                                class="font-poppins bg-customYellow text-black text-sm px-4 py-2 rounded-md font-medium hover:bg-hovercustomYellow transition">
-                                Next Step
+                                class="font-poppins bg-customYellow text-black text-sm px-5 py-2 rounded-md font-medium hover:bg-hovercustomYellow transition">
+                                Next
                             </button>
                         @endif
 
@@ -545,7 +450,7 @@
                 reader.onload = function (e) {
                     const previewContainer = document.getElementById("image-container");
                     previewContainer.innerHTML = '';
-                    previewContainer.innerHTML = `<img src="${e.target.result}" alt="Selected Image" class="w-[60vh] h-[65vh] object-cover" />`;
+                    previewContainer.innerHTML = `<img src="${e.target.result}" alt="Selected Image" class="w-[44vh] h-[50vh] sm:w-[60vh] sm:h-[65vh] object-cover" />`;
                 };
                 reader.readAsDataURL(file);
             }

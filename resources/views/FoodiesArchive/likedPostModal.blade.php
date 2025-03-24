@@ -24,13 +24,41 @@
                                 <p class="text-gray-500 text-xs">{{$likedpost->foodPost->created_at->diffForHumans()}}</p>
                             </div>
                         </div>
-                        <button class="bg-customYellow text-black text-sm px-5 py-1 rounded-full font-medium hover:bg-hovercustomYellow">Follow</button>
+                        {{-- <button class="bg-customYellow text-black text-sm px-5 py-1 rounded-full font-medium hover:bg-hovercustomYellow">Follow</button> --}}
+                        <div>
+                            @php
+                                $authUser = auth()->user();
+                                $isFollowing = $authUser && isset($likedpost->foodPost->user) ? $authUser->isFollowing($likedpost->foodPost->user->id) : false;
+                            @endphp
+
+                            @if ($authUser && $authUser->id === $likedpost->foodPost->user->id)
+                                {{-- If the post is by the authenticated user, not showing any button --}}
+                            @else
+                                @if (!$authUser)
+                                    {{-- If the user is not logged in, showing the Follow button --}}
+                                    <button type="button" class="py-1 px-5 bg-customYellow text-black text-sm font-medium rounded-md hover:bg-hovercustomYellow">
+                                        Follow
+                                    </button>
+                                @else
+                                    {{-- If logged in, check if they are following --}}
+                                    @if ($isFollowing)
+                                        <button class="py-1 px-5 bg-gray-200 text-sm font-medium rounded-md hover:bg-gray-300">
+                                            Following
+                                        </button>
+                                    @else
+                                        <button type="submit" class="py-1 px-5 bg-customYellow text-black text-sm font-medium rounded-md hover:bg-hovercustomYellow">
+                                            Follow
+                                        </button>
+                                    @endif
+                                @endif
+                            @endif
+                        </div>
                     </div>
 
                     <h2 class="text-2xl font-medium mb-1">{{$likedpost->foodPost->name}}</h2>
                     <p class="text-gray-700 text-base">Restaurant: {{$likedpost->foodPost->restaurant->name}}</p>
                     <span class="text-gray-700 mb-3 text-base">{{$likedpost->foodPost->foodType->name}}, {{$likedpost->foodPost->cuisineType->name}}</span>
-                    <span class="bg-green-100 text-green-700 text-xs font-semibold py-1 px-3 mb-4 rounded w-fit">{{$likedpost->foodPost->tag->name}}</span>
+                    <span class="bg-green-100 text-green-700 text-xs font-medium py-1 px-3 mb-4 rounded w-fit">{{$likedpost->foodPost->tag->name}}</span>
 
                     @php
                         $userRatingValue = round($likedpost->foodPost->rating);

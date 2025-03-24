@@ -1,7 +1,9 @@
 <x-app-layout>
     <section class="pt-20">
         <div class="max-w-7xl mx-auto p-6">
-            <a href="/discover" class="text-gray-700 font-medium hover:text-gray-500 hvr-icon-back"><i class="fa-solid fa-arrow-left-long hvr-icon"></i> Back</a>
+            <a href="{{ route('food.discover', ['scroll' => session('scroll_position')]) }}" class="text-gray-700 font-medium hover:text-gray-500 hvr-icon-back">
+                <i class="fa-solid fa-arrow-left-long hvr-icon"></i> Back
+            </a>
 
             <h1 class="text-2xl font-bold mt-2">{{$singlePost->name}}</h1>
             <p class="text-gray-600 pt-2">Restaurant: {{$singlePost->restaurant->name}}</p>

@@ -194,9 +194,13 @@ class FoodPostController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show($id)
+    public function show($id, Request $request)
     {
         $singlePost = FoodPosts::findOrFail($id);
+
+        if ($request->has('scroll')) {
+            session(['scroll_position' => $request->scroll]);
+        }
 
         $reviewsPaginate = Reviews::where('food_post_id', $id)->paginate(5);
 

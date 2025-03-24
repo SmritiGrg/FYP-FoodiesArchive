@@ -36,8 +36,8 @@
             <p class="text-darkPurple font-poppins text-3xl sm:text-4xl md:text-5xl font-extrabold">
                 Start Exploring New Foods
             </p>
-            <p class="mt-3 text-xs sm:text-sm md:text-base text-gray-600 font-poppins">
-                Discover Authentic Tastes, Share Your Foodie Adventures.
+            <p class="mt-3 text-sm sm:text-sm md:text-base text-gray-600 font-poppins">
+                Explore hidden gems, share your favorite meals, and connect with fellow food lovers!
             </p>
 
             <div class="mt-10 flex justify-center px-4 sm:px-0" id="search-container">
@@ -81,12 +81,12 @@
                 </div>
             </div>
 
-            <p class="mt-5 text-base sm:text-lg md:text-xl text-darkRed font-semibold font-poppins">
+            <p class="mt-2 sm:mt-5 text-base sm:text-lg md:text-xl text-darkRed font-semibold font-poppins">
                 Begin Your Culinary Journey Today.
             </p>
             <a 
                 href="{{ route('foodpost.create') }}" 
-                class="text-xs sm:text-sm md:text-base text-darkRed font-medium underline font-poppins hover:text-lightRed hvr-icon-forward"
+                class="text-sm sm:text-sm md:text-base text-darkRed font-medium underline font-poppins hover:text-lightRed hvr-icon-forward"
             >
                 Post Your Food <i class="fa-solid fa-arrow-right ml-2 hvr-icon"></i>
             </a>
@@ -95,59 +95,59 @@
 
     {{----- SECOND SECTION OF LANDING PAGE CATEGORY SLIDER-----}}
     <section class="px-5 md:px-24 pb-5 sm:pb-16">
-        <div class="relative main-category rounded-b-[50px] bg-bgPurple py-7 px-6 sm:rounded-b-[100px] text-center h-[40vh] ">
-            <h2 class="text-2xl sm:text-4xl font-bold text-darkPurple font-poppins pt-5">Craving something specific?</h2>
-            <p class="text-base sm:text-2xl text-darkPurple mt-3 font-semibold" style="letter-spacing: 2px">
+        <div class="relative main-category rounded-b-[50px] bg-bgPurple py-7 px-6 sm:rounded-b-[100px] text-center h-[30vh] sm:h-[40vh] ">
+            <h2 class="text-xl sm:text-4xl font-bold text-darkPurple font-poppins pt-5">Craving something specific?</h2>
+            <p class="text-sm sm:text-2xl text-gray-700 mt-3 font-medium sm:font-semibold">
                 Search by different Categories and Start Exploring
             </p>
 
-            <div class="absolute left-1/2 transform -translate-x-1/2 top-52 w-[85%] h-60 overflow-hidden categories">
+            <div class="absolute left-1/2 transform -translate-x-1/2 top-40 sm:top-52 w-[80%] sm:w-[85%] h-60 overflow-hidden categories">
                 <div class="flex gap-8 categories-slide w-max">
-                    <div class="relative w-52 h-52 rounded-xl overflow-hidden group1">
+                    <div class="relative w-44 h-44 sm:w-52 sm:h-52 rounded-xl overflow-hidden group1">
                         <img src="{{asset('assets/img/Breakfast2.png')}}" class="w-full h-full object-cover" />
                         <div class="overlay">Breakfast</div>
                     </div>
-                    <div class="relative w-52 h-52 rounded-xl overflow-hidden group1">
+                    <div class="relative w-44 h-44 sm:w-52 sm:h-52 rounded-xl overflow-hidden group1">
                         <img src="{{asset('assets/img/Dinner.jpg')}}" class="w-full h-full object-cover" />
                         <div class="overlay">Dinner</div>
                     </div>
-                    <div class="w-52 h-52 rounded-xl overflow-hidden group1">
+                    <div class="w-44 h-44 sm:w-52 sm:h-52 rounded-xl overflow-hidden group1">
                         <img src="{{asset('assets/img/Japanese.jpg')}}" class="w-full h-full object-cover" />
                         <div class="overlay">Japanese</div>
                     </div>
-                    <div class="w-52 h-52 rounded-xl overflow-hidden group1">
+                    <div class="w-44 h-44 sm:w-52 sm:h-52 rounded-xl overflow-hidden group1">
                         <img src="{{asset('assets/img/Chatpat.jpg')}}" class="w-full h-full object-cover" />
                         <div class="overlay">Street Food</div>
                     </div>
-                    <div class="w-52 h-52 rounded-xl overflow-hidden group1">
+                    <div class="w-44 h-44 sm:w-52 sm:h-52 rounded-xl overflow-hidden group1">
                         <img src="{{asset('assets/img/Dessert.jpg')}}" class="w-full h-full object-cover" />
                         <div class="overlay">Dessert</div>
                     </div>
-                    <div class="w-52 h-52 rounded-xl overflow-hidden group1">
+                    <div class="w-44 h-44 sm:w-52 sm:h-52 rounded-xl overflow-hidden group1">
                         <img src="{{asset('assets/img/Drink.jpg')}}" class="w-full h-full object-cover" />
                         <div class="overlay">Drink</div>
                     </div>
-                    <div class="w-52 h-52 rounded-xl overflow-hidden group1">
+                    <div class="w-44 h-44 sm:w-52 sm:h-52 rounded-xl overflow-hidden group1">
                         <img src="{{asset('assets/img/Breakfast2.png')}}" class="w-full h-full object-cover" />
                         <div class="overlay">Breakfast</div>
                     </div>
-                    <div class="w-52 h-52 rounded-xl overflow-hidden group1">
+                    <div class="w-44 h-44 sm:w-52 sm:h-52 rounded-xl overflow-hidden group1">
                         <img src="{{asset('assets/img/Dinner.jpg')}}" class="w-full h-full object-cover" />
                         <div class="overlay">Dinner</div>
                     </div>
-                    <div class="w-52 h-52 rounded-xl overflow-hidden group1">
+                    <div class="w-44 h-44 sm:w-52 sm:h-52 rounded-xl overflow-hidden group1">
                         <img src="{{asset('assets/img/Japanese.jpg')}}" class="w-full h-full object-cover" />
                         <div class="overlay">Japanese</div>
                     </div>
-                    <div class="w-52 h-52 rounded-xl overflow-hidden group1">
+                    <div class="w-44 h-44 sm:w-52 sm:h-52 rounded-xl overflow-hidden group1">
                         <img src="{{asset('assets/img/Chatpat.jpg')}}" class="w-full h-full object-cover" />
                         <div class="overlay">Street Food</div>
                     </div>
-                    <div class="w-52 h-52 rounded-xl overflow-hidden group1">
+                    <div class="w-44 h-44 sm:w-52 sm:h-52 rounded-xl overflow-hidden group1">
                         <img src="{{asset('assets/img/Dessert.jpg')}}" class="w-full h-full object-cover" />
                         <div class="overlay">Dessert</div>
                     </div>
-                    <div class="w-52 h-52 rounded-xl overflow-hidden group1">
+                    <div class="w-44 h-44 sm:w-52 sm:h-52 rounded-xl overflow-hidden group1">
                         <img src="{{asset('assets/img/Drink.jpg')}}" class="w-full h-full object-cover" />
                         <div class="overlay">Drink</div>
                     </div>
@@ -176,7 +176,7 @@
                             <div class="flex flex-col md:flex-row items-center mt-10 bg-bgPurple rounded-lg shadow-md">
                                 <!-- Text Section -->
                                 <div class="w-full md:w-1/2 p-6 md:pl-24">
-                                    <h2 class="text-5xl md:text-4xl lg:text-5xl font-bold text-darkPurple" data-aos="fade-down">
+                                    <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-darkPurple" data-aos="fade-down">
                                         Upload <span class="text-customYellow">Food</span>
                                     </h2>
                                     <p class="text-lg md:text-base lg:text-lg text-gray-600 mt-4 mb-4" data-aos="fade-up">
@@ -188,8 +188,8 @@
                                     </a>
                                 </div>
                                 <!-- Image Section -->
-                                <div class="w-full py-10 md:w-1/2 md:py-12 flex justify-center" data-aos="fade-up">
-                                    <img src="{{asset('assets/img/laphing.jpg')}}" alt="Delicious Food" class="w-64 md:w-80 lg:w-full max-w-sm h-72 md:h-80 lg:h-96 object-cover rounded-lg">
+                                <div class="w-full pt-5 pb-8 sm:py-10 md:w-1/2 md:py-12 flex justify-center" data-aos="fade-up">
+                                    <img src="{{asset('assets/img/laphing.jpg')}}" alt="Delicious Food" class="w-80 md:w-80 lg:w-full max-w-sm h-72 md:h-80 lg:h-96 object-cover rounded-lg">
                                 </div>
                             </div>
                         </li>
@@ -198,7 +198,7 @@
                             <div class="flex flex-col md:flex-row items-center mt-10 bg-bgPurple rounded-lg shadow-md">
                                 <!-- Text Section -->
                                 <div class="w-full md:w-1/2 p-6 md:pl-24">
-                                    <h2 class="text-5xl md:text-4xl lg:text-5xl font-bold text-darkPurple">
+                                    <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-darkPurple">
                                         Social <span class="text-customYellow">Interactions</span>
                                     </h2>
                                     <p class="text-lg md:text-base lg:text-lg text-gray-600 mt-4">
@@ -206,8 +206,8 @@
                                     </p>
                                 </div>
                                 <!-- Image Section -->
-                                <div class="w-full py-10 md:w-1/2 md:py-12 flex justify-center">
-                                    <img src="{{asset('assets/img/laphing.jpg')}}" alt="Delicious Food" class="w-64 md:w-80 lg:w-full max-w-sm h-72 md:h-80 lg:h-96 object-cover rounded-lg">
+                                <div class="w-full pt-5 pb-8 sm:py-10 md:w-1/2 md:py-12 flex justify-center">
+                                    <img src="{{asset('assets/img/laphing.jpg')}}" alt="Delicious Food" class="w-80 md:w-80 lg:w-full max-w-sm h-72 md:h-80 lg:h-96 object-cover rounded-lg">
                                 </div>
                             </div>
                         </li>
@@ -216,7 +216,7 @@
                             <div class="flex flex-col md:flex-row items-center mt-10 bg-bgPurple rounded-lg shadow-md">
                                 <!-- Text Section -->
                                 <div class="w-full md:w-1/2 p-6 md:pl-24">
-                                    <h2 class="text-5xl md:text-4xl lg:text-5xl font-bold text-darkPurple">
+                                    <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-darkPurple">
                                         Ask and <span class="text-customYellow">answer</span>
                                     </h2>
                                     <p class="text-lg md:text-base lg:text-lg text-gray-600 mt-4">
@@ -225,8 +225,8 @@
                                     </p>
                                 </div>
                                 <!-- Image Section -->
-                                <div class="w-full py-10 md:w-1/2 md:py-12 flex justify-center">
-                                    <img src="{{asset('assets/img/sandwich.png')}}" alt="Delicious Food" class="w-64 md:w-80 lg:w-full max-w-sm h-72 md:h-80 lg:h-96 object-cover rounded-lg">
+                                <div class="w-full pt-5 pb-8 sm:py-10 md:w-1/2 md:py-12 flex justify-center">
+                                    <img src="{{asset('assets/img/sandwich.png')}}" alt="Delicious Food" class="w-80 md:w-80 lg:w-full max-w-sm h-72 md:h-80 lg:h-96 object-cover rounded-lg">
                                 </div>
                             </div>
                         </li>
@@ -235,7 +235,7 @@
                             <div class="flex flex-col md:flex-row items-center mt-10 bg-bgPurple rounded-lg shadow-md">
                                 <!-- Text Section -->
                                 <div class="w-full md:w-1/2 p-6 md:pl-24">
-                                    <h2 class="text-5xl md:text-4xl lg:text-5xl font-bold text-darkPurple">
+                                    <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-darkPurple">
                                         Discover through <span class="text-customYellow">Map</span>
                                     </h2>
                                     <p class="text-lg md:text-base lg:text-lg text-gray-600 mt-4">
@@ -243,8 +243,8 @@
                                     </p>
                                 </div>
                                 <!-- Image Section -->
-                                <div class="w-full py-10 md:w-1/2 md:py-12 flex justify-center">
-                                    <img src="{{asset('assets/img/Map_Carousel.png')}}" alt="Delicious Food" class="w-64 md:w-80 lg:w-full max-w-sm h-72 md:h-80 lg:h-96 object-cover rounded-lg">
+                                <div class="w-full pt-5 pb-8 sm:py-10 md:w-1/2 md:py-12 flex justify-center">
+                                    <img src="{{asset('assets/img/Map_Carousel.png')}}" alt="Delicious Food" class="w-80 md:w-80 lg:w-full max-w-sm h-72 md:h-80 lg:h-96 object-cover rounded-lg">
                                 </div>
                             </div>
                         </li>
@@ -253,7 +253,7 @@
                             <div class="flex flex-col md:flex-row items-center mt-10 bg-bgPurple rounded-lg shadow-md">
                                 <!-- Text Section -->
                                 <div class="w-full md:w-1/2 p-6 md:pl-24">
-                                    <h2 class="text-5xl md:text-4xl lg:text-5xl font-bold text-darkPurple">
+                                    <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-darkPurple">
                                         Build your <span class="text-customYellow">Streaks</span>
                                     </h2>
                                     <p class="text-lg md:text-base lg:text-lg text-gray-600 mt-4">
@@ -263,13 +263,13 @@
                                     </p>
                                 </div>
                                 <!-- Image Section -->
-                                <div class="w-full py-10 md:w-1/2 md:py-12 flex justify-center">
-                                    <img src="{{asset('assets/img/Chicken-Kimbap-1.png')}}" alt="Delicious Food" class="w-64 md:w-80 lg:w-full max-w-sm h-72 md:h-80 lg:h-96 object-cover rounded-lg">
+                                <div class="w-full pt-5 pb-8 sm:py-10 md:w-1/2 md:py-12 flex justify-center">
+                                    <img src="{{asset('assets/img/Chicken-Kimbap-1.png')}}" alt="Delicious Food" class="w-80 md:w-80 lg:w-full max-w-sm h-72 md:h-80 lg:h-96 object-cover rounded-lg">
                                 </div>
                             </div>
                         </li>
                     </ul>
-                    <div class="absolute bottom-0 left-1/2 transform -translate-x-1/2 flex space-x-2 py-4">
+                    <div class="absolute bottom-0 left-1/2 transform -translate-x-1/2 flex space-x-2 py-2 sm:py-4">
                         <button onclick="goToSlide(1)" class="carousel-button w-3 h-3 rounded-full bg-gray-400 hover:bg-yellow-400"></button>
                         <button onclick="goToSlide(2)" class="carousel-button w-3 h-3 rounded-full bg-gray-400 hover:bg-yellow-400"></button>
                         <button onclick="goToSlide(3)" class="carousel-button w-3 h-3 rounded-full bg-gray-400 hover:bg-yellow-400"></button>
@@ -358,7 +358,7 @@
     <section>
         <div class="py-7">
             <!-- Title Section -->
-            <div class="flex flex-col justify-center items-center">
+            <div class="flex flex-col justify-center items-center px-5">
                 <h1 class="text-2xl font-semibold text-customYellow font-poppins text-center" data-aos="fade-up">
                     Explore the Most Popular Dishes Among Our Foodies
                 </h1>
@@ -368,36 +368,45 @@
             </div>
 
             <!-- Cards Section -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 mt-3 px-4 sm:px-8 lg:px-20" data-aos="fade-up">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-1 mt-3 px-2 sm:px-8 lg:px-20" data-aos="fade-up">
                 @foreach($topFoods as $food)
                     <!-- Card 1 -->
                     <div class="bg-white overflow-hidden">
                         <div class="flex justify-between items-center p-4">
                             <div class="flex items-center">
                                 <a href="">
-                                    <img src="{{asset('uploads/profile-images/'. $food->user->image)}}" alt="profile" class="w-10 h-10 rounded-full object-cover object-center hover:opacity-80 transition-opacity duration-300" />
+                                    <img src="{{asset('uploads/profile-images/'. $food->user->image)}}" alt="img" class="w-10 h-10 rounded-full object-cover object-center hover:opacity-80 transition-opacity duration-300" />
                                 </a>
-                                <div class="ml-3 relative group">
+                                <div class="ml-4 relative group">
                                     <div>
                                         <div class="flex space-x-2 items-center">
-                                        <a href="{{ route('otherProfile', ['id' => $food->user->id]) }}" class="font-medium text-sm hover:text-gray-500">{{$food->user->full_name}}</a>
+                                            <a href="{{ route('otherProfile', ['id' => $food->user->id]) }}" class="font-medium text-sm hover:text-gray-500">{{$food->user->full_name}}</a>
                                             <div class="flex space-x-1 items-center">
-                                                <p class="rounded-full w-1 h-1 bg-gray-600"> </p>
-                                                @auth
-                                                    @php
-                                                        $isFollowing = auth()->user()->isFollowing($food->user->id);
-                                                    @endphp
+                                                @php
+                                                    $authUser = auth()->user();
+                                                    $isFollowing = $authUser && isset($user) ? $authUser->isFollowing($user->id) : false;
+                                                @endphp
 
+                                                @if (!$authUser)
+                                                    {{-- If the user is not logged in, show the Follow button --}}
+                                                    <p class="rounded-full w-1 h-1 bg-gray-600 "> </p>
+                                                    <button class="text-sm font-medium text-customYellow hover:text-hovercustomYellow">
+                                                        Follow
+                                                    </button>
+                                                @else
+                                                    {{-- If logged in, check if they are following --}}
                                                     @if ($isFollowing)
-                                                        <button class="text-customYellow text-sm font-medium">
+                                                        <p class="rounded-full w-1 h-1 bg-gray-600"> </p>
+                                                        <button class="py-1 px-5 bg-gray-200 text-sm font-medium rounded-md hover:bg-gray-300">
                                                             Following
                                                         </button>
                                                     @else
-                                                        <button type="submit" class="text-customYellow text-sm font-medium">
+                                                        <p class="rounded-full w-1 h-1 bg-gray-600"> </p>
+                                                        <button class="text-sm font-medium text-customYellow hover:text-hovercustomYellow">
                                                             Follow
                                                         </button>
                                                     @endif
-                                                @endauth
+                                                @endif
                                             </div>
                                         </div>
                                     </div>
@@ -430,7 +439,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <p class="font-medium text-sm text-gray-500">{{$food->user->username}}</p>
+                                    <p class="font-light text-sm text-gray-500">{{$food->user->username}}</p>
                                     <p class="text-gray-500 text-xs">{{ $food->created_at->diffForHumans() }}</p>
                                 </div>
                             </div>
@@ -438,7 +447,7 @@
                         </div>
 
                         <div class="px-4">
-                            <img src="{{ asset('uploads/' . $food->image) }}" alt="Food Img" class="w-full h-72 object-cover object-center rounded-xl"/>
+                            <a href="{{route('food.details', $food->id)}}"><img src="{{ asset('uploads/' . $food->image) }}" alt="Food Img" class="w-full h-96 sm:h-72 object-cover object-center rounded-xl hover:opacity-85"/></a>
                             <div class="mt-2">
                                 <div class="flex justify-between items-center mt-2 mb-2">
                                     <div class="flex items-center space-x-4">
@@ -456,7 +465,7 @@
                                 </div>
                                 <span class="bg-green-100 text-green-700 text-xs font-medium py-1 px-2 rounded">{{$food->tag->name}}</span>
                                 <div class="flex justify-between items-center mt-2">
-                                    <a href="{{route('food.details', $food->id)}}" class="text-base font-bold hover:text-gray-600">{{$food->name}}</a>
+                                    <a href="{{route('food.details', $food->id)}}" class="text-base font-semibold hover:text-gray-600">{{$food->name}}</a>
                                     <div class="flex">
                                         <img src="{{asset('assets/img/cutlery (1).png')}}" class="bg-customYellow p-1 rounded-md"
                                             style="height: 25px; width: 25px" alt="">
@@ -467,7 +476,7 @@
                                 </div>
                                 <p class="text-black text-sm">Rs. {{$food->price}}</p>
                                 <p class="text-gray-500 mt-1 text-sm">{{$food->review}}</p>
-                                <a href="" class="font-medium text-sm underline hover:text-gray-600">See More</a>
+                                <a href="{{route('food.details', $food->id)}}" class="font-medium text-sm underline hover:text-gray-600">See More</a>
                             </div>
                         </div>
                     </div>

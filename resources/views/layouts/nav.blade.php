@@ -40,7 +40,7 @@
 
             <!-- Navigation Links (Hidden on md and smaller screens) -->
             <div id="nav-links" class="hidden lg:flex space-x-4 lg:space-x-6 xl:space-x-12">
-                <a href="discover" class="text-gray-900 hover:text-customYellow text-base font-bold lg:text-sm xl:text-base">Discover</a>
+                <a href="/discover" class="text-gray-900 hover:text-customYellow text-base font-bold lg:text-sm xl:text-base">Discover</a>
                 <div class="relative group">
                     <button
                         class="text-gray-900 hover:text-customYellow text-base font-bold"
@@ -123,8 +123,11 @@
             <a href="discover" class="block py-2 text-gray-900 hover:text-customYellow text-base font-poppins font-medium"
                 >Discover</a
             >
-            <a href="#" class="block py-2 text-gray-900 hover:text-customYellow text-base font-poppins font-medium"
-                >Post a Food</a
+            <a href="/writeReview" class="block py-2 text-gray-900 hover:text-customYellow text-base font-poppins font-medium"
+                >Write a Review</a
+            >
+            <a href="{{ route('foodpost.create') }}" class="block py-2 text-gray-900 hover:text-customYellow text-base font-poppins font-medium"
+                >Upload Post</a
             >
             <a href="#" class="block py-2 text-gray-900 hover:text-customYellow text-base font-poppins font-medium"
                 >About us</a

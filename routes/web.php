@@ -14,7 +14,7 @@ Route::get('/', function () {
 });
 
 Route::get('/', [FrontendController::class, 'index']);
-Route::get('/discover', [FrontendController::class, 'discover']);
+Route::get('/discover', [FrontendController::class, 'discover'])->name('food.discover');
 Route::get('/writeReview', [FrontendController::class, 'writeReview']);
 // Route::get('/about', [FrontendController::class, 'about']);
 Route::get('/bookmark', [FrontendController::class, 'bookmark']);

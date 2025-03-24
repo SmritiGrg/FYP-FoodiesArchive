@@ -95,7 +95,33 @@
                                                     <p class="text-gray-500 text-xs font-poppins">{{ $food->created_at->diffForHumans() }}</p>
                                                 </div>
                                             </div>
-                                            <button class="bg-customYellow text-black text-sm px-5 py-1 rounded-full font-medium hover:bg-hovercustomYellow">Follow</button>
+                                            {{-- <button class="bg-customYellow text-black text-sm px-5 py-1 rounded-full font-medium hover:bg-hovercustomYellow">Follow</button> --}}
+                                            @php
+                                                $authUser = auth()->user();
+                                                $isFollowing = $authUser && isset($food->user) ? $authUser->isFollowing($food->user->id) : false;
+                                            @endphp
+
+                                            @if ($authUser && $authUser->id === $food->user->id)
+                                                {{-- If the post is by the authenticated user, not showing any button --}}
+                                            @else
+                                                @if (!$authUser)
+                                                    {{-- If the user is not logged in, showing the Follow button --}}
+                                                    <button type="button" class="py-1 px-5 bg-customYellow text-black text-sm font-medium rounded-md hover:bg-hovercustomYellow">
+                                                        Follow
+                                                    </button>
+                                                @else
+                                                    {{-- If logged in, check if they are following --}}
+                                                    @if ($isFollowing)
+                                                        <button class="py-1 px-5 bg-gray-200 text-sm font-medium rounded-md hover:bg-gray-300">
+                                                            Following
+                                                        </button>
+                                                    @else
+                                                        <button type="submit" class="py-1 px-5 bg-customYellow text-black text-sm font-medium rounded-md hover:bg-hovercustomYellow">
+                                                            Follow
+                                                        </button>
+                                                    @endif
+                                                @endif
+                                            @endif
                                         </div>
                                         <img src="{{ asset('uploads/' . $food->image) }}" class="w-full h-96 rounded-lg object-cover">
                                         <div class="flex justify-between items-center mt-2 mb-2">
@@ -115,9 +141,9 @@
                                     </div>
                                     <div class="w-1/2 flex flex-col justify-between mt-14">
                                         <div>
-                                            <span class="bg-green-100 text-green-700 text-xs font-semibold py-1 px-2 rounded">{{$food->tag->name}}</span>
+                                            <span class="bg-green-100 text-green-700 text-xs font-medium py-1 px-2 rounded">{{$food->tag->name}}</span>
                                             <div class="flex justify-between">
-                                                <a href="" class="text-lg font-medium font-poppins mt-2">{{$food->name}}</a>
+                                                <a href="{{route('food.details', $food->id)}}" class="text-lg font-medium font-poppins mt-2">{{$food->name}}</a>
                                                 <a href="" class="border-2 border-gray-400 rounded-3xl py-2 px-4 text-xs font-poppins hover:bg-black hover:text-white transition">
                                                     <i class="fa-solid fa-location-dot text-customYellow mr-2"></i>See Location
                                                 </a>
@@ -150,7 +176,7 @@
                                             </div>
                                             <p class="font-medium">Rs.{{$food->price}}</p>
                                             <p class="text-gray-600 text-sm mt-2">{{$food->review}}</p>
-                                            <a href="" class="font-medium text-sm underline hover:text-gray-600">See More</a>
+                                            <a href="{{route('food.details', $food->id)}}" class="font-medium text-sm underline hover:text-gray-600">See More</a>
                                         </div>
                                     </div>
                                 </div>

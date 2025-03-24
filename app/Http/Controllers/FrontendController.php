@@ -12,16 +12,20 @@ class FrontendController extends Controller
 {
     public function index()
     {
-        $topFoods = FoodPosts::orderBy('rating', 'desc')->limit(4)->get();
+        $topFoods = FoodPosts::orderBy('rating', 'desc')->limit(8)->get();
         $topContributors = User::orderBy('streak_count', 'desc')->take(3)->get();
         return view('FoodiesArchive.index', compact('topFoods', 'topContributors'));
     }
-    public function discover()
+    public function discover(Request $request)
     {
         $foodTypes = FoodTypes::all();
         $cuisineTypes = CuisineTypes::all();
-        $foods = FoodPosts::orderBy('created_at', 'desc')->get();
-        return view('FoodiesArchive.discover', compact('foodTypes', 'cuisineTypes', 'foods'));
+        $foods = FoodPosts::orderBy('created_at', 'desc')->paginate(5);
+        $topFoodies = User::orderBy('streak_count', 'desc')->take(5)->get();
+
+        $scrollPosition = $request->input('scroll', 0);
+
+        return view('FoodiesArchive.discover', compact('foodTypes', 'cuisineTypes', 'foods', 'topFoodies', 'scrollPosition'));
     }
     public function writeReview()
     {

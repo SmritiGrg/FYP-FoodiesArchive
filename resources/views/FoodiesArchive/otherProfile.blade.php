@@ -9,16 +9,18 @@
                     <div class="pt-2 pl-9">
                         <div class="flex space-x-9">
                             <h2 class="text-lg sm:text-xl font-medium text-textBlack">{{ $user->full_name }}</h2>
-                            {{-- @auth --}}
-                                {{-- @php
-                                    $isFollowing = auth()->user()->isFollowing($user->id);
-                                @endphp --}}
-                                @php
-    $authUser = auth()->user();
-    $isFollowing = $authUser ? $authUser->isFollowing($user->id) : false;
-@endphp
+                            @php
+                                $authUser = auth()->user();
+                                $isFollowing = $authUser && isset($user) ? $authUser->isFollowing($user->id) : false;
+                            @endphp
 
-
+                            @if (!$authUser)
+                                {{-- If the user is not logged in, show the Follow button --}}
+                                <button type="button" class="py-1 px-5 bg-customYellow text-black text-sm font-medium rounded-md hover:bg-hovercustomYellow">
+                                    Follow
+                                </button>
+                            @else
+                                {{-- If logged in, check if they are following --}}
                                 @if ($isFollowing)
                                     <button class="py-1 px-5 bg-gray-200 text-sm font-medium rounded-md hover:bg-gray-300">
                                         Following
@@ -28,7 +30,7 @@
                                         Follow
                                     </button>
                                 @endif
-                            {{-- @endauth --}}
+                            @endif
                         </div>
                         <p class="text-gray-600 text-sm">{{ $user->username }}</p>
                         <div class="flex space-x-2 items-center">

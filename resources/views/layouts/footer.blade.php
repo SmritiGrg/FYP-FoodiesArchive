@@ -108,6 +108,8 @@
     </footer>
 
     <script>
+        
+
         setTimeout(function() {
             let message = document.getElementById('success-message');
             if (message) {

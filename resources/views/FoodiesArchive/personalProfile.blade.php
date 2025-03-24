@@ -51,7 +51,7 @@
                             <div>
                                 <div class="relative group">
                                     <p class="text-darkPurple font-medium cursor-pointer">{{ Auth::user()->followers->count() }}</p>                                 
-                                    <div class="absolute w-60 top-full left-0 rounded-lg mt-1 shadow-lg p-3 text-start scale-y-0 border-2 border-gray-200 group-hover:scale-y-100 origin-top duration-200 bg-white">
+                                    <div class="absolute w-60 top-full left-0 rounded-lg mt-1 shadow-lg p-3 text-start scale-y-0 border-2 border-gray-200 group-hover:scale-y-100 origin-top duration-200 bg-white z-50">
                                         @if(Auth::user()->followers->count() > 0)
                                             @foreach(Auth::user()->followers as $follower)
                                                 <a href="{{ route('otherProfile', ['id' => $follower->follower->id]) }}" class="hover:bg-gray-100 border-b border-gray-200 last:border-b-0 flex items-center py-2">
@@ -70,7 +70,6 @@
                                 <p class="text-gray-500 font-normal">Followers</p>
                             </div>
                             <div>
-                                
                                 <div class="relative group">
                                     <p class="text-darkPurple font-medium cursor-pointer">{{ Auth::user()->followings->count() }}</p>                               
                                     <div class="absolute w-60 top-full left-0 rounded-lg mt-1 shadow-lg p-3 text-start scale-y-0 border-2 border-gray-200 group-hover:scale-y-100 origin-top duration-200 bg-white">
@@ -148,18 +147,18 @@
                             Edit Profile
                         </a>
                         <a href="" class="w-10 flex justify-center">
-                            <i class="fa-solid fa-gear text-darkPurple text-xl"></i>
+                            <i class="fa-solid fa-gear text-darkPurple text-xl hover:text-lightPurple"></i>
                         </a>
                         <a href="{{route('user.calendar')}}" class="w-10 flex justify-center">
-                            <i class="fa-solid fa-calendar-days text-darkPurple text-xl"></i>
+                            <i class="fa-solid fa-calendar-days text-darkPurple text-xl hover:text-lightPurple"></i>
                         </a>
                     </div>
                 </div>
 
                 <div class="absolute top-6 right-10 lg:block hidden">
                     <a href="profile" class="px-4 py-1 border border-darkPurple rounded hover:bg-darkPurple hover:text-white transition">Edit Profile</a>
-                    <a href=""><i class="fa-solid fa-gear pl-3 text-darkPurple text-xl"></i></a>
-                    <a href="{{route('user.calendar')}}"><i class="fa-solid fa-calendar-days pl-3 text-darkPurple text-xl"></i></a>
+                    <a href=""><i class="fa-solid fa-gear pl-3 text-darkPurple text-xl hover:text-lightPurple"></i></a>
+                    <a href="{{route('user.calendar')}}"><i class="fa-solid fa-calendar-days pl-3 text-darkPurple text-xl hover:text-lightPurple"></i></a>
                 </div>
             </div>
             
@@ -257,8 +256,8 @@
                         @if(Auth::user()->likes->count() > 0)
                             <div class="grid grid-cols-3 gap-2">
                                 @foreach(Auth::user()->likes as $likedpost)
-                                    <a href="#modal-{{ $likedpost->foodPost->id }}" class="relative group overflow-hidden border"> 
-                                        <img src="{{ asset($likedpost->foodPost->image) }}" alt="Food" class="w-full h-48 sm:h-72 md:h-96 object-cover">
+                                    <a href="#modal-{{ $likedpost->foodPost->id }}" class="relative group overflow-hidden border rounded-sm"> 
+                                        <img src="{{ asset($likedpost->foodPost->image) }}" alt="Food" class="w-full h-48 sm:h-72 md:h-96 object-cover rounded-sm">
                                         <div class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center opacity-0 group-hover:opacity-90 transition duration-300 ease-in-out">
                                             <p class="text-white text-lg font-semibold"><i class="fa-solid fa-heart text-white pr-2"></i>{{ $likedpost->foodPost->likes->count() }}</p>
                                         </div>
@@ -275,8 +274,8 @@
                         @if(Auth::user()->foodPosts->count() > 0)
                             <div class="grid grid-cols-3 gap-2">
                                 @foreach(Auth::user()->foodPosts()->orderBy('created_at', 'desc')->get() as $post)
-                                    <a href="#modal-{{ $post->id }}" class="relative group overflow-hidden border">                                        
-                                        <img src="{{ asset($post->image) }}" alt="Food" class="w-full h-48 sm:h-72 md:h-96 object-cover">
+                                    <a href="#modal-{{ $post->id }}" class="relative group overflow-hidden">                                        
+                                        <img src="{{ asset($post->image) }}" alt="Food" class="w-full h-48 sm:h-72 md:h-96 object-cover rounded-sm">
                                         <div class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center opacity-0 group-hover:opacity-90 transition duration-300 ease-in-out">
                                             <p class="text-white text-lg font-semibold"><i class="fa-solid fa-heart text-white pr-2"></i>{{ $post->likes->count() }}</p>
                                         </div>
