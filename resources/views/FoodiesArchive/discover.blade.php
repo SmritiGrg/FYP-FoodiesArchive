@@ -1,118 +1,118 @@
 <x-app-layout>
-<section class="pt-20 px-24">
-    <div class="grid grid-cols-4 items-center">
-        <div class="col-span-3 flex items-center relative">
-            <button id="leftArrow" class="absolute left-0 top-1/2 -translate-y-1/2 bg-white border-2 border-gray-200 text-gray-600 p-2 rounded-full w-9 h-9 shadow-md hover:shadow-lg transition z-20 flex items-center justify-center">
-                <i class="fa-solid fa-chevron-left"></i>
-            </button>
+    <section class="pt-20 px-24">
+        <div class="grid grid-cols-4 items-center">
+            <div class="col-span-3 flex items-center relative">
+                <button id="leftArrow" class="absolute left-0 top-1/2 -translate-y-1/2 bg-white border-2 border-gray-200 text-gray-600 p-2 rounded-full w-9 h-9 shadow-md hover:shadow-lg transition z-20 flex items-center justify-center">
+                    <i class="fa-solid fa-chevron-left"></i>
+                </button>
 
-            <div class="relative w-full mx-8">
-                <div class="absolute left-0 top-0 h-full w-12 bg-gradient-to-r from-white/90 to-transparent pointer-events-none"></div>
+                <div class="relative w-full mx-8">
+                    <div class="absolute left-0 top-0 h-full w-12 bg-gradient-to-r from-white/90 to-transparent pointer-events-none"></div>
 
-                <div class="scroll-container flex flex-row items-center justify-between overflow-x-auto gap-5" style="scrollbar-width: none; -ms-overflow-style: none;">
-                    @foreach ($foodTypes as $foodType)
-                        <p class="font-medium text-sm text-gray-600 hover:text-gray-900 transition cursor-pointer border-b-2 border-transparent hover:border-gray-400 p-3">
-                            {{$foodType->name}}
-                        </p>
-                    @endforeach
-                    @foreach ($cuisineTypes as $cuisineType)
-                        <p class="font-medium text-sm text-gray-600 hover:text-gray-900 transition cursor-pointer border-b-2 border-transparent hover:border-gray-400 p-3">
-                            {{$cuisineType->name}}
-                        </p>
-                    @endforeach
+                    <div class="scroll-container flex flex-row items-center justify-between overflow-x-auto gap-5" style="scrollbar-width: none; -ms-overflow-style: none;">
+                        @foreach ($foodTypes as $foodType)
+                            <p class="font-medium text-sm text-gray-600 hover:text-gray-900 transition cursor-pointer border-b-2 border-transparent hover:border-gray-400 p-3">
+                                {{$foodType->name}}
+                            </p>
+                        @endforeach
+                        @foreach ($cuisineTypes as $cuisineType)
+                            <p class="font-medium text-sm text-gray-600 hover:text-gray-900 transition cursor-pointer border-b-2 border-transparent hover:border-gray-400 p-3">
+                                {{$cuisineType->name}}
+                            </p>
+                        @endforeach
+                    </div>
+
+                    <div class="absolute right-0 top-0 h-full w-12 bg-gradient-to-l from-white/70 to-transparent pointer-events-none"></div>
                 </div>
 
-                <div class="absolute right-0 top-0 h-full w-12 bg-gradient-to-l from-white/70 to-transparent pointer-events-none"></div>
+                <button id="rightArrow" class="absolute -right-16 top-1/2 -translate-y-1/2 bg-white border-2 border-gray-200 text-gray-600 p-2 rounded-full w-9 h-9 shadow-md hover:shadow-lg transition z-20 flex items-center justify-center">
+                    <i class="fa-solid fa-chevron-right"></i>
+                </button>
             </div>
 
-            <button id="rightArrow" class="absolute -right-16 top-1/2 -translate-y-1/2 bg-white border-2 border-gray-200 text-gray-600 p-2 rounded-full w-9 h-9 shadow-md hover:shadow-lg transition z-20 flex items-center justify-center">
-                <i class="fa-solid fa-chevron-right"></i>
-            </button>
+            <div class="col-span-1 flex justify-end">
+                <button class="border-2 border-gray-200 rounded-xl py-2 px-4 text-base flex items-center gap-2 hover:bg-gray-100 hover:border-gray-500 transition cursor-pointer" onclick="openModal()">
+                    <i class="ri-equalizer-line"></i> Filters
+                </button>
+            </div>
         </div>
+    </section>
 
-        <div class="col-span-1 flex justify-end">
-            <button class="border-2 border-gray-200 rounded-xl py-2 px-4 text-base flex items-center gap-2 hover:bg-gray-100 hover:border-gray-500 transition cursor-pointer" onclick="openModal()">
-                <i class="ri-equalizer-line"></i> Filters
+    {{-- FILTER MODAL --}}
+    <div id="filterModal" class="fixed inset-0 z-50 hidden bg-black bg-opacity-50">
+        <div class="flex items-center justify-center h-full p-4">
+            <button onclick="closeModal()" class="absolute top-4 right-4 text-white text-3xl">
+                <i class="fa-solid fa-xmark"></i>
             </button>
+            <div class="bg-white w-1/4 rounded-3xl h-[70vh] flex-col flex p-4">
+                <h2 class="text-lg font-semibold mb-4 border-b-2 text-center pb-2">Filters</h2>
+                <h3 class="text-md font-medium mb-2">Price Range</h3>
+                <div class="grid grid-cols-2 items-center gap-4">
+                    <div class="col-span-1 flex flex-col">
+                        <label for="from" class="text-sm text-gray-400 font-medium pb-2">From:</label>
+                        <input id="from" type="number" class="w-24 border border-gray-300 rounded-2xl px-3 py-3 focus:outline-none focus:ring-2 focus:ring-blue-200 focus:bg-gray-100" value="50" min="50" max="4000">
+                    </div>
+                    <div class="col-span-1 flex flex-col ml-auto">
+                        <label for="to" class="text-sm text-gray-400 font-medium pb-2">To:</label>
+                        <input id="to" type="number" class="w-24 border border-gray-300 font-light rounded-2xl px-3 py-3 focus:outline-none focus:ring-2 focus:ring-blue-200 focus:bg-gray-100" value="4000" min="50" max="4000">
+                    </div>
+                </div>
+
+                <div class="flex flex-col gap-4 mt-5">
+                    <h3 class="text-md font-medium mb-2">Rating</h3>
+                    <!-- Rating 5 -->
+                    <label class="flex items-center gap-2 cursor-pointer">
+                        <input type="checkbox" class="border-gray-200 rounded-sm text-blue-600 focus:ring-blue-500 checked:border-blue-500">
+                        <div class="w-6 h-6 bg-yellow-500 rounded flex items-center justify-center">
+                            <img src="{{asset('assets/img/cutlery (1).png')}}" alt="" class="bg-customYellow p-1 rounded-md"
+                                style="height: 25px; width: 25px">
+                        </div>
+                        <span>5.0</span>
+                    </label>
+
+                    <!-- Rating 4 -->
+                    <label class="flex items-center gap-2 cursor-pointer">
+                        <input type="checkbox" class="border-gray-200 rounded-sm text-blue-600 focus:ring-blue-500 checked:border-blue-500">
+                        <div class="w-6 h-6 bg-yellow-500 rounded flex items-center justify-center">
+                            <img src="{{asset('assets/img/cutlery (1).png')}}" alt="" class="bg-customYellow p-1 rounded-md"
+                                style="height: 25px; width: 25px">
+                        </div>
+                        <span>4.0</span>
+                    </label>
+
+                    <!-- Rating 3 -->
+                    <label class="flex items-center gap-2 cursor-pointer">
+                        <input type="checkbox" class="border-gray-200 rounded-sm text-blue-600 focus:ring-blue-500 checked:border-blue-500">
+                        <div class="w-6 h-6 bg-yellow-500 rounded flex items-center justify-center">
+                            <img src="{{asset('assets/img/cutlery (1).png')}}" alt="" class="bg-customYellow p-1 rounded-md"
+                            style="height: 25px; width: 25px">
+                        </div>
+                        <span>3.0</span>
+                    </label>
+
+                    <!-- Rating 2 -->
+                    <label class="flex items-center gap-2 cursor-pointer">
+                        <input type="checkbox" class="border-gray-200 rounded-sm text-blue-600 focus:ring-blue-500 checked:border-blue-500">
+                        <div class="w-6 h-6 bg-yellow-500 rounded flex items-center justify-center">
+                            <img src="{{asset('assets/img/cutlery (1).png')}}" alt="" class="bg-customYellow p-1 rounded-md"
+                                style="height: 25px; width: 25px">
+                        </div>
+                        <span>2.0</span>
+                    </label>
+
+                    <!-- Rating 1 -->
+                    <label class="flex items-center gap-2 cursor-pointer">
+                        <input type="checkbox" class="border-gray-200 rounded-sm text-blue-600 focus:ring-blue-500 checked:border-blue-500">
+                        <div class="w-6 h-6 bg-yellow-500 rounded flex items-center justify-center">
+                            <img src="{{asset('assets/img/cutlery (1).png')}}" alt="" class="bg-customYellow p-1 rounded-md"
+                                                    style="height: 25px; width: 25px">
+                        </div>
+                        <span>1</span>
+                    </label>
+                </div>
+            </div>
         </div>
     </div>
-</section>
-
-{{-- FILTER MODAL --}}
-<div id="filterModal" class="fixed inset-0 z-50 hidden bg-black bg-opacity-50">
-    <div class="flex items-center justify-center h-full p-4">
-        <button onclick="closeModal()" class="absolute top-4 right-4 text-white text-3xl">
-            <i class="fa-solid fa-xmark"></i>
-        </button>
-        <div class="bg-white w-1/4 rounded-3xl h-[75vh] flex-col flex p-4">
-            <h2 class="text-lg font-semibold mb-4 border-b-2 text-center pb-2">Filters</h2>
-            <h3 class="text-md font-medium mb-2">Price Range</h3>
-            <div class="grid grid-cols-2 items-center gap-4">
-                <div class="col-span-1 flex flex-col">
-                    <label for="from" class="text-sm text-gray-400 font-medium pb-2">From:</label>
-                    <input id="from" type="number" class="w-24 border border-gray-300 rounded-2xl px-3 py-3 focus:outline-none focus:ring-2 focus:ring-blue-200 focus:bg-gray-100" value="50" min="50" max="4000">
-                </div>
-                <div class="col-span-1 flex flex-col ml-auto">
-                    <label for="to" class="text-sm text-gray-400 font-medium pb-2">To:</label>
-                    <input id="to" type="number" class="w-24 border border-gray-300 font-light rounded-2xl px-3 py-3 focus:outline-none focus:ring-2 focus:ring-blue-200 focus:bg-gray-100" value="4000" min="50" max="4000">
-                </div>
-            </div>
-
-            <div class="flex flex-col gap-4 mt-5">
-                <h3 class="text-md font-medium mb-2">Rating</h3>
-                <!-- Rating 5 -->
-                <label class="flex items-center gap-2 cursor-pointer">
-                    <input type="checkbox" class="border-gray-200 rounded-sm text-blue-600 focus:ring-blue-500 checked:border-blue-500">
-                    <div class="w-6 h-6 bg-yellow-500 rounded flex items-center justify-center">
-                        <img src="{{asset('assets/img/cutlery (1).png')}}" alt="" class="bg-customYellow p-1 rounded-md"
-                            style="height: 25px; width: 25px">
-                    </div>
-                    <span>5.0</span>
-                </label>
-
-                <!-- Rating 4 -->
-                <label class="flex items-center gap-2 cursor-pointer">
-                    <input type="checkbox" class="border-gray-200 rounded-sm text-blue-600 focus:ring-blue-500 checked:border-blue-500">
-                    <div class="w-6 h-6 bg-yellow-500 rounded flex items-center justify-center">
-                        <img src="{{asset('assets/img/cutlery (1).png')}}" alt="" class="bg-customYellow p-1 rounded-md"
-                            style="height: 25px; width: 25px">
-                    </div>
-                    <span>4.0</span>
-                </label>
-
-                <!-- Rating 3 -->
-                <label class="flex items-center gap-2 cursor-pointer">
-                    <input type="checkbox" class="border-gray-200 rounded-sm text-blue-600 focus:ring-blue-500 checked:border-blue-500">
-                    <div class="w-6 h-6 bg-yellow-500 rounded flex items-center justify-center">
-                        <img src="{{asset('assets/img/cutlery (1).png')}}" alt="" class="bg-customYellow p-1 rounded-md"
-                        style="height: 25px; width: 25px">
-                    </div>
-                    <span>3.0</span>
-                </label>
-
-                <!-- Rating 2 -->
-                <label class="flex items-center gap-2 cursor-pointer">
-                    <input type="checkbox" class="border-gray-200 rounded-sm text-blue-600 focus:ring-blue-500 checked:border-blue-500">
-                    <div class="w-6 h-6 bg-yellow-500 rounded flex items-center justify-center">
-                        <img src="{{asset('assets/img/cutlery (1).png')}}" alt="" class="bg-customYellow p-1 rounded-md"
-                            style="height: 25px; width: 25px">
-                    </div>
-                    <span>2.0</span>
-                </label>
-
-                <!-- Rating 1 -->
-                <label class="flex items-center gap-2 cursor-pointer">
-                    <input type="checkbox" class="border-gray-200 rounded-sm text-blue-600 focus:ring-blue-500 checked:border-blue-500">
-                    <div class="w-6 h-6 bg-yellow-500 rounded flex items-center justify-center">
-                        <img src="{{asset('assets/img/cutlery (1).png')}}" alt="" class="bg-customYellow p-1 rounded-md"
-                                                style="height: 25px; width: 25px">
-                    </div>
-                    <span>1</span>
-                </label>
-            </div>
-        </div>
-    </div>
-</div>
 
 
     <section class="px-8 pt-8 pb-7 max-w-7xl mx-auto">
@@ -291,78 +291,56 @@
         </script>
     @endif
 
-<script>
-    // Sliding the cuisine and food types
-    document.addEventListener("DOMContentLoaded", function () {
-        const container = document.querySelector(".scroll-container");
-        const leftArrow = document.getElementById("leftArrow");
-        const rightArrow = document.getElementById("rightArrow");
+    <script>
+        // Sliding the cuisine and food types
+        document.addEventListener("DOMContentLoaded", function () {
+            const container = document.querySelector(".scroll-container");
+            const leftArrow = document.getElementById("leftArrow");
+            const rightArrow = document.getElementById("rightArrow");
 
-        const scrollAmount = 200;
+            const scrollAmount = 200;
 
-        leftArrow.addEventListener("click", () => {
-            container.scrollBy({ left: -scrollAmount, behavior: "smooth" });
-        });
+            if (leftArrow && rightArrow && container) {
+                leftArrow.addEventListener("click", () => {
+                    container.scrollBy({ left: -scrollAmount, behavior: "smooth" });
+                });
 
-        rightArrow.addEventListener("click", () => {
-            container.scrollBy({ left: scrollAmount, behavior: "smooth" });
-        });
-    });
-
-    /////// FILTER MODAL
-    document.addEventListener("DOMContentLoaded", function () {
-        function openModal() {
-            const modal = document.getElementById("filterModal");
-            modal.classList.remove("hidden");
-            document.body.style.overflow = "hidden"; 
-        }
-
-        function closeModal() {
-            const modal = document.getElementById("filterModal");
-            modal.classList.add("hidden");
-            document.body.style.overflow = "auto"; 
-        }
-
-        // Close modal when clicking outside of it
-        document.getElementById("filterModal").addEventListener("click", function (event) {
-            const modalContent = this.querySelector(".bg-white"); // Targeting the actual modal content
-            if (!modalContent.contains(event.target)) {
-                closeModal();
+                rightArrow.addEventListener("click", () => {
+                    container.scrollBy({ left: scrollAmount, behavior: "smooth" });
+                });
             }
+
+            /////// FILTER MODAL
+            function openModal() {
+                const modal = document.getElementById("filterModal");
+                if (modal) {
+                    modal.classList.remove("hidden");
+                    document.body.style.overflow = "hidden"; 
+                }
+            }
+
+            function closeModal() {
+                const modal = document.getElementById("filterModal");
+                if (modal) {
+                    modal.classList.add("hidden");
+                    document.body.style.overflow = "auto"; 
+                }
+            }
+
+            // Close modal when clicking outside of it
+            const filterModal = document.getElementById("filterModal");
+            if (filterModal) {
+                filterModal.addEventListener("click", function (event) {
+                    const modalContent = this.querySelector(".bg-white"); // Targeting the actual modal content
+                    if (!modalContent.contains(event.target)) {
+                        closeModal();
+                    }
+                });
+            }
+
+            window.openModal = openModal;
+            window.closeModal = closeModal;
         });
-
-        window.openModal = openModal;
-        window.closeModal = closeModal;
-    });
-    //// END FILTER MODAL
-
-    // LIKE BUTTON AJAX
-    // $(document).ready(function() {
-    //     $('.unlike-heart, .like-heart').click(function() {
-    //         let postId = $(this).data('post-id');
-    //         let unlikeHeart = $(this).closest('span').find('.unlike-heart');
-    //         let likeHeart = $(this).closest('span').find('.like-heart');
-    //         let countSpan = $(this).siblings('.like-count');
-
-    //         $.ajax({
-    //             url: `/food-posts/${postId}/like`,
-    //             type: 'POST',
-    //             data: {
-    //                 _token: '{{ csrf_token() }}'
-    //             },
-    //             success: function(response) {
-    //                 if (response.liked) {
-    //                     unlikeHeart.addClass('hidden'); // Hide unlike heart
-    //                     likeHeart.removeClass('hidden').addClass('active'); // Show like heart with animation
-    //                 } else {
-    //                     likeHeart.addClass('hidden').removeClass('active'); // Hide like heart
-    //                     unlikeHeart.removeClass('hidden'); // Show unlike heart
-    //                 }
-    //                 countSpan.text(response.likeCount);
-    //             }
-    //         });
-    //     });
-    // });
-</script>
+    </script>
 
 </x-app-layout>

@@ -100,7 +100,7 @@
     <section class="px-5 md:px-24 pb-5 sm:pb-16">
         <div class="relative main-category rounded-b-[50px] bg-bgPurple py-7 px-6 sm:rounded-b-[100px] text-center h-[30vh] sm:h-[40vh] ">
             <h2 class="text-xl sm:text-4xl font-bold text-darkPurple font-poppins pt-5">Craving something specific?</h2>
-            <p class="text-sm sm:text-2xl text-gray-700 mt-3 font-medium sm:font-semibold">
+            <p class="text-sm sm:text-xl text-gray-700 mt-3 font-normal sm:font-medium">
                 Search by different Categories and Start Exploring
             </p>
 

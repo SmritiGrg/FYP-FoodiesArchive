@@ -126,10 +126,6 @@
                                         <img src="{{ asset('uploads/' . $food->image) }}" class="w-full h-96 rounded-lg object-cover">
                                         <div class="flex justify-between items-center mt-2 mb-2">
                                             <div class="flex items-center space-x-4">
-                                                {{-- <span class="text-black text-base">
-                                                    <i class="unlike-heart fa-regular fa-heart text-lg hover:text-gray-500 cursor-pointer"></i>
-                                                    <i class="fa-solid fa-heart text-lg like-heart text-red-500 hidden cursor-pointer"></i> {{ $food->likes->count() }}
-                                                </span> --}}
                                                 @include('components.like-button', ['food' => $food])
                                                 <span class="text-black text-base">
                                                     <i class="fa-regular fa-comment text-lg hover:text-gray-500 cursor-pointer"></i> {{ $food->reviews->count() }}

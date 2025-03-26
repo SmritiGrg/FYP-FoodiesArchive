@@ -193,25 +193,6 @@
 
     ////////////// END CAROUSELL
 
-
-        document.addEventListener("DOMContentLoaded", function () {
-            const userMenuButton = document.getElementById("user-menu-button");
-            const userMenu = document.querySelector('[role="menu"]'); 
-
-            userMenuButton.addEventListener("click", function (event) {
-                event.stopPropagation(); 
-                userMenu.classList.toggle("hidden");
-            });
-
-            // Close menu when clicking outside
-            document.addEventListener("click", function (event) {
-                if (!userMenuButton.contains(event.target) && !userMenu.contains(event.target)) {
-                    userMenu.classList.add("hidden");
-                }
-            });
-        });
-
-
         document.getElementById("menu-toggle").addEventListener("click", function () {
                 document.getElementById("mobile-menu").classList.toggle("hidden");
         });
@@ -226,22 +207,6 @@
         function closeModal() {
             document.querySelector('.fixed').classList.add('hidden');
         }
-        
-        ////////////// FOR LIKE button
-        // Select the elements
-        // const unlikeHeart = document.querySelector('.unlike-heart');
-        // const likeHeart = document.querySelector('.like-heart');
-
-        // // Add click event to toggle classes
-        // unlikeHeart.addEventListener('click', () => {
-        //     unlikeHeart.classList.toggle('active');
-        //     likeHeart.classList.toggle('active');
-        // });
-
-        // likeHeart.addEventListener('click', () => {
-        //     unlikeHeart.classList.toggle('active');
-        //     likeHeart.classList.toggle('active');
-        // });
 
         ////////////// FOR BOOKMARK BUTTON
         // Select the elements
@@ -346,8 +311,6 @@
         document.getElementById('right-btn').addEventListener('click', function() {
             document.getElementById('sliderCategory').scrollBy({ left: 200, behavior: 'smooth' });
         });
-
-
     </script>
 </body>
 

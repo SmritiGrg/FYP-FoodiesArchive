@@ -5,34 +5,30 @@
                 <i class="fa-solid fa-arrow-left-long hvr-icon"></i> Back
             </a>
 
-            <h1 class="text-2xl font-bold mt-2">{{$singlePost->name}}</h1>
-            <p class="text-gray-600 pt-2">Restaurant: {{$singlePost->restaurant->name}}</p>
-            <p class="text-gray-500 text-sm">{{$singlePost->cuisineType->name}}, {{$singlePost->foodType->name}}</p>
+            <h1 class="text-2xl font-bold mt-2">{{$food->name}}</h1>
+            <p class="text-gray-600 pt-2">Restaurant: {{$food->restaurant->name}}</p>
+            <p class="text-gray-500 text-sm">{{$food->cuisineType->name}}, {{$food->foodType->name}}</p>
 
             <div class="grid md:grid-cols-5 gap-8 mt-4 border-b-2 border-gray-100 pb-6">
                 <!-- Left Column - Image & Details (Takes 2/5 of the width) -->
                 <div class="col-span-2">
-                    <img src="{{ asset($singlePost->image) }}" alt="Food img" class="w-full h-2/4 object-cover rounded-lg" />
+                    <img src="{{ asset($food->image) }}" alt="Food img" class="w-full h-2/4 object-cover rounded-lg" />
                     
                     <div class="flex items-center justify-between mt-3">
                         <div class="flex items-center gap-5 text-gray-600">
+                            @include('components.like-button', ['food' => $food])
                             <span class="text-black text-base">
-                                <i class="unlike-heart fa-regular fa-heart text-lg hover:text-gray-500 cursor-pointer"></i>
-                                <i class="fa-solid fa-heart text-lg like-heart text-red-500 hidden cursor-pointer"></i> {{ $singlePost->likes->count() }}
-                            </span>
-
-                            <span class="text-black text-base">
-                                <i class="fa-regular fa-comment text-lg hover:text-gray-500 cursor-pointer"></i> {{ $singlePost->reviews->count() }}
+                                <i class="fa-regular fa-comment text-lg hover:text-gray-500 cursor-pointer"></i> {{ $food->reviews->count() }}
                             </span>
                         </div>
                     </div>
 
                     <div class="border-t-2 border-gray-100 mt-3 pt-5">
                         <div class="flex items-center">
-                            <img src="{{asset('uploads/profile-images/' . $singlePost->user->image) }}" alt="" class="w-12 h-12 rounded-full object-cover mr-3">
+                            <img src="{{asset('uploads/profile-images/' . $food->user->image) }}" alt="" class="w-12 h-12 rounded-full object-cover mr-3">
                             <div>
-                                <p class="text-base text-darkPurple">Uploaded by {{$singlePost->user->username}}</p>
-                                <a href="{{ route('otherProfile', ['id' => $singlePost->user->id]) }}" class="text-sm text-gray-500 underline hover:text-gray-600">View Profile</a>
+                                <p class="text-base text-darkPurple">Uploaded by {{$food->user->username}}</p>
+                                <a href="{{ route('otherProfile', ['id' => $food->user->id]) }}" class="text-sm text-gray-500 underline hover:text-gray-600">View Profile</a>
                             </div>
                         </div>
                     </div>
@@ -41,11 +37,11 @@
                 <!-- Right Column - Rating & Reviews (Takes 3/5 of the width) -->
                 <div class="col-span-3">
                     <div class="flex items-center gap-2">
-                        <span class="bg-green-100 text-green-700 text-xs font-medium py-1 px-2 rounded">{{$singlePost->tag->name}}</span>
+                        <span class="bg-green-100 text-green-700 text-xs font-medium py-1 px-2 rounded">{{$food->tag->name}}</span>
                     </div>
 
                     @php
-                        $userRatingValue = round($singlePost->rating);
+                        $userRatingValue = round($food->rating);
                         $formattedRating = number_format($userRatingValue, 1);
                     @endphp
 
@@ -59,16 +55,16 @@
                         <p class="ml-2 text-darkPurple font-normal text-sm">{{$formattedRating}}</p>
                     </div>
 
-                    <p class="text-lg font-medium mt-2">Rs. {{$singlePost->price}}</p>
-                    <p class="text-gray-500 mt-2 pb-4">{{$singlePost->review}}</p>
+                    <p class="text-lg font-medium mt-2">Rs. {{$food->price}}</p>
+                    <p class="text-gray-500 mt-2 pb-4">{{$food->review}}</p>
 
                     <div class="mt-4 border-t-2 border-gray-100 pb-4 pt-2">
                         <p class="text-xl text-darkPurple font-bold pb-2">Contribute</p>
-                        <a href="{{ route('writeReview', ['food_id' => $singlePost->id]) }}" class="bg-darkPurple text-white px-4 py-2 rounded-3xl hover:bg-lightPurple">Write a Review</a>
+                        <a href="{{ route('writeReview', ['food_id' => $food->id]) }}" class="bg-darkPurple text-white px-4 py-2 rounded-3xl hover:bg-lightPurple">Write a Review</a>
                         <button class="ml-2 border border-darkPurple text-darkPurple px-4 py-2 rounded-3xl hover:bg-darkPurple hover:text-white">Ask a Question</button>
                     </div>
 
-                    <h3 class="mt-4 text-lg font-medium">({{$singlePost->reviews->count()}} reviews)</h3>
+                    <h3 class="mt-4 text-lg font-medium">({{$food->reviews->count()}} reviews)</h3>
 
                     <!-- Reviews Grid (2 Columns) -->
                     <div class="grid md:grid-cols-1 gap-4 mt-3">
@@ -181,11 +177,7 @@
                             <div class="mt-2">
                                 <div class="flex justify-between items-center mt-2 mb-2">
                                     <div class="flex items-center space-x-4">
-                                        <span class="text-black text-base">
-                                            <i class="unlike-heart fa-regular fa-heart text-lg hover:text-gray-500 cursor-pointer"></i>
-                                            <i class="fa-solid fa-heart text-lg like-heart text-red-500 hidden cursor-pointer"></i> {{$similarPost->likes->count()}}
-                                        </span>
-
+                                        @include('components.like-button', ['food' => $similarPost])
                                         <span class="text-black text-base">
                                             <i class="fa-regular fa-comment text-lg hover:text-gray-500 cursor-pointer"></i> {{$similarPost->reviews->count()}}
                                         </span>

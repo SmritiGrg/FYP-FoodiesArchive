@@ -196,7 +196,7 @@ class FoodPostController extends Controller
      */
     public function show($id, Request $request)
     {
-        $singlePost = FoodPosts::findOrFail($id);
+        $food = FoodPosts::findOrFail($id);
 
         if ($request->has('scroll')) {
             session(['scroll_position' => $request->scroll]);
@@ -205,16 +205,16 @@ class FoodPostController extends Controller
         $reviewsPaginate = Reviews::where('food_post_id', $id)->paginate(5);
 
         $similarPosts = FoodPosts::where('id', '!=', $id)
-            ->where(function ($query) use ($singlePost) {
-                $query->where('cuisine_type_id', $singlePost->cuisine_type_id)
-                    ->orWhere('food_type_id', $singlePost->food_type_id)
-                    ->orWhere('name', 'LIKE', '%' . $singlePost->name . '%');
+            ->where(function ($query) use ($food) {
+                $query->where('cuisine_type_id', $food->cuisine_type_id)
+                    ->orWhere('food_type_id', $food->food_type_id)
+                    ->orWhere('name', 'LIKE', '%' . $food->name . '%');
             })
             ->inRandomOrder()
             ->limit(4)
             ->get();
 
-        return view('FoodiesArchive.singlePost', compact('singlePost', 'similarPosts', 'reviewsPaginate'));
+        return view('FoodiesArchive.singlePost', compact('food', 'similarPosts', 'reviewsPaginate'));
     }
 
     /**

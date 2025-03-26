@@ -67,6 +67,9 @@ class LikesController extends Controller
 
     public function like(FoodPosts $foodPost)
     {
+        if (Auth::guest()) {
+            return response()->json(['message' => 'Unauthorized'], 401);
+        }
         $user = Auth::user();
 
         // Check if the user already liked the post

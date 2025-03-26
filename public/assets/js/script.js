@@ -1,9 +1,9 @@
 //DOMContentLoaded - first loads the page then only executes the script
 document.addEventListener("DOMContentLoaded", function () {
-
     // gets any click event on the entire page
     document.body.addEventListener("click", function (event) {
-        if ( //checking if the clicked element has the following classes
+        if (
+            //checking if the clicked element has the following classes
             event.target.classList.contains("unlike-heart") ||
             event.target.classList.contains("like-heart")
         ) {
@@ -26,8 +26,23 @@ document.addEventListener("DOMContentLoaded", function () {
                 },
                 body: JSON.stringify({}),
             })
-                .then((response) => response.json()) //converting to JSON format
-                .then((data) => { // contains the response from the controller
+                .then((response) => {
+                    // console.log("Raw response:", response);
+                    // Check if the response is a redirect to the login page
+                    if (response.redirected) {
+                        window.location.href = response.url; // Redirect to the login page
+                        return;
+                    }
+
+                    // Only parse JSON if the response is valid JSON
+                    if (response.status === 401) {
+                        window.location.href = "{{ route('login') }}";
+                        return;
+                    }
+                    return response.json(); // Parse the JSON if the response is valid
+                })
+                .then((data) => {
+                    // contains the response from the controller
                     if (data.liked) {
                         //UPDATING UI BASED ON THE RESPONSE LIKE STATUS
                         // User Liked

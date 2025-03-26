@@ -97,10 +97,7 @@
 
                     <div class="mt-auto border-t flex items-center justify-between sticky bottom-0 z-10">
                         <div class="flex items-center space-x-4 my-2">
-                            <span class="text-black text-xl">
-                                <i class="unlike-heart fa-regular fa-heart text-xl hover:text-gray-500 cursor-pointer"></i>
-                                <i class="fa-solid fa-heart text-xl like-heart text-red-500 hidden cursor-pointer"></i> {{$post->likes->count()}}
-                            </span>
+                            @include('components.like-button', ['food' => $post])
 
                             <span class="text-black text-xl">
                                 <i class="fa-regular fa-comment text-xl hover:text-gray-500 cursor-pointer"></i> {{$post->reviews->count()}}
