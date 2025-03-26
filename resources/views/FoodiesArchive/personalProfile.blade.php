@@ -1,4 +1,10 @@
 <x-app-layout>
+    @if (session('message'))
+        <p id="success-message" class="fixed bottom-5 left-1/2 transform -translate-x-1/2 text-base text-green-500 border border-green-200 bg-white px-4 py-2 rounded-lg shadow-md w-fit">
+            {{ session('message') }}
+        </p>
+    @endif
+
     <section class="pt-16">
         <div class="max-w-7xl mx-auto mt-10 bg-white">
             <!-- Profile Header -->
@@ -255,7 +261,7 @@
                         <!-- Liked Posts Section -->
                         @if(Auth::user()->likes->count() > 0)
                             <div class="grid grid-cols-3 gap-2">
-                                @foreach(Auth::user()->likes as $likedpost)
+                                @foreach(Auth::user()->likes->sortByDesc('created_at') as $likedpost)
                                     <a href="#modal-{{ $likedpost->foodPost->id }}" class="relative group overflow-hidden border rounded-sm"> 
                                         <img src="{{ asset($likedpost->foodPost->image) }}" alt="Food" class="w-full h-48 sm:h-72 md:h-96 object-cover rounded-sm">
                                         <div class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center opacity-0 group-hover:opacity-90 transition duration-300 ease-in-out">
@@ -286,8 +292,8 @@
                         @else
                             <div class="flex-row items-center justify-center">
                                 <div class="text-center">
-                                    <p class="text-gray-500 text-lg mt-4">No posts yet. Share your first food post!</p>
-                                        <a href="{{ route('foodpost.create') }}" class="text-blue-600 underline font-medium hover:text-blue-500">Upload Now</a>
+                                    <p class="text-gray-500 text-base sm:text-lg mt-4">No posts yet. Share your first food post!</p>
+                                        <a href="{{ route('foodpost.create') }}" class="text-sm sm:text-base text-blue-600 underline font-medium hover:text-blue-500">Upload Now</a>
                                 </div>
                             </div>
                         @endif

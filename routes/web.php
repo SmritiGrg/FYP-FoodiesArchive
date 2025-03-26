@@ -4,6 +4,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\FoodPostController;
 use App\Http\Controllers\FrontendController;
+use App\Http\Controllers\LikesController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ReviewsController;
 use App\Models\FoodPosts;
@@ -53,6 +54,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/PersonalProfile/calendar/{month?}/{year?}', [AuthenticatedSessionController::class, 'userCalendar'])->name('user.calendar');
 
     Route::get('/write-review/{food_id}', [ReviewsController::class, 'writeReview'])->name('writeReview');
+
+    Route::post('/food-posts/{foodPost}/like', [LikesController::class, 'like'])->name('food-posts.like');
 });
 
 

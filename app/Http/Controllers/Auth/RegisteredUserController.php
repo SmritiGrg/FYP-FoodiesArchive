@@ -57,6 +57,7 @@ class RegisteredUserController extends Controller
 
     public function storeProfileImage(Request $request)
     {
+        // dd($request);
         // Validate the incoming request
         $request->validate([
             'image' => 'required|image|mimes:jpeg,png,jpg|max:2048', // Max 2MB

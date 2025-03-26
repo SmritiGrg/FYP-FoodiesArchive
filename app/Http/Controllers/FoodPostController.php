@@ -187,7 +187,7 @@ class FoodPostController extends Controller
         // Clear session data after successful submission
         $request->session()->forget(['currentStep', 'totalSteps', 'name', 'price', 'restaurant_id', 'cuisine_type_id', 'food_type_id', 'tag_id', 'image', 'review', 'rating']);
 
-        return redirect('/')->with('message', 'Post uploaded successfully!');
+        return redirect()->route('personalProfile')->with('message', 'Post uploaded successfully!');
     }
 
 

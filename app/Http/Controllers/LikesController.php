@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\FoodPosts;
 use App\Models\Likes;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class LikesController extends Controller
 {
@@ -61,5 +63,34 @@ class LikesController extends Controller
     public function destroy(Likes $likes)
     {
         //
+    }
+
+    public function like(FoodPosts $foodPost)
+    {
+        $user = Auth::user();
+
+        // Check if the user already liked the post
+        $existingLike = Likes::where('user_id', $user->id)
+            ->where('food_post_id', $foodPost->id)
+            ->first();
+
+        if ($existingLike) {
+            // Unlike the post
+            $existingLike->delete();
+            $liked = false;
+        } else {
+            // Like the post
+            Likes::create([
+                'user_id' => $user->id,
+                'food_post_id' => $foodPost->id
+            ]);
+            $liked = true;
+        }
+
+        // SENDING JSON response TO THE FRONTEND
+        return response()->json([
+            'liked' => $liked,
+            'likeCount' => $foodPost->likes()->count()
+        ]);
     }
 }

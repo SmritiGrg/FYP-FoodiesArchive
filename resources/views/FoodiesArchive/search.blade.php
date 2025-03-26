@@ -81,8 +81,8 @@
                     <!-- Food Cards -->
                     <div class="space-y-6">
                         @if($result->isNotEmpty())
+                            <h2 class="text-darkPurple p-4 text-3xl font-semibold">Search results matching "{{ request('query') }}"</h2>
                             @foreach($result as $food)
-                                <h2 class="text-darkPurple p-4 text-3xl font-semibold">Search results matching "{{ request('query') }}"</h2>
                                 <div class="bg-white p-4 flex gap-4 border-b-2">
                                     <div class="w-1/2">
                                         <div class="flex justify-between items-center mb-3">
@@ -126,11 +126,11 @@
                                         <img src="{{ asset('uploads/' . $food->image) }}" class="w-full h-96 rounded-lg object-cover">
                                         <div class="flex justify-between items-center mt-2 mb-2">
                                             <div class="flex items-center space-x-4">
-                                                <span class="text-black text-base">
+                                                {{-- <span class="text-black text-base">
                                                     <i class="unlike-heart fa-regular fa-heart text-lg hover:text-gray-500 cursor-pointer"></i>
                                                     <i class="fa-solid fa-heart text-lg like-heart text-red-500 hidden cursor-pointer"></i> {{ $food->likes->count() }}
-                                                </span>
-
+                                                </span> --}}
+                                                @include('components.like-button', ['food' => $food])
                                                 <span class="text-black text-base">
                                                     <i class="fa-regular fa-comment text-lg hover:text-gray-500 cursor-pointer"></i> {{ $food->reviews->count() }}
                                                 </span>

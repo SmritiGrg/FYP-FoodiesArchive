@@ -107,9 +107,8 @@
         </div>
     </footer>
 
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
-        
-
         setTimeout(function() {
             let message = document.getElementById('success-message');
             if (message) {
@@ -230,35 +229,35 @@
         
         ////////////// FOR LIKE button
         // Select the elements
-        const unlikeHeart = document.querySelector('.unlike-heart');
-        const likeHeart = document.querySelector('.like-heart');
+        // const unlikeHeart = document.querySelector('.unlike-heart');
+        // const likeHeart = document.querySelector('.like-heart');
 
-        // Add click event to toggle classes
-        unlikeHeart.addEventListener('click', () => {
-            unlikeHeart.classList.toggle('active');
-            likeHeart.classList.toggle('active');
-        });
+        // // Add click event to toggle classes
+        // unlikeHeart.addEventListener('click', () => {
+        //     unlikeHeart.classList.toggle('active');
+        //     likeHeart.classList.toggle('active');
+        // });
 
-        likeHeart.addEventListener('click', () => {
-            unlikeHeart.classList.toggle('active');
-            likeHeart.classList.toggle('active');
-        });
+        // likeHeart.addEventListener('click', () => {
+        //     unlikeHeart.classList.toggle('active');
+        //     likeHeart.classList.toggle('active');
+        // });
 
         ////////////// FOR BOOKMARK BUTTON
         // Select the elements
-        const notBookmarked = document.querySelector('.not-bookmarked');
-        const bookmarked = document.querySelector('.bookmarked');
+        // const notBookmarked = document.querySelector('.not-bookmarked');
+        // const bookmarked = document.querySelector('.bookmarked');
 
-        // Add click event to toggle classes
-        notBookmarked.addEventListener('click', () => {
-            notBookmarked.classList.toggle('active');
-            bookmarked.classList.toggle('active');
-        });
+        // // Add click event to toggle classes
+        // notBookmarked.addEventListener('click', () => {
+        //     notBookmarked.classList.toggle('active');
+        //     bookmarked.classList.toggle('active');
+        // });
 
-        bookmarked.addEventListener('click', () => {
-            notBookmarked.classList.toggle('active');
-            bookmarked.classList.toggle('active');
-        });
+        // bookmarked.addEventListener('click', () => {
+        //     notBookmarked.classList.toggle('active');
+        //     bookmarked.classList.toggle('active');
+        // });
 
         ////// ANIMATE ON SCROLL
         AOS.init({
@@ -347,6 +346,8 @@
         document.getElementById('right-btn').addEventListener('click', function() {
             document.getElementById('sliderCategory').scrollBy({ left: 200, behavior: 'smooth' });
         });
+
+
     </script>
 </body>
 

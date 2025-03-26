@@ -88,9 +88,13 @@ span i.unlike-heart.active {
 }
 
 /* Show the like heart and add the animation when active */
-span i.like-heart.active {
+.like-heart {
+    display: none; /* Hidden by default */
+}
+
+.like-heart.active {
     display: inline-block;
-    animation: pop 0.5s ease forwards; /* Add the pop animation */
+    animation: pop 0.5s ease forwards;
 }
 
 i.not-bookmarked.active {
