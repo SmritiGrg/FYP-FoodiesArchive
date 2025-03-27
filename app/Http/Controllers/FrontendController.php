@@ -18,15 +18,46 @@ class FrontendController extends Controller
     }
     public function discover(Request $request)
     {
+        $user = auth()->user();
         $foodTypes = FoodTypes::all();
         $cuisineTypes = CuisineTypes::all();
-        $foods = FoodPosts::orderBy('created_at', 'desc')->paginate(5);
-        $topFoodies = User::orderBy('streak_count', 'desc')->take(5)->get();
+
+        $foods = FoodPosts::where('user_id', '!=', $user->id)
+            ->orderBy('created_at', 'desc')
+            ->paginate(5);
+
+        $topFoodiesGuest = User::orderBy('streak_count', 'desc')->take(5)->get();
+        $topFoodiesAuth = User::whereNotIn('id', $user->followings->pluck('id'))
+            ->where('id', '!=', $user->id) // Excluding the authenticated user
+            ->orderBy('streak_count', 'desc')
+            ->take(5)
+            ->get();
 
         $scrollPosition = $request->input('scroll', 0);
 
-        return view('FoodiesArchive.discover', compact('foodTypes', 'cuisineTypes', 'foods', 'topFoodies', 'scrollPosition'));
+        return view('FoodiesArchive.discover', compact('foodTypes', 'cuisineTypes', 'foods', 'topFoodiesGuest', 'topFoodiesAuth', 'scrollPosition'));
     }
+
+    public function following(Request $request)
+    {
+        // getting the authenticated user
+        $user = auth()->user();
+
+        $topFoodies = User::whereNotIn('id', $user->followings->pluck('id'))
+            ->where('id', '!=', $user->id) // Excluding the authenticated user
+            ->orderBy('streak_count', 'desc')
+            ->take(5)
+            ->get();
+
+        // getting the latest posts uploaded by users followed by the authenticated user
+        $foods = FoodPosts::whereIn('user_id', $user->followings->pluck('id'))
+            ->latest()
+            ->get();
+
+        // Passing the posts to the view
+        return view('FoodiesArchive.following', compact('foods', 'topFoodies'));
+    }
+
     public function writeReview()
     {
         $foods = FoodPosts::take(4)->get();

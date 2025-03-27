@@ -16,19 +16,35 @@
 
                             @if (!$authUser)
                                 {{-- If the user is not logged in, show the Follow button --}}
-                                <button type="button" class="py-1 px-5 bg-customYellow text-black text-sm font-medium rounded-md hover:bg-hovercustomYellow">
-                                    Follow
-                                </button>
-                            @else
-                                {{-- If logged in, check if they are following --}}
-                                @if ($isFollowing)
-                                    <button class="py-1 px-5 bg-gray-200 text-sm font-medium rounded-md hover:bg-gray-300">
-                                        Following
-                                    </button>
-                                @else
+                                <form method="POST" action="{{route('users.follow', $user->id)}}">
+                                    @csrf
                                     <button type="submit" class="py-1 px-5 bg-customYellow text-black text-sm font-medium rounded-md hover:bg-hovercustomYellow">
                                         Follow
                                     </button>
+                                </form>
+                            @else
+                                {{-- If logged in, check if they are following --}}
+                                @if ($isFollowing)
+                                    <div class="relative group">
+                                        <button class="py-1 px-5 bg-gray-200 text-sm font-medium rounded-md hover:bg-gray-300">
+                                            Following
+                                        </button>                               
+                                        <div class="absolute w-32 top-full left-0 rounded-lg p-1 mt-1 shadow-lg text-start scale-y-0 border-2 border-gray-200 group-hover:scale-y-100 origin-top duration-200 bg-white z-50">
+                                            <form method="POST" action="{{route('users.unfollow', $user->id)}}">
+                                                @csrf
+                                                <button type="submit" class="w-full text-red-500 hover:bg-gray-100 border-b border-gray-200 last:border-b-0 flex items-center py-1 px-3">
+                                                    Unfollow
+                                                </button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                @else
+                                    <form method="POST" action="{{route('users.follow', $user->id)}}">
+                                        @csrf
+                                        <button type="submit" class="py-1 px-5 bg-customYellow text-black text-sm font-medium rounded-md hover:bg-hovercustomYellow">
+                                            Follow
+                                        </button>
+                                    </form>
                                 @endif
                             @endif
                         </div>
@@ -63,11 +79,45 @@
                                 <p class="text-gray-500 ">Contributions</p>
                             </div>
                             <div>
-                                <p class="text-darkPurple font-medium">{{ $user->followers->count() }}</p>
+                                <div class="relative group">
+                                    <p class="text-darkPurple font-medium cursor-pointer">{{ $user->followers->count() }}</p>                                 
+                                    <div class="absolute w-60 top-full left-0 rounded-lg mt-1 shadow-lg p-3 text-start scale-y-0 border-2 border-gray-200 group-hover:scale-y-100 origin-top duration-200 bg-white z-50">
+                                        @if($user->followers->count() > 0)
+                                            @foreach($user->followers as $follower)
+                                                <a href="{{ route('otherProfile', ['id' => $follower->id]) }}" class="hover:bg-gray-100 border-b border-gray-200 last:border-b-0 flex items-center py-2">
+                                                    <img src="{{ asset('uploads/profile-images/' . $follower->image) }}" alt="" class="w-8 h-8 rounded-full object-cover">
+                                                    <div>
+                                                        <p class="block text-sm font-medium text-textBlack pl-3">{{ $follower->full_name }}</p>
+                                                        <p class="block text-xs font-normal text-lightgray pl-3">{{ $follower->username }}</p>
+                                                    </div>
+                                                </a>
+                                            @endforeach
+                                        @else
+                                            <p class="text-sm text-gray-500 px-2 py-2">No followers yet.</p>
+                                        @endif
+                                    </div>
+                                </div>
                                 <p class="text-gray-500 font-normal">Followers</p>
                             </div>
                             <div>
-                                <p class="text-darkPurple font-medium">{{ $user->followings->count() }}</p>
+                                <div class="relative group">
+                                    <p class="text-darkPurple font-medium cursor-pointer">{{ $user->followings->count() }}</p>                               
+                                    <div class="absolute w-60 top-full left-0 rounded-lg mt-1 shadow-lg p-3 text-start scale-y-0 border-2 border-gray-200 group-hover:scale-y-100 origin-top duration-200 bg-white z-50">
+                                        @if($user->followings->count() > 0)
+                                            @foreach($user->followings as $following)
+                                                <a href="{{ route('otherProfile', ['id' => $following->id]) }}" class="hover:bg-gray-100 border-b border-gray-200 last:border-b-0 flex items-center py-2">
+                                                    <img src="{{ asset('uploads/profile-images/' . $following->image) }}" alt="" class="w-8 h-8 rounded-full object-cover">
+                                                    <div>
+                                                        <p class="block text-sm font-medium text-textBlack pl-3">{{ $following->full_name }}</p>
+                                                        <p class="block text-xs font-normal text-lightgray pl-3">{{ $following->username }}</p>
+                                                    </div>
+                                                </a>
+                                            @endforeach
+                                        @else
+                                            <p class="text-sm text-gray-500 px-2 py-2">No followers yet.</p>
+                                        @endif
+                                    </div>
+                                </div>
                                 <p class="text-gray-500 font-normal">Following</p>
                             </div>
                             <div>

@@ -54,13 +54,13 @@ class User extends Authenticatable implements CanResetPassword
     // Users this user is following.
     public function followings()
     {
-        return $this->hasMany(Follows::class, 'follower_id');
+        return $this->belongsToMany(User::class, 'follows', 'follower_id', 'followed_id')->withTimestamps();
     }
 
     // Users following this user.
     public function followers()
     {
-        return $this->hasMany(Follows::class, 'followed_id');
+        return $this->belongsToMany(User::class, 'follows', 'followed_id', 'follower_id')->withTimestamps();
     }
 
     public function restaurants()
@@ -99,7 +99,7 @@ class User extends Authenticatable implements CanResetPassword
             ->withTimestamps();
     }
 
-    public function isFollowing($userId)
+    public function isFollowing(int $userId)
     {
         return $this->followings()->where('followed_id', $userId)->exists();
     }

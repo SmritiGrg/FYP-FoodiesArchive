@@ -24,7 +24,45 @@
                                 <p class="text-gray-500 text-xs">{{$post->created_at->diffForHumans()}}</p>
                             </div>
                         </div>
-                        <button class="bg-customYellow text-black text-sm px-5 py-1 rounded-full font-medium hover:bg-hovercustomYellow">Follow</button>
+                        {{-- <button class="bg-customYellow text-black text-sm px-5 py-1 rounded-full font-medium hover:bg-hovercustomYellow">Follow</button> --}}
+                        @php
+                            $authUser = auth()->user();
+                            $isFollowing = $authUser && isset($user) ? $authUser->isFollowing($user->id) : false;
+                        @endphp
+
+                        @if (!$authUser)
+                            {{-- If the user is not logged in, show the Follow button --}}
+                            <form method="POST" action="{{route('users.follow', $user->id)}}">
+                                @csrf
+                                <button type="submit" class="py-1 px-5 bg-customYellow text-black text-sm font-medium rounded-md hover:bg-hovercustomYellow">
+                                    Follow
+                                </button>
+                            </form>
+                        @else
+                            {{-- If logged in, check if they are following --}}
+                            @if ($isFollowing)
+                                <div class="relative group">
+                                    <button class="py-1 px-5 bg-gray-200 text-sm font-medium rounded-md hover:bg-gray-300">
+                                        Following
+                                    </button>                               
+                                    <div class="absolute w-32 top-full left-0 rounded-lg p-1 mt-1 shadow-lg text-start scale-y-0 border-2 border-gray-200 group-hover:scale-y-100 origin-top duration-200 bg-white z-50">
+                                        <form method="POST" action="{{route('users.unfollow', $user->id)}}">
+                                            @csrf
+                                            <button type="submit" class="w-full text-red-500 hover:bg-gray-100 border-b border-gray-200 last:border-b-0 flex items-center py-1 px-3">
+                                                Unfollow
+                                            </button>
+                                        </form>
+                                    </div>
+                                </div>
+                            @else
+                                <form method="POST" action="{{route('users.follow', $user->id)}}">
+                                    @csrf
+                                    <button type="submit" class="py-1 px-5 bg-customYellow text-black text-sm font-medium rounded-md hover:bg-hovercustomYellow">
+                                        Follow
+                                    </button>
+                                </form>
+                            @endif
+                        @endif
                     </div>
 
                     <div class="flex-grow overflow-auto scrollable-content pt-3">

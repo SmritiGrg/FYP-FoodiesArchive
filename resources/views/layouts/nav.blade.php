@@ -40,7 +40,22 @@
 
             <!-- Navigation Links (Hidden on md and smaller screens) -->
             <div id="nav-links" class="hidden lg:flex space-x-4 lg:space-x-6 xl:space-x-12">
-                <a href="/discover" class="text-gray-900 hover:text-customYellow text-base font-bold lg:text-sm xl:text-base">Discover</a>
+                {{-- <a href="/discover" class="text-gray-900 hover:text-customYellow text-base font-bold lg:text-sm xl:text-base">Discover</a> --}}
+                <div class="relative group">
+                    <button
+                        class="text-gray-900 hover:text-customYellow text-base font-bold"
+                    >
+                        Discover
+                    </button>
+                    <div class="absolute w-40 top-full left-0 rounded-lg mt-1 shadow-lg p-3 text-start scale-y-0 group-hover:scale-y-100 origin-top duration-200 bg-white">
+                        <div class="hover:bg-gray-100">
+                            <a href="/following" class="block text-sm font-medium hover:text-customYellow px-2 py-2">Following</a>
+                        </div>
+                        <div class="hover:bg-gray-100">
+                            <a href="/discover" class="block text-sm font-medium hover:text-customYellow px-2 py-2">For You</a>
+                        </div>
+                    </div>
+                </div>
                 <div class="relative group">
                     <button
                         class="text-gray-900 hover:text-customYellow text-base font-bold"
@@ -49,7 +64,7 @@
                     </button>
                     <div class="absolute w-40 top-full left-0 rounded-lg mt-1 shadow-lg p-3 text-start scale-y-0 group-hover:scale-y-100 origin-top duration-200 bg-white">
                         <div class="hover:bg-gray-100">
-                            <a href="writeReview" class="block text-sm font-medium hover:text-customYellow px-2 py-2">Write a Review</a>
+                            <a href="/writeReview" class="block text-sm font-medium hover:text-customYellow px-2 py-2">Write a Review</a>
                         </div>
                         <div class="hover:bg-gray-100">
                             <a href="{{ route('foodpost.create') }}" class="block text-sm font-medium hover:text-customYellow px-2 py-2">Upload Post</a>

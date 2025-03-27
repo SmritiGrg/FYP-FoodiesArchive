@@ -1,7 +1,7 @@
 {{-- <x-guest-layout> --}}
 <x-app-layout>
-    <div class="min-h-screen flex flex-col sm:justify-center items-center sm:pt-0 mb-5">
-        <div class="w-11/12 flex flex-col lg:flex-row sm:max-w-5xl bg-white mt-10 shadow-lg overflow-hidden sm:rounded-lg border border-gray-200 mx-4 sm:mx-auto">
+    <div class="sm:min-h-screen flex flex-col sm:justify-center items-center sm:pt-0 mb-4 sm:mb-5">
+        <div class="w-11/12 flex flex-col lg:flex-row sm:max-w-5xl bg-white mt-20 sm:mt-10 shadow-lg overflow-hidden sm:rounded-lg border border-gray-200 mx-4 sm:mx-auto">
             <div class="hidden lg:flex w-full lg:w-1/3 flex-col items-center justify-center bg-cover bg-center" style="background-image: url('{{ asset('assets/img/Dinner.jpg') }}');">
                 <h1 class="text-4xl font-bold text-center tracking-wider text-white font-poppins">Welcome</h1>
                 <div>

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
+use App\Http\Controllers\FollowsController;
 use App\Http\Controllers\FoodPostController;
 use App\Http\Controllers\FrontendController;
 use App\Http\Controllers\LikesController;
@@ -56,6 +57,11 @@ Route::middleware('auth')->group(function () {
     Route::get('/write-review/{food_id}', [ReviewsController::class, 'writeReview'])->name('writeReview');
 
     Route::post('/food-posts/{foodPost}/like', [LikesController::class, 'like'])->name('food-posts.like');
+
+    Route::post('users/{user}/follow', [FollowsController::class, 'follow'])->name('users.follow');
+    Route::post('users/{user}/unfollow', [FollowsController::class, 'unfollow'])->name('users.unfollow');
+
+    Route::get('/following', [FrontendController::class, 'following'])->name('food.following');
 });
 
 

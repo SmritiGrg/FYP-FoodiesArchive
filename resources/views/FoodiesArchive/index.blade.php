@@ -384,30 +384,39 @@
                                     <div>
                                         <div class="flex space-x-2 items-center">
                                             <a href="{{ route('otherProfile', ['id' => $food->user->id]) }}" class="font-medium text-sm hover:text-gray-500">{{$food->user->full_name}}</a>
-                                            <div class="flex space-x-1 items-center">
+                                            <div>
                                                 @php
                                                     $authUser = auth()->user();
-                                                    $isFollowing = $authUser && isset($user) ? $authUser->isFollowing($user->id) : false;
+                                                    $isFollowing = $authUser && isset($food->user) ? $authUser->isFollowing($food->user->id) : false;
                                                 @endphp
 
                                                 @if (!$authUser)
                                                     {{-- If the user is not logged in, show the Follow button --}}
-                                                    <p class="rounded-full w-1 h-1 bg-gray-600 "> </p>
-                                                    <button class="text-sm font-medium text-customYellow hover:text-hovercustomYellow">
-                                                        Follow
-                                                    </button>
-                                                @else
-                                                    {{-- If logged in, check if they are following --}}
-                                                    @if ($isFollowing)
-                                                        <p class="rounded-full w-1 h-1 bg-gray-600"> </p>
-                                                        <button class="py-1 px-5 bg-gray-200 text-sm font-medium rounded-md hover:bg-gray-300">
-                                                            Following
-                                                        </button>
-                                                    @else
-                                                        <p class="rounded-full w-1 h-1 bg-gray-600"> </p>
+                                                    <form method="POST" action="{{route('users.follow', $food->user->id)}}" class="flex space-x-1 items-center">
+                                                        @csrf
+                                                        <p class="rounded-full w-1 h-1 bg-gray-600 "> </p>
                                                         <button class="text-sm font-medium text-customYellow hover:text-hovercustomYellow">
                                                             Follow
                                                         </button>
+                                                    </form>
+                                                @else
+                                                    {{-- If logged in, check if they are following --}}
+                                                    @if ($isFollowing)
+                                                        <form method="POST" action="{{route('users.unfollow', $food->user->id)}}" class="flex space-x-1 items-center">
+                                                            @csrf
+                                                            <p class="rounded-full w-1 h-1 bg-gray-600"> </p>
+                                                            <button class="text-sm font-medium text-customYellow hover:text-hovercustomYellow">
+                                                                Unfollow
+                                                            </button>
+                                                        </form>
+                                                    @else
+                                                        <form method="POST" action="{{route('users.follow', $food->user->id)}}" class="flex space-x-1 items-center">
+                                                            @csrf
+                                                            <p class="rounded-full w-1 h-1 bg-gray-600"> </p>
+                                                            <button class="text-sm font-medium text-customYellow hover:text-hovercustomYellow">
+                                                                Follow
+                                                            </button>
+                                                        </form>
                                                     @endif
                                                 @endif
                                             </div>

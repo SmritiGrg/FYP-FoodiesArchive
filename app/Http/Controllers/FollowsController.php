@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Follows;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class FollowsController extends Controller
 {
@@ -21,6 +23,20 @@ class FollowsController extends Controller
     public function create()
     {
         //
+    }
+
+    public function follow(User $user)
+    {
+        $follower = auth()->user();
+        $follower->followings()->attach($user);
+        return back()->with('success', "Followed successfully!");
+    }
+
+    public function unfollow(User $user)
+    {
+        $follower = auth()->user();
+        $follower->followings()->detach($user);
+        return back()->with('success', "Unfollowed successfully!");
     }
 
     /**

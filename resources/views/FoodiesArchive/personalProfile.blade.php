@@ -60,11 +60,11 @@
                                     <div class="absolute w-60 top-full left-0 rounded-lg mt-1 shadow-lg p-3 text-start scale-y-0 border-2 border-gray-200 group-hover:scale-y-100 origin-top duration-200 bg-white z-50">
                                         @if(Auth::user()->followers->count() > 0)
                                             @foreach(Auth::user()->followers as $follower)
-                                                <a href="{{ route('otherProfile', ['id' => $follower->follower->id]) }}" class="hover:bg-gray-100 border-b border-gray-200 last:border-b-0 flex items-center py-2">
-                                                    <img src="{{ asset('uploads/profile-images/' . $follower->follower->image) }}" alt="" class="w-8 h-8 rounded-full object-cover">
+                                                <a href="{{ route('otherProfile', ['id' => $follower->id]) }}" class="hover:bg-gray-100 border-b border-gray-200 last:border-b-0 flex items-center py-2">
+                                                    <img src="{{ asset('uploads/profile-images/' . $follower->image) }}" alt="" class="w-8 h-8 rounded-full object-cover">
                                                     <div>
-                                                        <p class="block text-sm font-medium text-textBlack pl-3">{{ $follower->follower->full_name }}</p>
-                                                        <p class="block text-xs font-normal text-lightgray pl-3">{{ $follower->follower->username }}</p>
+                                                        <p class="block text-sm font-medium text-textBlack pl-3">{{ $follower->full_name }}</p>
+                                                        <p class="block text-xs font-normal text-lightgray pl-3">{{ $follower->username }}</p>
                                                     </div>
                                                 </a>
                                             @endforeach
@@ -78,14 +78,14 @@
                             <div>
                                 <div class="relative group">
                                     <p class="text-darkPurple font-medium cursor-pointer">{{ Auth::user()->followings->count() }}</p>                               
-                                    <div class="absolute w-60 top-full left-0 rounded-lg mt-1 shadow-lg p-3 text-start scale-y-0 border-2 border-gray-200 group-hover:scale-y-100 origin-top duration-200 bg-white">
+                                    <div class="absolute w-60 top-full left-0 rounded-lg mt-1 shadow-lg p-3 text-start scale-y-0 border-2 border-gray-200 group-hover:scale-y-100 origin-top duration-200 bg-white z-50">
                                         @if(Auth::user()->followings->count() > 0)
                                             @foreach(Auth::user()->followings as $following)
-                                                <a href="{{ route('otherProfile', ['id' => $following->following->id]) }}" class="hover:bg-gray-100 border-b border-gray-200 last:border-b-0 flex items-center py-2">
-                                                    <img src="{{ asset('uploads/profile-images/' . $following->following->image) }}" alt="" class="w-8 h-8 rounded-full object-cover">
+                                                <a href="{{ route('otherProfile', ['id' => $following->id]) }}" class="hover:bg-gray-100 border-b border-gray-200 last:border-b-0 flex items-center py-2">
+                                                    <img src="{{ asset('uploads/profile-images/' . $following->image) }}" alt="" class="w-8 h-8 rounded-full object-cover">
                                                     <div>
-                                                        <p class="block text-sm font-medium text-textBlack pl-3">{{ $following->following->full_name }}</p>
-                                                        <p class="block text-xs font-normal text-lightgray pl-3">{{ $following->following->username }}</p>
+                                                        <p class="block text-sm font-medium text-textBlack pl-3">{{ $following->full_name }}</p>
+                                                        <p class="block text-xs font-normal text-lightgray pl-3">{{ $following->username }}</p>
                                                     </div>
                                                 </a>
                                             @endforeach
