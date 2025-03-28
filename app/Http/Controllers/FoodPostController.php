@@ -151,7 +151,7 @@ class FoodPostController extends Controller
         // Get all session data for the food post
         // dd($request);
         $request->validate([
-            'review' => 'required|string|max:100',
+            'review' => 'required|string|min:0|max:100',
             'rating' => 'required|integer|min:1|max:5',
         ]);
 

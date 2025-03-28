@@ -1,6 +1,6 @@
 <x-app-layout>
     @if (session('message'))
-        <p id="success-message" class="fixed bottom-5 left-1/2 transform -translate-x-1/2 text-base text-green-500 border border-green-200 bg-white px-4 py-2 rounded-lg shadow-md w-fit">
+        <p id="success-message" class="fixed bottom-5 left-1/2 transform -translate-x-1/2 text-base text-green-500 border border-green-200 bg-white px-4 py-2 rounded-lg shadow-md w-fit z-50">
             {{ session('message') }}
         </p>
     @endif
@@ -204,7 +204,7 @@
                     @if(request('tab') == 'reviews')
                         @if(Auth::user()->reviews->count() > 0)
                             <div class="space-y-6">
-                                @foreach(Auth::user()->reviews as $review)
+                                @foreach(Auth::user()->reviews->sortByDesc('created_at') as $review)
                                     <div class="border-b pb-6">
                                         <div class="flex items-start space-x-4">
                                             <!-- Food Image -->

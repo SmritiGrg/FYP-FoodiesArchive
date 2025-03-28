@@ -131,7 +131,8 @@
                                     <input type="text" placeholder="Eg: 350" id="price"
                                         class="w-full mt-1 p-2 border rounded-md focus:outline-none 
                                         {{ $errors->has('price') ? 'border-red-500' : 'border-gray-300' }}" 
-                                        name="price">
+                                        name="price"
+                                        value="{{ old('price') }}">
                                     <span class="absolute right-3 top-3 text-gray-500 text-sm font-poppins">In NRS.</span>
                                     @error('price')
                                         <p class="text-sm text-red-600 space-y-1 font-poppins">{{$message}}</p>
@@ -245,7 +246,8 @@
                                 <label class="font-medium text-gray-700 font-poppins" for="review">Write your Review</label>
                                 <textarea placeholder="This is a very tasty food..." id="review"
                                     class="w-full mt-1 p-2 border border-gray-300 rounded-md focus:outline-none"
-                                    name="review" rows="4"></textarea>
+                                    name="review" rows="4"
+                                    value="{{ old('review') }}"></textarea>
                                     @error('review')
                                         <p class="text-sm text-red-600 space-y-1 font-poppins">{{$message}}</p>
                                     @enderror

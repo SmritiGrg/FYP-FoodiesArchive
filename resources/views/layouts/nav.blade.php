@@ -135,8 +135,11 @@
 
         <!-- Mobile Dropdown Menu -->
         <div id="mobile-menu" class="hidden lg:hidden bg-white p-4 shadow-lg text-center">
-            <a href="discover" class="block py-2 text-gray-900 hover:text-customYellow text-base font-poppins font-medium"
-                >Discover</a
+            <a href="/following" class="block py-2 text-gray-900 hover:text-customYellow text-base font-poppins font-medium"
+                >Following</a
+            >
+            <a href="/discover" class="block py-2 text-gray-900 hover:text-customYellow text-base font-poppins font-medium"
+                >For You</a
             >
             <a href="/writeReview" class="block py-2 text-gray-900 hover:text-customYellow text-base font-poppins font-medium"
                 >Write a Review</a

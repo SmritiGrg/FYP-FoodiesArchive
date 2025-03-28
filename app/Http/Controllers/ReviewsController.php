@@ -28,7 +28,21 @@ class ReviewsController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request) {}
+    public function store(Request $request)
+    {
+        $request->validate([
+            'review' => 'required|string|min:0|max:100',
+            'rating' => 'required|integer|min:1|max:5',
+            'food_post_id' => 'required|exists:food_posts,id',
+        ]);
+        $review = new Reviews();
+        $review->review = $request->review;
+        $review->rating = $request->rating;
+        $review->user_id = Auth::user()->id;
+        $review->food_post_id = $request->food_post_id;
+        $review->save();
+        return redirect()->route('personalProfile', ['tab' => 'reviews'])->with('message', 'Review submitted successfully.');
+    }
 
     /**
      * Display the specified resource.

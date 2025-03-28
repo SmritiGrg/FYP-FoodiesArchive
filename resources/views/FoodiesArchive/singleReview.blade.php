@@ -40,9 +40,10 @@
                             <span class="text-base sm:text-lg font-medium">{{$foodPost->reviews->count()}} reviews</span>
                         </div>
                     </div>
-                    <form action="" method="POST">
+                    <form action="{{route('review.store')}}" method="POST">
                         @csrf
                         <div class="mb-8">
+                            <input type="hidden" name="food_post_id" value="{{ $foodPost->id }}">
                             <h3 class="text-lg sm:text-xl font-semibold mb-3">Rate your food</h3>
                             <div class="flex">
                                 <div class="rate flex pt-1">
@@ -108,7 +109,8 @@
                                 class="w-full border border-gray-300 rounded-lg p-4 focus:outline-none focus:ring-1 focus:ring-blue-200" 
                                 name="review"
                                 rows="5" 
-                                placeholder="This is a very tasty food..."></textarea>
+                                placeholder="This is a very tasty food..."
+                                value="{{ old('review') }}"></textarea>
                             <div class="text-right text-gray-500 text-sm mt-1">0-100 characters</div>
                             @error('review')
                                 <p class="text-sm text-red-600 space-y-1 font-poppins">{{$message}}</p>

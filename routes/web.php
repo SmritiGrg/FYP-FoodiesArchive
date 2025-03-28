@@ -55,6 +55,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/PersonalProfile/calendar/{month?}/{year?}', [AuthenticatedSessionController::class, 'userCalendar'])->name('user.calendar');
 
     Route::get('/write-review/{food_id}', [ReviewsController::class, 'writeReview'])->name('writeReview');
+    Route::post('/review/create', [ReviewsController::class, 'store'])->name('review.store');
 
     Route::post('/food-posts/{foodPost}/like', [LikesController::class, 'like'])->name('food-posts.like');
 
