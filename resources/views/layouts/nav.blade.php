@@ -77,7 +77,7 @@
             <!-- Right Icons -->
             <div class="flex items-center space-x-4">
                 <!-- Bookmark Icon (Hidden on md screens and below) -->
-                <a href="bookmark" class="hidden lg:block">
+                <a href="{{ route('user.bookmarks') }}" class="hidden lg:block">
                     <i class="fa-regular fa-bookmark text-xl hover:text-gray-500"></i>
                 </a>
                 @guest

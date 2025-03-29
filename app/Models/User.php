@@ -70,7 +70,7 @@ class User extends Authenticatable implements CanResetPassword
 
     public function foodPosts()
     {
-        return $this->hasMany(FoodPosts::class, 'user_id', 'id');
+        return $this->hasMany(FoodPost::class, 'user_id', 'id');
     }
 
     public function questions()
@@ -102,5 +102,10 @@ class User extends Authenticatable implements CanResetPassword
     public function isFollowing(int $userId)
     {
         return $this->followings()->where('followed_id', $userId)->exists();
+    }
+
+    public function bookmarksPosts()
+    {
+        return $this->belongsToMany(FoodPost::class, 'bookmarks', 'user_id', 'food_post_id')->withTimestamps();
     }
 }

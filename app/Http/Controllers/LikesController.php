@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\FoodPosts;
+use App\Models\FoodPost;
 use App\Models\Likes;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -65,7 +65,7 @@ class LikesController extends Controller
         //
     }
 
-    public function like(FoodPosts $foodPost)
+    public function like(FoodPost $foodPost)
     {
         if (Auth::guest()) {
             return response()->json(['message' => 'Unauthorized'], 401);

@@ -102,7 +102,8 @@ i.not-bookmarked.active {
 }
 
 i.bookmarked.active {
-    display: inline-block; /* Add the pop animation */
+    display: inline-block;
+    animation: pop 0.5s ease forwards;
 }
 
 @keyframes pop {

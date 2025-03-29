@@ -23,6 +23,6 @@ class Likes extends Model
     // each like belongs to a food post
     public function foodPost()
     {
-        return $this->belongsTo(FoodPosts::class, 'food_post_id', 'id');
+        return $this->belongsTo(FoodPost::class, 'food_post_id', 'id');
     }
 }

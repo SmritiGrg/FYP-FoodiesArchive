@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class FoodPosts extends Model
+class FoodPost extends Model
 {
     use HasFactory;
 
@@ -67,5 +67,10 @@ class FoodPosts extends Model
     public function tag()
     {
         return $this->belongsTo(Tags::class, 'tag_id', 'id');
+    }
+
+    public function bookmarkedByUsers()
+    {
+        return $this->belongsToMany(User::class, 'bookmarks', 'food_post_id', 'user_id')->withTimestamps();
     }
 }

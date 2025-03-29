@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\CuisineTypes;
-use App\Models\FoodPosts;
+use App\Models\FoodPost;
 use App\Models\FoodTypes;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -12,7 +12,7 @@ class FrontendController extends Controller
 {
     public function index()
     {
-        $topFoods = FoodPosts::orderBy('rating', 'desc')->limit(8)->get();
+        $topFoods = FoodPost::orderBy('rating', 'desc')->limit(8)->get();
         $topContributors = User::orderBy('streak_count', 'desc')->take(3)->get();
         return view('FoodiesArchive.index', compact('topFoods', 'topContributors'));
     }
@@ -22,7 +22,7 @@ class FrontendController extends Controller
         $foodTypes = FoodTypes::all();
         $cuisineTypes = CuisineTypes::all();
 
-        $foods = FoodPosts::where('user_id', '!=', $user->id)
+        $foods = FoodPost::where('user_id', '!=', $user->id)
             ->orderBy('created_at', 'desc')
             ->paginate(5);
 
@@ -50,7 +50,7 @@ class FrontendController extends Controller
             ->get();
 
         // getting the latest posts uploaded by users followed by the authenticated user
-        $foods = FoodPosts::whereIn('user_id', $user->followings->pluck('id'))
+        $foods = FoodPost::whereIn('user_id', $user->followings->pluck('id'))
             ->latest()
             ->get();
 
@@ -60,7 +60,7 @@ class FrontendController extends Controller
 
     public function writeReview()
     {
-        $foods = FoodPosts::take(4)->get();
+        $foods = FoodPost::take(4)->get();
         return view('FoodiesArchive.writeReview', compact('foods'));
     }
 
@@ -76,7 +76,9 @@ class FrontendController extends Controller
 
     public function bookmark()
     {
-        return view('FoodiesArchive.bookmark');
+        $user = auth()->user();
+        $bookmarkedPosts = $user->bookmarksPosts()->orderByPivot('created_at', 'desc')->get();
+        return view('FoodiesArchive.bookmark', compact('bookmarkedPosts'));
     }
 
     public function personalProfile()

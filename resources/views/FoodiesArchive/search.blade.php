@@ -147,8 +147,7 @@
                                                     <i class="fa-regular fa-comment text-lg hover:text-gray-500 cursor-pointer"></i> {{ $food->reviews->count() }}
                                                 </span>
                                             </div>
-                                            <i class="not-bookmarked fa-regular fa-bookmark text-lg hover:text-gray-500 cursor-pointer"></i>
-                                            <i class="bookmarked fa-solid fa-bookmark text-lg text-black hidden cursor-pointer"></i>
+                                            @include('components.bookmark-button', ['food' => $food])
                                         </div>
                                     </div>
                                     <div class="w-1/2 flex flex-col justify-between mt-14">

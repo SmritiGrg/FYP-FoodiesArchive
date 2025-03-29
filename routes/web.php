@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
+use App\Http\Controllers\BookmarkController;
 use App\Http\Controllers\FollowsController;
 use App\Http\Controllers\FoodPostController;
 use App\Http\Controllers\FrontendController;
@@ -19,7 +20,7 @@ Route::get('/', [FrontendController::class, 'index']);
 Route::get('/discover', [FrontendController::class, 'discover'])->name('food.discover');
 Route::get('/writeReview', [FrontendController::class, 'writeReview']);
 // Route::get('/about', [FrontendController::class, 'about']);
-Route::get('/bookmark', [FrontendController::class, 'bookmark']);
+// Route::get('/bookmark', [FrontendController::class, 'bookmark']);
 
 
 Route::get('/search', [FoodPostController::class, 'search'])->name('search.food');
@@ -63,6 +64,11 @@ Route::middleware('auth')->group(function () {
     Route::post('users/{user}/unfollow', [FollowsController::class, 'unfollow'])->name('users.unfollow');
 
     Route::get('/following', [FrontendController::class, 'following'])->name('food.following');
+
+    // Route for user's bookmark page
+    Route::get('/bookmark', [FrontendController::class, 'bookmark'])->name('user.bookmarks');
+
+    Route::post('/bookmark/{foodPost}', [BookmarkController::class, 'store'])->name('bookmark.toggle');
 });
 
 

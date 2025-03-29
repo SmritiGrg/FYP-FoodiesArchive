@@ -463,17 +463,12 @@
                             <div class="mt-2">
                                 <div class="flex justify-between items-center mt-2 mb-2">
                                     <div class="flex items-center space-x-4">
-                                        {{-- <span class="text-black text-base">
-                                            <i class="unlike-heart fa-regular fa-heart text-lg hover:text-gray-500 cursor-pointer"></i>
-                                            <i class="fa-solid fa-heart text-lg like-heart text-red-500 hidden cursor-pointer"></i> {{$food->likes->count()}}
-                                        </span> --}}
                                         @include('components.like-button', ['food' => $food])
                                         <span class="text-black text-base">
                                             <i class="fa-regular fa-comment text-lg hover:text-gray-500 cursor-pointer"></i> {{$food->reviews->count()}}
                                         </span>
                                     </div>
-                                    <i class="not-bookmarked fa-regular fa-bookmark text-lg hover:text-gray-500 cursor-pointer"></i>
-                                    <i class="bookmarked fa-solid fa-bookmark text-lg text-black hidden cursor-pointer"></i>
+                                    @include('components.bookmark-button', ['food' => $food])
                                 </div>
                                 <span class="bg-green-100 text-green-700 text-xs font-medium py-1 px-2 rounded">{{$food->tag->name}}</span>
                                 <div class="flex justify-between items-center mt-2">

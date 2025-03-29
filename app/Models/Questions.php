@@ -16,7 +16,7 @@ class Questions extends Model
 
     public function foodPosts(): void
     {
-        $this->belongsTo(FoodPosts::class, 'food_post_id', 'id');
+        $this->belongsTo(FoodPost::class, 'food_post_id', 'id');
     }
 
     public function users(): void

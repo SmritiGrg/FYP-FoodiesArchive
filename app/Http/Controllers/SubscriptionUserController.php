@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\SubscriptionUser;
+use App\Models\UserSubscriber;
 use Illuminate\Http\Request;
 
 class SubscriptionUserController extends Controller
@@ -34,7 +34,7 @@ class SubscriptionUserController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(SubscriptionUser $subscriptionUser)
+    public function show(UserSubscriber $UserSubscriber)
     {
         //
     }
@@ -42,7 +42,7 @@ class SubscriptionUserController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(SubscriptionUser $subscriptionUser)
+    public function edit(UserSubscriber $UserSubscriber)
     {
         //
     }
@@ -50,7 +50,7 @@ class SubscriptionUserController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, SubscriptionUser $subscriptionUser)
+    public function update(Request $request, UserSubscriber $UserSubscriber)
     {
         //
     }
@@ -58,7 +58,7 @@ class SubscriptionUserController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(SubscriptionUser $subscriptionUser)
+    public function destroy(UserSubscriber $UserSubscriber)
     {
         //
     }

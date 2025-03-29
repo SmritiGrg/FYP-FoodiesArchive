@@ -23,6 +23,6 @@ class Reviews extends Model
 
     public function food_post()
     {
-        return $this->belongsTo(FoodPosts::class, 'food_post_id', 'id');
+        return $this->belongsTo(FoodPost::class, 'food_post_id', 'id');
     }
 }

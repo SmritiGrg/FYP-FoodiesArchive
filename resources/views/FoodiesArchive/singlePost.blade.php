@@ -9,12 +9,12 @@
             <p class="text-gray-600 pt-2">Restaurant: {{$food->restaurant->name}}</p>
             <p class="text-gray-500 text-sm">{{$food->cuisineType->name}}, {{$food->foodType->name}}</p>
 
-            <div class="grid md:grid-cols-5 gap-8 mt-4 border-b-2 border-gray-100 pb-6">
-                <!-- Left Column - Image & Details (Takes 2/5 of the width) -->
-                <div class="col-span-2">
-                    <img src="{{ asset($food->image) }}" alt="Food img" class="w-full h-2/4 object-cover rounded-lg" />
+            <div class="grid grid-cols-1 md:grid-cols-5 gap-1 sm:gap-8 mt-4 border-b-2 border-gray-100">
+                <!-- Left Column - Image & Details -->
+                <div class="col-span-2 self-start mb-3">
+                    <img src="{{ asset($food->image) }}" alt="Food img" class="w-full h-auto sm:h-2/4 md:h-2/3 object-cover rounded-lg" />
                     
-                    <div class="flex items-center justify-between mt-3">
+                    <div class="flex items-center justify-between my-2">
                         <div class="flex items-center gap-5 text-gray-600">
                             @include('components.like-button', ['food' => $food])
                             <span class="text-black text-base">
@@ -23,7 +23,7 @@
                         </div>
                     </div>
 
-                    <div class="border-t-2 border-gray-100 mt-3 pt-5">
+                    <div class="pt-2">
                         <div class="flex items-center">
                             <img src="{{asset('uploads/profile-images/' . $food->user->image) }}" alt="" class="w-12 h-12 rounded-full object-cover mr-3">
                             <div>
@@ -66,8 +66,8 @@
 
                     <h3 class="mt-4 text-lg font-medium">({{$food->reviews->count()}} reviews)</h3>
 
-                    <!-- Reviews Grid (2 Columns) -->
-                    <div class="grid md:grid-cols-1 gap-4 mt-3">
+                    <!-- Reviews Grid -->
+                    <div class="grid grid-cols-1 gap-4 mt-3">
                         @foreach($reviewsPaginate as $review)
                             <div class="p-3 border-b-2 border-gray-100">
                                 <a href="{{ route('otherProfile', ['id' => $review->user->id]) }}" class="flex items-center">
@@ -114,7 +114,7 @@
             </div>
 
             <!-- Location Section -->
-            <div class="mt-8">
+            <div class="mt-2">
                 <h3 class="text-xl font-semibold">Location</h3>
                 <p class="text-gray-600 text-sm"><i class="fa-solid fa-location-dot pr-1"></i> Street no 18, Pokhara 33700</p>
                 <div class="w-full h-96 bg-gray-300 mt-2 rounded-md">
@@ -133,14 +133,14 @@
                         <div class="flex justify-between items-center p-4">
                             <div class="flex items-center">
                                 <a href="">
-                                    <img src="{{asset('uploads/profile-images/'. $similarPost->user->image)}}" alt="profile" class="w-10 h-10 rounded-full object-cover object-center hover:opacity-80 transition-opacity duration-300" />
+                                    <img src="{{asset('uploads/profile-images/'. $similarPost->user->image)}}" alt="img" class="w-10 h-10 rounded-full object-cover object-center hover:opacity-80 transition-opacity duration-300" />
                                 </a>
                                 <div class="ml-3 relative group">
-                                    <a href="" class="font-medium text-sm hover:text-gray-500">{{$similarPost->user->full_name}}</a>
+                                    <a href="{{ route('otherProfile', ['id' => $similarPost->user->id]) }}" class="font-medium text-sm hover:text-gray-500">{{$similarPost->user->full_name}}</a>
                                     <!-- Modal -->
                                     <div class="absolute hidden group-hover:block w-60 p-4 bg-white shadow-lg rounded-lg z-10 border border-gray-200">
                                         <div class="flex items-center space-x-4">
-                                            <img src="{{asset('uploads/profile-images/' . $similarPost->user->image)}}" alt="profile" class="w-12 h-12 rounded-full object-cover">
+                                            <img src="{{asset('uploads/profile-images/' . $similarPost->user->image)}}" alt="img" class="w-12 h-12 rounded-full object-cover">
                                             <div>
                                                 <a href="" class="font-semibold text-sm font-poppins">{{$similarPost->user->full_name}}</a>
                                                 <p class="text-gray-500 text-xs font-poppins">{{$similarPost->user->username}}</p>
@@ -169,7 +169,40 @@
                                     <p class="text-gray-500 text-xs">{{ $similarPost->created_at->diffForHumans() }}</p>
                                 </div>
                             </div>
-                            <button class="font-poppins bg-customYellow text-black text-sm px-5 py-1 rounded-full font-medium hover:bg-hovercustomYellow">Follow</button>
+                            @php
+                                $authUser = auth()->user();
+                                $isFollowing = $authUser && isset($similarPost->user) ? $authUser->isFollowing($similarPost->user->id) : false;
+                            @endphp
+
+                            @if (!$authUser)
+                                {{-- If the user is not logged in, show the Follow button --}}
+                                <form method="POST" action="{{route('users.follow', $similarPost->user->id)}}" class="flex space-x-1 items-center">
+                                    @csrf
+                                    <p class="rounded-full w-1 h-1 bg-gray-600 "> </p>
+                                    <button class="text-sm font-medium text-customYellow hover:text-hovercustomYellow">
+                                        Follow
+                                    </button>
+                                </form>
+                            @else
+                                {{-- If logged in, check if they are following --}}
+                                @if ($isFollowing)
+                                    <form method="POST" action="{{route('users.unfollow', $similarPost->user->id)}}" class="flex space-x-1 items-center">
+                                        @csrf
+                                        <p class="rounded-full w-1 h-1 bg-gray-600"> </p>
+                                        <button class="text-sm font-medium text-customYellow hover:text-hovercustomYellow">
+                                            Unfollow
+                                        </button>
+                                    </form>
+                                @else
+                                    <form method="POST" action="{{route('users.follow', $similarPost->user->id)}}" class="flex space-x-1 items-center">
+                                        @csrf
+                                        <p class="rounded-full w-1 h-1 bg-gray-600"> </p>
+                                        <button class="text-sm font-medium text-customYellow hover:text-hovercustomYellow">
+                                            Follow
+                                        </button>
+                                    </form>
+                                @endif
+                            @endif
                         </div>
 
                         <div class="px-4">
@@ -187,7 +220,7 @@
                                 </div>
                                 <span class="bg-green-100 text-green-700 text-xs font-medium py-1 px-2 rounded">{{$similarPost->tag->name}}</span>
                                 <div class="flex justify-between items-center mt-2">
-                                    <a href="" class="text-base font-bold hover:text-gray-600">{{$similarPost->name}}</a>
+                                    <a href="" class="text-base font-semibold hover:text-gray-600">{{$similarPost->name}}</a>
                                     <div class="flex">
                                         <img src="{{asset('assets/img/cutlery (1).png')}}" class="bg-customYellow p-1 rounded-md"
                                             style="height: 25px; width: 25px" alt="">

@@ -24,6 +24,6 @@ class Restaurants extends Model
 
     public function foodPosts(): void
     {
-        $this->hasMany(FoodPosts::class, 'restaurant_id', 'id');
+        $this->hasMany(FoodPost::class, 'restaurant_id', 'id');
     }
 }

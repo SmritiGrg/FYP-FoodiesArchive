@@ -3,24 +3,19 @@
         <h1 class="text-2xl font-semibold text-darkPurple mb-6">Bookmarked</h1>
         <div class="grid grid-cols-3 gap-2">
             <!-- Food Card -->
-            <div class="relative shadow-md overflow-hidden border group cursor-pointer" onclick="openModal()">
-                    <img src="{{asset('assets/img/Chicken-Kimbap-1.png')}}" alt="Food 1" class="w-full h-48 sm:h-72 md:h-96 object-cover">
-                    <div class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition duration-300 ease-in-out">
-                        <p class="text-white text-lg font-semibold"><i class="fa-solid fa-heart text-white pr-2"></i>50</p>
-                    </div>
-            </div>
-            <div class="relative shadow-md overflow-hidden border group cursor-pointer" onclick="openModal()">
-                    <img src="{{asset('assets/img/momo.jpg')}}" alt="Food 1" class="w-full h-48 sm:h-72 md:h-96 object-cover">
-                    <div class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition duration-300 ease-in-out">
-                        <p class="text-white text-lg font-semibold"><i class="fa-solid fa-heart text-white pr-2"></i>50</p>
-                    </div>
-            </div>
-            <div class="relative overflow-hidden border group">
-                    <img src="{{asset('assets/img/sandwich.png')}}" alt="Food 3" class="w-full h-48 sm:h-72 md:h-96 object-cover">
-                    <div class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition duration-300 ease-in-out">
-                        <p class="text-white text-lg font-semibold"><i class="fa-solid fa-heart text-white pr-2"></i>50</p>
-                    </div>
-            </div>
+            @if($bookmarkedPosts->isEmpty())
+                <p>You have no bookmarked posts yet.</p>
+            @else
+                @foreach($bookmarkedPosts as $post)
+                    <a href="#modal-{{ $post->id }}" class="relative group overflow-hidden border rounded-sm"> 
+                        <img src="{{ asset($post->image) }}" alt="Food" class="w-full h-48 sm:h-72 md:h-96 object-cover rounded-sm">
+                        <div class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center opacity-0 group-hover:opacity-90 transition duration-300 ease-in-out">
+                            <p class="text-white text-lg font-semibold"><i class="fa-solid fa-heart text-white pr-2"></i>{{ $post->likes->count() }}</p>
+                        </div>
+                    </a>
+                    @include('FoodiesArchive.bookmarkModal', ['post' => $post])
+                @endforeach
+            @endif
         </div>
     </section>
 

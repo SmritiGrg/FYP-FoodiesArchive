@@ -1,5 +1,6 @@
 //DOMContentLoaded - first loads the page then only executes the script
 document.addEventListener("DOMContentLoaded", function () {
+    // LIKE BUTTON FEATURE
     // gets any click event on the entire page
     document.body.addEventListener("click", function (event) {
         if (
@@ -65,4 +66,78 @@ document.addEventListener("DOMContentLoaded", function () {
                 .catch((error) => console.error("Error:", error));
         }
     });
+    // END
+
+    // BOOKMARK BUTTON FEATURE
+    document.body.addEventListener("click", function (event) {
+        if (
+            // Checking if the clicked element has the following classes
+            event.target.classList.contains("not-bookmarked") ||
+            event.target.classList.contains("bookmarked")
+        ) {
+            // Checking if the clicked element is a bookmark icon
+            if (
+                event.target.classList.contains("not-bookmarked") ||
+                event.target.classList.contains("bookmarked")
+            ) {
+                let postId = event.target.getAttribute("data-post-id"); // Getting post id from the clicked element
+                let bookmarkContainer = event.target.closest("span");
+
+                // Select the bookmark icons within the same container
+                let unbookmarkedIcon = bookmarkContainer.querySelector(
+                    ".fa-regular.fa-bookmark"
+                );
+                let bookmarkedIcon = bookmarkContainer.querySelector(
+                    ".fa-solid.fa-bookmark"
+                );
+
+                // AJAX - sending AJAX request to update the bookmark status
+                fetch(`/bookmark/${postId}`, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json", // JSON FORMAT
+                        "X-CSRF-TOKEN": document
+                            .querySelector('meta[name="csrf-token"]')
+                            .getAttribute("content"),
+                    },
+                    body: JSON.stringify({}),
+                })
+                    .then((response) => {
+                        // Check if the response is a redirect to the login page
+                        if (response.redirected) {
+                            window.location.href = response.url; // Redirect to the login page
+                            return;
+                        }
+
+                        // Check for unauthorized status and redirect to login page
+                        if (response.status === 401) {
+                            window.location.href = "{{ route('login') }}";
+                            return;
+                        }
+                        return response.json(); // Parse the JSON if the response is valid
+                    })
+                    .then((data) => {
+                        // Contains the response from the controller
+                        if (data.bookmarked) {
+                            // User Bookmarked
+                            unbookmarkedIcon.classList.add("hidden");
+                            bookmarkedIcon.classList.remove("hidden");
+                            bookmarkedIcon.classList.add("active"); // Add the active class for animation
+
+                            // Remove animation after 500ms
+                            setTimeout(
+                                () => bookmarkedIcon.classList.remove("active"),
+                                500
+                            );
+                        } else {
+                            // User Unbookmarked
+                            bookmarkedIcon.classList.add("hidden");
+                            unbookmarkedIcon.classList.remove("hidden");
+                        }
+                    })
+                    .catch((error) => console.error("Error:", error));
+            }
+        }
+    });
+    // END
 });

@@ -65,7 +65,7 @@
                         @endif
                     </div>
 
-                    <div class="flex-grow overflow-auto scrollable-content pt-3">
+                    <div class="flex-grow overflow-auto scrollable-content pt-1">
                         <h2 class="text-xl font-medium mb-1">{{$post->name}}</h2>
                         <p class="text-gray-700 text-sm">Restaurant: {{$post->restaurant->name}}</p>
                         <p class="text-gray-700 mb-3 text-sm">{{$post->foodType->name}}, {{$post->cuisineType->name}}</p>
@@ -141,8 +141,7 @@
                                 <i class="fa-regular fa-comment text-xl hover:text-gray-500 cursor-pointer"></i> {{$post->reviews->count()}}
                             </span>
                         </div>
-                        <i class="not-bookmarked fa-regular fa-bookmark text-xl hover:text-gray-500 cursor-pointer"></i>
-                        <i class="bookmarked fa-solid fa-bookmark text-xl text-black hidden cursor-pointer"></i>
+                        @include('components.bookmark-button', ['food' => $post])
                     </div>
                 </div>
             </div>

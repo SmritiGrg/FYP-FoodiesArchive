@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\CuisineTypes;
-use App\Models\FoodPosts;
+use App\Models\FoodPost;
 use App\Models\FoodTypes;
 use App\Models\Restaurants;
 use App\Models\Reviews;
@@ -167,7 +167,7 @@ class FoodPostController extends Controller
 
         // dd($request);
         // Create new food post
-        $foodPost = new FoodPosts();
+        $foodPost = new FoodPost();
 
         // Store the rest of the form data
         $foodPost->name = $data['name'];
@@ -196,7 +196,7 @@ class FoodPostController extends Controller
      */
     public function show($id, Request $request)
     {
-        $food = FoodPosts::findOrFail($id);
+        $food = FoodPost::findOrFail($id);
 
         if ($request->has('scroll')) {
             session(['scroll_position' => $request->scroll]);
@@ -204,7 +204,8 @@ class FoodPostController extends Controller
 
         $reviewsPaginate = Reviews::where('food_post_id', $id)->paginate(5);
 
-        $similarPosts = FoodPosts::where('id', '!=', $id)
+        $similarPosts = FoodPost::where('id', '!=', $id)
+            ->where('user_id', '!=', Auth::id()) // Excluding posts from the auth user
             ->where(function ($query) use ($food) {
                 $query->where('cuisine_type_id', $food->cuisine_type_id)
                     ->orWhere('food_type_id', $food->food_type_id)
@@ -220,7 +221,7 @@ class FoodPostController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(FoodPosts $foodPost)
+    public function edit(FoodPost $foodPost)
     {
         //
     }
@@ -228,7 +229,7 @@ class FoodPostController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, FoodPosts $foodPost)
+    public function update(Request $request, FoodPost $foodPost)
     {
         //
     }
@@ -236,7 +237,7 @@ class FoodPostController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(FoodPosts $foodPost)
+    public function destroy(FoodPost $foodPost)
     {
         //
     }
@@ -248,7 +249,7 @@ class FoodPostController extends Controller
 
         $search = $request->input('query');
 
-        $result = FoodPosts::where(function ($query) use ($search) {
+        $result = FoodPost::where(function ($query) use ($search) {
             $query->where('name', 'like', "%$search%");
         })
             ->orWhereHas('cuisineType', function ($query) use ($search) {

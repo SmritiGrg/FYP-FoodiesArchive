@@ -95,8 +95,7 @@
                                 <i class="fa-regular fa-comment text-xl hover:text-gray-500 cursor-pointer"></i> {{$likedpost->foodPost->reviews->count()}}
                             </span>
                         </div>
-                        <i class="not-bookmarked fa-regular fa-bookmark text-xl hover:text-gray-500 cursor-pointer"></i>
-                        <i class="bookmarked fa-solid fa-bookmark text-xl text-black hidden cursor-pointer"></i>
+                        @include('components.bookmark-button', ['food' => $likedpost->foodPost])
                     </div>
                 </div>
             </div>
