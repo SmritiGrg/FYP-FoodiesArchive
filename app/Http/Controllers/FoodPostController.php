@@ -293,4 +293,56 @@ class FoodPostController extends Controller
 
         return redirect()->route('foodpost.create')->with('message', 'Form data has been cleared.');
     }
+
+    public function liveSearch(Request $request)
+    {
+        if ($request->ajax()) {
+            $search = $request->input('query'); // Corrected variable name
+
+            $foods = FoodPost::where(function ($q) use ($search) {
+                $q->where('name', 'like', "%$search%")
+                    ->orWhereHas('cuisineType', function ($q) use ($search) {
+                        $q->where('name', 'like', "%$search%");
+                    })
+                    ->orWhereHas('foodType', function ($q) use ($search) {
+                        $q->where('name', 'like', "%$search%");
+                    })
+                    ->orWhereHas('tag', function ($q) use ($search) {
+                        $q->where('name', 'like', "%$search%");
+                    })
+                    ->orWhereHas('restaurant', function ($q) use ($search) {
+                        $q->where('name', 'like', "%$search%");
+                    });
+            })
+                ->limit(6)
+                ->get();
+
+            // Initialize output variable
+            $output = "";
+
+            if ($foods->count()) {
+                foreach ($foods as $food) {
+                    $output .= '
+                    <a href="' . route('food.details', $food->id) . '" class="block">
+                        <div class="flex items-center hover:bg-gray-100 p-3 cursor-pointer" onclick="event.stopPropagation();">
+                            <img src="' . asset($food->image) . '" 
+                                alt="img" 
+                                class="w-16 h-16 object-cover object-center rounded-md" />
+                            <div class="pl-3">
+                                <span class="font-medium text-base hover:text-gray-500 block">' . $food->name . '</span>
+                                <p class="font-light text-sm text-gray-500">Restaurant: ' . $food->restaurant->name . '</p>
+                            </div>
+                        </div>  
+                    </a>
+                    ';
+                }
+            } else {
+                $output = '<p class="text-gray-500 text-sm p-4">No results found.</p>';
+            }
+
+            return response()->json($output);
+        }
+
+        return view('FoodiesArchive.index');
+    }
 }

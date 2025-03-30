@@ -8,14 +8,13 @@
                 <form action="{{ route('search.food') }}" method="GET">
                     <input 
                         id="search-bar"
-                        type="text" 
+                        type="search" 
                         name="query"
                         placeholder="Discover foods..." 
                         class="w-full p-4 pr-4 sm:pr-20 pl-9 text-gray-800 font-poppins rounded-full border border-gray-300 focus:outline-none"
                         style="box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;"
                         value="{{ old('query', $search) }}"
                         onfocus="showModal()"
-                        onblur="hideModal()"
                     />
                     <div class="absolute left-4 top-7 sm:top-1/2 transform -translate-y-1/2 text-black cursor-pointer">
                         <i class="fa-solid fa-magnifying-glass"></i>
@@ -34,13 +33,15 @@
                     </div>
                 </form>
 
-                <!-- Modal -->
-                <div id="search-modal" class="absolute left-0 mt-2 w-full z-50 bg-white rounded-xl shadow-md hidden">
+                {{-- Modal  --}}
+                <div id="search-modal" class="livepost absolute left-0 mt-2 w-full z-50 bg-white rounded-xl shadow-md hidden">
                     <div class="p-4 flex items-center">
                         <i class="fa-solid fa-location-arrow text-base"></i>
                         <span class="pl-3">Nearby</span>
                     </div>
-                    <!-- Add more content to your modal as needed -->
+                    <div id="search-results" class="border-t border-gray-200">
+                        {{-- this is the part where the live search will come --}}
+                    </div>
                 </div>
             </div>
         </div>

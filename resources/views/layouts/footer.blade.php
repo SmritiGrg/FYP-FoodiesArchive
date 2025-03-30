@@ -1,111 +1,111 @@
 <footer class="bg-bgPurple">
-        <div class="max-w-screen-xl mx-auto">
-            <div class="flex flex-wrap p-4 gap-6 justify-between">
-                <div class="w-full sm:w-full md:w-1/3 lg:w-1/4 mt-6">
-                    <a href="#">
-                    <img
-                        src="{{ asset('assets/img/FoodiesArchive_Logo-name_only.png') }}"
-                        class="h-14 mb-5"
-                        alt="Foodie's Archive Logo"
-                    />
-                    </a>
-                    <p class="text-lightgray text-sm font-poppins">
-                    Bringing food lovers together, discover authentic tastes, share
-                    your Foodie Adventures and stunning foodie spreads today.
-                    </p>
-                    <p class="text-lightgray text-sm mt-2 font-poppins">
-                    Sign up now and discover the best food reviews in Nepal
-                    </p>
-                </div>
-
-                <div class="w-full sm:w-full md:w-1/3 lg:w-1/5 mt-6">
-                    <h3 class="text-gray-900 text-xl font-medium mb-4 font-poppins">
-                    Features
-                    </h3>
-                    <ul class="space-y-2">
-                    <li>
-                        <a href="#" class="text-lightgray hover:text-gray-500 text-sm hover:underline font-poppins">Create Post</a>
-                    </li>
-                    <li>
-                        <a
-                        href="#"
-                        class="text-lightgray hover:text-gray-500 text-sm hover:underline font-poppins"
-                        >Write Review</a
-                        >
-                    </li>
-                    <li>
-                        <a
-                        href="#"
-                        class="text-lightgray hover:text-gray-500 text-sm hover:underline font-poppins"
-                        >Build Streaks</a
-                        >
-                    </li>
-                    </ul>
-                </div>
-
-                <div class="w-full sm:w-full md:w-1/3 lg:w-1/5 mt-6">
-                    <h3 class="text-gray-900 text-xl font-medium mb-4 font-poppins">
-                    Quick Links
-                    </h3>
-                    <ul class="space-y-2">
-                    <li>
-                        <a
-                        href="#"
-                        class="text-lightgray hover:text-gray-500 text-sm hover:underline font-poppins"
-                        >Discover</a
-                        >
-                    </li>
-                    <li>
-                        <a
-                        href="#"
-                        class="text-lightgray hover:text-gray-500 text-sm hover:underline font-poppins"
-                        >Post a food</a
-                        >
-                    </li>
-                    <li>
-                        <a
-                        href="#"
-                        class="text-lightgray hover:text-gray-500 text-sm hover:underline font-poppins"
-                        >About us</a
-                        >
-                    </li>
-                    </ul>
-                </div>
-
-                <div class="w-full sm:w-full md:w-1/3 lg:w-1/5 mt-6">
-                    <h3 class="text-gray-900 text-xl font-medium mb-4 font-poppins">
-                    Connect with us
-                    </h3>
-                    <ul class="space-y-2">
-                    <a href=""
-                        ><li
-                        class="text-lightgray text-sm font-poppins hover:text-gray-500"
-                        >
-                        +977 9812354678
-                        </li></a
-                    >
-                    <a href=""
-                        ><li
-                        class="text-lightgray text-sm font-poppins underline hover:text-gray-500"
-                        >
-                        foodiearchive@gmail.com
-                        </li></a
-                    >
-                    </ul>
-                </div>
+    <div class="max-w-screen-xl mx-auto">
+        <div class="flex flex-wrap p-4 gap-6 justify-between">
+            <div class="w-full sm:w-full md:w-1/3 lg:w-1/4 mt-6">
+                <a href="/">
+                <img
+                    src="{{ asset('assets/img/FoodiesArchive_Logo-name_only.png') }}"
+                    class="h-14 mb-5"
+                    alt="Foodie's Archive Logo"
+                />
+                </a>
+                <p class="text-lightgray text-sm font-poppins">
+                Bringing food lovers together, discover authentic tastes, share
+                your Foodie Adventures and stunning foodie spreads today.
+                </p>
+                <p class="text-lightgray text-sm mt-2 font-poppins">
+                Sign up now and discover the best food reviews in Nepal
+                </p>
             </div>
 
-            <div class="border-t border-gray-300 pt-8 text-center pb-5">
-                <p class="text-lightgray text-sm font-poppins">
-                    This website is developed as a final year project for Informatics
-                    College Pokhara, Nepal
-                </p>
-                <p class="text-lightgray text-sm mt-1 font-poppins">
-                    Copyright © 2025 Foodie's Archive. All rights reserved.
-                </p>
+            <div class="w-full sm:w-full md:w-1/3 lg:w-1/5 mt-6">
+                <h3 class="text-gray-900 text-xl font-medium mb-4 font-poppins">
+                Features
+                </h3>
+                <ul class="space-y-2">
+                <li>
+                    <a href="#" class="text-lightgray hover:text-gray-500 text-sm hover:underline font-poppins">Create Post</a>
+                </li>
+                <li>
+                    <a
+                    href="#"
+                    class="text-lightgray hover:text-gray-500 text-sm hover:underline font-poppins"
+                    >Write Review</a
+                    >
+                </li>
+                <li>
+                    <a
+                    href="#"
+                    class="text-lightgray hover:text-gray-500 text-sm hover:underline font-poppins"
+                    >Build Streaks</a
+                    >
+                </li>
+                </ul>
+            </div>
+
+            <div class="w-full sm:w-full md:w-1/3 lg:w-1/5 mt-6">
+                <h3 class="text-gray-900 text-xl font-medium mb-4 font-poppins">
+                Quick Links
+                </h3>
+                <ul class="space-y-2">
+                <li>
+                    <a
+                    href="#"
+                    class="text-lightgray hover:text-gray-500 text-sm hover:underline font-poppins"
+                    >Discover</a
+                    >
+                </li>
+                <li>
+                    <a
+                    href="#"
+                    class="text-lightgray hover:text-gray-500 text-sm hover:underline font-poppins"
+                    >Post a food</a
+                    >
+                </li>
+                <li>
+                    <a
+                    href="#"
+                    class="text-lightgray hover:text-gray-500 text-sm hover:underline font-poppins"
+                    >About us</a
+                    >
+                </li>
+                </ul>
+            </div>
+
+            <div class="w-full sm:w-full md:w-1/3 lg:w-1/5 mt-6">
+                <h3 class="text-gray-900 text-xl font-medium mb-4 font-poppins">
+                Connect with us
+                </h3>
+                <ul class="space-y-2">
+                <a href=""
+                    ><li
+                    class="text-lightgray text-sm font-poppins hover:text-gray-500"
+                    >
+                    +977 9812354678
+                    </li></a
+                >
+                <a href=""
+                    ><li
+                    class="text-lightgray text-sm font-poppins underline hover:text-gray-500"
+                    >
+                    foodiearchive@gmail.com
+                    </li></a
+                >
+                </ul>
             </div>
         </div>
-    </footer>
+
+        <div class="border-t border-gray-300 pt-8 text-center pb-5">
+            <p class="text-lightgray text-sm font-poppins">
+                This website is developed as a final year project for Informatics
+                College Pokhara, Nepal
+            </p>
+            <p class="text-lightgray text-sm mt-1 font-poppins">
+                Copyright © 2025 Foodie's Archive. All rights reserved.
+            </p>
+        </div>
+    </div>
+</footer>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
@@ -118,7 +118,7 @@
 
         ////// SEARCH BAR WHEN SCROLLING JS
         window.addEventListener("scroll", function () {
-            let searchBar = document.getElementById("search-bar2");
+            let searchBar = document.getElementById("nav-search-container");
             if (window.scrollY > 50) {
                 searchBar.classList.remove("hidden");
             } else {
@@ -208,22 +208,6 @@
             document.querySelector('.fixed').classList.add('hidden');
         }
 
-        ////////////// FOR BOOKMARK BUTTON
-        // Select the elements
-        // const notBookmarked = document.querySelector('.not-bookmarked');
-        // const bookmarked = document.querySelector('.bookmarked');
-
-        // // Add click event to toggle classes
-        // notBookmarked.addEventListener('click', () => {
-        //     notBookmarked.classList.toggle('active');
-        //     bookmarked.classList.toggle('active');
-        // });
-
-        // bookmarked.addEventListener('click', () => {
-        //     notBookmarked.classList.toggle('active');
-        //     bookmarked.classList.toggle('active');
-        // });
-
         ////// ANIMATE ON SCROLL
         AOS.init({
             duration: 1000,
@@ -293,6 +277,31 @@
 
 
         /////// SEARCH BAR MODAL
+        // function showModal() {
+        //     document.getElementById('search-modal').classList.remove('hidden');
+        // }
+
+        // function hideModal() {
+        //     document.getElementById('search-modal').classList.add('hidden');
+        // }
+
+        // // Adding click listener to document
+        // document.addEventListener('click', function(event) {
+        //     if (!event.target.closest('#search-container') && !event.target.closest('#search-modal')) {
+        //         hideModal();
+        //     }
+        // });
+
+        // Nav Section Modal
+        function showNavModal() {
+            document.getElementById('nav-search-modal').classList.remove('hidden');
+        }
+
+        function hideNavModal() {
+            document.getElementById('nav-search-modal').classList.add('hidden');
+        }
+
+        // Hero Section Modal
         function showModal() {
             document.getElementById('search-modal').classList.remove('hidden');
         }
@@ -300,6 +309,20 @@
         function hideModal() {
             document.getElementById('search-modal').classList.add('hidden');
         }
+
+        // Click listener for hero section
+        document.addEventListener('click', function(event) {
+            if (!event.target.closest('#search-container') && !event.target.closest('#search-modal')) {
+                hideModal();
+            }
+        });
+
+        // Click listener for nav section
+        document.addEventListener('click', function(event) {
+            if (!event.target.closest('#nav-search-container') && !event.target.closest('#nav-search-modal')) {
+                hideNavModal();
+            }
+        });
         /////// END SEARCH BAR MODAL
 
 

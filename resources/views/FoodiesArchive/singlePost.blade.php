@@ -12,7 +12,7 @@
             <div class="grid grid-cols-1 md:grid-cols-5 gap-1 sm:gap-8 mt-4 border-b-2 border-gray-100">
                 <!-- Left Column - Image & Details -->
                 <div class="col-span-2 self-start mb-3">
-                    <img src="{{ asset($food->image) }}" alt="Food img" class="w-full h-auto sm:h-2/4 md:h-2/3 object-cover rounded-lg" />
+                    <img src="{{ asset($food->image) }}" alt="Food img" class="w-full h-auto sm:h-1/4 object-cover rounded-lg" />
                     
                     <div class="flex items-center justify-between my-2">
                         <div class="flex items-center gap-5 text-gray-600">
@@ -178,7 +178,6 @@
                                 {{-- If the user is not logged in, show the Follow button --}}
                                 <form method="POST" action="{{route('users.follow', $similarPost->user->id)}}" class="flex space-x-1 items-center">
                                     @csrf
-                                    <p class="rounded-full w-1 h-1 bg-gray-600 "> </p>
                                     <button class="text-sm font-medium text-customYellow hover:text-hovercustomYellow">
                                         Follow
                                     </button>
@@ -188,7 +187,6 @@
                                 @if ($isFollowing)
                                     <form method="POST" action="{{route('users.unfollow', $similarPost->user->id)}}" class="flex space-x-1 items-center">
                                         @csrf
-                                        <p class="rounded-full w-1 h-1 bg-gray-600"> </p>
                                         <button class="text-sm font-medium text-customYellow hover:text-hovercustomYellow">
                                             Unfollow
                                         </button>
@@ -196,7 +194,6 @@
                                 @else
                                     <form method="POST" action="{{route('users.follow', $similarPost->user->id)}}" class="flex space-x-1 items-center">
                                         @csrf
-                                        <p class="rounded-full w-1 h-1 bg-gray-600"> </p>
                                         <button class="text-sm font-medium text-customYellow hover:text-hovercustomYellow">
                                             Follow
                                         </button>

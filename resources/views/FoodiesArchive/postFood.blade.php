@@ -348,6 +348,7 @@
         </div>
     </section>
 
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
         const stars = document.querySelectorAll(".rating-icon");
         const ratingTitle = document.getElementById("rating-title");
@@ -441,6 +442,21 @@
                     previewContainer.innerHTML = `<img src="${e.target.result}" alt="Selected Image" class="w-[44vh] h-[50vh] sm:w-[60vh] sm:h-[65vh] object-cover" />`;
                 };
                 reader.readAsDataURL(file);
+            }
+        });
+
+        function showNavModal() {
+            document.getElementById('nav-search-modal').classList.remove('hidden');
+        }
+
+        function hideNavModal() {
+            document.getElementById('nav-search-modal').classList.add('hidden');
+        }
+
+        // Adding click listener to document
+        document.addEventListener('click', function(event) {
+            if (!event.target.closest('#nav-search-container') && !event.target.closest('#nav-search-modal')) {
+                hideNavModal();
             }
         });
     </script>

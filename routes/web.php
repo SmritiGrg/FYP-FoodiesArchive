@@ -26,6 +26,8 @@ Route::get('/writeReview', [FrontendController::class, 'writeReview']);
 Route::get('/search', [FoodPostController::class, 'search'])->name('search.food');
 // Route::get('/writeReviewSearch', [FoodPostController::class, 'searchForReview'])->name('search.review');
 
+Route::get('/live', [FoodPostController::class, 'liveSearch'])->name('search.live');
+
 Route::get('/discover/postDetails/{id}', [FoodPostController::class, 'show'])->name('food.details');
 
 Route::get('/userProfile/{id}', [FrontendController::class, 'otherProfile'])->name('otherProfile');

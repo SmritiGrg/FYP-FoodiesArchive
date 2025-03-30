@@ -21,20 +21,34 @@
                 />
             </a>
 
-            <div id="search-bar2" class="hidden transition-all duration-300">
+            <div id="nav-search-container">
                 <div class="relative w-full max-w-2xl">
                     <form action="{{ route('search.food') }}" method="GET">
                         <div class="absolute left-4 top-1/2 transform -translate-y-1/2 text-black cursor-pointer">
                             <i class="fa-solid fa-magnifying-glass"></i>
                         </div>
                         <input 
-                            id="search-bar"
+                            id="nav-search-bar"
                             type="text" 
                             name="query"
                             placeholder="Discover foods..." 
                             class="w-52 md:w-80 pl-9 text-gray-800 font-poppins rounded-full border border-gray-300 text-sm"
+                            style="box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;"
+                            onfocus="showNavModal()"
                         />
                     </form>
+
+                    <!-- Modal -->
+                    <div id="nav-search-modal" class="livepost absolute left-0 mt-2 w-full z-50 bg-white rounded-xl shadow-md hidden">
+                        <div class="p-4 flex items-center">
+                            <i class="fa-solid fa-location-arrow text-base"></i>
+                            <span class="pl-3">Nearby</span>
+                        </div>
+                        <div id="nav-search-results" class="border-t border-gray-200">
+                            {{-- this is the part where the live search will come --}}
+                        </div>
+                        
+                    </div>
                 </div>
             </div>
 

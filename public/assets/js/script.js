@@ -140,4 +140,36 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
     // END
+
+    // FOR OTHER LIVE SEARCH BAR
+    $(document).on("keyup", "#search-bar", function () {
+        // console.log("Keyup event fired!");
+        var value = $(this).val();
+        // console.log(value);
+        $.ajax({
+            type: "GET",
+            url: "/live",
+            data: { query: value },
+            success: function (data) {
+                // console.log(data);
+                $("#search-results").html(data);
+            },
+        });
+    });
+
+    // FOR NAV BAR LIVE SEARCH BAR
+    $(document).on("keyup", "#nav-search-bar", function () {
+        // console.log("Keyup event fired!");
+        var value = $(this).val();
+        // console.log(value);
+        $.ajax({
+            type: "GET",
+            url: "/live",
+            data: { query: value },
+            success: function (data) {
+                // console.log(data);
+                $("#nav-search-results").html(data);
+            },
+        });
+    });
 });
