@@ -2,7 +2,7 @@
 
 namespace Database\Factories;
 
-use App\Models\FoodPosts;
+use App\Models\FoodPost;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -19,7 +19,7 @@ class LikesFactory extends Factory
     public function definition(): array
     {
         $userId = User::pluck('id')->toArray(); // Fetch all user IDs
-        $foodPostId = FoodPosts::pluck('id')->toArray(); // Fetch all food post IDs
+        $foodPostId = FoodPost::pluck('id')->toArray(); // Fetch all food post IDs
 
         return [
             'user_id' => $this->faker->randomElement($userId), // Associate a random user

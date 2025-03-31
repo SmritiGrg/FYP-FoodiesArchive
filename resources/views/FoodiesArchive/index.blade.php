@@ -193,7 +193,7 @@
                                 </div>
                                 <!-- Image Section -->
                                 <div class="w-full pt-5 pb-8 sm:py-10 md:w-1/2 md:py-12 flex justify-center" data-aos="fade-up">
-                                    <img src="{{asset('assets/img/laphing.jpg')}}" alt="Delicious Food" class="w-80 md:w-80 lg:w-full max-w-sm h-72 md:h-80 lg:h-96 object-cover rounded-lg">
+                                    <img src="{{asset('assets/img/Dinner.jpg')}}" alt="Delicious Food" class="w-80 md:w-80 lg:w-full max-w-sm h-72 md:h-80 lg:h-96 object-cover rounded-lg">
                                 </div>
                             </div>
                         </li>
@@ -211,7 +211,7 @@
                                 </div>
                                 <!-- Image Section -->
                                 <div class="w-full pt-5 pb-8 sm:py-10 md:w-1/2 md:py-12 flex justify-center">
-                                    <img src="{{asset('assets/img/laphing.jpg')}}" alt="Delicious Food" class="w-80 md:w-80 lg:w-full max-w-sm h-72 md:h-80 lg:h-96 object-cover rounded-lg">
+                                    <img src="{{asset('assets/img/Dessert.jpg')}}" alt="Delicious Food" class="w-80 md:w-80 lg:w-full max-w-sm h-72 md:h-80 lg:h-96 object-cover rounded-lg">
                                 </div>
                             </div>
                         </li>
@@ -230,7 +230,7 @@
                                 </div>
                                 <!-- Image Section -->
                                 <div class="w-full pt-5 pb-8 sm:py-10 md:w-1/2 md:py-12 flex justify-center">
-                                    <img src="{{asset('assets/img/sandwich.png')}}" alt="Delicious Food" class="w-80 md:w-80 lg:w-full max-w-sm h-72 md:h-80 lg:h-96 object-cover rounded-lg">
+                                    <img src="{{asset('assets/img/Breakfast2.png')}}" alt="Delicious Food" class="w-80 md:w-80 lg:w-full max-w-sm h-72 md:h-80 lg:h-96 object-cover rounded-lg">
                                 </div>
                             </div>
                         </li>
@@ -268,7 +268,7 @@
                                 </div>
                                 <!-- Image Section -->
                                 <div class="w-full pt-5 pb-8 sm:py-10 md:w-1/2 md:py-12 flex justify-center">
-                                    <img src="{{asset('assets/img/Chicken-Kimbap-1.png')}}" alt="Delicious Food" class="w-80 md:w-80 lg:w-full max-w-sm h-72 md:h-80 lg:h-96 object-cover rounded-lg">
+                                    <img src="{{asset('assets/img/streak.png')}}" alt="Delicious Food" class="w-80 md:w-80 lg:w-full max-w-sm h-72 md:h-80 lg:h-96 object-cover rounded-lg">
                                 </div>
                             </div>
                         </li>
@@ -460,7 +460,7 @@
                         </div>
 
                         <div class="px-4">
-                            <a href="{{route('food.details', $food->id)}}"><img src="{{ asset('uploads/' . $food->image) }}" alt="Food Img" class="w-full h-96 sm:h-72 object-cover object-center rounded-xl hover:opacity-85"/></a>
+                            <a href="{{route('food.details', $food->id)}}"><img src="{{ asset($food->image) }}" alt="Food Img" class="w-full h-96 sm:h-72 object-cover object-center rounded-xl hover:opacity-85"/></a>
                             <div class="mt-2">
                                 <div class="flex justify-between items-center mt-2 mb-2">
                                     <div class="flex items-center space-x-4">

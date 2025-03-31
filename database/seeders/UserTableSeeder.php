@@ -22,14 +22,26 @@ class UserTableSeeder extends Seeder
             'image' => 'admin.jpg',
             'role' => 'admin',
         ]);
+
         User::create([
             'full_name' => 'Smriti Gurung',
             'username' => 'smrii28',
             'email' => 'gurungsm.10@gmail.com',
             'password' => Hash::make('customer123'),
-            'image' => 'smrii28-profile-1738587162.jpg',
+            'image' => 'aries10-profile-1742961117.jpg',
             'role' => 'visitor',
             'streak_count' => 50,
+            'last_activity_date' => now(),
+        ]);
+
+        User::create([
+            'full_name' => 'Aries Gurung',
+            'username' => 'aries10',
+            'email' => 'aries10@gmail.com',
+            'password' => Hash::make('Aries28#'),
+            'image' => 'aries10-profile-1742961117.jpg',
+            'role' => 'visitor',
+            'streak_count' => 40,
             'last_activity_date' => now(),
         ]);
         User::factory()->count(50)->create();

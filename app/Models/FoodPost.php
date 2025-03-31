@@ -61,7 +61,7 @@ class FoodPost extends Model
     // A food post can have many reviews
     public function reviews()
     {
-        return $this->hasMany(Reviews::class, 'food_post_id', 'id');
+        return $this->hasMany(Reviews::class, 'food_post_id', 'id')->whereNull('parent_id');
     }
 
     public function tag()

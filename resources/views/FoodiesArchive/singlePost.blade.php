@@ -203,7 +203,7 @@
                         </div>
 
                         <div class="px-4">
-                            <img src="{{ asset('uploads/' . $similarPost->image) }}" alt="Food Img" class="w-full h-72 object-cover object-center rounded-xl"/>
+                            <img src="{{ asset( $similarPost->image) }}" alt="Food Img" class="w-full h-72 object-cover object-center rounded-xl"/>
                             <div class="mt-2">
                                 <div class="flex justify-between items-center mt-2 mb-2">
                                     <div class="flex items-center space-x-4">

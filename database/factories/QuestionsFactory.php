@@ -3,7 +3,6 @@
 namespace Database\Factories;
 
 use App\Models\FoodPost;
-use App\Models\FoodPosts;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -19,7 +18,7 @@ class QuestionsFactory extends Factory
      */
     public function definition(): array
     {
-        $foodPostId = FoodPosts::pluck('id')->toArray();
+        $foodPostId = FoodPost::pluck('id')->toArray();
         $userId = User::pluck('id')->toArray();
         return [
             'content' => $this->faker->sentence(), // Generates a random question

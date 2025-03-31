@@ -25,4 +25,8 @@ class Reviews extends Model
     {
         return $this->belongsTo(FoodPost::class, 'food_post_id', 'id');
     }
+
+    public function replies(){
+        return $this->hasMany(Reviews::class, 'parent_id');
+    }
 }
