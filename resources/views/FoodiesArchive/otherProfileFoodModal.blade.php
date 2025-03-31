@@ -109,6 +109,8 @@
                                             <a href="{{ route('otherProfile', ['id' => $review->user->id]) }}" class="font-normal text-xs hover:text-gray-500">{{$review->user->full_name}}</a>
                                         </div>
                                         <p class="text-gray-500 text-xs">{{$post->created_at->diffForHumans()}}</p>
+                                        <button onclick="toggleReplyForm({{ $review->id }})" class="text-xs text-gray-500 font-medium hover:text-gray-600">Reply</button>
+
                                         <div class="mt-2">
                                             @php
                                                 $userRatingValue = round($review->rating);
@@ -126,7 +128,80 @@
                                             </div>
                                             <p class="text-xs text-textBlack mt-2 font-light">{{$review->review}}</p>
                                         </div>
-                                        
+
+                                        <!-- Reply Form -->
+                                        <div id="reply-form-{{ $review->id }}" class="hidden">
+                                            <form action="{{ route('review.store') }}" method="POST">
+                                                @csrf
+                                                <input type="hidden" name="food_post_id" value="{{ $review->food_post_id }}">
+                                                <input type="hidden" name="parent_id" value="{{ $review->id }}"> <!-- This ensures it's a reply -->
+                                                
+                                                <div class="w-full mb-2 mt-2">
+                                                    <textarea class="bg-gray-100 rounded text-sm border border-gray-400 resize-none w-full h-20 py-2 px-3 font-normal placeholder-gray-400 focus:outline-none focus:bg-white"
+                                                            name="review" placeholder="Reply to this review" {{ $errors->has('review') ? 'border-red-500' : 'border-gray-300' }}></textarea>
+                                                    @error('review')
+                                                        <p class="text-sm text-red-600 space-y-1 font-poppins">{{ $message }}</p>
+                                                    @enderror
+                                                </div>
+
+                                                <div class="w-full flex justify-end px-3">
+                                                    <button type="submit" class="py-1 px-5 bg-customYellow text-black text-sm font-medium rounded-md hover:bg-hovercustomYellow">
+                                                        Post
+                                                    </button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                        <!-- Checking if there are replies -->
+                                        @if ($review->replies->count() > 0)
+                                            <!-- Toggle Replies Button -->
+                                            <div class="flex items-center my-2">
+                                                <hr class="w-10 border-gray-400">
+                                                <button id="toggle-replies-btn-{{ $review->id }}" onclick="toggleReplies({{ $review->id }})" class="text-sm text-gray-500 font-normal px-2 mt-2">
+                                                    SHOW REPLIES ({{ $review->replies->count() }})
+                                                </button>
+                                            </div>
+
+                                            <!-- Replies Section -->
+                                            <div id="replies-{{ $review->id }}" class="hidden w-full">
+                                                @foreach ($review->replies as $reply)
+                                                    <div class="mb-3 ml-6 lg:ml-12 text-base bg-white w-full">
+                                                        <div class="flex justify-between items-center mb-2 w-full">
+                                                            <div class="flex items-center">
+                                                                <a href="{{ route('otherProfile', ['id' => $reply->user->id]) }}" class="flex items-center">
+                                                                    <img class="mr-2 w-10 h-10 rounded-full object-cover" 
+                                                                        src="{{ asset('uploads/profile-images/' . $reply->user->image) }}" >
+                                                                    <p class="inline-flex items-center mr-3 text-sm text-gray-900 font-medium">
+                                                                        {{ $reply->user->full_name }}
+                                                                    </p>
+                                                                </a>
+                                                                <p class="text-xs text-gray-600">
+                                                                    <time datetime="{{ $reply->created_at }}">
+                                                                        {{ $reply->created_at->diffForHumans() }}
+                                                                    </time>
+                                                                </p>
+                                                            </div>
+                                                            @if (Auth::id() === $reply->user->id)
+                                                                <div class="relative group">
+                                                                    <span class="text-gray-600 text-lg font-medium hover:text-gray-500 cursor-pointer">
+                                                                        <i class="fa-solid fa-ellipsis"></i>
+                                                                    </span>
+                                                                    <div class="absolute w-28 top-full right-0 rounded-lg mt-1 shadow-lg p-1 text-start scale-y-0 border-gray-200 group-hover:scale-y-100 origin-top duration-200 bg-white">
+                                                                        <div class="hover:bg-gray-100 flex justify-center">
+                                                                            <form action="{{ route('review.delete', $reply->id) }}" method="POST">
+                                                                                @csrf
+                                                                                @method('DELETE')
+                                                                                <button type="submit" class="block text-xs font-normal text-red-500 px-2 py-1">Delete</button>
+                                                                            </form>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            @endif
+                                                        </div>
+                                                        <p class="text-gray-600 mt-2 text-sm">{{ $reply->review }}</p>
+                                                    </div>
+                                                @endforeach
+                                            </div>
+                                        @endif
                                     </div>
                                 </div>
                             @endforeach
@@ -137,7 +212,7 @@
                         <div class="flex items-center space-x-4 my-2">
                             @include('components.like-button', ['food' => $post])
 
-                            <span class="text-black text-xl">
+                            <span class="text-black text-base">
                                 <i class="fa-regular fa-comment text-xl hover:text-gray-500 cursor-pointer"></i> {{$post->reviews->count()}}
                             </span>
                         </div>
@@ -200,3 +275,31 @@
         </div>
     </div>
 </div>
+
+<script>
+    function toggleReplies(reviewId) {
+        const repliesSection = document.getElementById(`replies-${reviewId}`);
+        const toggleButton = document.getElementById(`toggle-replies-btn-${reviewId}`);
+
+        if (repliesSection.classList.contains("hidden")) {
+            // Show replies
+            repliesSection.classList.remove("hidden");
+            toggleButton.innerText = `HIDE REPLIES`;
+        } else {
+            // Hide replies
+            repliesSection.classList.add("hidden");
+            toggleButton.innerText = `SHOW REPLIES (${repliesSection.children.length})`;
+        }
+    }
+
+    function toggleReplyForm(reviewId) {
+        const replyForm = document.getElementById(`reply-form-${reviewId}`);
+        
+        // Toggle visibility of the reply form
+        if (replyForm.classList.contains("hidden")) {
+            replyForm.classList.remove("hidden");
+        } else {
+            replyForm.classList.add("hidden");
+        }
+    }
+</script>

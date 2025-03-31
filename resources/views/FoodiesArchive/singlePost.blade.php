@@ -1,4 +1,15 @@
 <x-app-layout>
+    @if (session('message'))
+        <p id="success-message" class="fixed bottom-5 left-1/2 transform -translate-x-1/2 text-base text-green-500 border border-green-200 bg-white px-4 py-2 rounded-lg shadow-md w-fit z-50">
+            {{ session('message') }}
+        </p>
+    @endif
+    @if (session('delete'))
+        <p id="success-message" class="fixed bottom-5 left-1/2 transform -translate-x-1/2 text-base text-red-500 border border-red-200 bg-white px-4 py-2 rounded-lg shadow-md w-fit z-50">
+            {{ session('delete') }}
+        </p>
+    @endif
+    
     <section class="pt-20">
         <div class="max-w-7xl mx-auto p-6">
             <a href="{{ route('food.discover', ['scroll' => session('scroll_position')]) }}" class="text-gray-700 font-medium hover:text-gray-500 hvr-icon-back">
@@ -9,7 +20,7 @@
             <p class="text-gray-600 pt-2">Restaurant: {{$food->restaurant->name}}</p>
             <p class="text-gray-500 text-sm">{{$food->cuisineType->name}}, {{$food->foodType->name}}</p>
 
-            <div class="grid grid-cols-1 md:grid-cols-5 gap-1 sm:gap-8 mt-4 border-b-2 border-gray-100">
+            <div class="grid grid-cols-1 md:grid-cols-5 gap-1 sm:gap-8 mt-4 border-b-2 border-gray-100 pb-3">
                 <!-- Left Column - Image & Details -->
                 <div class="col-span-2 self-start mb-3">
                     <img src="{{ asset($food->image) }}" alt="Food img" class="w-full h-auto sm:h-1/4 object-cover rounded-lg" />
@@ -69,41 +80,116 @@
                     <!-- Reviews Grid -->
                     <div class="grid grid-cols-1 gap-4 mt-3">
                         @foreach($reviewsPaginate as $review)
-                            <div class="p-3 border-b-2 border-gray-100">
+                            <div class="border-b-2 border-gray-100 pb-2">
+                                <!-- Reviewer Info -->
                                 <a href="{{ route('otherProfile', ['id' => $review->user->id]) }}" class="flex items-center">
-                                    <img src="{{asset('uploads/profile-images/' . $review->user->image) }}" alt="" class="w-10 h-10 rounded-full object-cover mr-3">
+                                    <img src="{{ asset('uploads/profile-images/' . $review->user->image) }}" alt="" class="w-10 h-10 rounded-full object-cover mr-3">
                                     <div>
-                                        <span class="block text-sm text-gray-900 font-medium">{{$review->user->full_name}}</span>
-                                        <span class="block text-sm text-gray-500"
-                                            >{{$review->user->username}}</span
-                                        >
+                                        <div class="flex space-x-2 items-center">
+                                            <p class="block text-sm text-gray-900 font-medium">
+                                                {{$review->user->full_name}} 
+                                                <span class="text-xs text-gray-500 pl-2">{{ $review->created_at->diffForHumans() }}</span>
+                                            </p>
+                                        </div>
+                                        <span class="block text-sm text-gray-500">{{$review->user->username}}</span>
                                     </div>
                                 </a>
+                                <button onclick="toggleReplyForm({{ $review->id }})" class="text-xs text-gray-500 font-medium hover:text-gray-600">Reply</button>
+                                
+                                <!-- Star Rating -->
                                 @php
                                     $userRatingValue = round($review->rating);
                                     $formattedRating = number_format($userRatingValue, 1);
                                 @endphp
-
                                 <div class="flex items-center mr-2 my-2">
                                     @for ($i = 1; $i <= 5; $i++)
                                         @if ($i <= $userRatingValue)
-                                            <!-- Full star if the rating is less than or equal to the user's rating -->
-                                            <img src="{{ asset('assets/img/cutlery (1).png') }}" 
-                                                class="bg-customYellow p-1 rounded-md mr-1" 
-                                                style="height: 20px; width: 20px;" 
-                                                alt="Full">
+                                            <img src="{{ asset('assets/img/cutlery (1).png') }}" class="bg-customYellow p-1 rounded-md mr-1" style="height: 20px; width: 20px;" alt="Full">
                                         @else
-                                            <!-- Empty star if the rating is less than the current iteration -->
-                                            <img src="{{ asset('assets/img/cutlery (1).png') }}" 
-                                                class="bg-gray-300 p-1 rounded-md mr-1" 
-                                                style="height: 20px; width: 20px;" 
-                                                alt="Empty">
+                                            <img src="{{ asset('assets/img/cutlery (1).png') }}" class="bg-gray-300 p-1 rounded-md mr-1" style="height: 20px; width: 20px;" alt="Empty">
                                         @endif
                                     @endfor
-                                    <p class="ml-2 text-darkPurple font-normal text-sm">{{$formattedRating}}</p>
+                                    <p class="ml-2 text-darkPurple font-normal text-sm">{{ $formattedRating }}</p>
                                 </div>
-                                <p class="text-xs text-gray-500">{{ $review->created_at->diffForHumans() }}</p>
+
+                                <!-- Review Content -->
                                 <p class="text-gray-600 mt-2 text-sm">{{ $review->review }}</p>
+
+                                <!-- Reply Form -->
+                                <div id="reply-form-{{ $review->id }}" class="hidden">
+                                    <form action="{{ route('review.store') }}" method="POST">
+                                        @csrf
+                                        <input type="hidden" name="food_post_id" value="{{ $review->food_post_id }}">
+                                        <input type="hidden" name="parent_id" value="{{ $review->id }}"> <!-- This ensures it's a reply -->
+                                        
+                                        <div class="w-full px-3 mb-2 mt-6">
+                                            <textarea class="bg-gray-100 rounded border border-gray-400 resize-none w-full h-20 py-2 px-3 font-normal placeholder-gray-400 focus:outline-none focus:bg-white"
+                                                    name="review" placeholder="Reply to this review" {{ $errors->has('review') ? 'border-red-500' : 'border-gray-300' }}></textarea>
+                                            @error('review')
+                                                <p class="text-sm text-red-600 space-y-1 font-poppins">{{ $message }}</p>
+                                            @enderror
+                                        </div>
+
+                                        <div class="w-full flex justify-end px-3 my-3">
+                                            <button type="submit" class="py-1 px-5 bg-customYellow text-black text-sm font-medium rounded-md hover:bg-hovercustomYellow">
+                                                Post
+                                            </button>
+                                        </div>
+                                    </form>
+                                </div>
+
+
+                                <!-- Checking if there are replies -->
+                                @if ($review->replies->count() > 0)
+                                    <!-- Toggle Replies Button -->
+                                    <div class="flex items-center my-2">
+                                        <hr class="w-10 border-gray-400">
+                                        <button id="toggle-replies-btn-{{ $review->id }}" onclick="toggleReplies({{ $review->id }})" class="text-sm text-gray-500 font-normal px-2 mt-2">
+                                            SHOW REPLIES ({{ $review->replies->count() }})
+                                        </button>
+                                    </div>
+
+                                    <!-- Replies Section -->
+                                    <div id="replies-{{ $review->id }}" class="hidden">
+                                        @foreach ($review->replies as $reply)
+                                            <div class="mb-3 ml-6 lg:ml-12 text-base bg-white">
+                                                <div class="flex justify-between items-center mb-2">
+                                                    <div class="flex items-center">
+                                                        <a href="{{ route('otherProfile', ['id' => $reply->user->id]) }}" class="flex items-center">
+                                                            <img class="mr-2 w-10 h-10 rounded-full object-cover" 
+                                                                src="{{ asset('uploads/profile-images/' . $reply->user->image) }}" >
+                                                            <p class="inline-flex items-center mr-3 text-sm text-gray-900 font-medium">
+                                                                {{ $reply->user->full_name }}
+                                                            </p>
+                                                        </a>
+                                                        <p class="text-xs text-gray-600">
+                                                            <time datetime="{{ $reply->created_at }}">
+                                                                {{ $reply->created_at->diffForHumans() }}
+                                                            </time>
+                                                        </p>
+                                                    </div>
+                                                    @if (Auth::id() === $reply->user->id)
+                                                        <div class="relative group">
+                                                            <span class="text-gray-600 text-lg font-medium hover:text-gray-500 cursor-pointer">
+                                                                <i class="fa-solid fa-ellipsis"></i>
+                                                            </span>
+                                                            <div class="absolute w-32 top-full right-0 rounded-lg mt-1 shadow-lg p-1 text-start scale-y-0 border-gray-200 group-hover:scale-y-100 origin-top duration-200 bg-white">
+                                                                <div class="hover:bg-gray-100 flex justify-center">
+                                                                    <form action="{{ route('review.delete', $reply->id) }}" method="POST">
+                                                                        @csrf
+                                                                        @method('DELETE')
+                                                                        <button type="submit" class="block text-sm font-normal text-red-500 px-2 py-2">Delete</button>
+                                                                    </form>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    @endif
+                                                </div>
+                                                <p class="text-gray-600 mt-2 text-sm">{{ $reply->review }}</p>
+                                            </div>
+                                        @endforeach
+                                    </div>
+                                @endif
                             </div>
                         @endforeach
                     </div>
@@ -239,4 +325,31 @@
         </div>
     </section>
 
+    <script>
+        function toggleReplies(reviewId) {
+            const repliesSection = document.getElementById(`replies-${reviewId}`);
+            const toggleButton = document.getElementById(`toggle-replies-btn-${reviewId}`);
+
+            if (repliesSection.classList.contains("hidden")) {
+                // Show replies
+                repliesSection.classList.remove("hidden");
+                toggleButton.innerText = `HIDE REPLIES`;
+            } else {
+                // Hide replies
+                repliesSection.classList.add("hidden");
+                toggleButton.innerText = `SHOW REPLIES (${repliesSection.children.length})`;
+            }
+        }
+
+        function toggleReplyForm(reviewId) {
+            const replyForm = document.getElementById(`reply-form-${reviewId}`);
+            
+            // Toggle visibility of the reply form
+            if (replyForm.classList.contains("hidden")) {
+                replyForm.classList.remove("hidden");
+            } else {
+                replyForm.classList.add("hidden");
+            }
+        }
+    </script>
 </x-app-layout>

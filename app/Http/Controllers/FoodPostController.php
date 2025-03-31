@@ -194,18 +194,55 @@ class FoodPostController extends Controller
     /**
      * Display the specified resource.
      */
+    // public function show($id, Request $request)
+    // {
+    //     $food = FoodPost::findOrFail($id);
+
+    //     if ($request->has('scroll')) {
+    //         session(['scroll_position' => $request->scroll]);
+    //     }
+
+    //     // $reviewsPaginate = Reviews::where('food_post_id', $id)->paginate(3);
+    //     $reviewsPaginate = Reviews::where('food_post_id', $id)
+    //         ->with(['user:id,full_name', 'replies'])
+    //         ->get();
+
+    //     dd($food, $reviewsPaginate->toArray());
+
+    //     $similarPosts = FoodPost::where('id', '!=', $id)
+    //         ->where('user_id', '!=', Auth::id()) // Excluding posts from the auth user
+    //         ->where(function ($query) use ($food) {
+    //             $query->where('cuisine_type_id', $food->cuisine_type_id)
+    //                 ->orWhere('food_type_id', $food->food_type_id)
+    //                 ->orWhere('name', 'LIKE', '%' . $food->name . '%');
+    //         })
+    //         ->inRandomOrder()
+    //         ->limit(4)
+    //         ->get();
+
+    //     return view('FoodiesArchive.singlePost', compact('food', 'similarPosts', 'reviewsPaginate'));
+    // }
+
     public function show($id, Request $request)
     {
-        $food = FoodPost::findOrFail($id);
+        $food = FoodPost::with([
+            'reviews.user:id,full_name', // Load review authors
+            'reviews.replies.user:id,full_name' // Load replies with their authors
+        ])->findOrFail($id);
 
         if ($request->has('scroll')) {
             session(['scroll_position' => $request->scroll]);
         }
 
-        $reviewsPaginate = Reviews::where('food_post_id', $id)->paginate(5);
+        // Fetch only top-level reviews (parent_id = NULL)
+        $reviewsPaginate = $food->reviews()->paginate(3);
+
+        $reviewsPaginate->load(['replies.user:id,full_name']);
+
+        // dd($food, $reviewsPaginate->toArray());
 
         $similarPosts = FoodPost::where('id', '!=', $id)
-            ->where('user_id', '!=', Auth::id()) // Excluding posts from the auth user
+            ->where('user_id', '!=', Auth::id()) // Exclude posts from the auth user
             ->where(function ($query) use ($food) {
                 $query->where('cuisine_type_id', $food->cuisine_type_id)
                     ->orWhere('food_type_id', $food->food_type_id)
@@ -217,6 +254,7 @@ class FoodPostController extends Controller
 
         return view('FoodiesArchive.singlePost', compact('food', 'similarPosts', 'reviewsPaginate'));
     }
+
 
     /**
      * Show the form for editing the specified resource.
@@ -237,9 +275,11 @@ class FoodPostController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(FoodPost $foodPost)
+    public function destroy($id)
     {
-        //
+        $post = FoodPost::query()->where('id', $id)->get()->first();
+        $post->delete();
+        return redirect()->route('personalProfile')->with('delete', 'Post deleted successfully!');
     }
 
     public function search(Request $request)

@@ -48,6 +48,9 @@ Route::middleware('auth')->group(function () {
     Route::post('/foodpost/submit', [FoodPostController::class, 'store'])->name('foodpost.store');
     Route::post('/foodpost/clear-session', [FoodPostController::class, 'clearFormSession'])->name('foodpost.clearSession');
 
+    Route::delete('/foodpost/delete/{id}', [FoodPostController::class, 'destroy'])->name('foodpost.delete');
+
+
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::post('/profile', [ProfileController::class, 'removeImage'])->name('profile.remove-image');
@@ -59,6 +62,7 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/write-review/{food_id}', [ReviewsController::class, 'writeReview'])->name('writeReview');
     Route::post('/review/create', [ReviewsController::class, 'store'])->name('review.store');
+    Route::delete('/review/delete/{id}', [ReviewsController::class, 'destroy'])->name('review.delete');
 
     Route::post('/food-posts/{foodPost}/like', [LikesController::class, 'like'])->name('food-posts.like');
 

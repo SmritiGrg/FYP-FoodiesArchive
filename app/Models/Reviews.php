@@ -13,7 +13,8 @@ class Reviews extends Model
         'review',
         'rating',
         'user_id',
-        'food_post_id'
+        'food_post_id',
+        'parent_id'
     ];
 
     public function user()
@@ -26,7 +27,13 @@ class Reviews extends Model
         return $this->belongsTo(FoodPost::class, 'food_post_id', 'id');
     }
 
-    public function replies(){
+    public function replies()
+    {
         return $this->hasMany(Reviews::class, 'parent_id');
+    }
+
+    public function parent()
+    {
+        return $this->belongsTo(Reviews::class, 'parent_id');
     }
 }

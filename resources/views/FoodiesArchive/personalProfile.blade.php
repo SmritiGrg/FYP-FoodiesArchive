@@ -4,6 +4,11 @@
             {{ session('message') }}
         </p>
     @endif
+    @if (session('delete'))
+        <p id="success-message" class="fixed bottom-5 left-1/2 transform -translate-x-1/2 text-base text-red-500 border border-red-200 bg-white px-4 py-2 rounded-lg shadow-md w-fit z-50">
+            {{ session('delete') }}
+        </p>
+    @endif
 
     <section class="pt-16">
         <div class="max-w-7xl mx-auto mt-10 bg-white">
@@ -202,15 +207,20 @@
 
                     <!-- Review Sections -->
                     @if(request('tab') == 'reviews')
-                        @if(Auth::user()->reviews->count() > 0)
+                        @php
+                            // Getting only main reviews (excluding replies)
+                            $mainReviews = Auth::user()->reviews()->whereNull('parent_id')->orderByDesc('created_at')->paginate(4);
+                        @endphp
+
+                        @if($mainReviews->count() > 0)
                             <div class="space-y-6">
-                                @foreach(Auth::user()->reviews->sortByDesc('created_at') as $review)
+                                @foreach($mainReviews as $review)
                                     <div class="border-b pb-6">
                                         <div class="flex items-start space-x-4">
                                             <!-- Food Image -->
                                             <img src="{{ asset($review->food_post->image) }}" 
                                                 alt="Food Image" 
-                                                class="w-32 h-32 object-cover">
+                                                class="w-32 h-32 object-cover rounded-md">
 
                                             <div class="w-full">
                                                 <div class="flex justify-between items-center ">
@@ -222,7 +232,11 @@
                                                                 <a href="" class="block text-sm font-normal text-textBlack px-2 py-2">Edit</a>
                                                             </div>
                                                             <div class="hover:bg-gray-100 flex justify-center">
-                                                                <a href="" class="block text-sm font-normal text-red-500 px-2 py-2">Delete</a>
+                                                                <form action="{{ route('review.delete', $review->id) }}" method="POST">
+                                                                    @csrf
+                                                                    @method('DELETE')
+                                                                    <button type="submit" class="block text-sm font-normal text-red-500 px-2 py-2">Delete</button>
+                                                                </form>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -252,6 +266,10 @@
                                         <p class="text-sm sm:text-base text-gray-700 mt-2">{{ $review->review }}</p>
                                     </div>
                                 @endforeach
+                                <div class="mt-4">
+                                    {{-- appending current query parameter meaning from url to links --}}
+                                    {{ $mainReviews->appends(request()->query())->links() }}
+                                </div>
                             </div>
                         @else
                             <p class="text-gray-500 text-lg mt-4">No reviews yet.</p>

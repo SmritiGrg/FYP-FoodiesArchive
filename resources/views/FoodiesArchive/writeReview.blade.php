@@ -122,9 +122,9 @@
             Your Reviews
         </h2>
         @if(Auth::check())
-            @if(Auth::user()->reviews->count() > 0)
+            @if(Auth::user()->reviews->whereNull('parent_id')->count() > 0)
                 <div class="space-y-6">
-                    @foreach(Auth::user()->reviews as $review)
+                    @foreach(Auth::user()->reviews->whereNull('parent_id')->sortByDesc('created_at') as $review)
                         <div class="border-b pb-6">
                             <div class="flex items-start space-x-4">
                                 <!-- Food Image -->
@@ -142,7 +142,11 @@
                                                     <a href="" class="block text-sm font-normal text-textBlack px-2 py-2">Edit</a>
                                                 </div>
                                                 <div class="hover:bg-gray-100 flex justify-center">
-                                                    <a href="" class="block text-sm font-normal text-red-500 px-2 py-2">Delete</a>
+                                                    <form action="{{ route('review.delete', $review->id) }}" method="POST">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button type="submit" class="block text-sm font-normal text-red-500 px-2 py-2">Delete</button>
+                                                    </form>
                                                 </div>
                                             </div>
                                         </div>

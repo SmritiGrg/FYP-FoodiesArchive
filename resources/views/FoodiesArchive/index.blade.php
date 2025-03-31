@@ -465,9 +465,9 @@
                                 <div class="flex justify-between items-center mt-2 mb-2">
                                     <div class="flex items-center space-x-4">
                                         @include('components.like-button', ['food' => $food])
-                                        <span class="text-black text-base">
-                                            <i class="fa-regular fa-comment text-lg hover:text-gray-500 cursor-pointer"></i> {{$food->reviews->count()}}
-                                        </span>
+                                        <a href="" class="text-black text-base">
+                                            <i class="fa-regular fa-comment text-lg hover:text-gray-500 cursor-pointer" title="Write Review"></i> {{$food->reviews->count()}}
+                                        </a>
                                     </div>
                                     @include('components.bookmark-button', ['food' => $food])
                                 </div>
