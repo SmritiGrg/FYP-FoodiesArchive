@@ -22,21 +22,31 @@ class FrontendController extends Controller
         $foodTypes = FoodTypes::all();
         $cuisineTypes = CuisineTypes::all();
 
-        $foods = FoodPost::where('user_id', '!=', $user->id)
-            ->orderBy('created_at', 'desc')
-            ->paginate(5);
+        if ($user) {
+            // Exclude the authenticated user's posts
+            $foods = FoodPost::where('user_id', '!=', $user->id)
+                ->orderBy('created_at', 'desc')
+                ->paginate(5);
 
-        $topFoodiesGuest = User::orderBy('streak_count', 'desc')->take(5)->get();
-        $topFoodiesAuth = User::whereNotIn('id', $user->followings->pluck('id'))
-            ->where('id', '!=', $user->id) // Excluding the authenticated user
-            ->orderBy('streak_count', 'desc')
-            ->take(5)
-            ->get();
+            // Exclude authenticated user's followings from top foodies
+            $topFoodies = User::whereNotIn('id', $user->followings->pluck('id'))
+                ->where('id', '!=', $user->id)
+                ->orderBy('streak_count', 'desc')
+                ->take(5)
+                ->get();
+        } else {
+            // Show all posts for guests
+            $foods = FoodPost::orderBy('created_at', 'desc')->paginate(5);
+
+            // Show top foodies for guests
+            $topFoodies = User::orderBy('streak_count', 'desc')->take(5)->get();
+        }
 
         $scrollPosition = $request->input('scroll', 0);
 
-        return view('FoodiesArchive.discover', compact('foodTypes', 'cuisineTypes', 'foods', 'topFoodiesGuest', 'topFoodiesAuth', 'scrollPosition'));
+        return view('FoodiesArchive.discover', compact('foodTypes', 'cuisineTypes', 'foods', 'topFoodies', 'scrollPosition'));
     }
+
 
     public function following(Request $request)
     {

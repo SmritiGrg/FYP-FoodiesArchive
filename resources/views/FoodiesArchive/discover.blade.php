@@ -1,4 +1,10 @@
 <x-app-layout>
+    @if (session('message'))
+        <p id="success-message" class="fixed bottom-5 left-1/2 transform -translate-x-1/2 text-base text-green-500 border border-green-200 bg-white px-4 py-2 rounded-lg shadow-md w-fit z-50">
+            {{ session('message') }}
+        </p>
+    @endif
+
     <section class="pt-20 px-24">
         <div class="grid grid-cols-4 items-center">
             <div class="col-span-3 flex items-center relative">
@@ -249,140 +255,55 @@
                 <div class="bg-white">
                     <h2 class="text-base font-medium text-darkPurple mb-4">Foodies You Might Like</h2>
                     <div class="space-y-4">
-                        @guest
-                            @foreach($topFoodiesGuest as $user)
-                                <div class="flex items-center gap-4">
-                                    <img src="{{ asset('uploads/profile-images/' . $user->image) }}" alt="img" class="w-8 h-8 rounded-full object-cover">
-                                    <div class="w-full">
-                                        <div class="relative group">
-                                            <div class="flex items-center justify-between relative">
-                                                <a href="{{ route('otherProfile', ['id' => $user->id]) }}" class="font-medium text-sm hover:text-gray-500">{{$user->full_name}}</a>
+                        @foreach($topFoodies as $user)
+                            <div class="flex items-center gap-4">
+                                <img src="{{ asset('uploads/profile-images/' . $user->image) }}" alt="img" class="w-8 h-8 rounded-full object-cover">
+                                <div class="w-full">
+                                    <div class="relative group">
+                                        <div class="flex items-center justify-between relative">
+                                            <a href="{{ route('otherProfile', ['id' => $user->id]) }}" class="font-medium text-sm hover:text-gray-500">{{$user->full_name}}</a>
+                                            <div>
+                                                <form method="POST" action="{{route('users.follow', $user->id)}}" class="flex space-x-1 items-center">
+                                                    @csrf
+                                                    <button class="text-sm font-medium text-customYellow hover:text-hovercustomYellow">
+                                                        Follow
+                                                    </button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                        <!-- Modal -->
+                                        <div class="absolute hidden group-hover:block w-60 p-4 bg-white shadow-lg rounded-lg z-10 border border-gray-200">
+                                            <div class="flex items-center space-x-4">
+                                                <img src="{{asset('uploads/profile-images/' . $user->image)}}" alt="profile" class="w-12 h-12 rounded-full object-cover">
                                                 <div>
-                                                    @php
-                                                        $authUser = auth()->user();
-                                                        $isFollowing = $authUser && isset($user) ? $authUser->isFollowing($user->id) : false;
-                                                    @endphp
-
-                                                    @if (!$authUser)
-                                                        {{-- If the user is not logged in, show the Follow button --}}
-                                                        <button class="text-sm font-medium text-customYellow hover:text-hovercustomYellow">
-                                                            Follow
-                                                        </button>
-                                                    @else
-                                                        {{-- If logged in, check if they are following --}}
-                                                        @if ($isFollowing)
-                                                            <button class="py-1 px-5 bg-gray-200 text-sm font-medium rounded-md hover:bg-gray-300">
-                                                                Following
-                                                            </button>
-                                                        @else
-                                                            <button class="text-sm font-medium text-customYellow hover:text-hovercustomYellow">
-                                                                Follow
-                                                            </button>
-                                                        @endif
-                                                    @endif
+                                                    <a href="{{ route('otherProfile', ['id' => $user->id]) }}" class="font-medium text-sm font-poppins">{{$user->full_name}}</a>
+                                                    <p class="text-gray-500 text-xs font-poppins">{{$user->username}}</p>
+                                                    <p class="border border-gray-300 rounded-full text-sm w-16 pl-2 mt-2"><i class="fa-solid fa-fire-flame-curved text-red-400"></i> {{$user->streak_count}}</p>
                                                 </div>
                                             </div>
-                                            <!-- Modal -->
-                                            <div class="absolute hidden group-hover:block w-60 p-4 bg-white shadow-lg rounded-lg z-10 border border-gray-200">
-                                                <div class="flex items-center space-x-4">
-                                                    <img src="{{asset('uploads/profile-images/' . $user->image)}}" alt="profile" class="w-12 h-12 rounded-full object-cover">
-                                                    <div>
-                                                        <a href="{{ route('otherProfile', ['id' => $user->id]) }}" class="font-medium text-sm font-poppins">{{$user->full_name}}</a>
-                                                        <p class="text-gray-500 text-xs font-poppins">{{$user->username}}</p>
-                                                        <p class="border border-gray-300 rounded-full text-sm w-16 pl-2 mt-2"><i class="fa-solid fa-fire-flame-curved text-red-400"></i> {{$user->streak_count}}</p>
-                                                    </div>
+                                            <div class="flex justify-between text-center mt-4">
+                                                <!-- Posts -->
+                                                <div>
+                                                    <p class="font-bold text-sm font-poppins">{{ $user->foodposts->count() }}</p>
+                                                    <p class="text-gray-500 text-xs font-poppins">Posts</p>
                                                 </div>
-                                                <div class="flex justify-between text-center mt-4">
-                                                    <!-- Posts -->
-                                                    <div>
-                                                        <p class="font-bold text-sm font-poppins">{{ $user->foodposts->count() }}</p>
-                                                        <p class="text-gray-500 text-xs font-poppins">Posts</p>
-                                                    </div>
-                                                    <!-- Followers -->
-                                                    <div>
-                                                        <p class="font-bold text-sm font-poppins">{{ $user->followers->count() }}</p>
-                                                        <p class="text-gray-500 text-xs font-poppins">Followers</p>
-                                                    </div> 
-                                                    <!-- Following -->
-                                                    <div>
-                                                        <p class="font-bold text-sm font-poppins">{{ $user->followings->count() }}</p>
-                                                        <p class="text-gray-500 text-xs font-poppins">Following</p>
-                                                    </div>
+                                                <!-- Followers -->
+                                                <div>
+                                                    <p class="font-bold text-sm font-poppins">{{ $user->followers->count() }}</p>
+                                                    <p class="text-gray-500 text-xs font-poppins">Followers</p>
+                                                </div> 
+                                                <!-- Following -->
+                                                <div>
+                                                    <p class="font-bold text-sm font-poppins">{{ $user->followings->count() }}</p>
+                                                    <p class="text-gray-500 text-xs font-poppins">Following</p>
                                                 </div>
                                             </div>
                                         </div>
-                                        <p class="text-gray-500 text-xs">{{ $user->username }}</p>
                                     </div>
+                                    <p class="text-gray-500 text-xs">{{ $user->username }}</p>
                                 </div>
-                            @endforeach
-                        @endguest
-                        @auth
-                            @foreach($topFoodiesAuth as $user)
-                                <div class="flex items-center gap-4">
-                                    <img src="{{ asset('uploads/profile-images/' . $user->image) }}" alt="img" class="w-8 h-8 rounded-full object-cover">
-                                    <div class="w-full">
-                                        <div class="relative group">
-                                            <div class="flex items-center justify-between relative">
-                                                <a href="{{ route('otherProfile', ['id' => $user->id]) }}" class="font-medium text-sm hover:text-gray-500">{{$user->full_name}}</a>
-                                                <div>
-                                                    @php
-                                                        $authUser = auth()->user();
-                                                        $isFollowing = $authUser && isset($user) ? $authUser->isFollowing($user->id) : false;
-                                                    @endphp
-
-                                                    @if (!$authUser)
-                                                        {{-- If the user is not logged in, show the Follow button --}}
-                                                        <button class="text-sm font-medium text-customYellow hover:text-hovercustomYellow">
-                                                            Follow
-                                                        </button>
-                                                    @else
-                                                        {{-- If logged in, check if they are following --}}
-                                                        @if ($isFollowing)
-                                                            <button class="py-1 px-5 bg-gray-200 text-sm font-medium rounded-md hover:bg-gray-300">
-                                                                Following
-                                                            </button>
-                                                        @else
-                                                            <button class="text-sm font-medium text-customYellow hover:text-hovercustomYellow">
-                                                                Follow
-                                                            </button>
-                                                        @endif
-                                                    @endif
-                                                </div>
-                                            </div>
-                                            <!-- Modal -->
-                                            <div class="absolute hidden group-hover:block w-60 p-4 bg-white shadow-lg rounded-lg z-10 border border-gray-200">
-                                                <div class="flex items-center space-x-4">
-                                                    <img src="{{asset('uploads/profile-images/' . $user->image)}}" alt="profile" class="w-12 h-12 rounded-full object-cover">
-                                                    <div>
-                                                        <a href="{{ route('otherProfile', ['id' => $user->id]) }}" class="font-medium text-sm font-poppins">{{$user->full_name}}</a>
-                                                        <p class="text-gray-500 text-xs font-poppins">{{$user->username}}</p>
-                                                        <p class="border border-gray-300 rounded-full text-sm w-16 pl-2 mt-2"><i class="fa-solid fa-fire-flame-curved text-red-400"></i> {{$user->streak_count}}</p>
-                                                    </div>
-                                                </div>
-                                                <div class="flex justify-between text-center mt-4">
-                                                    <!-- Posts -->
-                                                    <div>
-                                                        <p class="font-bold text-sm font-poppins">{{ $user->foodposts->count() }}</p>
-                                                        <p class="text-gray-500 text-xs font-poppins">Posts</p>
-                                                    </div>
-                                                    <!-- Followers -->
-                                                    <div>
-                                                        <p class="font-bold text-sm font-poppins">{{ $user->followers->count() }}</p>
-                                                        <p class="text-gray-500 text-xs font-poppins">Followers</p>
-                                                    </div> 
-                                                    <!-- Following -->
-                                                    <div>
-                                                        <p class="font-bold text-sm font-poppins">{{ $user->followings->count() }}</p>
-                                                        <p class="text-gray-500 text-xs font-poppins">Following</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <p class="text-gray-500 text-xs">{{ $user->username }}</p>
-                                    </div>
-                                </div>
-                            @endforeach
-                        @endauth
+                            </div>
+                        @endforeach
                     </div>
                 </div>
             </div>

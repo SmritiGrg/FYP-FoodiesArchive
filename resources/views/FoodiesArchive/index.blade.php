@@ -5,6 +5,12 @@
         </div>
     @endif
 
+    @if (session('message'))
+        <p id="success-message" class="fixed bottom-5 left-1/2 transform -translate-x-1/2 text-base text-green-500 border border-green-200 bg-white px-4 py-2 rounded-lg shadow-md w-fit z-50">
+            {{ session('message') }}
+        </p>
+    @endif
+
     @if(session('showProfileImageModal'))
         <!-- Modal Structure for Profile Image Upload -->
         <div class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">

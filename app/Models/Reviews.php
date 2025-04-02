@@ -14,7 +14,7 @@ class Reviews extends Model
         'rating',
         'user_id',
         'food_post_id',
-        'parent_id'
+        'parent_id',
     ];
 
     public function user()
@@ -35,5 +35,15 @@ class Reviews extends Model
     public function parent()
     {
         return $this->belongsTo(Reviews::class, 'parent_id');
+    }
+
+    public function helpfuls()
+    {
+        return $this->hasMany(ReviewHelpful::class, 'review_id');
+    }
+
+    public function isHelpfulByAuthUser()
+    {
+        return $this->helpfuls()->where('user_id', auth()->id())->exists();
     }
 }

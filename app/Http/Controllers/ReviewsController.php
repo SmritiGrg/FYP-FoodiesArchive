@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\FoodPost;
+use App\Models\ReviewHelpful;
 use App\Models\Reviews;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -24,25 +25,6 @@ class ReviewsController extends Controller
     {
         //
     }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    // public function store(Request $request)
-    // {
-    //     $request->validate([
-    //         'review' => 'required|string|min:0|max:100',
-    //         'rating' => 'required|integer|min:1|max:5',
-    //         'food_post_id' => 'required|exists:food_posts,id',
-    //     ]);
-    //     $review = new Reviews();
-    //     $review->review = $request->review;
-    //     $review->rating = $request->rating;
-    //     $review->user_id = Auth::user()->id;
-    //     $review->food_post_id = $request->food_post_id;
-    //     $review->save();
-    //     return redirect()->route('personalProfile', ['tab' => 'reviews'])->with('message', 'Review submitted successfully.');
-    // }
 
     public function store(Request $request)
     {
@@ -70,6 +52,43 @@ class ReviewsController extends Controller
         }
     }
 
+    public function helpfulBtn(Reviews $review)
+    {
+        if (Auth::guest()) {
+            return response()->json(['message' => 'Unauthorized'], 401);
+        }
+        $user = Auth::user();
+
+        // \Log::info('Review ID: ' . $review->id);
+        // \Log::info('User ID: ' . $user->id);
+        // \Log::info('Existing Helpful Query: ' . ReviewHelpful::where('user_id', $user->id)
+        //     ->where('review_id', $review->id)
+        //     ->toSql());
+
+        // Check if the user already toggled the button
+        $existingHelpful = ReviewHelpful::where('user_id', $user->id)
+            ->where('review_id', $review->id)
+            ->first();
+
+        if ($existingHelpful) {
+            // remove helpful 
+            $existingHelpful->delete();
+            $helpful = false;
+        } else {
+            // active helpful btn
+            ReviewHelpful::create([
+                'user_id' => $user->id,
+                'review_id' => $review->id
+            ]);
+            $helpful = true;
+        }
+
+        // SENDING JSON response TO THE FRONTEND
+        return response()->json([
+            'helpful' => $helpful,
+            'helpfulCount' => $review->helpfuls()->count()
+        ]);
+    }
 
 
     /**

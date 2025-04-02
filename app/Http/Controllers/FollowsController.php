@@ -29,14 +29,14 @@ class FollowsController extends Controller
     {
         $follower = auth()->user();
         $follower->followings()->attach($user);
-        return back()->with('success', "Followed successfully!");
+        return back()->with('message', "You're now following {$user->username}");
     }
 
     public function unfollow(User $user)
     {
         $follower = auth()->user();
         $follower->followings()->detach($user);
-        return back()->with('success', "Unfollowed successfully!");
+        return back()->with('message', "You unfollowed {$user->username}");
     }
 
     /**

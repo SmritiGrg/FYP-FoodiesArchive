@@ -75,6 +75,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/bookmark', [FrontendController::class, 'bookmark'])->name('user.bookmarks');
 
     Route::post('/bookmark/{foodPost}', [BookmarkController::class, 'store'])->name('bookmark.toggle');
+
+    Route::post('/review/helpful/{review}', [ReviewsController::class, 'helpfulBtn']);
 });
 
 

@@ -173,5 +173,76 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 
-    
+    //REVIEW HELPFUL BUTTON
+    document.body.addEventListener("click", function (event) {
+        if (
+            // Checking if the clicked element has the following classes
+            event.target.classList.contains("not-helpful") ||
+            event.target.classList.contains("helpful")
+        ) {
+            // Checking if the clicked element is a bookmark icon
+            if (
+                event.target.classList.contains("not-helpful") ||
+                event.target.classList.contains("helpful")
+            ) {
+                let reviewId = event.target.getAttribute("data-review-id"); // Getting review id from the clicked element
+                let helpfulContainer = event.target.closest("span");
+
+                // Select the bookmark icons within the same container
+                let notHelpfulIcon =
+                    helpfulContainer.querySelector(".ri-thumb-up-line");
+                let helpfulIcon =
+                    helpfulContainer.querySelector(".ri-thumb-up-fill");
+                let countSpan =
+                    helpfulContainer.querySelector(".helpful-count");
+
+                // AJAX - sending AJAX request to update the bookmark status
+                fetch(`/review/helpful/${reviewId}`, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json", // JSON FORMAT
+                        "X-CSRF-TOKEN": document
+                            .querySelector('meta[name="csrf-token"]')
+                            .getAttribute("content"),
+                    },
+                    body: JSON.stringify({}),
+                })
+                    .then((response) => {
+                        // Check if the response is a redirect to the login page
+                        if (response.redirected) {
+                            window.location.href = response.url; // Redirect to the login page
+                            return;
+                        }
+
+                        // Check for unauthorized status and redirect to login page
+                        if (response.status === 401) {
+                            window.location.href = "{{ route('login') }}";
+                            return;
+                        }
+                        return response.json(); // Parse the JSON if the response is valid
+                    })
+                    .then((data) => {
+                        // Contains the response from the controller
+                        if (data.helpful) {
+                            // User helpful active
+                            notHelpfulIcon.classList.add("hidden");
+                            helpfulIcon.classList.remove("hidden");
+                            helpfulIcon.classList.add("active"); // Add the active class for animation
+
+                            // Remove animation after 500ms
+                            setTimeout(
+                                () => helpfulIcon.classList.remove("active"),
+                                500
+                            );
+                        } else {
+                            // User Unbookmarked
+                            helpfulIcon.classList.add("hidden");
+                            notHelpfulIcon.classList.remove("hidden");
+                        }
+                        countSpan.textContent = data.helpfulCount;
+                    })
+                    .catch((error) => console.error("Error:", error));
+            }
+        }
+    });
 });

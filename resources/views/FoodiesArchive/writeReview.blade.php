@@ -135,18 +135,21 @@
                                 <div class="w-full">
                                     <div class="flex justify-between items-center ">
                                         <a href="{{route('food.details', $review->food_post->id)}}" class="text-base sm:text-lg font-medium">{{ $review->food_post->name }}</a>
-                                        <div class="relative group">
-                                            <span class="text-textBlack text-lg font-medium hover:text-gray-500 cursor-pointer"><i class="fa-solid fa-ellipsis"></i></span>
-                                            <div class="absolute w-36 top-full right-0 rounded-lg mt-1 shadow-lg p-3 text-start scale-y-0 border-gray-200 group-hover:scale-y-100 origin-top duration-200 bg-white">
-                                                <div class="hover:bg-gray-100 border-b-2 border-gray-200 flex justify-center">
-                                                    <a href="" class="block text-sm font-normal text-textBlack px-2 py-2">Edit</a>
-                                                </div>
-                                                <div class="hover:bg-gray-100 flex justify-center">
-                                                    <form action="{{ route('review.delete', $review->id) }}" method="POST">
-                                                        @csrf
-                                                        @method('DELETE')
-                                                        <button type="submit" class="block text-sm font-normal text-red-500 px-2 py-2">Delete</button>
-                                                    </form>
+                                        <div class="flex">
+                                            @include('components.helpful-button', ['review' => $review])
+                                            <div class="relative group">
+                                                <span class="text-textBlack text-lg font-medium hover:text-gray-500 cursor-pointer"><i class="fa-solid fa-ellipsis"></i></span>
+                                                <div class="absolute w-36 top-full right-0 rounded-lg mt-1 shadow-lg p-1 text-start scale-y-0 border-gray-200 group-hover:scale-y-100 origin-top duration-200 bg-white">
+                                                    <div class="hover:bg-gray-100 border-b-2 border-gray-200 flex justify-center">
+                                                        <a href="" class="block text-sm font-normal text-textBlack px-2 py-1">Edit</a>
+                                                    </div>
+                                                    <div class="hover:bg-gray-100 flex justify-center">
+                                                        <form action="{{ route('review.delete', $review->id) }}" method="POST">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                            <button type="submit" class="block text-sm font-normal text-red-500 px-2 py-1">Delete</button>
+                                                        </form>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -187,4 +190,32 @@
             </div>
         @endif
     </section>
+
+    <script>
+        function toggleReplies(reviewId) {
+            const repliesSection = document.getElementById(`replies-${reviewId}`);
+            const toggleButton = document.getElementById(`toggle-replies-btn-${reviewId}`);
+
+            if (repliesSection.classList.contains("hidden")) {
+                // Show replies
+                repliesSection.classList.remove("hidden");
+                toggleButton.innerText = `HIDE REPLIES`;
+            } else {
+                // Hide replies
+                repliesSection.classList.add("hidden");
+                toggleButton.innerText = `SHOW REPLIES (${repliesSection.children.length})`;
+            }
+        }
+
+        function toggleReplyForm(reviewId) {
+            const replyForm = document.getElementById(`reply-form-${reviewId}`);
+            
+            // Toggle visibility of the reply form
+            if (replyForm.classList.contains("hidden")) {
+                replyForm.classList.remove("hidden");
+            } else {
+                replyForm.classList.add("hidden");
+            }
+        }
+    </script>
 </x-app-layout>

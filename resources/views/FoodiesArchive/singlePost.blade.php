@@ -82,18 +82,44 @@
                         @foreach($reviewsPaginate as $review)
                             <div class="border-b-2 border-gray-100 pb-2">
                                 <!-- Reviewer Info -->
-                                <a href="{{ route('otherProfile', ['id' => $review->user->id]) }}" class="flex items-center">
-                                    <img src="{{ asset('uploads/profile-images/' . $review->user->image) }}" alt="" class="w-10 h-10 rounded-full object-cover mr-3">
-                                    <div>
-                                        <div class="flex space-x-2 items-center">
-                                            <p class="block text-sm text-gray-900 font-medium">
-                                                {{$review->user->full_name}} 
-                                                <span class="text-xs text-gray-500 pl-2">{{ $review->created_at->diffForHumans() }}</span>
-                                            </p>
+                                <div class="flex w-full justify-between">
+                                    <a href="{{ route('otherProfile', ['id' => $review->user->id]) }}" class="flex items-center">
+                                        <img src="{{ asset('uploads/profile-images/' . $review->user->image) }}" alt="" class="w-10 h-10 rounded-full object-cover mr-3">
+                                        <div class="w-full">
+                                            <div class="flex justify-between">
+                                                <div class="flex space-x-2 items-center">
+                                                    <p class="block text-sm text-gray-900 font-medium">
+                                                        {{$review->user->full_name}} 
+                                                        <span class="text-xs text-gray-500 pl-2">{{ $review->created_at->diffForHumans() }}</span>
+                                                    </p>
+                                                </div>
+                                            </div>
+                                            <span class="block text-sm text-gray-500">{{$review->user->username}}</span>
                                         </div>
-                                        <span class="block text-sm text-gray-500">{{$review->user->username}}</span>
+                                    </a>
+                                    <div class="flex space-x-2">
+                                        <div>
+                                            @include('components.helpful-button', ['review' => $review])
+                                        </div>
+                                        @if (Auth::id() === $review->user->id)
+                                            <div class="relative group">
+                                                <span class="text-gray-600 text-lg font-medium hover:text-gray-500 cursor-pointer">
+                                                    <i class="fa-solid fa-ellipsis"></i>
+                                                </span>
+                                                <div class="absolute w-32 top-full right-0 rounded-lg mt-1 shadow-lg p-1 text-start scale-y-0 border-gray-200 group-hover:scale-y-100 origin-top duration-200 bg-white">
+                                                    <div class="hover:bg-gray-100 flex justify-center">
+                                                        <form action="{{ route('review.delete', $review->id) }}" method="POST">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                            <button type="submit" class="block text-sm font-normal text-red-500 px-2 py-2">Delete</button>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        @endif
                                     </div>
-                                </a>
+                                </div>
+                            
                                 <button onclick="toggleReplyForm({{ $review->id }})" class="text-xs text-gray-500 font-medium hover:text-gray-600">Reply</button>
                                 
                                 <!-- Star Rating -->
@@ -137,7 +163,6 @@
                                         </div>
                                     </form>
                                 </div>
-
 
                                 <!-- Checking if there are replies -->
                                 @if ($review->replies->count() > 0)
@@ -210,9 +235,10 @@
         </div>
     </section>
 
+    {{-- YOU MAY ALSO LIKE --}}
     <section class="py-7">
         <p class="border-t-2 border-gray-100 pt-4 font-bold text-2xl pl-24">You May Also Like</p>
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 mt-3 px-4 sm:px-8 lg:px-20">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-1 mt-3 px-4 sm:px-8 lg:px-20">
             @if(isset($similarPosts) && $similarPosts->isNotEmpty())
                 @foreach($similarPosts as $similarPost)
                     <div class="bg-white">
@@ -228,7 +254,7 @@
                                         <div class="flex items-center space-x-4">
                                             <img src="{{asset('uploads/profile-images/' . $similarPost->user->image)}}" alt="img" class="w-12 h-12 rounded-full object-cover">
                                             <div>
-                                                <a href="" class="font-semibold text-sm font-poppins">{{$similarPost->user->full_name}}</a>
+                                                <a href="" class="font-medium text-sm font-poppins">{{$similarPost->user->full_name}}</a>
                                                 <p class="text-gray-500 text-xs font-poppins">{{$similarPost->user->username}}</p>
                                                 <p class="border border-gray-300 rounded-full text-sm w-16 pl-2 mt-2"><i class="fa-solid fa-fire-flame-curved text-red-400"></i> {{$similarPost->user->streak_count}}</p>
                                             </div>
