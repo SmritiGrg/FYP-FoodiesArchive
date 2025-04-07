@@ -11,6 +11,7 @@ class Restaurants extends Model
 
     protected $fillable = [
         'name',
+        'location',
         'longitude',
         'latitude',
         'added_by_user_id',
@@ -22,8 +23,8 @@ class Restaurants extends Model
         return $this->belongsTo(User::class, 'added_by_user_id');
     }
 
-    public function foodPosts(): void
+    public function foodPosts()
     {
-        $this->hasMany(FoodPost::class, 'restaurant_id', 'id');
+        return $this->hasMany(FoodPost::class, 'restaurant_id', 'id');
     }
 }

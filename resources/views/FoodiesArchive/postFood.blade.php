@@ -1,5 +1,10 @@
 @extends('layouts.postMain')
 @section('container')
+    @if (session('message'))
+        <p id="success-message" class="fixed bottom-5 left-1/2 transform -translate-x-1/2 text-base text-green-500 border border-green-200 bg-white px-4 py-2 rounded-lg shadow-md w-fit z-50">
+            {{ session('message') }}
+        </p>
+    @endif
     <section class="pt-10 pb-3 fixed bg-white px-3">
         <div class="sm:px-6 lg:px-24 md:px-11 mt-10">
             <ul class="mx-auto grid gap-6 sm:gap-10 max-w-full grid-cols-6">
@@ -115,14 +120,51 @@
                                     <option value="" disabled selected>Select a restaurant</option>
                                     @foreach ($restaurants as $restaurant)
                                         <option value="{{ $restaurant->id }}" {{ old('restaurant_id') == $restaurant->id ? 'selected' : '' }}>
-                                            {{ $restaurant->name }}
+                                            {{ $restaurant->name }}  ({{$restaurant->location}})
                                         </option>
                                     @endforeach
                                 </select>
-
                                 @error('restaurant_id')
                                     <p class="text-red-500 text-sm mt-2">{{$message}}</p>
                                 @enderror
+                                <button type="button" onclick="openModal()" 
+                                    class="mt-2 text-sm text-blue-600 hover:underline font-poppins">
+                                    + Add a new restaurant
+                                </button>
+
+                                <!-- Restaurant Add Form Modal -->
+                                {{-- <div id="restaurantModal" class="fixed inset-0 bg-black bg-opacity-40 z-50 hidden items-center justify-center">
+                                    <div class="bg-white w-full max-w-md rounded-lg shadow-lg p-6 relative">
+                                        <h3 class="text-xl font-bold text-gray-800 mb-2">Add New Restaurant</h3>
+                                        <p class="text-sm text-gray-600 mb-4">
+                                            The restaurant details you submit will be reviewed before being listed.
+                                        </p>
+                                        <form method="POST" action="{{ route('restaurant.store') }}">
+                                            @csrf
+                                            <input type="hidden" name="added_by_user_id" value="{{ auth()->id() }}">
+
+                                            <div class="mt-4">
+                                                <x-input-label for="name" value="Restaurant Name" />
+                                                <x-text-input id="name" class="block mt-1 w-full" type="text" name="name"
+                                                    :error="$errors->has('name')" :value="old('name')" autofocus />
+                                                <x-input-error :messages="$errors->get('name')" class="mt-2" />
+                                            </div>
+
+                                            <div class="mt-4">
+                                                <x-input-label for="location" value="Location" />
+                                                <x-text-input id="location" class="block mt-1 w-full" type="text" name="location" placeholder="Eg:Pokhara, Nepal"
+                                                    :error="$errors->has('location')" :value="old('location')" autofocus/>
+                                                <x-input-error :messages="$errors->get('location')" class="mt-2" />
+                                            </div>
+
+                                            <div class="flex justify-end mt-4 space-x-2">
+                                                <button type="submit" class="px-4 py-2 bg-customYellow text-white rounded hover:bg-hovercustomYellow">Add</button>
+                                            </div>
+                                        </form>
+                                        <!-- Close button (X) -->
+                                        <button onclick="closeModal()" class="absolute top-2 right-2 text-gray-500 hover:text-gray-800 text-xl"><i class="fa-solid fa-xmark"></i></button>
+                                    </div>
+                                </div> --}}
                             </div>
 
                             <div class="mt-3">
@@ -344,12 +386,67 @@
                         @endif
                     </div>
                 </form>
+                <!-- Restaurant Add Form Modal -->
+                <div id="restaurantModal" class="fixed inset-0 bg-black bg-opacity-40 z-50 hidden items-center justify-center">
+                    <div class="bg-white w-full max-w-md rounded-lg shadow-lg p-6 relative">
+                        <h3 class="text-xl font-bold text-gray-800 mb-2">Add New Restaurant</h3>
+                        <p class="text-sm text-gray-600 mb-4">
+                            The restaurant details you submit will be reviewed before being listed.
+                        </p>
+                        <form method="POST" action="{{ route('restaurant.store') }}">
+                            @csrf
+                            <input type="hidden" name="added_by_user_id" value="{{ auth()->id() }}">
+
+                            <div class="mt-4">
+                                <x-input-label for="rest_name" value="Restaurant Name" />
+                                <x-text-input id="rest_name" class="block mt-1 w-full" type="text" name="name"
+                                    :error="$errors->has('name')" :value="old('name')" autofocus />
+                                <x-input-error :messages="$errors->get('name')" class="mt-2" />
+                            </div>
+
+                            <div class="mt-4">
+                                <x-input-label for="location" value="Location" />
+                                <input id="location" class="block mt-1 w-full text-slate-400 bg-white border rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring-indigo-300 {{ $errors->has('name') ? 'border-red-500 focus:border-red-500 focus:ring-red-500' : 'border-gray-300' }}"
+                                    type="text" name="location" placeholder="Eg: Pokhara, Nepal"
+                                    value="{{ old('location') }}" autofocus>
+
+                                <x-input-error :messages="$errors->get('location')" class="mt-2" />
+                            </div>
+
+                            <div class="flex justify-end mt-4 space-x-2">
+                                <button type="submit" class="px-4 py-2 bg-customYellow text-white rounded hover:bg-hovercustomYellow">Add</button>
+                            </div>
+                        </form>
+                        <!-- Close button (X) -->
+                        <button onclick="closeModal()" class="absolute top-2 right-2 text-gray-500 hover:text-gray-800 text-xl"><i class="fa-solid fa-xmark"></i></button>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
+        // FOR RESTAURANT ADD MODAL FORM
+        function openModal() {
+            document.getElementById('restaurantModal').classList.remove('hidden');
+            document.getElementById('restaurantModal').classList.add('flex');
+        }
+
+        function closeModal() {
+            document.getElementById('restaurantModal').classList.remove('flex');
+            document.getElementById('restaurantModal').classList.add('hidden');
+        }
+
+        // FOR MESSAGE
+        setTimeout(function() {
+            let message = document.getElementById('success-message');
+            if (message) {
+                message.style.display = 'none';
+            }
+        }, 3000);
+
+        // FOR RATING
         const stars = document.querySelectorAll(".rating-icon");
         const ratingTitle = document.getElementById("rating-title");
         let selectedRating = 0; // To store the selected rating

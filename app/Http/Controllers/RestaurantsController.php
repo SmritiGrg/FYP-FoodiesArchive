@@ -28,7 +28,22 @@ class RestaurantsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // dd($request);
+        $restaurant = new Restaurants();
+        $request->validate([
+            'name' => 'required|max:100',
+            'location' => 'required',
+            'longitude' => 'numeric|nullable',
+            'latitude' => 'numeric|nullable',
+            'added_by_user_id' => 'required',
+        ]);
+        $restaurant->name = $request->name;
+        $restaurant->location = $request->location;
+        $restaurant->latitude = $request->latitude;
+        $restaurant->longitude = $request->longitude;
+        $restaurant->added_by_user_id = $request->added_by_user_id;
+        $restaurant->save();
+        return redirect()->back()->with('message', 'Restaurant Added Succesfully');
     }
 
     /**
@@ -50,16 +65,35 @@ class RestaurantsController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Restaurants $restaurants)
+    public function update(Request $request, $id)
     {
-        //
+        // dd($request);
+        $restaurant = Restaurants::findOrFail($id);
+        $request->validate([
+            'rest_name' => 'required|max:100',
+            'rest_location' => 'required',
+            'rest_longitude' => 'nullable',
+            'rest_latitude' => 'nullable',
+            'rest_status' => 'required',
+            'added_by_user_id' => 'required',
+        ]);
+        $restaurant->name = $request->rest_name;
+        $restaurant->location = $request->rest_location;
+        $restaurant->latitude = $request->rest_latitude;
+        $restaurant->longitude = $request->rest_longitude;
+        $restaurant->status = $request->rest_status;
+        $restaurant->added_by_user_id = $request->added_by_user_id;
+        $restaurant->update();
+        return redirect()->back()->with('message', 'Restaurant Updated Succesfully');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Restaurants $restaurants)
+    public function destroy($id)
     {
-        //
+        $restaurant = Restaurants::query()->where('id', $id)->get()->first();
+        $restaurant->delete();
+        return redirect()->back()->with('message', 'Restaurant Deleted Successfully');
     }
 }

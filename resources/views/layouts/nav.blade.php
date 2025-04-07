@@ -1,5 +1,5 @@
 <header>
-    <nav class="bg-white fixed">
+    <nav class="bg-white fixed z-50">
         <div class="max-w-screen-xl mx-auto flex items-center justify-between p-4">
             <!-- Hamburger Menu (Visible only on md and smaller screens) -->
             <button id="menu-toggle" class="lg:hidden text-lg sm:text-2xl text-gray-900">

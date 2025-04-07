@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
-use App\Models\FoodPosts;
+use App\Models\FoodPost;
 use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -67,7 +67,7 @@ class AuthenticatedSessionController extends Controller
         $lastDay = $firstDay->copy()->endOfMonth();
 
         // Get posts for the user within the month
-        $posts = FoodPosts::where('user_id', $userId)
+        $posts = FoodPost::where('user_id', $userId)
             ->whereBetween('created_at', [$firstDay, $lastDay])
             ->orderBy('created_at', 'ASC')
             ->get()

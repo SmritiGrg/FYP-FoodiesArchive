@@ -8,6 +8,7 @@ use App\Http\Controllers\FoodPostController;
 use App\Http\Controllers\FrontendController;
 use App\Http\Controllers\LikesController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\RestaurantsController;
 use App\Http\Controllers\ReviewsController;
 use App\Models\FoodPosts;
 use Illuminate\Support\Facades\Route;
@@ -39,6 +40,8 @@ Route::get('/dashboard', function () {
 
 Route::middleware('auth')->group(function () {
     // Route::resource('/foodpost', FoodPostController::class);
+    Route::post('/foodpost/restaurant', [RestaurantsController::class, 'store'])->name('restaurant.store');
+
 
     Route::get('/foodpost/{step?}', [FoodPostController::class, 'create'])->name('foodpost.create');
     // Route::post('/foodpost', [FoodPostController::class, 'store'])->name('foodpost.store');
@@ -82,6 +85,9 @@ Route::middleware('auth')->group(function () {
 
 Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::get('/admin', [AdminController::class, 'index'])->name('admin.index');
+    Route::get('/restaurant', [AdminController::class, 'restaurant']);
+    Route::patch('/restaurant/{id}', [RestaurantsController::class, 'update'])->name('restaurant.update');
+    Route::delete('/restaurant/{id}', [RestaurantsController::class, 'destroy'])->name('restaurant.delete');
 });
 
 require __DIR__ . '/auth.php';

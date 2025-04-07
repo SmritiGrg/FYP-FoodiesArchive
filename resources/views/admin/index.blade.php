@@ -1,32 +1,5 @@
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-
-    <title>{{ config('app.name', 'Laravel') }}</title>
-
-    <link rel="stylesheet" href="{{asset('assets/css/style.css')}}">
-    <link rel="stylesheet" href="{{asset('assets/css/hover-min.css')}}">
-    <link rel="stylesheet" href="{{asset('assets/css/hover.css')}}">
-
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.bunny.net">
-    <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.0/css/all.min.css" integrity="sha512-9xKTRVabjVeZmc+GUW8GgSmcREDunMM+Dt/GrzchfN8tkwHizc5RP4Ok/MXFFy5rIjJjzhndFScTceq5e6GvVQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <!-- Scripts -->
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
-
-    <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
-
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.css" integrity="sha512-kJlvECunwXftkPwyvHbclArO8wszgBGisiLeuDFwNM8ws+wKIw0sv1os3ClWZOcrEB2eRXULYUsm8OVRGJKwGA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-</head>
-<body>
+@extends('admin.inc.main')
+@section('container')
     {{-- @auth
         <li class="nav-item
                 dropdown mx-5">
@@ -52,71 +25,137 @@
         HELLO WELCOME ADMIN
     </h1> --}} 
 
-    <div class="fixed left-0 top-0 w-72 h-full bg-bgPurple p-4">
-        <a href="" class="">
-            <img src="{{asset('backend/assets/img/FoodiesArchive_Logo-removebg-preview.png')}}" alt="" style="height: 50px; width: 240px;">
-        </a>  
-        <ul class="mt-4">
-            <li class="mb-1 group active">
-                <a href="" class="flex items-center py-3 px-4 text-gray-500 hover:bg-gray-700 hover:text-white rounded-md group-[.active]:bg-gray-700 group-[.active]:text-white">
-                    <i class="ri-home-2-line mr-3 text-lg"></i>
-                    <span class="text-sm">Dashboard</span>
-                </a>
-            </li>
-            <li class="mb-1">
-                <a href="" class="flex items-center py-3 px-4 text-gray-500 hover:bg-gray-700 hover:text-white rounded-md group-[.active]:bg-gray-700 group-[.active]:text-white">
-                    <i class="ri-group-fill mr-3 text-lg"></i>
-                    <span class="text-sm">User Management</span>
-                </a>
-            </li>
-            <li class="mb-1">
-                <a href="" class="flex items-center py-3 px-4 text-gray-500 hover:bg-gray-700 hover:text-white rounded-md group-[.active]:bg-gray-700 group-[.active]:text-white">
-                    <i class="ri-restaurant-2-line mr-3 text-lg"></i>
-                    <span class="text-sm">Restaurant Management</span>
-                </a>
-            </li>
-            <li class="mb-1">
-                <a href="" class="flex items-center py-3 px-4 text-gray-500 hover:bg-gray-700 hover:text-white rounded-md group-[.active]:bg-gray-700 group-[.active]:text-white">
-                    <i class="fa-solid fa-grip mr-3 text-lg"></i>
-                    <span class="text-sm">Food Post Management</span>
-                </a>
-            </li>
-            <li class="mb-1">
-                <a href="" class="flex items-center py-3 px-4 text-gray-500 hover:bg-gray-700 hover:text-white rounded-md group-[.active]:bg-gray-700 group-[.active]:text-white">
-                    <i class="fa-regular fa-star mr-3 text-lg"></i>
-                    <span class="text-sm">Review & Rating Management</span>
-                </a>
-            </li>
-            <li class="mb-1 group">
-                <a href="" class="flex items-center py-3 px-4 text-gray-500 hover:bg-gray-700 hover:text-white rounded-md group-[.active]:bg-gray-700 group-[.active]:text-white group-[.selected]:bg-gray-950 group-[.selected]:text-gray-100 sidebar-dropdown-toggle">
-                    <i class="ri-award-fill mr-3 text-lg"></i>
-                    <span class="text-sm">Badge Management</span>
-                    <i class="ri-arrow-right-wide-line ml-auto text-lg group-[.selected]:rotate-90"></i>
-                </a>
-                <ul class="pl-7 mt-2 hidden group-[.selected]:block">
-                    <li class="mb-4">
-                        <a href="" class="text-gray-500 text-sm flex items-center hover:text-white before:contents-[''] before:w-1 before:h-1 before:rounded-full before:bg-gray-500 before:mr-3">Create</a>
-                    </li>
-                    <li class="mb-4">
-                        <a href="" class="text-gray-500 text-sm flex items-center hover:text-white before:contents-[''] before:w-1 before:h-1 before:rounded-full before:bg-gray-500 before:mr-3">Index</a>
-                    </li>
-                </ul>
-            </li>
-            <li class="mb-1">
-                <a href="" class="flex items-center py-3 px-4 text-gray-500 hover:bg-gray-700 hover:text-white rounded-md group-[.active]:bg-gray-700 group-[.active]:text-white">
-                    <i class="ri-bill-line mr-3 text-lg"></i>
-                    <span class="text-sm">Subscription Management</span>
-                </a>
-            </li>
-            <li class="mb-1">
-                <a href="" class="flex items-center py-3 px-4 text-gray-500 hover:bg-gray-700 hover:text-white rounded-md group-[.active]:bg-gray-700 group-[.active]:text-white">
-                    <i class="fa-solid fa-credit-card mr-3 text-lg"></i>
-                    <span class="text-sm">Payment Management</span>
-                </a>
-            </li>
-        </ul>  
-    </div>
+        <div class="p-8">
+            <!-- Tab Navigation -->
+            <div class="flex justify-between items-center mb-6">
+                <div class="space-x-2">
+                    <button class="px-4 py-2 text-sm font-medium bg-white rounded shadow hover:bg-gray-100">Overview</button>
+                    <button class="px-4 py-2 text-sm font-medium bg-white rounded shadow hover:bg-gray-100">Food Posts</button>
+                    <button class="px-4 py-2 text-sm font-medium bg-white rounded shadow hover:bg-gray-100">Users</button>
+                    <button class="px-4 py-2 text-sm font-medium bg-white rounded shadow hover:bg-gray-100">Reviews</button>
+                </div>
+                <button class="px-4 py-2 bg-customYellow text-white rounded hover:bg-hovercustomYellow">Export Data</button>
+            </div>
 
-    <script src="{{asset('backend/assets/js/script.js')}}"></script>
-</body>
-</html>
+            <!-- Stats Cards -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
+                <div class="bg-white p-4 rounded shadow">
+                    <p class="text-sm text-gray-500">Total Users</p>
+                    <div class="text-2xl font-bold">{{ $totalUsers }}</div>
+                    <p class="text-xs mt-1 {{ $userGrowth < 0 ? 'text-red-600' : 'text-green-600' }}">
+                        {{ $userGrowth < 0 ? '-' : '+' }}{{ min(abs(round($userGrowth, 2)), 100)}}% from last month ({{ $usersLastMonth }} → {{ $usersThisMonth }})
+                    </p>
+                </div>
+                <div class="bg-white p-4 rounded shadow">
+                    <p class="text-sm text-gray-500">Premium Users</p>
+                    <div class="text-2xl font-bold">{{ $premiumUsers }}</div>
+                    <p class="text-xs mt-1 {{ $premiumGrowth < 0 ? 'text-red-600' : 'text-green-600' }}">
+                        {{ $premiumGrowth < 0 ? '-' : '+' }}{{ min(abs(round($premiumGrowth, 2)), 100)}}% from last month ({{ $premiumLastMonth }} → {{ $premiumThisMonth }})
+                    </p>
+                </div>
+                <div class="bg-white p-4 rounded shadow">
+                    <p class="text-sm text-gray-500">Food Posts</p>
+                    <div class="text-2xl font-bold">{{ $totalFoodPosts }}</div>
+                    <p class="text-xs mt-1 {{ $postGrowth < 0 ? 'text-red-600' : 'text-green-600' }}">
+                        {{ $postGrowth < 0 ? '-' : '+' }}{{ min(abs(round($postGrowth, 2)), 100)}}% from last month ({{ $postsLastMonth }} → {{ $postsThisMonth }})
+                    </p>
+                </div>
+                <div class="bg-white p-4 rounded shadow">
+                    <p class="text-sm text-gray-500">Reviews</p>
+                    <div class="text-2xl font-bold">{{ $totalMainReviews }}</div>
+                    <p class="text-xs mt-1 {{ $reviewGrowth < 0 ? 'text-red-600' : 'text-green-600' }}">
+                        {{ $reviewGrowth < 0 ? '-' : '+' }}{{ min(abs(round($reviewGrowth, 2)), 100)}}% from last month ({{ $reviewsLastMonth }} → {{ $reviewsThisMonth }})
+                    </p>
+                </div>
+            </div>
+
+            <!-- Recent Activity -->
+            <div class="bg-white rounded shadow p-6 mb-6">
+                <h2 class="text-lg font-semibold mb-2">Recent Activity</h2>
+                <p class="text-sm text-gray-500 mb-4">Latest actions across the platform</p>
+
+                <div class="space-y-4">
+                    <div class="flex gap-4 items-start">
+                        <div class="h-10 w-10 rounded-full bg-gray-200 flex items-center justify-center">JD</div>
+                        <div>
+                            <p class="text-sm font-medium">John Doe added a new food post</p>
+                            <p class="text-sm text-gray-500">Authentic Newari Cuisine at Bhojan Griha</p>
+                            <p class="text-xs text-gray-400">2 hours ago</p>
+                        </div>
+                    </div>
+                    <div class="flex gap-4 items-start">
+                        <div class="h-10 w-10 rounded-full bg-gray-200 flex items-center justify-center">SM</div>
+                        <div>
+                            <p class="text-sm font-medium">Sarah Miller left a review</p>
+                            <p class="text-sm text-gray-500">5-star review for Thakali Kitchen</p>
+                            <p class="text-xs text-gray-400">4 hours ago</p>
+                        </div>
+                    </div>
+                    <div class="flex gap-4 items-start">
+                        <div class="h-10 w-10 rounded-full bg-gray-200 flex items-center justify-center">RK</div>
+                        <div>
+                            <p class="text-sm font-medium">Rajesh Kumar upgraded to premium</p>
+                            <p class="text-sm text-gray-500">Annual subscription plan</p>
+                            <p class="text-xs text-gray-400">Yesterday</p>
+                        </div>
+                    </div>
+                    <div class="flex gap-4 items-start">
+                        <div class="h-10 w-10 rounded-full bg-gray-200 flex items-center justify-center">AP</div>
+                        <div>
+                            <p class="text-sm font-medium">Aakriti Pradhan asked a question</p>
+                            <p class="text-sm text-gray-500">About Sel Roti preparation techniques</p>
+                            <p class="text-xs text-gray-400">Yesterday</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Food Posts Table -->
+            <div class="bg-white rounded shadow p-6 mb-6">
+                <div class="flex justify-between items-center mb-4">
+                    <h2 class="text-lg font-semibold">Food Posts Management</h2>
+                    <button class="px-4 py-2 bg-orange-600 text-white rounded hover:bg-orange-700">Add New Post</button>
+                </div>
+                <p class="text-sm text-gray-500 mb-4">Manage all food posts across the platform</p>
+
+                <div class="overflow-x-auto">
+                    <table class="w-full text-sm text-left">
+                    <thead class="bg-gray-100">
+                        <tr>
+                        <th class="p-3">Post Title</th>
+                        <th class="p-3">Author</th>
+                        <th class="p-3">Rating</th>
+                        <th class="p-3">Date</th>
+                        <th class="p-3">Status</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y">
+                        <tr>
+                            <td class="p-3 font-medium">Authentic Momo Experience in Thamel</td>
+                            <td class="p-3">Binod Sharma</td>
+                            <td class="p-3">4.8</td>
+                            <td class="p-3 text-gray-500">Apr 2, 2023</td>
+                            <td class="p-3"><span class="px-2 py-1 bg-green-100 text-green-800 text-xs rounded">Published</span></td>
+                        </tr>
+                        <tr>
+                            <td class="p-3 font-medium">Street Food Tour of Patan</td>
+                            <td class="p-3">Anita Gurung</td>
+                            <td class="p-3">4.2</td>
+                            <td class="p-3 text-gray-500">Apr 1, 2023</td>
+                            <td class="p-3"><span class="px-2 py-1 bg-yellow-100 text-yellow-800 text-xs rounded">Under Review</span></td>
+                        </tr>
+                        <tr>
+                            <td class="p-3 font-medium">Hidden Gem: Newari Feast in Kirtipur</td>
+                            <td class="p-3">Suraj Maharjan</td>
+                            <td class="p-3">4.9</td>
+                            <td class="p-3 text-gray-500">Mar 30, 2023</td>
+                            <td class="p-3"><span class="px-2 py-1 bg-red-100 text-red-800 text-xs rounded">Flagged</span></td>
+                        </tr>
+                    </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </main>
+    {{-- END MAIN --}}
+@endsection

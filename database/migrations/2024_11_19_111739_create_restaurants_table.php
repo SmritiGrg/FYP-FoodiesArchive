@@ -14,8 +14,9 @@ return new class extends Migration
         Schema::create('restaurants', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->decimal('longitude', 10, 7);
-            $table->decimal('latitude', 10, 7);
+            $table->string('location');
+            $table->decimal('longitude', 10, 7)->nullable();
+            $table->decimal('latitude', 10, 7)->nullable();
             $table->foreignId('added_by_user_id');
             $table->foreign('added_by_user_id')->references('id')->on('users')->onDelete('cascade');
             $table->enum('status', ['approved', 'pending', 'rejected'])->default('pending');

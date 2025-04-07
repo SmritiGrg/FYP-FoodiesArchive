@@ -5,8 +5,8 @@
         </p>
     @endif
 
-    <section class="pt-20 px-24">
-        <div class="grid grid-cols-4 items-center">
+    <section class="pt-10 px-24 sticky top-10 z-30 bg-white border-b border-gray-200">
+        <div class="grid grid-cols-5 items-center">
             <div class="col-span-3 flex items-center relative">
                 <button id="leftArrow" class="absolute left-0 top-1/2 -translate-y-1/2 bg-white border-2 border-gray-200 text-gray-600 p-2 rounded-full w-9 h-9 shadow-md hover:shadow-lg transition z-20 flex items-center justify-center">
                     <i class="fa-solid fa-chevron-left"></i>
@@ -36,10 +36,20 @@
                 </button>
             </div>
 
-            <div class="col-span-1 flex justify-end">
+            <div class="col-span-2 flex justify-end items-center gap-4">
                 <button class="border-2 border-gray-200 rounded-xl py-2 px-4 text-base flex items-center gap-2 hover:bg-gray-100 hover:border-gray-500 transition cursor-pointer" onclick="openModal()">
                     <i class="ri-equalizer-line"></i> Filters
                 </button>
+
+                <!-- Sort Dropdown -->
+                <div>
+                    <select class="border-2 border-gray-200 rounded-xl py-2 px-4 text-base text-gray-700 bg-white hover:border-gray-400 transition cursor-pointer">
+                        <option value="default">Sort By</option>
+                        <option value="rating">Rating</option>
+                        <option value="newest">Newest</option>
+                        <option value="popular">Most Popular</option>
+                    </select>
+                </div>
             </div>
         </div>
     </section>
@@ -121,7 +131,7 @@
     </div>
 
 
-    <section class="px-8 pt-8 pb-7 max-w-7xl mx-auto">
+    <section class="px-8 pt-12 pb-7 max-w-7xl mx-auto">
         <h1 class="text-4xl font-bold mb-6 text-darkPurple font-poppins">Dive Into Delicious Discoveries.</h1>
         <div class="flex gap-36">
             <!-- Main Content -->
