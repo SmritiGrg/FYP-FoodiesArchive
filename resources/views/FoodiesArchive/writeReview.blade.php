@@ -13,7 +13,7 @@
 
             <div class="mt-10 flex justify-center px-4 sm:px-0" id="search-container">
                 <div class="relative w-full max-w-2xl">
-                    <form action="" method="GET">
+                    <form action="{{ route('search.food') }}" method="GET">
                         <input 
                             id="search-bar"
                             type="search" 
@@ -41,7 +41,7 @@
                     </form>
 
                     <!-- Modal -->
-                    <div id="search-modal" class="livepost absolute left-0 mt-2 w-full z-50 bg-white rounded-xl shadow-md hidden">
+                    <div id="search-modal" class="livepost absolute left-0 mt-2 w-full z-30 bg-white rounded-xl shadow-md hidden">
                         <div class="p-4 flex items-center">
                             <i class="fa-solid fa-location-arrow text-base"></i>
                             <span class="pl-3">Nearby</span>

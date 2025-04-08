@@ -28,10 +28,7 @@
                         {{-- THREE BUTTON EDIT DELETE --}}
                         <div class="relative group">
                             <span class="text-textBlack text-lg font-medium hover:text-gray-500 cursor-pointer"><i class="fa-solid fa-ellipsis"></i></span>
-                            <div class="absolute w-36 top-full right-0 rounded-lg mt-1 shadow-lg p-3 text-start scale-y-0 border-gray-200 group-hover:scale-y-100 origin-top duration-200 bg-white">
-                                <div class="hover:bg-gray-100 border-b-2 border-gray-200 flex justify-center">
-                                    <a href="" class="block text-sm font-normal text-textBlack px-2 py-2">Edit</a>
-                                </div>
+                            <div class="absolute w-32 top-full right-0 rounded-lg mt-1 shadow-lg text-start scale-y-0 border-gray-200 group-hover:scale-y-100 origin-top duration-200 bg-white">
                                 <div class="hover:bg-gray-100 flex justify-center">
                                     <form action="{{ route('foodpost.delete', $post->id) }}" method="POST">
                                         @csrf

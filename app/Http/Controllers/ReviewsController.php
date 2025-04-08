@@ -133,6 +133,13 @@ class ReviewsController extends Controller
 
     public function writeReview($food_id)
     {
+        $hasReviewed = Reviews::where('food_post_id', $food_id)
+            ->where('user_id', auth()->id())
+            ->exists();
+
+        if ($hasReviewed) {
+            return redirect()->back()->with('error', 'You have already reviewed this food post.');
+        }
         $foodPost = FoodPost::find($food_id);
         return view('FoodiesArchive.singleReview', compact('foodPost'));
     }

@@ -31,202 +31,222 @@
                                 $isFollowing = $authUser && isset($likedpost->foodPost->user) ? $authUser->isFollowing($likedpost->foodPost->user->id) : false;
                             @endphp
 
-                            @if ($authUser && $authUser->id === $likedpost->foodPost->user->id)
-                                {{-- If the post is by the authenticated user, not showing any button --}}
-                            @else
-                                @if (!$authUser)
-                                    {{-- If the user is not logged in, showing the Follow button --}}
-                                    <button type="button" class="py-1 px-5 bg-customYellow text-black text-sm font-medium rounded-md hover:bg-hovercustomYellow">
+                            @if (!$authUser)
+                                {{-- If the user is not logged in, show the Follow button --}}
+                                <form method="POST" action="{{route('users.follow', $likedpost->foodPost->user->id)}}">
+                                    @csrf
+                                    <button type="submit" class="py-1 px-5 bg-customYellow text-black text-sm font-medium rounded-md hover:bg-hovercustomYellow">
                                         Follow
                                     </button>
-                                @else
-                                    {{-- If logged in, check if they are following --}}
-                                    @if ($isFollowing)
+                                </form>
+                            @else
+                                {{-- If logged in, check if they are following --}}
+                                @if ($isFollowing)
+                                    <div class="relative group">
                                         <button class="py-1 px-5 bg-gray-200 text-sm font-medium rounded-md hover:bg-gray-300">
                                             Following
-                                        </button>
-                                    @else
+                                        </button>                               
+                                        <div class="absolute w-32 top-full left-0 rounded-lg p-1 mt-1 shadow-lg text-start scale-y-0 border-2 border-gray-200 group-hover:scale-y-100 origin-top duration-200 bg-white z-50">
+                                            <form method="POST" action="{{route('users.unfollow', $likedpost->foodPost->user->id)}}">
+                                                @csrf
+                                                <button type="submit" class="w-full text-red-500 hover:bg-gray-100 border-b border-gray-200 last:border-b-0 flex items-center py-1 px-3">
+                                                    Unfollow
+                                                </button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                @else
+                                    <form method="POST" action="{{route('users.follow', $likedpost->foodPost->user->id)}}">
+                                        @csrf
                                         <button type="submit" class="py-1 px-5 bg-customYellow text-black text-sm font-medium rounded-md hover:bg-hovercustomYellow">
                                             Follow
                                         </button>
-                                    @endif
+                                    </form>
                                 @endif
                             @endif
                         </div>
                     </div>
 
-                    <a href="{{ route('food.details', ['id' => $likedpost->foodPost->id]) }}" class="text-2xl font-medium mb-1">{{$likedpost->foodPost->name}}</a>
-                    <p class="text-gray-700 text-base">Restaurant: {{$likedpost->foodPost->restaurant->name}}</p>
-                    <span class="text-gray-700 mb-3 text-base">{{$likedpost->foodPost->foodType->name}}, {{$likedpost->foodPost->cuisineType->name}}</span>
-                    <span class="bg-green-100 text-green-700 text-xs font-medium py-1 px-3 mb-4 rounded w-fit">{{$likedpost->foodPost->tag->name}}</span>
+                    <div class="flex-grow overflow-auto scrollable-content pt-1">
+                        <a href="{{ route('food.details', ['id' => $likedpost->foodPost->id]) }}" class="text-xl font-medium mb-1">{{$likedpost->foodPost->name}}</a>
+                        <p class="text-gray-700 text-sm">Restaurant: {{$likedpost->foodPost->restaurant->name}}</p>
+                        <span class="text-gray-700 pb-3 text-sm">{{$likedpost->foodPost->foodType->name}}, {{$likedpost->foodPost->cuisineType->name}}</span>
+                        <p class="bg-green-100 text-green-700 text-xs font-medium py-1 px-3 mb-4 rounded w-fit">{{$likedpost->foodPost->tag->name}}</p>
 
-                    @php
-                        $userRatingValue = round($likedpost->foodPost->rating);
-                        $formattedRating = number_format($userRatingValue, 1);
-                    @endphp
+                        @php
+                            $userRatingValue = round($likedpost->foodPost->rating);
+                            $formattedRating = number_format($userRatingValue, 1);
+                        @endphp
 
-                    <div class="flex items-center mr-2 my-2">
-                        @for ($i = 1; $i <= 5; $i++)
-                            @if ($i <= $userRatingValue)
-                                <!-- Full star if the rating is less than or equal to the user's rating -->
-                                <img src="{{ asset('assets/img/cutlery (1).png') }}" 
-                                    class="bg-customYellow p-1 rounded-md mr-1" 
-                                    style="height: 25px; width: 25px;" 
-                                    alt="Full">
-                            @else
-                                <!-- Empty star if the rating is less than the current iteration -->
-                                <img src="{{ asset('assets/img/cutlery (1).png') }}" 
-                                    class="bg-gray-300 p-1 rounded-md mr-1" 
-                                    style="height: 25px; width: 25px;" 
-                                    alt="Empty">
-                            @endif
-                        @endfor
-                        <p class="pl-1">{{$formattedRating}}</p>
-                    </div>
-                    <p class="font-medium text-lg mb-4">Rs. {{$likedpost->foodPost->price}}</p>
-                    <p class="text-gray-700 mb-6">
-                        {{$likedpost->foodPost->review}}
-                    </p>
+                        <div class="flex items-center mr-2 my-2">
+                            @for ($i = 1; $i <= 5; $i++)
+                                @if ($i <= $userRatingValue)
+                                    <!-- Full star if the rating is less than or equal to the user's rating -->
+                                    <img src="{{ asset('assets/img/cutlery (1).png') }}" 
+                                        class="bg-customYellow p-1 rounded-md mr-1" 
+                                        style="height: 25px; width: 25px;" 
+                                        alt="Full">
+                                @else
+                                    <!-- Empty star if the rating is less than the current iteration -->
+                                    <img src="{{ asset('assets/img/cutlery (1).png') }}" 
+                                        class="bg-gray-300 p-1 rounded-md mr-1" 
+                                        style="height: 25px; width: 25px;" 
+                                        alt="Empty">
+                                @endif
+                            @endfor
+                            <p class="pl-1">{{$formattedRating}}</p>
+                        </div>
+                        <p class="font-medium text-lg mb-4">Rs. {{$likedpost->foodPost->price}}</p>
+                        <p class="text-gray-700 text-base pb-4">
+                            {{$likedpost->foodPost->review}}
+                        </p>
+                        <div class="pb-6 border-b-2 border-b-gray-100">
+                            <a href="{{ route('writeReview', ['food_id' => $likedpost->foodPost->id]) }}" class="bg-darkPurple text-sm text-white px-2 py-1 rounded-xl hover:bg-lightPurple">Write a Review</a>
+                        </div>
 
-                    <div class="flex flex-col space-y-6 w-full pt-3">
-                        @foreach($likedpost->foodPost->reviews as $review)
-                            <div class="flex w-full justify-between">
-                                <div class="flex">
-                                    <a href="">
-                                        <img src="{{ asset('uploads/profile-images/' . $review->user->image) }}" alt="img" class="w-8 h-8 rounded-full object-cover" />
-                                    </a>
-                                    <div class="ml-3">
-                                        <div class="flex items-center justify-between">
-                                            <a href="{{ route('otherProfile', ['id' => $review->user->id]) }}" class="font-normal text-xs hover:text-gray-500">{{$review->user->full_name}}</a>
-                                        </div>
-                                        <p class="text-gray-500 text-xs">{{$post->created_at->diffForHumans()}}</p>
-                                        <button onclick="toggleReplyForm({{ $review->id }})" class="text-xs text-gray-500 font-medium hover:text-gray-600">Reply</button>
 
-                                        <div class="mt-2">
-                                            @php
-                                                $userRatingValue = round($review->rating);
-                                                $formattedRating = number_format($userRatingValue, 1);
-                                            @endphp
-                                            
-                                            <div class="flex items-center space-x-1">
-                                                @for ($i = 1; $i <= 5; $i++)
-                                                    <img src="{{ asset('assets/img/cutlery (1).png') }}" 
-                                                        class="p-1 rounded-md {{ $i <= $userRatingValue ? 'bg-customYellow' : 'bg-gray-300' }}" 
-                                                        style="height: 20px; width: 20px;" 
-                                                        alt="{{ $i <= $userRatingValue ? 'Full' : 'Empty' }}">
-                                                @endfor
-                                                <p class="pr-2 text-xs font-normal">{{ $formattedRating }}</p>
+                        <div class="flex flex-col space-y-6 w-full pt-3">
+                            @foreach($likedpost->foodPost->reviews as $review)
+                                <div class="flex w-full justify-between">
+                                    <div class="flex">
+                                        <a href="">
+                                            <img src="{{ asset('uploads/profile-images/' . $review->user->image) }}" alt="img" class="w-8 h-8 rounded-full object-cover" />
+                                        </a>
+                                        <div class="ml-3">
+                                            <div class="flex items-center justify-between">
+                                                <a href="{{ route('otherProfile', ['id' => $review->user->id]) }}" class="font-normal text-xs hover:text-gray-500">{{$review->user->full_name}}</a>
                                             </div>
-                                            <p class="text-xs text-textBlack mt-2 font-light">{{$review->review}}</p>
-                                        </div>
+                                            <p class="text-gray-500 text-xs">{{$post->created_at->diffForHumans()}}</p>
+                                            <button onclick="toggleReplyForm({{ $review->id }})" class="text-xs text-gray-500 font-medium hover:text-gray-600">Reply</button>
 
-                                        <!-- Reply Form -->
-                                        <div id="reply-form-{{ $review->id }}" class="hidden">
-                                            <form action="{{ route('review.store') }}" method="POST">
-                                                @csrf
-                                                <input type="hidden" name="food_post_id" value="{{ $review->food_post_id }}">
-                                                <input type="hidden" name="parent_id" value="{{ $review->id }}"> <!-- This ensures it's a reply -->
+                                            <div class="mt-2">
+                                                @php
+                                                    $userRatingValue = round($review->rating);
+                                                    $formattedRating = number_format($userRatingValue, 1);
+                                                @endphp
                                                 
-                                                <div class="w-full mb-2 mt-2">
-                                                    <textarea class="bg-gray-100 rounded text-sm border border-gray-400 resize-none w-full h-20 py-2 px-3 font-normal placeholder-gray-400 focus:outline-none focus:bg-white"
-                                                            name="review" placeholder="Reply to this review" {{ $errors->has('review') ? 'border-red-500' : 'border-gray-300' }}></textarea>
-                                                    @error('review')
-                                                        <p class="text-sm text-red-600 space-y-1 font-poppins">{{ $message }}</p>
-                                                    @enderror
+                                                <div class="flex items-center space-x-1">
+                                                    @for ($i = 1; $i <= 5; $i++)
+                                                        <img src="{{ asset('assets/img/cutlery (1).png') }}" 
+                                                            class="p-1 rounded-md {{ $i <= $userRatingValue ? 'bg-customYellow' : 'bg-gray-300' }}" 
+                                                            style="height: 20px; width: 20px;" 
+                                                            alt="{{ $i <= $userRatingValue ? 'Full' : 'Empty' }}">
+                                                    @endfor
+                                                    <p class="pr-2 text-xs font-normal">{{ $formattedRating }}</p>
                                                 </div>
+                                                <p class="text-xs text-textBlack mt-2 font-light">{{$review->review}}</p>
+                                            </div>
 
-                                                <div class="w-full flex justify-end px-3">
-                                                    <button type="submit" class="py-1 px-5 bg-customYellow text-black text-sm font-medium rounded-md hover:bg-hovercustomYellow">
-                                                        Post
+                                            <!-- Reply Form -->
+                                            <div id="reply-form-{{ $review->id }}" class="hidden">
+                                                <form action="{{ route('review.store') }}" method="POST">
+                                                    @csrf
+                                                    <input type="hidden" name="food_post_id" value="{{ $review->food_post_id }}">
+                                                    <input type="hidden" name="parent_id" value="{{ $review->id }}"> <!-- This ensures it's a reply -->
+                                                    
+                                                    <div class="w-full mb-2 mt-2">
+                                                        <textarea class="bg-gray-100 rounded text-sm border border-gray-400 resize-none w-full h-20 py-2 px-3 font-normal placeholder-gray-400 focus:outline-none focus:bg-white"
+                                                                name="review" placeholder="Reply to this review" {{ $errors->has('review') ? 'border-red-500' : 'border-gray-300' }}></textarea>
+                                                        @error('review')
+                                                            <p class="text-sm text-red-600 space-y-1 font-poppins">{{ $message }}</p>
+                                                        @enderror
+                                                    </div>
+
+                                                    <div class="w-full flex justify-end px-3">
+                                                        <button type="submit" class="py-1 px-5 bg-customYellow text-black text-sm font-medium rounded-md hover:bg-hovercustomYellow">
+                                                            Post
+                                                        </button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                            <!-- Checking if there are replies -->
+                                            @if ($review->replies->count() > 0)
+                                                <!-- Toggle Replies Button -->
+                                                <div class="flex items-center my-2">
+                                                    <hr class="w-10 border-gray-400">
+                                                    <button id="toggle-replies-btn-{{ $review->id }}" onclick="toggleReplies({{ $review->id }})" class="text-sm text-gray-500 font-normal px-2 mt-2">
+                                                        SHOW REPLIES ({{ $review->replies->count() }})
                                                     </button>
                                                 </div>
-                                            </form>
-                                        </div>
-                                        <!-- Checking if there are replies -->
-                                        @if ($review->replies->count() > 0)
-                                            <!-- Toggle Replies Button -->
-                                            <div class="flex items-center my-2">
-                                                <hr class="w-10 border-gray-400">
-                                                <button id="toggle-replies-btn-{{ $review->id }}" onclick="toggleReplies({{ $review->id }})" class="text-sm text-gray-500 font-normal px-2 mt-2">
-                                                    SHOW REPLIES ({{ $review->replies->count() }})
-                                                </button>
-                                            </div>
 
-                                            <!-- Replies Section -->
-                                            <div id="replies-{{ $review->id }}" class="hidden w-full">
-                                                @foreach ($review->replies as $reply)
-                                                    <div class="mb-3 ml-6 lg:ml-12 text-base bg-white w-full">
-                                                        <div class="flex justify-between items-center mb-2 w-full">
-                                                            <div class="flex items-center">
-                                                                <a href="{{ route('otherProfile', ['id' => $reply->user->id]) }}" class="flex items-center">
-                                                                    <img class="mr-2 w-10 h-10 rounded-full object-cover" 
-                                                                        src="{{ asset('uploads/profile-images/' . $reply->user->image) }}" >
-                                                                    <p class="inline-flex items-center mr-3 text-sm text-gray-900 font-medium">
-                                                                        {{ $reply->user->full_name }}
+                                                <!-- Replies Section -->
+                                                <div id="replies-{{ $review->id }}" class="hidden w-full">
+                                                    @foreach ($review->replies as $reply)
+                                                        <div class="mb-3 ml-6 lg:ml-12 text-base bg-white w-full">
+                                                            <div class="flex justify-between items-center mb-2 w-full">
+                                                                <div class="flex items-center">
+                                                                    <a href="{{ route('otherProfile', ['id' => $reply->user->id]) }}" class="flex items-center">
+                                                                        <img class="mr-2 w-10 h-10 rounded-full object-cover" 
+                                                                            src="{{ asset('uploads/profile-images/' . $reply->user->image) }}" >
+                                                                        <p class="inline-flex items-center mr-3 text-sm text-gray-900 font-medium">
+                                                                            {{ $reply->user->full_name }}
+                                                                        </p>
+                                                                    </a>
+                                                                    <p class="text-xs text-gray-600">
+                                                                        <time datetime="{{ $reply->created_at }}">
+                                                                            {{ $reply->created_at->diffForHumans() }}
+                                                                        </time>
                                                                     </p>
-                                                                </a>
-                                                                <p class="text-xs text-gray-600">
-                                                                    <time datetime="{{ $reply->created_at }}">
-                                                                        {{ $reply->created_at->diffForHumans() }}
-                                                                    </time>
-                                                                </p>
-                                                            </div>
-                                                            @if (Auth::id() === $reply->user->id)
-                                                                <div class="relative group">
-                                                                    <span class="text-gray-600 text-lg font-medium hover:text-gray-500 cursor-pointer">
-                                                                        <i class="fa-solid fa-ellipsis"></i>
-                                                                    </span>
-                                                                    <div class="absolute w-28 top-full right-0 rounded-lg mt-1 shadow-lg p-1 text-start scale-y-0 border-gray-200 group-hover:scale-y-100 origin-top duration-200 bg-white">
-                                                                        <div class="hover:bg-gray-100 flex justify-center">
-                                                                            <form action="{{ route('review.delete', $reply->id) }}" method="POST">
-                                                                                @csrf
-                                                                                @method('DELETE')
-                                                                                <button type="submit" class="block text-xs font-normal text-red-500 px-2 py-1">Delete</button>
-                                                                            </form>
+                                                                </div>
+                                                                @if (Auth::id() === $reply->user->id)
+                                                                    <div class="relative group">
+                                                                        <span class="text-gray-600 text-lg font-medium hover:text-gray-500 cursor-pointer">
+                                                                            <i class="fa-solid fa-ellipsis"></i>
+                                                                        </span>
+                                                                        <div class="absolute w-28 top-full right-0 rounded-lg mt-1 shadow-lg p-1 text-start scale-y-0 border-gray-200 group-hover:scale-y-100 origin-top duration-200 bg-white">
+                                                                            <div class="hover:bg-gray-100 flex justify-center">
+                                                                                <form action="{{ route('review.delete', $reply->id) }}" method="POST">
+                                                                                    @csrf
+                                                                                    @method('DELETE')
+                                                                                    <button type="submit" class="block text-xs font-normal text-red-500 px-2 py-1">Delete</button>
+                                                                                </form>
+                                                                            </div>
                                                                         </div>
                                                                     </div>
-                                                                </div>
-                                                            @endif
+                                                                @endif
+                                                            </div>
+                                                            <p class="text-gray-600 mt-2 text-sm">{{ $reply->review }}</p>
                                                         </div>
-                                                        <p class="text-gray-600 mt-2 text-sm">{{ $reply->review }}</p>
+                                                    @endforeach
+                                                </div>
+                                            @endif
+                                        </div>
+                                    </div>
+
+                                    {{-- HELPFUL BUTTON AND THREE BUTTON  --}}
+                                    <div class="flex space-x-2">
+                                        <div>
+                                            @include('components.helpful-button', ['review' => $review])
+                                        </div>
+                                        @if (Auth::id() === $review->user->id)
+                                            <div class="relative group">
+                                                <span class="text-gray-600 text-lg font-medium hover:text-gray-500 cursor-pointer">
+                                                    <i class="fa-solid fa-ellipsis"></i>
+                                                </span>
+                                                <div class="absolute w-32 top-full right-0 rounded-lg mt-1 shadow-lg p-1 text-start scale-y-0 border-gray-200 group-hover:scale-y-100 origin-top duration-200 bg-white">
+                                                    <div class="hover:bg-gray-100 flex justify-center">
+                                                        <form action="{{ route('review.delete', $review->id) }}" method="POST">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                            <button type="submit" class="block text-sm font-normal text-red-500 px-2 py-2">Delete</button>
+                                                        </form>
                                                     </div>
-                                                @endforeach
+                                                </div>
                                             </div>
                                         @endif
                                     </div>
                                 </div>
-
-                                {{-- HELPFUL BUTTON AND THREE BUTTON  --}}
-                                <div class="flex space-x-2">
-                                    <div>
-                                        @include('components.helpful-button', ['review' => $review])
-                                    </div>
-                                    @if (Auth::id() === $review->user->id)
-                                        <div class="relative group">
-                                            <span class="text-gray-600 text-lg font-medium hover:text-gray-500 cursor-pointer">
-                                                <i class="fa-solid fa-ellipsis"></i>
-                                            </span>
-                                            <div class="absolute w-32 top-full right-0 rounded-lg mt-1 shadow-lg p-1 text-start scale-y-0 border-gray-200 group-hover:scale-y-100 origin-top duration-200 bg-white">
-                                                <div class="hover:bg-gray-100 flex justify-center">
-                                                    <form action="{{ route('review.delete', $review->id) }}" method="POST">
-                                                        @csrf
-                                                        @method('DELETE')
-                                                        <button type="submit" class="block text-sm font-normal text-red-500 px-2 py-2">Delete</button>
-                                                    </form>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    @endif
-                                </div>
-                            </div>
-                        @endforeach
+                            @endforeach
+                        </div>
                     </div>
+
+                    
 
                     <div class="mt-auto border-t flex items-center justify-between">
                         <div class="flex items-center space-x-4 my-2">
                             @include('components.like-button', ['food' => $likedpost->foodPost])
 
-                            <span class="text-black text-xl">
+                            <span class="text-black text-base">
                                 <i class="fa-regular fa-comment text-xl hover:text-gray-500 cursor-pointer"></i> {{$likedpost->foodPost->reviews->count()}}
                             </span>
                         </div>

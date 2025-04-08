@@ -21,7 +21,7 @@
                 />
             </a>
 
-            <div id="nav-search-container">
+            <div id="nav-search-container" class="hidden transition-opacity duration-300">
                 <div class="relative w-full max-w-2xl">
                     <form action="{{ route('search.food') }}" method="GET">
                         <div class="absolute left-4 top-1/2 transform -translate-y-1/2 text-black cursor-pointer">

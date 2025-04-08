@@ -4,6 +4,11 @@
             {{ session('message') }}
         </p>
     @endif
+    @if (session('error'))
+        <p id="success-message" class="fixed bottom-5 left-1/2 transform -translate-x-1/2 text-base text-red-500 border border-red-200 bg-white px-4 py-2 rounded-lg shadow-xl w-fit z-50">
+            {{ session('error') }}
+        </p>
+    @endif
     @if (session('delete'))
         <p id="success-message" class="fixed bottom-5 left-1/2 transform -translate-x-1/2 text-base text-red-500 border border-red-200 bg-white px-4 py-2 rounded-lg shadow-md w-fit z-50">
             {{ session('delete') }}

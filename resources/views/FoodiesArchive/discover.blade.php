@@ -5,7 +5,7 @@
         </p>
     @endif
 
-    <section class="pt-10 px-24 sticky top-10 z-30 bg-white border-b border-gray-200">
+    <section class="pt-10 px-24 sticky top-10 z-30 bg-white border-b shadow-md">
         <div class="grid grid-cols-5 items-center">
             <div class="col-span-3 flex items-center relative">
                 <button id="leftArrow" class="absolute left-0 top-1/2 -translate-y-1/2 bg-white border-2 border-gray-200 text-gray-600 p-2 rounded-full w-9 h-9 shadow-md hover:shadow-lg transition z-20 flex items-center justify-center">
@@ -17,14 +17,14 @@
 
                     <div class="scroll-container flex flex-row items-center justify-between overflow-x-auto gap-5" style="scrollbar-width: none; -ms-overflow-style: none;">
                         @foreach ($foodTypes as $foodType)
-                            <p class="font-medium text-sm text-gray-600 hover:text-gray-900 transition cursor-pointer border-b-2 border-transparent hover:border-gray-400 p-3">
+                            <a href="{{ request()->fullUrlWithQuery(['food_type' => $foodType->id]) }}" class="font-medium text-sm text-gray-600 hover:text-gray-900 transition cursor-pointer border-b-2 border-transparent hover:border-gray-400 p-3">
                                 {{$foodType->name}}
-                            </p>
+                            </a>
                         @endforeach
                         @foreach ($cuisineTypes as $cuisineType)
-                            <p class="font-medium text-sm text-gray-600 hover:text-gray-900 transition cursor-pointer border-b-2 border-transparent hover:border-gray-400 p-3">
+                            <a href="{{ request()->fullUrlWithQuery(['cuisine_type' => $cuisineType->id]) }}" class="font-medium text-sm text-gray-600 hover:text-gray-900 transition cursor-pointer border-b-2 border-transparent hover:border-gray-400 p-3">
                                 {{$cuisineType->name}}
-                            </p>
+                            </a>
                         @endforeach
                     </div>
 
@@ -43,13 +43,19 @@
 
                 <!-- Sort Dropdown -->
                 <div>
-                    <select class="border-2 border-gray-200 rounded-xl py-2 px-4 text-base text-gray-700 bg-white hover:border-gray-400 transition cursor-pointer">
-                        <option value="default">Sort By</option>
-                        <option value="rating">Rating</option>
-                        <option value="newest">Newest</option>
-                        <option value="popular">Most Popular</option>
-                    </select>
+                    <form method="GET" id="sortForm">
+                        <input type="hidden" name="food_type" value="{{ request('food_type') }}">
+                        <input type="hidden" name="cuisine_type" value="{{ request('cuisine_type') }}">
+                        <select name="sort_by" onchange="document.getElementById('sortForm').submit()" class="border-2 border-gray-200 rounded-xl py-2 px-4 text-base text-gray-700 bg-white hover:border-gray-400 transition cursor-pointer">
+                            <option value="default">Sort By</option>
+                            <option value="newest" {{ request('sort_by') == 'newest' ? 'selected' : '' }}>Newest</option>
+                            <option value="review" {{ request('sort_by') == 'review' ? 'selected' : '' }}>Most Reviewed</option>
+                            <option value="most_liked" {{ request('sort_by') == 'most_liked' ? 'selected' : '' }}>Most Liked</option>
+                            <option value="most_followed_user" {{ request('sort_by') == 'most_followed_user' ? 'selected' : '' }}>Top Followed</option>
+                        </select>
+                    </form>
                 </div>
+                <a href="/discover" class="text-sm text-blue-600 hover:underline ml-2">Clear All Filters</a>
             </div>
         </div>
     </section>
@@ -60,78 +66,81 @@
             <button onclick="closeModal()" class="absolute top-4 right-4 text-white text-3xl">
                 <i class="fa-solid fa-xmark"></i>
             </button>
-            <div class="bg-white w-1/4 rounded-3xl h-[70vh] flex-col flex p-4">
+            <div class="bg-white w-1/4 rounded-3xl h-[74vh] flex-col flex p-4">
                 <h2 class="text-lg font-semibold mb-4 border-b-2 text-center pb-2">Filters</h2>
-                <h3 class="text-md font-medium mb-2">Price Range</h3>
-                <div class="grid grid-cols-2 items-center gap-4">
-                    <div class="col-span-1 flex flex-col">
-                        <label for="from" class="text-sm text-gray-400 font-medium pb-2">From:</label>
-                        <input id="from" type="number" class="w-24 border border-gray-300 rounded-2xl px-3 py-3 focus:outline-none focus:ring-2 focus:ring-blue-200 focus:bg-gray-100" value="50" min="50" max="4000">
+                <form method="GET" action="{{ url()->current() }}">
+                    <h3 class="text-md font-medium mb-2">Price Range</h3>
+                    <div class="grid grid-cols-2 items-center gap-4">
+                        <div class="col-span-1 flex flex-col">
+                            <label for="from" class="text-sm text-gray-400 font-medium pb-2">From:</label>
+                            <input id="from" type="number" name="price_from" class="w-24 border border-gray-300 rounded-2xl px-3 py-3 focus:outline-none focus:ring-2 focus:ring-blue-200 focus:bg-gray-100" value="{{ request('price_from', 50) }}" min="50" max="4000">
+                        </div>
+                        <div class="col-span-1 flex flex-col ml-auto">
+                            <label for="to" class="text-sm text-gray-400 font-medium pb-2">To:</label>
+                            <input id="to" type="number" name="price_to" class="w-24 border border-gray-300 font-light rounded-2xl px-3 py-3 focus:outline-none focus:ring-2 focus:ring-blue-200 focus:bg-gray-100" value="{{ request('price_to', 4000) }}" min="50" max="4000">
+                        </div>
                     </div>
-                    <div class="col-span-1 flex flex-col ml-auto">
-                        <label for="to" class="text-sm text-gray-400 font-medium pb-2">To:</label>
-                        <input id="to" type="number" class="w-24 border border-gray-300 font-light rounded-2xl px-3 py-3 focus:outline-none focus:ring-2 focus:ring-blue-200 focus:bg-gray-100" value="4000" min="50" max="4000">
+                    <button type="submit" class="mt-4 py-1 px-2 text-sm bg-customYellow text-white rounded-xl">Apply Filters</button>
+                    <div class="flex flex-col gap-4 mt-5">
+                        <h3 class="text-md font-medium mb-2">Rating</h3>
+                        <!-- Rating 5 -->
+                        <label class="flex items-center gap-2 cursor-pointer">
+                            <input type="checkbox" name="rating[]" value="5" class="border-gray-200 rounded-sm text-blue-600 focus:ring-blue-500 checked:border-blue-500" {{ in_array(5, request('rating', [])) ? 'checked' : '' }}>
+                            <div class="w-6 h-6 bg-yellow-500 rounded flex items-center justify-center">
+                                <img src="{{asset('assets/img/cutlery (1).png')}}" alt="" class="bg-customYellow p-1 rounded-md"
+                                    style="height: 25px; width: 25px">
+                            </div>
+                            <span>5.0</span>
+                        </label>
+
+                        <!-- Rating 4 -->
+                        <label class="flex items-center gap-2 cursor-pointer">
+                            <input type="checkbox" name="rating[]" value="4" class="border-gray-200 rounded-sm text-blue-600 focus:ring-blue-500 checked:border-blue-500" {{ in_array(4, request('rating', [])) ? 'checked' : '' }}>
+                            <div class="w-6 h-6 bg-yellow-500 rounded flex items-center justify-center">
+                                <img src="{{asset('assets/img/cutlery (1).png')}}" alt="" class="bg-customYellow p-1 rounded-md"
+                                    style="height: 25px; width: 25px">
+                            </div>
+                            <span>4.0</span>
+                        </label>
+
+                        <!-- Rating 3 -->
+                        <label class="flex items-center gap-2 cursor-pointer">
+                            <input type="checkbox" name="rating[]" value="3" class="border-gray-200 rounded-sm text-blue-600 focus:ring-blue-500 checked:border-blue-500" {{ in_array(3, request('rating', [])) ? 'checked' : '' }}>
+                            <div class="w-6 h-6 bg-yellow-500 rounded flex items-center justify-center">
+                                <img src="{{asset('assets/img/cutlery (1).png')}}" alt="" class="bg-customYellow p-1 rounded-md"
+                                style="height: 25px; width: 25px">
+                            </div>
+                            <span>3.0</span>
+                        </label>
+
+                        <!-- Rating 2 -->
+                        <label class="flex items-center gap-2 cursor-pointer">
+                            <input type="checkbox" name="rating[]" value="2" class="border-gray-200 rounded-sm text-blue-600 focus:ring-blue-500 checked:border-blue-500" {{ in_array(2, request('rating', [])) ? 'checked' : '' }}>
+                            <div class="w-6 h-6 bg-yellow-500 rounded flex items-center justify-center">
+                                <img src="{{asset('assets/img/cutlery (1).png')}}" alt="" class="bg-customYellow p-1 rounded-md"
+                                    style="height: 25px; width: 25px">
+                            </div>
+                            <span>2.0</span>
+                        </label>
+
+                        <!-- Rating 1 -->
+                        <label class="flex items-center gap-2 cursor-pointer">
+                            <input type="checkbox" name="rating[]" value="1" class="border-gray-200 rounded-sm text-blue-600 focus:ring-blue-500 checked:border-blue-500" {{ in_array(1, request('rating', [])) ? 'checked' : '' }}>
+                            <div class="w-6 h-6 bg-yellow-500 rounded flex items-center justify-center">
+                                <img src="{{asset('assets/img/cutlery (1).png')}}" alt="" class="bg-customYellow p-1 rounded-md"
+                                                        style="height: 25px; width: 25px">
+                            </div>
+                            <span>1</span>
+                        </label>
                     </div>
-                </div>
-
-                <div class="flex flex-col gap-4 mt-5">
-                    <h3 class="text-md font-medium mb-2">Rating</h3>
-                    <!-- Rating 5 -->
-                    <label class="flex items-center gap-2 cursor-pointer">
-                        <input type="checkbox" class="border-gray-200 rounded-sm text-blue-600 focus:ring-blue-500 checked:border-blue-500">
-                        <div class="w-6 h-6 bg-yellow-500 rounded flex items-center justify-center">
-                            <img src="{{asset('assets/img/cutlery (1).png')}}" alt="" class="bg-customYellow p-1 rounded-md"
-                                style="height: 25px; width: 25px">
-                        </div>
-                        <span>5.0</span>
-                    </label>
-
-                    <!-- Rating 4 -->
-                    <label class="flex items-center gap-2 cursor-pointer">
-                        <input type="checkbox" class="border-gray-200 rounded-sm text-blue-600 focus:ring-blue-500 checked:border-blue-500">
-                        <div class="w-6 h-6 bg-yellow-500 rounded flex items-center justify-center">
-                            <img src="{{asset('assets/img/cutlery (1).png')}}" alt="" class="bg-customYellow p-1 rounded-md"
-                                style="height: 25px; width: 25px">
-                        </div>
-                        <span>4.0</span>
-                    </label>
-
-                    <!-- Rating 3 -->
-                    <label class="flex items-center gap-2 cursor-pointer">
-                        <input type="checkbox" class="border-gray-200 rounded-sm text-blue-600 focus:ring-blue-500 checked:border-blue-500">
-                        <div class="w-6 h-6 bg-yellow-500 rounded flex items-center justify-center">
-                            <img src="{{asset('assets/img/cutlery (1).png')}}" alt="" class="bg-customYellow p-1 rounded-md"
-                            style="height: 25px; width: 25px">
-                        </div>
-                        <span>3.0</span>
-                    </label>
-
-                    <!-- Rating 2 -->
-                    <label class="flex items-center gap-2 cursor-pointer">
-                        <input type="checkbox" class="border-gray-200 rounded-sm text-blue-600 focus:ring-blue-500 checked:border-blue-500">
-                        <div class="w-6 h-6 bg-yellow-500 rounded flex items-center justify-center">
-                            <img src="{{asset('assets/img/cutlery (1).png')}}" alt="" class="bg-customYellow p-1 rounded-md"
-                                style="height: 25px; width: 25px">
-                        </div>
-                        <span>2.0</span>
-                    </label>
-
-                    <!-- Rating 1 -->
-                    <label class="flex items-center gap-2 cursor-pointer">
-                        <input type="checkbox" class="border-gray-200 rounded-sm text-blue-600 focus:ring-blue-500 checked:border-blue-500">
-                        <div class="w-6 h-6 bg-yellow-500 rounded flex items-center justify-center">
-                            <img src="{{asset('assets/img/cutlery (1).png')}}" alt="" class="bg-customYellow p-1 rounded-md"
-                                                    style="height: 25px; width: 25px">
-                        </div>
-                        <span>1</span>
-                    </label>
-                </div>
+                </form>
+                
             </div>
         </div>
     </div>
 
 
-    <section class="px-8 pt-12 pb-7 max-w-7xl mx-auto">
+    <section class="px-8 pt-14 pb-7 max-w-7xl mx-auto">
         <h1 class="text-4xl font-bold mb-6 text-darkPurple font-poppins">Dive Into Delicious Discoveries.</h1>
         <div class="flex gap-36">
             <!-- Main Content -->
@@ -146,10 +155,43 @@
                                         <a href="">
                                             <img src="{{asset('uploads/profile-images/' . $food->user->image)}}" alt="img" class="w-10 h-10 rounded-full object-cover" />
                                         </a>
-                                        <div class="ml-3">
-                                            <a href="{{ route('otherProfile', ['id' => $food->user->id]) }}" class="font-medium text-base hover:text-gray-500 font-poppins">{{$food->user->full_name}}</a>
-                                            <p class="text-gray-500 text-xs font-poppins">{{ $food->created_at->diffForHumans() }}</p>
+                                        <div class="relative group">
+                                            <div>
+                                                <div class="ml-3">
+                                                    <a href="{{ route('otherProfile', ['id' => $food->user->id]) }}" class="font-medium text-base hover:text-gray-500 font-poppins">{{$food->user->full_name}}</a>
+                                                    <p class="text-gray-500 text-xs font-poppins">{{ $food->created_at->diffForHumans() }}</p>
+                                                </div>
+                                            </div>
+                                            <!-- Modal -->
+                                            <div class="absolute hidden group-hover:block w-60 p-4 bg-white shadow-lg rounded-lg z-10 border border-gray-200">
+                                                <div class="flex items-center space-x-4">
+                                                    <img src="{{asset('uploads/profile-images/' . $food->user->image)}}" alt="profile" class="w-12 h-12 rounded-full object-cover">
+                                                    <div>
+                                                        <a href="{{ route('otherProfile', ['id' => $food->user->id]) }}" class="font-medium text-sm font-poppins">{{$food->user->full_name}}</a>
+                                                        <p class="text-gray-500 text-xs font-poppins">{{$food->user->username}}</p>
+                                                        <p class="border border-gray-300 rounded-full text-sm w-16 pl-2 mt-2"><i class="fa-solid fa-fire-flame-curved text-red-400"></i> {{$food->user->streak_count}}</p>
+                                                    </div>
+                                                </div>
+                                                <div class="flex justify-between text-center mt-4">
+                                                    <!-- Posts -->
+                                                    <div>
+                                                        <p class="font-bold text-sm font-poppins">{{ $food->user->foodposts->count() }}</p>
+                                                        <p class="text-gray-500 text-xs font-poppins">Posts</p>
+                                                    </div>
+                                                    <!-- Followers -->
+                                                    <div>
+                                                        <p class="font-bold text-sm font-poppins">{{ $food->user->followers->count() }}</p>
+                                                        <p class="text-gray-500 text-xs font-poppins">Followers</p>
+                                                    </div> 
+                                                    <!-- Following -->
+                                                    <div>
+                                                        <p class="font-bold text-sm font-poppins">{{ $food->user->followings->count() }}</p>
+                                                        <p class="text-gray-500 text-xs font-poppins">Following</p>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
+                                        
                                     </div>
                                     @php
                                         $authUser = auth()->user();

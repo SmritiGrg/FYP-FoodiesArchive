@@ -72,8 +72,8 @@
                         <p class="bg-green-100 text-green-700 text-xs font-medium py-1 px-3 mb-4 rounded w-fit">{{$post->tag->name}}</p>
 
                         @php
-                        $userRatingValue = round($post->rating);
-                        $formattedRating = number_format($userRatingValue, 1);
+                            $userRatingValue = round($post->rating);
+                            $formattedRating = number_format($userRatingValue, 1);
                         @endphp
 
                         <div class="flex items-center mr-2 my-2">
@@ -95,9 +95,13 @@
                                 <p class="pl-1">{{$formattedRating}}</p>
                         </div>
                         <p class="font-medium text-lg mb-2">Rs. {{$post->price}}</p>
-                        <p class="text-gray-700 pb-6 border-b-2 border-b-gray-100">
+                        <p class="text-gray-700 pb-4">
                             {{$post->review}}
                         </p>
+                        <div class="pb-6 border-b-2 border-b-gray-100">
+                            <a href="{{ route('writeReview', ['food_id' => $post->id]) }}" class="bg-darkPurple text-sm text-white px-2 py-1 rounded-xl hover:bg-lightPurple">Write a Review</a>
+                        </div>
+
                         <div class="flex flex-col space-y-6 w-full pt-3">
                             @foreach($post->reviews as $review)
                                 <div class="flex w-full justify-between">

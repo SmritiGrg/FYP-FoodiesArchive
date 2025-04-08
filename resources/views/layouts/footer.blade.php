@@ -118,15 +118,50 @@
 
         ////// SEARCH BAR WHEN SCROLLING JS
         window.addEventListener("scroll", function () {
-            let searchBar = document.getElementById("nav-search-container");
+            const searchBar = document.getElementById("nav-search-container");
+
             if (window.scrollY > 50) {
+                // Show the search bar
                 searchBar.classList.remove("hidden");
             } else {
+                // Hide when back to top
                 searchBar.classList.add("hidden");
             }
         });
         /////// END
 
+        // Nav Section Modal
+        function showNavModal() {
+            document.getElementById('nav-search-modal').classList.remove('hidden');
+        }
+
+        function hideNavModal() {
+            document.getElementById('nav-search-modal').classList.add('hidden');
+        }
+
+        // Hero Section Modal
+        function showModal() {
+            document.getElementById('search-modal').classList.remove('hidden');
+        }
+
+        function hideModal() {
+            document.getElementById('search-modal').classList.add('hidden');
+        }
+
+        // Click listener for hero section
+        document.addEventListener('click', function(event) {
+            if (!event.target.closest('#search-container') && !event.target.closest('#search-modal')) {
+                hideModal();
+            }
+        });
+
+        // Click listener for nav section
+        document.addEventListener('click', function(event) {
+            if (!event.target.closest('#nav-search-container') && !event.target.closest('#nav-search-modal')) {
+                hideNavModal();
+            }
+        });
+        /////// END SEARCH BAR MODAL
 
         function previewImage(event) {
             const reader = new FileReader();
@@ -291,39 +326,6 @@
         //         hideModal();
         //     }
         // });
-
-        // Nav Section Modal
-        function showNavModal() {
-            document.getElementById('nav-search-modal').classList.remove('hidden');
-        }
-
-        function hideNavModal() {
-            document.getElementById('nav-search-modal').classList.add('hidden');
-        }
-
-        // Hero Section Modal
-        function showModal() {
-            document.getElementById('search-modal').classList.remove('hidden');
-        }
-
-        function hideModal() {
-            document.getElementById('search-modal').classList.add('hidden');
-        }
-
-        // Click listener for hero section
-        document.addEventListener('click', function(event) {
-            if (!event.target.closest('#search-container') && !event.target.closest('#search-modal')) {
-                hideModal();
-            }
-        });
-
-        // Click listener for nav section
-        document.addEventListener('click', function(event) {
-            if (!event.target.closest('#nav-search-container') && !event.target.closest('#nav-search-modal')) {
-                hideNavModal();
-            }
-        });
-        /////// END SEARCH BAR MODAL
 
 
         /////// DISCOVER PAGE CATEGORY SCROLLING
