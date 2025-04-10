@@ -5,13 +5,17 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Badges extends Model
+class Badge extends Model
 {
     use HasFactory;
 
     protected $fillable = [
         'name',
-        'streak_criteria'
+        'description',
+        'streak_criteria',
+        'image',
+        'contribution_required',
+        'special_badge',
     ];
 
     public function users()

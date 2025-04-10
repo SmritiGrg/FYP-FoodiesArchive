@@ -11,14 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('badges', function (Blueprint $table) {
+        Schema::create('contributions', function (Blueprint $table) {
             $table->id();
-            $table->string('name')->unique();
-            $table->text('description');
-            $table->string('image')->nullable();
-            $table->integer('streak_criteria')->nullable();
-            $table->integer('contribution_required')->nullable();
-            $table->string('special_badge')->nullable();
+            $table->enum('type', ['post', 'review']);
+            $table->date('contribution_date');
+            $table->foreignId('user_id');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -28,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('badges');
+        Schema::dropIfExists('contributions');
     }
 };

@@ -32,6 +32,7 @@ class UserTableSeeder extends Seeder
             'role' => 'visitor',
             'streak_count' => 50,
             'last_activity_date' => now(),
+            'total_streak_points' =>50
         ]);
 
         User::create([
@@ -43,6 +44,7 @@ class UserTableSeeder extends Seeder
             'role' => 'visitor',
             'streak_count' => 40,
             'last_activity_date' => now(),
+            'total_streak_points' =>40
         ]);
         User::factory()->count(50)->create();
     }

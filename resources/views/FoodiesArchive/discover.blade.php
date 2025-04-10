@@ -169,7 +169,7 @@
                                                     <div>
                                                         <a href="{{ route('otherProfile', ['id' => $food->user->id]) }}" class="font-medium text-sm font-poppins">{{$food->user->full_name}}</a>
                                                         <p class="text-gray-500 text-xs font-poppins">{{$food->user->username}}</p>
-                                                        <p class="border border-gray-300 rounded-full text-sm w-16 pl-2 mt-2"><i class="fa-solid fa-fire-flame-curved text-red-400"></i> {{$food->user->streak_count}}</p>
+                                                        <p class="border border-gray-300 rounded-full text-sm w-16 pl-2 mt-2"><i class="fa-solid fa-fire-flame-curved text-red-400"></i> {{$food->user->total_streak_points}}</p>
                                                     </div>
                                                 </div>
                                                 <div class="flex justify-between text-center mt-4">
@@ -330,7 +330,7 @@
                                                 <div>
                                                     <a href="{{ route('otherProfile', ['id' => $user->id]) }}" class="font-medium text-sm font-poppins">{{$user->full_name}}</a>
                                                     <p class="text-gray-500 text-xs font-poppins">{{$user->username}}</p>
-                                                    <p class="border border-gray-300 rounded-full text-sm w-16 pl-2 mt-2"><i class="fa-solid fa-fire-flame-curved text-red-400"></i> {{$user->streak_count}}</p>
+                                                    <p class="border border-gray-300 rounded-full text-sm w-16 pl-2 mt-2"><i class="fa-solid fa-fire-flame-curved text-red-400"></i> {{$user->total_streak_points}}</p>
                                                 </div>
                                             </div>
                                             <div class="flex justify-between text-center mt-4">

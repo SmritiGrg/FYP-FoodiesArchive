@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Badge;
 use App\Models\FoodPost;
 use App\Models\Restaurants;
 use App\Models\Reviews;
@@ -84,5 +85,11 @@ class AdminController extends Controller
     {
         $restaurants = Restaurants::paginate(5);
         return view('admin.restaurant', compact('restaurants'));
+    }
+
+    public function badge()
+    {
+        $badges = Badge::paginate(5);
+        return view('admin.badge', compact('badges'));
     }
 }

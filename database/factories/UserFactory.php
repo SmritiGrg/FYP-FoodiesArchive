@@ -32,6 +32,7 @@ class UserFactory extends Factory
             'image' => $this->faker->imageUrl(),
             'role' => $this->assignRole(),
             'streak_count' => $this->faker->numberBetween(0, 200),
+            'total_streak_points' => $this->faker->numberBetween(0, 1000),
             'last_activity_date' => $this->faker->optional()->dateTimeThisYear(),
             'email_verified_at' => now(),
             'remember_token' => Str::random(10),

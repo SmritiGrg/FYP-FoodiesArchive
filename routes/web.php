@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
+use App\Http\Controllers\BadgesController;
 use App\Http\Controllers\BookmarkController;
 use App\Http\Controllers\FollowsController;
 use App\Http\Controllers\FoodPostController;
@@ -21,7 +22,6 @@ Route::get('/', [FrontendController::class, 'index']);
 Route::get('/discover', [FrontendController::class, 'discover'])->name('food.discover');
 Route::get('/writeReview', [FrontendController::class, 'writeReview']);
 // Route::get('/about', [FrontendController::class, 'about']);
-// Route::get('/bookmark', [FrontendController::class, 'bookmark']);
 
 
 Route::get('/search', [FoodPostController::class, 'search'])->name('search.food');
@@ -88,6 +88,10 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::get('/restaurant', [AdminController::class, 'restaurant']);
     Route::patch('/restaurant/{id}', [RestaurantsController::class, 'update'])->name('restaurant.update');
     Route::delete('/restaurant/{id}', [RestaurantsController::class, 'destroy'])->name('restaurant.delete');
+
+    Route::get('/admin/badge', [AdminController::class, 'badge'])->name('admin.badge');
+    Route::delete('/admin/badge/{id}', [BadgesController::class, 'destroy'])->name('badge.delete');
+    Route::patch('/admin/badge/{id}', [BadgesController::class, 'update'])->name('badge.update');
 });
 
 require __DIR__ . '/auth.php';

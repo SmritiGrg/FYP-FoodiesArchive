@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Models\Badges;
+use App\Models\Badge;
 use App\Models\User;
 use App\Models\UserBadges;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -17,7 +17,7 @@ class UserBadgeTableSeeder extends Seeder
     {
         // Fetch all users and badges
         $users = User::all();
-        $badges = Badges::all();
+        $badges = Badge::all();
 
         // Loop through each user and assign badges based on their streak count
         foreach ($users as $user) {

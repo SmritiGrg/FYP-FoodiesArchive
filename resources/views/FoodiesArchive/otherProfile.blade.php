@@ -57,7 +57,7 @@
                         <div class="hidden sm:flex items-center mt-4">
                             <i class="fa-solid fa-fire-flame-curved text-red-400 text-2xl pr-3"></i>
                             <div class="pt-1">
-                                <span class="block text-sm text-gray-900 font-medium">{{ $user->streak_count }}</span>
+                                <span class="block text-sm text-gray-900 font-medium">{{ $user->total_streak_points }}</span>
                                 <span class="block text-sm text-gray-500">
                                     Total streaks
                                 </span>
@@ -178,14 +178,19 @@
                 <div class="w-full lg:w-1/4 p-4">
                     <h3 class="font-semibold text-lg mb-2 text-textBlack">Achievements</h3>
                     <div class="flex lg:block justify-around border p-5 md:p-3 lg:space-y-3">
-                        <div class="flex items-center space-x-3">
-                            <span class="w-14 h-14 sm:w-20 sm:h-20 rounded-full bg-red-400"></span>
-                            <p class="text-sm text-textBlack"">Badge Name <br><span class="text-gray-500">20 streaks</span></p>
-                        </div>
-                        <div class="flex items-center space-x-3">
-                            <span class="w-14 h-14 sm:w-20 sm:h-20 rounded-full bg-blue-400"></span>
-                            <p class="text-sm text-textBlack">Badge Name <br><span class="text-gray-500">50 streaks</span></p>
-                        </div>
+                        @if ($user->badges->count() > 0)
+                            @foreach ($user->badges as $badge)
+                                <div class="flex items-center space-x-3">
+                                    <img src="{{asset('uploads/badge-images/'. $badge->image)}}" alt="{{ $badge->name }}" class="w-14 h-14 sm:w-20 sm:h-20 rounded-full object-cover">
+                                    <p class="text-sm text-textBlack">
+                                        {{ $badge->name }} <br>
+                                        <span class="text-gray-500">{{ $badge->streak_criteria }} streaks</span>
+                                    </p>
+                                </div>
+                            @endforeach
+                        @else
+                            <p class="text-gray-500 text-lg mt-4">No Badge received yet.</p>
+                        @endif
                     </div>
                 </div>
 

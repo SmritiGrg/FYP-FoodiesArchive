@@ -4,8 +4,14 @@
         <img src="{{asset('backend/assets/img/FoodiesArchive_Logo-removebg-preview.png')}}" alt="" style="height: 50px; width: 240px;">
     </a>  
     <ul class="mt-4">
-        <li class="mb-1 group active">
+        {{-- <li class="mb-1 group active">
             <a href="/admin" class="flex items-center py-3 px-4 text-gray-500 hover:bg-gray-700 hover:text-white rounded-md group-[.active]:bg-gray-700 group-[.active]:text-white">
+                <i class="ri-home-2-line mr-3 text-lg"></i>
+                <span class="text-sm">Dashboard</span>
+            </a>
+        </li> --}}
+        <li class="mb-1 group active">
+            <a href="/admin" class="flex items-center py-3 px-4 text-gray-500 hover:bg-gray-700 hover:text-white rounded-md">
                 <i class="ri-home-2-line mr-3 text-lg"></i>
                 <span class="text-sm">Dashboard</span>
             </a>
@@ -34,7 +40,7 @@
                 <span class="text-sm">Review & Rating Management</span>
             </a>
         </li>
-        <li class="mb-1 group">
+        {{-- <li class="mb-1 group">
             <a href="" class="flex items-center py-3 px-4 text-gray-500 hover:bg-gray-700 hover:text-white rounded-md group-[.active]:bg-gray-700 group-[.active]:text-white group-[.selected]:bg-gray-950 group-[.selected]:text-gray-100 sidebar-dropdown-toggle">
                 <i class="ri-award-fill mr-3 text-lg"></i>
                 <span class="text-sm">Badge Management</span>
@@ -42,12 +48,18 @@
             </a>
             <ul class="pl-7 mt-2 hidden group-[.selected]:block">
                 <li class="mb-4">
-                    <a href="" class="text-gray-500 text-sm flex items-center hover:text-white before:contents-[''] before:w-1 before:h-1 before:rounded-full before:bg-gray-500 before:mr-3">Create</a>
+                    <a href="" class="text-gray-500 text-sm flex items-center before:contents-[''] before:w-1 before:h-1 before:rounded-full before:bg-gray-500 before:mr-3">Create</a>
                 </li>
                 <li class="mb-4">
                     <a href="" class="text-gray-500 text-sm flex items-center hover:text-white before:contents-[''] before:w-1 before:h-1 before:rounded-full before:bg-gray-500 before:mr-3">Index</a>
                 </li>
             </ul>
+        </li> --}}
+        <li class="mb-1">
+            <a href="{{route('admin.badge')}}" class="flex items-center py-3 px-4 text-gray-500 hover:bg-gray-700 hover:text-white rounded-md group-[.active]:bg-gray-700 group-[.active]:text-white">
+                <i class="fa-regular fa-star mr-3 text-lg"></i>
+                <span class="text-sm">Badge Management</span>
+            </a>
         </li>
         <li class="mb-1">
             <a href="" class="flex items-center py-3 px-4 text-gray-500 hover:bg-gray-700 hover:text-white rounded-md group-[.active]:bg-gray-700 group-[.active]:text-white">

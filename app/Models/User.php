@@ -26,6 +26,7 @@ class User extends Authenticatable implements CanResetPassword
         'role',
         'streak_count',
         'last_activity_date',
+        'total_streak_points',
     ];
 
     /**
@@ -94,7 +95,7 @@ class User extends Authenticatable implements CanResetPassword
 
     public function badges()
     {
-        return $this->belongsToMany(Badges::class, 'user_badges')
+        return $this->belongsToMany(Badge::class, 'user_badges')
             ->withPivot('awarded_date')
             ->withTimestamps();
     }
@@ -107,5 +108,10 @@ class User extends Authenticatable implements CanResetPassword
     public function bookmarksPosts()
     {
         return $this->belongsToMany(FoodPost::class, 'bookmarks', 'user_id', 'food_post_id')->withTimestamps();
+    }
+
+    public function contributions()
+    {
+        return $this->hasMany(Contribution::class);
     }
 }
