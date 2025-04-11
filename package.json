@@ -17,6 +17,7 @@
     },
     "dependencies": {
         "animate.css": "^4.1.1",
+        "canvas-confetti": "^1.9.3",
         "hover.css": "^2.3.2"
     }
 }

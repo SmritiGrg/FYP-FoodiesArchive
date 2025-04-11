@@ -35,6 +35,8 @@ class ReviewsController extends Controller
             'rating' => 'nullable|integer|min:1|max:5', // Rating is now optional
         ]);
 
+        $user = auth()->user();
+
         $review = new Reviews([
             'review' => $request->review,
             'user_id' => Auth::id(),
@@ -45,11 +47,43 @@ class ReviewsController extends Controller
 
         $review->save();
 
-        if ($request->parent_id) {
-            return redirect()->back()->with('message', 'Reply submitted successfully.');
-        } else {
+        // updating streak points for post +3 points
+        // $this->updateStreak($user, 3);
+
+        // awarding badges if any
+        // $this->checkForBadges($user);
+
+        // if ($request->parent_id) {
+        //     return redirect()->back()->with('message', 'Reply submitted successfully.');
+        // } else {
+        //     return redirect()->route('personalProfile', ['tab' => 'reviews'])->with('message', 'Review submitted successfully.');
+        // }
+
+        // Only doing this for main reviews (not replies)
+        if (!$request->parent_id) {
+            // Updating streak points for post +3 points
+            $this->updateStreak($user, 3);
+
+            // Flash streak popup data to session
+            session()->flash('streak_popup', [
+                'points' => 3,
+                'streak_count' => $user->streak_count,
+            ]);
+
+            // Check for badges and flash if any
+            $badge = $this->checkForBadges($user);
+            if ($badge) {
+                session()->flash('badge_popup', [
+                    'name' => $badge->name,
+                    'description' => $badge->description,
+                    'image' => $badge->image,
+                ]);
+            }
+
             return redirect()->route('personalProfile', ['tab' => 'reviews'])->with('message', 'Review submitted successfully.');
         }
+
+        return redirect()->back()->with('message', 'Reply submitted successfully.');
     }
 
     public function helpfulBtn(Reviews $review)

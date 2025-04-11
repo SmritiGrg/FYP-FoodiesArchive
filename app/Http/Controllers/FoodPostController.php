@@ -151,9 +151,11 @@ class FoodPostController extends Controller
         // Get all session data for the food post
         // dd($request);
         $request->validate([
-            'review' => 'required|string|min:0|max:100',
+            'review' => 'required|string|min:0|max:200',
             'rating' => 'required|integer|min:1|max:5',
         ]);
+
+        $user = auth()->user();
 
         $data = [
             'name' => $request->session()->get('name'),
@@ -181,8 +183,27 @@ class FoodPostController extends Controller
         $foodPost->image = $data['image'];
         $foodPost->user_id = Auth::user()->id;
 
-        // Save to database
+        // saving to database
         $foodPost->save();
+
+        //updating streak points for review  +6points
+        $this->updateStreak($user, 6);
+
+        // flashing streak popup to session
+        session()->flash('streak_popup', [
+            'points' => 6,
+            'streak_count' => $user->streak_count,
+        ]);
+
+        // Checking for badge and flashing if any
+        $badge = $this->checkForBadges($user);
+        if ($badge) {
+            session()->flash('badge_popup', [
+                'name' => $badge->name,
+                'description' => $badge->description,
+                'image' => $badge->image,
+            ]);
+        }
 
         // Clear session data after successful submission
         $request->session()->forget(['currentStep', 'totalSteps', 'name', 'price', 'restaurant_id', 'cuisine_type_id', 'food_type_id', 'tag_id', 'image', 'review', 'rating']);

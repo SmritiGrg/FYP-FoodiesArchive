@@ -27,6 +27,7 @@ class User extends Authenticatable implements CanResetPassword
         'streak_count',
         'last_activity_date',
         'total_streak_points',
+        'badge_popup',
     ];
 
     /**
@@ -49,6 +50,7 @@ class User extends Authenticatable implements CanResetPassword
         return [
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
+            'badge_popup' => 'array',
         ];
     }
 

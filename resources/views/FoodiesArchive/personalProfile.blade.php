@@ -5,9 +5,38 @@
         </p>
     @endif
     @if (session('delete'))
-        <p id="success-message" class="fixed bottom-5 left-1/2 transform -translate-x-1/2 text-base text-red-500 border border-red-200 bg-white px-4 py-2 rounded-lg shadow-md w-fit z-50">
+        <p id="success-message" class="fixed bottom-5 left-1/2 transform -translate-x-1/2 text-base text-white border border-red-600 bg-red-500 px-4 py-2 rounded-lg shadow-md w-fit z-50">
             {{ session('delete') }}
         </p>
+    @endif
+
+    @if(session('streak_popup'))
+        <div id="streak-popup" class="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
+            <div class="bg-white text-center p-6 rounded-2xl shadow-2xl relative">
+                <div class="flex">
+                    <i class="fa-solid fa-fire-flame-curved text-red-400 text-2xl pr-3"></i>
+                    <h2 class="text-2xl font-bold text-green-600">Streak Increased!</h2>
+                </div>
+                <p class="text-lg mt-2">+{{ session('streak_popup.points') }} points</p>
+                <p class="text-sm text-gray-600">Current Streak: {{ session('streak_popup.streak_count') }}</p>
+                <button onclick="document.getElementById('streak-popup').remove()" class="absolute top-2 right-3 text-gray-500 hover:text-gray-700 text-lg"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+        </div>
+    @endif
+
+    @if(session('badge_popup'))
+        <div id="badge-popup" class="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
+            <div class="bg-white text-center p-6 rounded-2xl shadow-2xl relative animate-bounce">
+                <div class="flex">
+                    <i class="ri-award-fill text-customYellow text-2xl pr-3"></i>
+                    <h2 class="text-2xl font-bold text-yellow-500">New Badge Earned!</h2>
+                </div>
+                <img src="{{ asset('uploads/badge-images/' . session('badge_popup.image')) }}" alt="img" class="w-28 h-28 mx-auto mb-2">
+                <p class="font-semibold">{{ session('badge_popup.name') }}</p>
+                <p class="text-sm text-gray-500">{{ session('badge_popup.description') }}</p>
+                <button onclick="document.getElementById('badge-popup').remove()" class="absolute top-2 right-3 text-gray-500 hover:text-gray-700 text-lg">&times;</button>
+            </div>
+        </div>
     @endif
 
     <section class="pt-16">
@@ -95,7 +124,7 @@
                                                 </a>
                                             @endforeach
                                         @else
-                                            <p class="text-sm text-gray-500 px-2 py-2">No followers yet.</p>
+                                            <p class="text-sm text-gray-500 px-2 py-2">No following yet.</p>
                                         @endif
                                     </div>
                                 </div>
@@ -185,7 +214,7 @@
                                     <img src="{{asset('uploads/badge-images/'. $badge->image)}}" alt="img" class="w-14 h-14 sm:w-20 sm:h-20 rounded-full object-cover">
                                     <p class="text-sm text-textBlack">
                                         {{ $badge->name }} <br>
-                                        <span class="text-gray-500">{{ $badge->streak_criteria }} streaks</span>
+                                        <span class="text-gray-500 text-xs">{{ $badge->description }} streaks</span>
                                     </p>
                                 </div>
                             @endforeach
@@ -232,7 +261,7 @@
                                                     <a href="{{route('food.details', $review->food_post->id)}}" class="text-base sm:text-lg font-medium">{{ $review->food_post->name }}</a>
                                                     <div class="relative group">
                                                         <span class="text-textBlack text-lg font-medium hover:text-gray-500 cursor-pointer"><i class="fa-solid fa-ellipsis"></i></span>
-                                                        <div class="absolute w-36 top-full right-0 rounded-lg mt-1 shadow-lg p-3 text-start scale-y-0 border-gray-200 group-hover:scale-y-100 origin-top duration-200 bg-white">
+                                                        <div class="absolute w-36 top-full right-0 rounded-lg mt-1 shadow-lg text-start scale-y-0 border-gray-200 group-hover:scale-y-100 origin-top duration-200 bg-white">
                                                             <div class="hover:bg-gray-100 flex justify-center">
                                                                 <form action="{{ route('review.delete', $review->id) }}" method="POST">
                                                                     @csrf
@@ -340,4 +369,28 @@
             modal.classList.add('invisible', 'opacity-0');
         }
     }
+
+    setTimeout(() => {
+        document.getElementById('badge-popup')?.remove();
+    }, 6000);
+
+    document.addEventListener("DOMContentLoaded", function () {
+        if (document.getElementById("streak-popup")) {
+            confetti({
+                particleCount: 100,
+                spread: 70,
+                origin: { y: 0.6 }
+            });
+        }
+    });
+    document.addEventListener("DOMContentLoaded", function () {
+        if (document.getElementById("badge-popup")) {
+            confetti({
+                particleCount: 100,
+                spread: 70,
+                origin: { y: 0.6 }
+            });
+        }
+    });
+
 </script>

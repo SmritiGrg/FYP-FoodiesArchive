@@ -37,6 +37,15 @@ class AuthenticatedSessionController extends Controller
             $url = "/admin";
         }
 
+        // Checking for badge popup in user's database record
+        $user = Auth::user();
+        if ($user->badge_popup) {
+            session(['badge_popup' => $user->badge_popup]);
+
+            // Clearing it from the database after moving it to session
+            $user->update(['badge_popup' => null]);
+        }
+
         return redirect()->intended($url);
     }
 

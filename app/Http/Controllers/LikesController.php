@@ -88,6 +88,24 @@ class LikesController extends Controller
                 'food_post_id' => $foodPost->id
             ]);
             $liked = true;
+
+            // Checking and assigning like-related badge to the owner of the post
+            $postOwner = $foodPost->user;
+            $badge = $this->checkForLikeBasedBadges($postOwner);
+            // dd($badge, $postOwner);
+            // dd($badge);
+            logger('Returned badge:', [$badge]);
+
+            if ($badge) {
+                // Store badge popup in the database for the post owner
+                $postOwner->update([
+                    'badge_popup' => [
+                        'name' => $badge->name,
+                        'description' => $badge->description,
+                        'image' => $badge->image,
+                    ],
+                ]);
+            }
         }
 
         // SENDING JSON response TO THE FRONTEND
