@@ -10,17 +10,21 @@ abstract class Controller
 {
     public function updateStreak($user, $points)
     {
+        $streakReset = false;
         if (
             $user->last_activity_date &&
             Carbon::parse($user->last_activity_date)->lt(now()->subDays(7))
         ) {
             $user->streak_count = 0;
+            $streakReset = true;
         }
 
         $user->streak_count += $points;
         $user->total_streak_points += $points;
         $user->last_activity_date = now();
         $user->save();
+
+        return $streakReset;
     }
 
     public function checkForBadges($user)
@@ -59,7 +63,7 @@ abstract class Controller
             if ($alreadyHas) continue;
 
             // You can customize the value check here
-            if (($badge->special_badge === 'post_50_likes' && $totalLikes >= 2) ||
+            if (($badge->special_badge === 'post_50_likes' && $totalLikes >= 50) ||
                 ($badge->special_badge === 'post_100_likes' && $totalLikes >= 100)
             ) {
 

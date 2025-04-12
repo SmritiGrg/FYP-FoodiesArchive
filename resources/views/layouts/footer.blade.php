@@ -116,7 +116,14 @@
             if (message) {
                 message.style.display = 'none';
             }
-        }, 3000); // Hide after 2 seconds
+        }, 3000); // Hide after 3 seconds
+
+        setTimeout(function() {
+            let message = document.getElementById('streak_message');
+            if (message) {
+                message.style.display = 'none';
+            }
+        }, 3000); // Hide after 3 seconds
 
         ////// SEARCH BAR WHEN SCROLLING JS
         window.addEventListener("scroll", function () {

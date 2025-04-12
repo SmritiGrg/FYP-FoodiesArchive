@@ -46,6 +46,12 @@ class AuthenticatedSessionController extends Controller
             $user->update(['badge_popup' => null]);
         }
 
+        $streakReset = $this->updateStreak($user, 0);
+
+        if ($streakReset) {
+            session()->flash('streak_message', 'Your streak has ended due to inactivity');
+        }
+
         return redirect()->intended($url);
     }
 

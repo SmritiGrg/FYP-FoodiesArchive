@@ -11,16 +11,24 @@
         </p>
     @endif
 
-    @if(session('badge_popup'))
+    @if (session('streak_message'))
+        <div id="streak_message" class="fixed top-14 left-1/2 transform -translate-x-1/2 w-fit z-50">
+            <p class="text-base text-white border border-yellow-600 bg-yellow-400 px-6 py-4 rounded-lg shadow-md animate-bounce">
+                {{ session('streak_message') }}
+            </p>
+        </div>
+    @endif
+
+    @if($badge = session()->pull('badge_popup'))
         <div id="badge-popup" class="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
             <div class="bg-white text-center p-6 rounded-2xl shadow-2xl relative animate-bounce">
-                <div class="flex">
+                <div class="flex items-center justify-center mb-4">
                     <i class="ri-award-fill text-customYellow text-2xl pr-3"></i>
                     <h2 class="text-2xl font-bold text-yellow-500">New Badge Earned!</h2>
                 </div>
-                <img src="{{ asset('uploads/badge-images/' . session('badge_popup.image')) }}" alt="img" class="w-28 h-28 mx-auto mb-2">
-                <p class="font-semibold">{{ session('badge_popup.name') }}</p>
-                <p class="text-sm text-gray-500">{{ session('badge_popup.description') }}</p>
+                <img src="{{ asset('uploads/badge-images/' . $badge['image']) }}" alt="img" class="w-28 h-28 mx-auto mb-2">
+                <p class="font-semibold">{{ $badge['name'] }}</p>
+                <p class="text-sm text-gray-500">{{ $badge['description'] }}</p>
                 <button onclick="document.getElementById('badge-popup').remove()" class="absolute top-2 right-3 text-gray-500 hover:text-gray-700 text-lg">&times;</button>
             </div>
         </div>
