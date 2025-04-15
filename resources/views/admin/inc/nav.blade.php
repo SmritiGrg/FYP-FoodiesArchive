@@ -1,11 +1,11 @@
 {{-- MAIN --}}
 <main class="w-[calc(100%-265px)] ml-64 bg-gray-50 min-h-screen">
     <div class="py-3 px-6 bg-white flex items-center shadow-md shadow-black/5">
-        <ul class="flex items-center text-2xl ml-4 font-semibold">
+        {{-- <ul class="flex items-center text-2xl ml-4 font-semibold">
             <li class="mr-4">
                 Dashboard
             </li>
-        </ul>
+        </ul> --}}
         <ul class="ml-auto flex items-center">
             <li>
                 <button class="text-gray-400 w-8 h-8 mr-3 rounded-full flex items-center justify-center hover:bg-gray-100 hover:text-gray-600">

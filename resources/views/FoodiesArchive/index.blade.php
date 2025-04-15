@@ -19,6 +19,7 @@
         </div>
     @endif
 
+    {{-- assigning badge_popup in a variable and removing from the session --}}
     @if($badge = session()->pull('badge_popup'))
         <div id="badge-popup" class="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
             <div class="bg-white text-center p-6 rounded-2xl shadow-2xl relative animate-bounce">
@@ -240,7 +241,7 @@
                                 </div>
                                 <!-- Image Section -->
                                 <div class="w-full pt-5 pb-8 sm:py-10 md:w-1/2 md:py-12 flex justify-center">
-                                    <img src="{{asset('assets/img/Dessert.jpg')}}" alt="Delicious Food" class="w-80 md:w-80 lg:w-full max-w-sm h-72 md:h-80 lg:h-96 object-cover rounded-lg">
+                                    <img src="{{asset('assets/img/SocialInteraction.png')}}" alt="Delicious Food" class="w-80 md:w-80 lg:w-full max-w-sm h-72 md:h-80 lg:h-96 object-cover rounded-lg">
                                 </div>
                             </div>
                         </li>

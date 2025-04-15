@@ -6,6 +6,7 @@ use App\Models\Badge;
 use App\Models\FoodPost;
 use App\Models\Restaurants;
 use App\Models\Reviews;
+use App\Models\Tags;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -89,7 +90,13 @@ class AdminController extends Controller
 
     public function badge()
     {
-        $badges = Badge::paginate(5);
+        $badges = Badge::paginate(4);
         return view('admin.badge', compact('badges'));
+    }
+
+    public function tag()
+    {
+        $tags = Tags::paginate(6);
+        return view('admin.tag', compact('tags'));
     }
 }

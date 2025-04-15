@@ -35,12 +35,14 @@ class RestaurantsController extends Controller
             'location' => 'required',
             'longitude' => 'numeric|nullable',
             'latitude' => 'numeric|nullable',
+            'status' => 'nullable',
             'added_by_user_id' => 'required',
         ]);
         $restaurant->name = $request->name;
         $restaurant->location = $request->location;
         $restaurant->latitude = $request->latitude;
         $restaurant->longitude = $request->longitude;
+        $restaurant->status = $request->status;
         $restaurant->added_by_user_id = $request->added_by_user_id;
         $restaurant->save();
         return redirect()->back()->with('message', 'Restaurant Added Succesfully');
@@ -86,6 +88,16 @@ class RestaurantsController extends Controller
         $restaurant->update();
         return redirect()->back()->with('message', 'Restaurant Updated Succesfully');
     }
+
+    public function approve($id)
+    {
+        $restaurant = Restaurants::findOrFail($id);
+        $restaurant->status = 'approved';
+        $restaurant->save();
+
+        return redirect()->back()->with('message', 'Restaurant approved successfully!');
+    }
+
 
     /**
      * Remove the specified resource from storage.

@@ -28,7 +28,14 @@ class TagsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // dd($request);
+        $tag = new Tags;
+        $request->validate([
+            'name' => 'required|max:100',
+        ]);
+        $tag->name = $request->name;
+        $tag->save();
+        return redirect()->back()->with('message', 'Tag Created Succesfully');
     }
 
     /**
@@ -50,16 +57,25 @@ class TagsController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Tags $tags)
+    public function update(Request $request, $id)
     {
-        //
+        // dd($request);
+        $tag = Tags::findOrFail($id);
+        $request->validate([
+            'tag_name' => 'required|max:100',
+        ]);
+        $tag->name = $request->tag_name;
+        $tag->update();
+        return redirect()->back()->with('message', 'Tag Updated Succesfully');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Tags $tags)
+    public function destroy($id)
     {
-        //
+        $tag = Tags::query()->where('id', $id)->get()->first();
+        $tag->delete();
+        return redirect()->back()->with('message', 'Tag Deleted Successfully');
     }
 }

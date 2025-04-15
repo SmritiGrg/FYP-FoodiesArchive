@@ -11,6 +11,7 @@ use App\Http\Controllers\LikesController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RestaurantsController;
 use App\Http\Controllers\ReviewsController;
+use App\Http\Controllers\TagsController;
 use App\Models\FoodPosts;
 use Illuminate\Support\Facades\Route;
 
@@ -85,13 +86,22 @@ Route::middleware('auth')->group(function () {
 
 Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::get('/admin', [AdminController::class, 'index'])->name('admin.index');
+
     Route::get('/restaurant', [AdminController::class, 'restaurant']);
     Route::patch('/restaurant/{id}', [RestaurantsController::class, 'update'])->name('restaurant.update');
     Route::delete('/restaurant/{id}', [RestaurantsController::class, 'destroy'])->name('restaurant.delete');
+    Route::patch('/restaurant/{id}/approve', [RestaurantsController::class, 'approve'])->name('restaurant.approve');
 
-    Route::get('/admin/badge', [AdminController::class, 'badge'])->name('admin.badge');
-    Route::delete('/admin/badge/{id}', [BadgesController::class, 'destroy'])->name('badge.delete');
-    Route::patch('/admin/badge/{id}', [BadgesController::class, 'update'])->name('badge.update');
+
+    Route::get('/badge', [AdminController::class, 'badge']);
+    Route::delete('/badge/{id}', [BadgesController::class, 'destroy'])->name('badge.delete');
+    Route::post('/badge', [BadgesController::class, 'store'])->name('badge.store');
+    Route::patch('/badge/{id}', [BadgesController::class, 'update'])->name('badge.update');
+
+    Route::get('/tag', [AdminController::class, 'tag']);
+    Route::delete('/tag/{id}', [TagsController::class, 'destroy'])->name('tag.delete');
+    Route::post('/tag', [TagsController::class, 'store'])->name('tag.store');
+    Route::patch('/tag/{id}', [TagsController::class, 'update'])->name('tag.update');
 });
 
 require __DIR__ . '/auth.php';

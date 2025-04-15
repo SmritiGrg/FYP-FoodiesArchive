@@ -8,34 +8,34 @@
     <div class="flex-1 p-8 bg-gray-100">
         <div class="mb-6">
             <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
-            <div class="flex flex-col md:flex-row gap-4 md:items-center">
-                <div class="relative">
-                    <input type="text" placeholder="Search restaurants..." class="pl-9 w-full md:w-[300px] border border-gray-300 rounded-md py-2 px-3" />
-                    <i class="fa-solid fa-magnifying-glass absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400"></i>
+                <div class="flex flex-col md:flex-row gap-4 md:items-center">
+                    <div class="relative">
+                        <input type="text" placeholder="Search restaurants..." class="pl-9 w-full md:w-[300px] border border-gray-300 rounded-md py-2 px-3" />
+                        <i class="fa-solid fa-magnifying-glass absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400"></i>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <button class="flex items-center border border-gray-300 px-4 py-2 text-sm rounded-md hover:bg-gray-200">
+                            <svg class="h-4 w-4 mr-2" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 4a1 1 0 0 1 1-1h1.3a1 1 0 0 1 .97.757L7.6 6H20a1 1 0 0 1 0 2H7.1a1 1 0 0 1-.97-.757L4.3 3H4a1 1 0 0 1-1-1ZM6 10a1 1 0 0 1 1-1h13a1 1 0 1 1 0 2H7a1 1 0 0 1-1-1Zm1 4a1 1 0 0 0 0 2h10a1 1 0 1 0 0-2H7Z"></path></svg>
+                            Filter
+                        </button>
+                        <select class="border border-gray-300 rounded-md h-9 px-6 text-sm">
+                            <option value="all">All Status</option>
+                            <option value="approved">Approved</option>
+                            <option value="pending">Pending</option>
+                            <option value="rejected">Rejected</option> 
+                        </select>
+                        <select class="border border-gray-300 rounded-md h-9 px-7 text-sm">
+                            <option value="all">All Locations</option>
+                            <option value="kathmandu">Kathmandu</option>
+                            <option value="lalitpur">Lalitpur</option>
+                            <option value="bhaktapur">Bhaktapur</option>
+                            <option value="pokhara">Pokhara</option>
+                        </select>
+                    </div>
                 </div>
-                <div class="flex items-center gap-2">
-                    <button class="flex items-center border border-gray-300 px-4 py-2 text-sm rounded-md hover:bg-gray-200">
-                        <svg class="h-4 w-4 mr-2" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 4a1 1 0 0 1 1-1h1.3a1 1 0 0 1 .97.757L7.6 6H20a1 1 0 0 1 0 2H7.1a1 1 0 0 1-.97-.757L4.3 3H4a1 1 0 0 1-1-1ZM6 10a1 1 0 0 1 1-1h13a1 1 0 1 1 0 2H7a1 1 0 0 1-1-1Zm1 4a1 1 0 0 0 0 2h10a1 1 0 1 0 0-2H7Z"></path></svg>
-                        Filter
-                    </button>
-                    <select class="border border-gray-300 rounded-md h-9 px-3 text-sm">
-                        <option value="all">All Status</option>
-                        <option value="approved">Approved</option>
-                        <option value="pending">Pending</option>
-                        <option value="rejected">Rejected</option> 
-                    </select>
-                    <select class="border border-gray-300 rounded-md h-9 px-3 text-sm">
-                        <option value="all">All Locations</option>
-                        <option value="kathmandu">Kathmandu</option>
-                        <option value="lalitpur">Lalitpur</option>
-                        <option value="bhaktapur">Bhaktapur</option>
-                        <option value="pokhara">Pokhara</option>
-                    </select>
-                </div>
-            </div>
-            <button type="button" onclick="openModal()" class="bg-customYellow hover:bg-hovercustomYellow text-white px-4 py-2 rounded-md text-sm flex items-center">
-                + Add Restaurant
-            </button>
+                <button type="button" onclick="openRestaurantModal()" class="bg-customYellow hover:bg-hovercustomYellow text-white px-4 py-2 rounded-md text-sm flex items-center">
+                    + Add Restaurant
+                </button>
             </div>
         </div>
 
@@ -45,7 +45,7 @@
 
         <div class="bg-white rounded-md shadow">
             <!-- Header -->
-            <div class="grid grid-cols-12 p-4 bg-gray-100 text-sm font-medium">
+            <div class="grid grid-cols-12 p-4 bg-gray-100 text-sm font-medium text-center">
                 <div class="col-span-3">Restaurant Name</div>
                 <div class="col-span-2">Location</div>
                 <div class="col-span-2">Submitted By</div>
@@ -68,7 +68,7 @@
                             <div class="col-span-3 font-medium">{{ $restaurant->name }}</div>
                             <div class="col-span-2">{{ $restaurant->location }}</div>
                             <div class="col-span-2">{{ $restaurant->addedByUser->full_name }}</div>
-                            <div class="col-span-2">{{ $restaurant->foodPosts->count() }}</div>
+                            <div class="col-span-2 text-center">{{ $restaurant->foodPosts->count() }}</div>
                             <div class="col-span-1">
                                 <span class="px-2 py-1 rounded
                                     @if($restaurant->status == 'approved') bg-green-100 text-green-800
@@ -78,7 +78,7 @@
                                     {{ $restaurant->status }}
                                 </span>
                             </div>
-                            <div class="col-span-2 flex space-x-2">
+                            <div class="col-span-2 flex space-x-2 justify-center">
                                 <label for="{{ $viewModalId }}" class="text-gray-600 border border-gray-300 px-3 py-1 rounded-md cursor-pointer">View</label>
 
                                 <div class="relative group">
@@ -233,14 +233,20 @@
                                         </div>
                                     </div>
 
-                                    <div class="flex flex-col sm:flex-row gap-2 mt-6">
-                                        <button class="sm:flex-1 border border-red-200 text-red-500 py-2 rounded-md hover:bg-red-50 flex items-center justify-center gap-2">
-                                            Reject
-                                        </button>
-                                        <button class="sm:flex-1 bg-green-600 text-white py-2 rounded-md hover:bg-green-700 flex items-center justify-center gap-2">
-                                            Approve
-                                        </button>
+                                    <div class="flex sm:flex-row gap-2 mt-6">
+                                        <label for="{{ $viewModalId }}" class="flex-1 border border-red-200 text-red-500 py-2 rounded-md hover:bg-red-50 flex items-center justify-center cursor-pointer">
+                                            Cancel
+                                        </label>
+
+                                        <form method="POST" action="{{ route('restaurant.approve', $restaurant->id) }}" class="flex-1">
+                                            @csrf
+                                            @method('PATCH')
+                                            <button type="submit" class="w-full bg-green-600 text-white py-2 rounded-md hover:bg-green-700">
+                                                Approve
+                                            </button>
+                                        </form>
                                     </div>
+
                                 </div>
                             </div>
                         </div>
@@ -277,21 +283,21 @@
                 </div>
 
                 <div class="mt-4">
-                    <x-input-label for="latitude" value="Latitude" />
+                    <label for="latitude" class="block font-medium text-sm text-slate-600">Latitude</label>
                     <x-text-input id="latitude" class="block mt-1 w-full" type="text" name="latitude"
                         :error="$errors->has('latitude')" :value="old('latitude')" autofocus />
                     <x-input-error :messages="$errors->get('latitude')" class="mt-2" />
                 </div>
 
                 <div class="mt-4">
-                    <x-input-label for="longitude" value="Longitude" />
+                    <label for="longitude" class="block font-medium text-sm text-slate-600">Longitude</label>
                     <x-text-input id="longitude" class="block mt-1 w-full" type="text" name="longitude"
                         :error="$errors->has('longitude')" :value="old('longitude')" autofocus />
                     <x-input-error :messages="$errors->get('longitude')" class="mt-2" />
                 </div>
 
-                <div>
-                    <x-input-label for="status" value="Status" />
+                <div class="mt-4">
+                    <label for="status" class="block font-medium text-sm text-slate-600">Status</label>
                     <select name="status" id="status" class="mt-1 block w-full text-slate-400 bg-white border rounded-md shadow-sm">
                         <option value="approved">approved</option>
                         <option value="pending">pending</option>
@@ -305,9 +311,21 @@
                 </div>
             </form>
             <!-- Close button (X) -->
-            <button onclick="closeModal()" class="absolute top-2 right-2 text-gray-500 hover:text-gray-800 text-xl"><i class="fa-solid fa-xmark"></i></button>
+            <button onclick="closeRestaurantModal()" class="absolute top-2 right-2 text-gray-500 hover:text-gray-800 text-xl"><i class="fa-solid fa-xmark"></i></button>
         </div>
     </div>
 </main>
 {{-- END MAIN --}}
+@if ($errors->any())
+    <script>
+        window.addEventListener('DOMContentLoaded', () => {
+            const modal = document.getElementById('restaurantModal');
+            if (modal) {
+                modal.classList.remove('hidden');
+                modal.classList.add('flex'); // this ensures proper centering
+            }
+        });
+    </script>
+@endif
+
 @endsection

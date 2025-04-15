@@ -56,9 +56,21 @@
             </ul>
         </li> --}}
         <li class="mb-1">
-            <a href="{{route('admin.badge')}}" class="flex items-center py-3 px-4 text-gray-500 hover:bg-gray-700 hover:text-white rounded-md group-[.active]:bg-gray-700 group-[.active]:text-white">
-                <i class="fa-regular fa-star mr-3 text-lg"></i>
+            <a href="/badge" class="flex items-center py-3 px-4 text-gray-500 hover:bg-gray-700 hover:text-white rounded-md group-[.active]:bg-gray-700 group-[.active]:text-white">
+                <i class="ri-award-fill mr-3 text-lg"></i>
                 <span class="text-sm">Badge Management</span>
+            </a>
+        </li>
+        <li class="mb-1">
+            <a href="/tag" class="flex items-center py-3 px-4 text-gray-500 hover:bg-gray-700 hover:text-white rounded-md group-[.active]:bg-gray-700 group-[.active]:text-white">
+                <i class="fa-solid fa-tag mr-3 text-lg"></i>
+                <span class="text-sm">Tag Management</span>
+            </a>
+        </li>
+        <li class="mb-1">
+            <a href="" class="flex items-center py-3 px-4 text-gray-500 hover:bg-gray-700 hover:text-white rounded-md group-[.active]:bg-gray-700 group-[.active]:text-white">
+                <i class="fa-solid fa-utensils mr-3 text-lg"></i>
+                <span class="text-sm">Types Management</span>
             </a>
         </li>
         <li class="mb-1">

@@ -15,6 +15,6 @@ class Tags extends Model
 
     public function foodPosts()
     {
-        return $this->hasMany(FoodPosts::class);
+        return $this->hasMany(FoodPost::class, 'tag_id', 'id');
     }
 }
