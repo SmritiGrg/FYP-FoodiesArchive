@@ -1,36 +1,41 @@
 @extends('admin.inc.main')
 @section('container')
+<main class="w-[calc(100%-260px)] ml-64 bg-gray-50 min-h-screen pt-16">
     @if (session('message'))
         <p id="success-message" class="fixed bottom-5 left-1/2 transform -translate-x-1/2 text-base text-white bg-green-500 border border-green-600 px-4 py-2 rounded-lg shadow-md w-fit z-50">
             {{ session('message') }}
         </p>
     @endif
-    <div class="flex-1 p-8 bg-gray-100">
+    <div class="flex-1 px-8 py-2 bg-gray-100">
+        <div class="mb-2 border-b border-gray-200">
+            <p class="text-customYellow font-semibold text-2xl py-2">Restaurants</p>
+        </div>
         <div class="mb-6">
             <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
                 <div class="flex flex-col md:flex-row gap-4 md:items-center">
                     <div class="relative">
-                        <input type="text" placeholder="Search restaurants..." class="pl-9 w-full md:w-[300px] border border-gray-300 rounded-md py-2 px-3" />
+                        <input type="search" name="search" id="search" placeholder="Search restaurants..." class="pl-9 w-full md:w-[300px] border border-gray-300 rounded-md py-2 px-3" />
                         <i class="fa-solid fa-magnifying-glass absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400"></i>
                     </div>
                     <div class="flex items-center gap-2">
-                        <button class="flex items-center border border-gray-300 px-4 py-2 text-sm rounded-md hover:bg-gray-200">
-                            <svg class="h-4 w-4 mr-2" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 4a1 1 0 0 1 1-1h1.3a1 1 0 0 1 .97.757L7.6 6H20a1 1 0 0 1 0 2H7.1a1 1 0 0 1-.97-.757L4.3 3H4a1 1 0 0 1-1-1ZM6 10a1 1 0 0 1 1-1h13a1 1 0 1 1 0 2H7a1 1 0 0 1-1-1Zm1 4a1 1 0 0 0 0 2h10a1 1 0 1 0 0-2H7Z"></path></svg>
-                            Filter
-                        </button>
-                        <select class="border border-gray-300 rounded-md h-9 px-6 text-sm">
-                            <option value="all">All Status</option>
-                            <option value="approved">Approved</option>
-                            <option value="pending">Pending</option>
-                            <option value="rejected">Rejected</option> 
-                        </select>
-                        <select class="border border-gray-300 rounded-md h-9 px-7 text-sm">
-                            <option value="all">All Locations</option>
-                            <option value="kathmandu">Kathmandu</option>
-                            <option value="lalitpur">Lalitpur</option>
-                            <option value="bhaktapur">Bhaktapur</option>
-                            <option value="pokhara">Pokhara</option>
-                        </select>
+                        <form method="GET" action="{{ route('restautant.index') }}">
+                            <select name="status" class="border border-gray-300 rounded-md h-9 px-6 text-sm" onchange="this.form.submit()">
+                                <option value="all" {{ request('status') == 'all' ? 'selected' : '' }}>All Status</option>
+                                <option value="approved" {{ request('status') == 'approved' ? 'selected' : '' }}>Approved</option>
+                                <option value="pending" {{ request('status') == 'pending' ? 'selected' : '' }}>Pending</option>
+                                <option value="rejected" {{ request('status') == 'rejected' ? 'selected' : '' }}>Rejected</option>
+                            </select>
+                        </form>
+                        <form method="GET" action="{{ route('restautant.index') }}">
+                            <select name="location" class="border border-gray-300 rounded-md h-9 px-7 text-sm" onchange="this.form.submit()">
+                                <option value="all" {{ request('location') == 'all' ? 'selected' : '' }}>All Locations</option>
+                                @foreach($locations as $location)
+                                    <option value="{{ $location }}" {{ request('location') == $location ? 'selected' : '' }}>
+                                        {{ $location }}
+                                    </option>
+                                @endforeach
+                            </select>
+                        </form>
                     </div>
                 </div>
                 <button type="button" onclick="openRestaurantModal()" class="bg-customYellow hover:bg-hovercustomYellow text-white px-4 py-2 rounded-md text-sm flex items-center">
@@ -39,19 +44,15 @@
             </div>
         </div>
 
-        <div class="mb-4 border-b border-gray-200">
-            <p class="text-customYellow font-semibold text-base">Restaurants</p>
-        </div>
-
         <div class="bg-white rounded-md shadow">
             <!-- Header -->
-            <div class="grid grid-cols-12 p-4 bg-gray-100 text-sm font-medium text-center">
-                <div class="col-span-3">Restaurant Name</div>
-                <div class="col-span-2">Location</div>
-                <div class="col-span-2">Submitted By</div>
-                <div class="col-span-2">Food Post</div>
-                <div class="col-span-1">Status</div>
-                <div class="col-span-2">Actions</div>
+            <div class="grid grid-cols-10 p-4 bg-gray-100">
+                <div class="col-span-3 text-xs font-medium text-gray-500 uppercase">Restaurant Name</div>
+                <div class="col-span-2 text-xs font-medium text-gray-500 uppercase">Location</div>
+                <div class="col-span-2 text-xs font-medium text-gray-500 uppercase">Submitted By</div>
+                <div class="col-span-1 text-xs font-medium text-gray-500 uppercase">Food Posts</div>
+                <div class="col-span-1 text-xs font-medium text-gray-500 uppercase">Status</div>
+                <div class="col-span-1 text-xs font-medium text-gray-500 uppercase">Actions</div>
             </div>
 
             <!-- Rows -->
@@ -64,13 +65,13 @@
 
                     <!-- Scoped wrapper for each peer toggle + modal -->
                     <div>
-                        <div class="grid grid-cols-12 p-4 items-center hover:bg-gray-50">
-                            <div class="col-span-3 font-medium">{{ $restaurant->name }}</div>
-                            <div class="col-span-2">{{ $restaurant->location }}</div>
-                            <div class="col-span-2">{{ $restaurant->addedByUser->full_name }}</div>
-                            <div class="col-span-2 text-center">{{ $restaurant->foodPosts->count() }}</div>
+                        <div class="grid grid-cols-10 p-4 items-center hover:bg-gray-50">
+                            <div class="col-span-3 text-sm">{{ $restaurant->name }}</div>
+                            <div class="col-span-2 text-sm">{{ $restaurant->location }}</div>
+                            <div class="col-span-2 text-sm">{{ $restaurant->addedByUser->full_name }}</div>
+                            <div class="col-span-1 text-sm">{{ $restaurant->foodPosts->count() }}</div>
                             <div class="col-span-1">
-                                <span class="px-2 py-1 rounded
+                                <span class="px-2 py-1 rounded text-sm
                                     @if($restaurant->status == 'approved') bg-green-100 text-green-800
                                     @elseif($restaurant->status == 'pending') bg-yellow-100 text-yellow-800
                                     @elseif($restaurant->status == 'rejected') bg-red-100 text-red-800
@@ -78,8 +79,8 @@
                                     {{ $restaurant->status }}
                                 </span>
                             </div>
-                            <div class="col-span-2 flex space-x-2 justify-center">
-                                <label for="{{ $viewModalId }}" class="text-gray-600 border border-gray-300 px-3 py-1 rounded-md cursor-pointer">View</label>
+                            <div class="col-span-1 flex space-x-2 justify-center">
+                                <label for="{{ $viewModalId }}" class="text-gray-600 border text-sm border-gray-300 px-3 py-1 rounded-md cursor-pointer">View</label>
 
                                 <div class="relative group">
                                     <span class="text-textBlack text-lg font-medium hover:text-gray-500 cursor-pointer">
@@ -255,7 +256,7 @@
             </div>
         </div>
         <div class="mt-4">
-            {{ $restaurants->links() }}
+            {{ $restaurants->appends(request()->query())->links() }}
         </div>
     </div>
 

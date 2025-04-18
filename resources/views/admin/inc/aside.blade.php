@@ -1,9 +1,9 @@
 {{-- SIDEBAR --}}
-<div class="fixed left-0 top-0 w-[265px] h-full bg-bgPurple p-4">
+<div class="fixed left-0 top-0 w-[265px] h-full bg-bgPurple p-4 z-50">
     <a href="" class="">
         <img src="{{asset('backend/assets/img/FoodiesArchive_Logo-removebg-preview.png')}}" alt="" style="height: 50px; width: 240px;">
     </a>  
-    <ul class="mt-4">
+    <ul class="mt-4 overflow-y-auto">
         {{-- <li class="mb-1 group active">
             <a href="/admin" class="flex items-center py-3 px-4 text-gray-500 hover:bg-gray-700 hover:text-white rounded-md group-[.active]:bg-gray-700 group-[.active]:text-white">
                 <i class="ri-home-2-line mr-3 text-lg"></i>

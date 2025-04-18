@@ -1,20 +1,45 @@
-////// SIDEBAR START
+//DOMContentLoaded - first loads the page then only executes the script
+document.addEventListener("DOMContentLoaded", function () {
+    ////// SIDEBAR START
+    document
+        .querySelectorAll(".sidebar-dropdown-toggle")
+        .forEach(function (item) {
+            item.addEventListener("click", function (e) {
+                e.preventDefault();
+                const parent = item.closest(".group");
+                if (parent.classList.contains("selected")) {
+                    parent.classList.remove("selected");
+                } else {
+                    document
+                        .querySelectorAll(".sidebar-dropdown-toggle")
+                        .forEach(function (i) {
+                            i.closest(".group").classList.remove("active");
+                        });
+                    parent.classList.add("selected");
+                }
+            });
+        });
+    ////// SIDEBAR END
 
-document.querySelectorAll(".sidebar-dropdown-toggle").forEach(function (item) {
-    item.addEventListener("click", function (e) {
-        e.preventDefault();
-        const parent = item.closest(".group");
-        if (parent.classList.contains("selected")) {
-            parent.classList.remove("selected");
+    $(document).on("keyup", "#search", function () {
+        // alert("hello");
+        $value = $(this).val();
+        if ($value) {
+            $(".alldata").hide();
+            $(".searchdata").show();
         } else {
-            document
-                .querySelectorAll(".sidebar-dropdown-toggle")
-                .forEach(function (i) {
-                    i.closest(".group").classList.remove("active");
-                });
-            parent.classList.add("selected");
+            $(".alldata").show();
+            $(".searchdata").hide();
         }
+        $.ajax({
+            type: "GET",
+            url: "/search-badge",
+            data: { search: $value },
+
+            success: function (data) {
+                console.log(data);
+                $("#badge-content").html(data);
+            },
+        });
     });
 });
-
-////// SIDEBAR END

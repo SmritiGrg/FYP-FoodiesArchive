@@ -113,4 +113,44 @@ class BadgesController extends Controller
         $badge->delete();
         return redirect()->back()->with('message', 'Badge Deleted Successfully');
     }
+
+    public function search(Request $request)
+    {
+        $badges = Badge::where('name', 'LIKE', '%' . $request->search . '%')
+            ->orWhere('streak_criteria', 'LIKE', '%' . $request->search . '%')
+            ->orWhere('description', 'LIKE', '%' . $request->search . '%')
+            ->orWhere('contribution_required', 'LIKE', '%' . $request->search . '%')
+            ->orWhere('special_badge', 'LIKE', '%' . $request->search . '%')
+            ->get();
+
+        $output = '';
+
+        if ($badges->count() > 0) {
+            foreach ($badges as $badge) {
+                $modalId = 'edit-modal-' . $badge->id;
+
+                $output .= '
+                    <div class="grid grid-cols-8 items-center hover:bg-gray-50 text-center">
+                        <div class="col-span-1 font-medium"><img src="' . asset('uploads/badge-images/' . $badge->image) . '" alt="" class="w-28 h-28"></div>
+                        <div class="col-span-1 font-medium">' . $badge->name . '</div>
+                        <div class="col-span-2 font-medium">' . $badge->description . '</div>
+                        <div class="col-span-1">' . $badge->streak_criteria . '</div>
+                        <div class="col-span-1">' . $badge->contribution_required . '</div>
+                        <div class="col-span-1">' . $badge->special_badge . '</div>
+                        <div class="col-span-1 flex space-x-2 justify-center">
+                            <label for="' . $modalId . '" class="block text-sm font-normal text-blue-400 px-2 py-2 cursor-pointer">Edit</label>
+                            <form action="' . route('badge.delete', $badge->id) . '" method="POST">
+                                ' . csrf_field() . method_field('DELETE') . '
+                                <button type="submit" class="block text-sm font-normal text-red-500 px-2 py-2">Delete</button>
+                            </form>
+                        </div>
+                    </div>
+                ';
+            }
+        } else {
+            $output .= '<div class="p-4 text-gray-500 text-center">No badges found.</div>';
+        }
+
+        return response($output);
+    }
 }

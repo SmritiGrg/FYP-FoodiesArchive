@@ -15,7 +15,16 @@ class FrontendController extends Controller
     {
         $topFoods = FoodPost::orderBy('rating', 'desc')->limit(8)->get();
         $topContributors = User::orderBy('streak_count', 'desc')->take(3)->get();
-        return view('FoodiesArchive.index', compact('topFoods', 'topContributors'));
+        $mostLikedFoods = FoodPost::withCount('likes')
+            ->orderBy('likes_count', 'desc')
+            ->take(2)
+            ->get();
+        $latestUploads = FoodPost::orderBy('created_at', 'desc')
+            ->take(2)
+            ->get();
+
+
+        return view('FoodiesArchive.index', compact('topFoods', 'topContributors', 'mostLikedFoods', 'latestUploads'));
     }
     // public function discover(Request $request)
     // {

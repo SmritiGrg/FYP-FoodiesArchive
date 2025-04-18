@@ -76,8 +76,8 @@
 
                     <div class="mt-4 border-t-2 border-gray-100 pb-4 pt-2">
                         <p class="text-xl text-darkPurple font-bold pb-2">Contribute</p>
-                        <a href="{{ route('writeReview', ['food_id' => $food->id]) }}" class="bg-darkPurple text-white px-4 py-2 rounded-3xl hover:bg-lightPurple">Write a Review</a>
-                        <button class="ml-2 border border-darkPurple text-darkPurple px-4 py-2 rounded-3xl hover:bg-darkPurple hover:text-white">Ask a Question</button>
+                        <a href="{{ route('writeReview', ['food_id' => $food->id]) }}" class="bg-darkPurple text-white px-4 py-2 rounded-md hover:bg-lightPurple">Write a Review</a>
+                        <button class="ml-2 border border-darkPurple text-darkPurple px-4 py-2 rounded-md hover:bg-darkPurple hover:text-white">Ask a Question</button>
                     </div>
 
                     <h3 class="mt-4 text-lg font-medium">({{$food->reviews->count()}} reviews)</h3>

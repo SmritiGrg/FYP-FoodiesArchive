@@ -1,5 +1,6 @@
 @extends('admin.inc.main')
 @section('container')
+<main class="w-[calc(100%-260px)] ml-64 bg-gray-50 min-h-screen pt-16">
     <div class="p-8">
         <!-- Tab Navigation -->
         <div class="flex justify-between items-center mb-6">

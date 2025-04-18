@@ -35,6 +35,7 @@
                             class="w-52 md:w-80 pl-9 text-gray-800 font-poppins rounded-full border border-gray-300 text-sm"
                             style="box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;"
                             onfocus="showNavModal()"
+                            autocomplete="off"
                         />
                     </form>
 

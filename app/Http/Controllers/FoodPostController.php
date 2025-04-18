@@ -307,6 +307,13 @@ class FoodPostController extends Controller
     {
         $foodTypes = FoodTypes::all();
         $cuisineTypes = CuisineTypes::all();
+        $mostLikedFoods = FoodPost::withCount('likes')
+            ->orderBy('likes_count', 'desc')
+            ->take(2)
+            ->get();
+        $latestUploads = FoodPost::orderBy('created_at', 'desc')
+            ->take(2)
+            ->get();
 
         $search = $request->input('query');
 
@@ -331,7 +338,7 @@ class FoodPostController extends Controller
             ->orWhere('username', 'LIKE', "%$search%")
             ->get();
 
-        return view('FoodiesArchive.search', compact('result', 'users', 'search', 'foodTypes', 'cuisineTypes'));
+        return view('FoodiesArchive.search', compact('result', 'users', 'search', 'foodTypes', 'cuisineTypes', 'mostLikedFoods', 'latestUploads'));
     }
 
     // Call this method to cancel the multistep form
@@ -384,17 +391,15 @@ class FoodPostController extends Controller
             if ($foods->count()) {
                 foreach ($foods as $food) {
                     $output .= '
-                    <a href="' . route('food.details', $food->id) . '" class="block">
-                        <div class="flex items-center hover:bg-gray-100 p-3 cursor-pointer" onclick="event.stopPropagation();">
-                            <img src="' . asset($food->image) . '" 
-                                alt="img" 
-                                class="w-16 h-16 object-cover object-center rounded-md" />
-                            <div class="pl-3">
-                                <span class="font-medium text-base hover:text-gray-500 block">' . $food->name . '</span>
-                                <p class="font-light text-sm text-gray-500">Restaurant: ' . $food->restaurant->name . '</p>
-                            </div>
-                        </div>  
-                    </a>
+                        <a href="' . route('food.details', $food->id) . '" class="block">
+                            <div class="flex items-center space-x-4 hover:bg-gray-100 p-3 cursor-pointer" onclick="event.stopPropagation();">
+                                <img src="' . asset($food->image) . '" alt="profile" class="w-16 h-16 object-cover object-center rounded-md">
+                                <div class="text-start">
+                                    <p class="font-light text-sm hover:text-gray-500">' . $food->name . '</p>
+                                    <p class="font-light text-sm text-gray-500">' . $food->restaurant->name . '</p>
+                                </div>
+                            </div>  
+                        </a>
                     ';
                 }
             } else {

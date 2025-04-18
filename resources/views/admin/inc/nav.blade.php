@@ -1,6 +1,6 @@
 {{-- MAIN --}}
-<main class="w-[calc(100%-265px)] ml-64 bg-gray-50 min-h-screen">
-    <div class="py-3 px-6 bg-white flex items-center shadow-md shadow-black/5">
+{{-- <main class="w-[calc(100%-265px)] ml-64 bg-gray-50 min-h-screen"> --}}
+    <div class="fixed top-0 left-64 right-0 z-30 bg-white shadow-md shadow-black/5 py-3 px-6 flex items-center">
         {{-- <ul class="flex items-center text-2xl ml-4 font-semibold">
             <li class="mr-4">
                 Dashboard

@@ -1,4 +1,6 @@
     <script src="{{asset('backend/assets/js/script.js')}}"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    
     <script>
         setTimeout(function() {
             let message = document.getElementById('success-message');

@@ -15,6 +15,7 @@
                         style="box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;"
                         value="{{ old('query', $search) }}"
                         onfocus="showModal()"
+                        autocomplete="off"
                     />
                     <div class="absolute left-4 top-7 sm:top-1/2 transform -translate-y-1/2 text-black cursor-pointer">
                         <i class="fa-solid fa-magnifying-glass"></i>
@@ -38,6 +39,41 @@
                     <div class="p-4 flex items-center">
                         <i class="fa-solid fa-location-arrow text-base"></i>
                         <span class="pl-3">Nearby</span>
+                    </div>
+                    <div id="pre-search">
+                        <div class="p-3 border-t border-gray-200 text-start">
+                            <h3 class="text-base font-medium text-gray-700 mb-2">Most Liked</h3>
+                            <ul class="space-y-2">
+                                @foreach ($mostLikedFoods as $mostLikedFood)
+                                    <a href="{{ route('food.details', $mostLikedFood->id) }}" class="block">
+                                        <div class="flex items-center space-x-4 hover:bg-gray-100 p-3 cursor-pointer" onclick="event.stopPropagation();">
+                                            <img src="{{ asset($mostLikedFood->image) }}" alt="profile" class="w-16 h-16 object-cover object-center rounded-md">
+                                            <div class="text-start">
+                                                <p class="font-light text-sm hover:text-gray-500">{{ $mostLikedFood->name }}</p>
+                                                <p class="font-light text-sm text-gray-500">{{ $mostLikedFood->restaurant->name }}</p>
+                                            </div>
+                                        </div>  
+                                    </a>
+                                @endforeach
+                            </ul>
+                        </div>
+
+                        <div class="p-3 text-start">
+                            <h3 class="text-base font-medium text-gray-700 mb-2">Latest Uploads</h3>
+                            <ul class="space-y-2">
+                                @foreach ($latestUploads as $latestUpload)
+                                    <a href="{{ route('food.details', $latestUpload->id) }}" class="block">
+                                        <div class="flex items-center space-x-4 hover:bg-gray-100 p-3 cursor-pointer" onclick="event.stopPropagation();">
+                                            <img src="{{ asset($latestUpload->image) }}" alt="profile" class="w-16 h-16 object-cover object-center rounded-md">
+                                            <div class="text-start">
+                                                <p class="font-light text-sm hover:text-gray-500">{{ $latestUpload->name }}</p>
+                                                <p class="font-light text-sm text-gray-500">{{ $latestUpload->restaurant->name }}</p>
+                                            </div>
+                                        </div>  
+                                    </a>
+                                @endforeach
+                            </ul>
+                        </div>
                     </div>
                     <div id="search-results" class="border-t border-gray-200">
                         {{-- this is the part where the live search will come --}}

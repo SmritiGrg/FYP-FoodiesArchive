@@ -245,4 +245,17 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         }
     });
+
+    const searchBar = document.getElementById("search-bar");
+    const preSearchSuggestions = document.getElementById("pre-search");
+
+    if (searchBar && preSearchSuggestions) {
+        searchBar.addEventListener("input", function () {
+            if (this.value.trim() !== "") {
+                preSearchSuggestions.style.display = "none";
+            } else {
+                preSearchSuggestions.style.display = "block";
+            }
+        });
+    }
 });
