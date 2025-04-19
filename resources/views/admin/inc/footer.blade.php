@@ -20,7 +20,7 @@
             document.getElementById('restaurantModal').classList.add('hidden');
         }
 
-        // FOR TAG ADD MODAL FORM
+        // FOR BADGE ADD MODAL FORM
         function openTagModal() {
             document.getElementById('tagModal').classList.remove('hidden');
             document.getElementById('tagModal').classList.add('flex');
@@ -41,6 +41,54 @@
             document.getElementById('badgeModal').classList.remove('flex');
             document.getElementById('badgeModal').classList.add('hidden');
         }
+
+        ///// START - FOR EDIT MODAL OF TAG
+        function openTagEditModal(id) {
+            document.getElementById(`edit-modal-${id}`).classList.remove('hidden');
+            document.getElementById(`edit-modal-${id}`).classList.add('flex');
+        }
+
+        function closeTagEditModal(id) {
+            document.getElementById(`edit-modal-${id}`).classList.remove('flex');
+            document.getElementById(`edit-modal-${id}`).classList.add('hidden');
+        }
+        ///// END - FOR EDIT MODAL OF TAG
+
+        ///// START - FOR EDIT MODAL OF BADGE
+        function openBadgeEditModal(id) {
+            document.getElementById(`edit-modal-${id}`).classList.remove('hidden');
+            document.getElementById(`edit-modal-${id}`).classList.add('flex');
+        }
+
+        function closeBadgeEditModal(id) {
+            document.getElementById(`edit-modal-${id}`).classList.remove('flex');
+            document.getElementById(`edit-modal-${id}`).classList.add('hidden');
+        }
+        ///// END - FOR EDIT MODAL OF BADGE
+
+        ///// START - FOR EDIT MODAL OF RESTAURANT
+        function openRestaurantEditModal(id) {
+            document.getElementById(`edit-modal-${id}`).classList.remove('hidden');
+            document.getElementById(`edit-modal-${id}`).classList.add('flex');
+        }
+
+        function closeRestaurantEditModal(id) {
+            document.getElementById(`edit-modal-${id}`).classList.remove('flex');
+            document.getElementById(`edit-modal-${id}`).classList.add('hidden');
+        }
+        ///// END - FOR EDIT MODAL OF RESTAURANT
+
+        ///// START - FOR VIEW MODAL OF RESTAURANT
+        function openRestaurantViewModal(id) {
+            document.getElementById(`view-modal-${id}`).classList.remove('hidden');
+            document.getElementById(`view-modal-${id}`).classList.add('flex');
+        }
+
+        function closeRestaurantViewModal(id) {
+            document.getElementById(`view-modal-${id}`).classList.remove('flex');
+            document.getElementById(`view-modal-${id}`).classList.add('hidden');
+        }
+        ///// END - FOR VIEW MODAL OF RESTAURANT
     </script>
 </body>
 </html>

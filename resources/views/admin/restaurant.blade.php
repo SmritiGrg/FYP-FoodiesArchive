@@ -80,7 +80,9 @@
                                 </span>
                             </div>
                             <div class="col-span-1 flex space-x-2 justify-center">
-                                <label for="{{ $viewModalId }}" class="text-gray-600 border text-sm border-gray-300 px-3 py-1 rounded-md cursor-pointer">View</label>
+                                {{-- <label for="{{ $viewModalId }}" class="text-gray-600 border text-sm border-gray-300 px-3 py-1 rounded-md cursor-pointer">View</label> --}}
+                                <button onclick="openRestaurantViewModal({{ $restaurant->id }})" class="text-gray-600 border text-sm border-gray-300 px-3 py-1 rounded-md cursor-pointer">View</button>
+
 
                                 <div class="relative group">
                                     <span class="text-textBlack text-lg font-medium hover:text-gray-500 cursor-pointer">
@@ -88,7 +90,7 @@
                                     </span>
                                     <div class="absolute w-36 top-full right-0 rounded-lg mt-1 shadow-lg text-start scale-y-0 border-gray-200 group-hover:scale-y-100 origin-top duration-200 bg-white z-50">
                                         <div class="hover:bg-gray-100 border-b-2 border-gray-200 flex justify-center">
-                                            <label for="{{ $modalId }}" class="block text-sm font-normal text-textBlack px-2 py-2 cursor-pointer">Edit</label>
+                                            <button onclick="openRestaurantEditModal({{ $restaurant->id }})" class="text-blue-500 px-2 py-2 text-sm font-normal">Edit</button>
                                         </div>
                                         <div class="hover:bg-gray-100 flex justify-center">
                                             <form action="{{route('restaurant.delete', $restaurant->id)}}" method="POST">
@@ -103,14 +105,13 @@
                         </div>
 
                         <div>
-                            <!-- Hidden Checkbox to Toggle Modal -->
-                            <input type="checkbox" id="{{ $modalId }}" class="hidden peer" />
-
                             <!-- Edit Modal -->
-                            <div class="fixed inset-0 bg-black bg-opacity-50 items-center justify-center z-50 hidden peer-checked:flex">
+                            <div id="edit-modal-{{ $restaurant->id }}" class="fixed inset-0 bg-black bg-opacity-50 items-center justify-center z-50 hidden">
                                 <div class="bg-white p-6 rounded-lg shadow-lg w-full max-w-md relative">
                                     <!-- Close Button -->
-                                    <label for="{{ $modalId }}" class="absolute top-2 right-2 text-gray-500 hover:text-black text-2xl cursor-pointer"><i class="fa-solid fa-xmark"></i></label>
+                                    <button onclick="closeRestaurantEditModal({{ $restaurant->id }})" class="absolute top-2 right-2 text-gray-500 hover:text-black text-2xl">
+                                        <i class="fa-solid fa-xmark"></i>
+                                    </button>
                                     <h2 class="text-xl font-bold mb-4">Edit Restaurant</h2>
                                     <form action="{{route('restaurant.update', $restaurant->id)}}" method="POST" class="mt-6 space-y-6">
                                         @csrf
@@ -169,13 +170,13 @@
                         </div>
 
                         <div>
-                            <!-- View Modal Checkbox -->
-                            <input type="checkbox" id="{{ $viewModalId }}" class="hidden peer" />
                             <!-- View Modal -->
-                            <div class="fixed inset-0 bg-black bg-opacity-50 items-center justify-center z-50 hidden peer-checked:flex">
+                            <div id="view-modal-{{ $restaurant->id }}" class="fixed inset-0 bg-black bg-opacity-50 items-center justify-center z-50 hidden">
                                 <div class="bg-white rounded-lg shadow-lg w-full max-w-3xl p-6 overflow-y-auto max-h-[90vh] relative">
                                     <!-- Close Button -->
-                                    <label for="{{ $viewModalId }}" class="absolute top-2 right-4 text-gray-500 hover:text-black text-2xl cursor-pointer"><i class="fa-solid fa-xmark"></i></label>
+                                    <button onclick="closeRestaurantViewModal({{ $restaurant->id }})" class="absolute top-2 right-2 text-gray-500 hover:text-black text-2xl">
+                                        <i class="fa-solid fa-xmark"></i>
+                                    </button>                                    
                                     <div class="mb-6">
                                         <h2 class="text-2xl font-bold">Restaurant Validation</h2>
                                         <p class="text-sm text-gray-500">Review and validate the restaurant details before approval.</p>
@@ -235,7 +236,7 @@
                                     </div>
 
                                     <div class="flex sm:flex-row gap-2 mt-6">
-                                        <label for="{{ $viewModalId }}" class="flex-1 border border-red-200 text-red-500 py-2 rounded-md hover:bg-red-50 flex items-center justify-center cursor-pointer">
+                                        <label onclick="closeRestaurantViewModal({{ $restaurant->id }})" class="flex-1 border border-red-200 text-red-500 py-2 rounded-md hover:bg-red-50 flex items-center justify-center cursor-pointer">
                                             Cancel
                                         </label>
 

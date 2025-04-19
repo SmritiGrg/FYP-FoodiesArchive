@@ -28,7 +28,7 @@
         </div>
 
         @if(request('tab') == 'leaderboard')
-            <!-- Leaderboard -->
+            <!-- LEADERBOARD -->
             <div class="bg-white shadow overflow-hidden sm:rounded-lg mb-8">
                 <div class="px-4 py-5 sm:px-6">
                     <h2 class="text-lg leading-6 font-medium text-gray-900">Badge Leaderboard</h2>
@@ -114,6 +114,88 @@
                 </div>
             </div>
 
+            @elseif(request('tab') == 'analytics')
+            <!-- ANALYTICS -->
+            <div class="p-6">
+                <h2 class="text-2xl font-bold mb-6">Badge Analytics</h2>
+
+                <!-- Charts -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="bg-white p-4 rounded shadow">
+                        <h3 class="text-lg font-medium mb-2 text-gray-500">Most Earned Badges</h3>
+                        <canvas id="mostEarnedChart" class="w-full h-48"></canvas>
+                    </div>
+                    <div class="bg-white p-4 rounded shadow">
+                        <h3 class="text-lg font-medium mb-2 text-gray-500">Least Earned Badges</h3>
+                        <canvas id="leastEarnedChart" class="w-full h-48"></canvas>
+                    </div>
+                    <div class="bg-white p-4 rounded shadow">
+                        <h3 class="text-lg font-medium mb-2 text-gray-500">Top Users by Badges</h3>
+                        <canvas id="topUsersChart" class="w-full h-48"></canvas>
+                    </div>
+                    <div class="bg-white p-4 rounded shadow">
+                        <h3 class="text-lg font-medium mb-2 text-gray-500">Badge Types Distribution</h3>
+                        <canvas id="typeChart" class="w-full h-48"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            {{-- CHARTS --}}
+            <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>;
+            <script>
+                const mostEarnedChart = new Chart(document.getElementById('mostEarnedChart'), {
+                    type: 'bar',
+                    data: {
+                        labels: {!! json_encode($mostEarned->pluck('name')) !!},
+                        datasets: [{
+                            label: 'Most Earned Badges',
+                            data: {!! json_encode($mostEarned->pluck('users_count')) !!},
+                            backgroundColor: 'rgba(237, 233, 157)',
+                        }]
+                    }
+                });
+
+                const leastEarnedChart = new Chart(document.getElementById('leastEarnedChart'), {
+                    type: 'bar',
+                    data: {
+                        labels: {!! json_encode($leastEarned->pluck('name')) !!},
+                        datasets: [{
+                            label: 'Least Earned Badges',
+                            data: {!! json_encode($leastEarned->pluck('users_count')) !!},
+                            backgroundColor: 'rgba(239, 68, 68, 0.7)',
+                        }]
+                    }
+                });
+
+                const topUsersChart = new Chart(document.getElementById('topUsersChart'), {
+                    type: 'bar',
+                    data: {
+                        labels: {!! json_encode($topUsers->pluck('full_name')) !!},
+                        datasets: [{
+                            label: 'Top Users by Badges',
+                            data: {!! json_encode($topUsers->pluck('badges_count')) !!},
+                            backgroundColor: 'rgba(34, 197, 94, 0.7)',
+                        }]
+                    }
+                });
+
+                const typeChart = new Chart(document.getElementById('typeChart'), {
+                    type: 'pie',
+                    data: {
+                        labels: {!! json_encode(array_keys($badgeTypeCounts)) !!},
+                        datasets: [{
+                            label: 'Badge Types',
+                            data: {!! json_encode(array_values($badgeTypeCounts)) !!},
+                            backgroundColor: [
+                                'rgba(248, 113, 113, 1)',
+                                'rgba(96, 181, 255, 1)',
+                                'rgba(245, 196, 94, 1)',
+                            ]
+                        }]
+                    }
+                });
+                </script>
+
             @else
             <div class="mb-3">
                 <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
@@ -122,7 +204,6 @@
                             <input type="search" name="search" id="search" placeholder="Search badges..." class="pl-9 w-full md:w-[300px] border border-gray-300 rounded-md py-2 px-3" />
                             <i class="fa-solid fa-magnifying-glass absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400"></i>
                         </div>
-                        
                     </div>
                     <div class="flex space-x-3">
                         <form method="GET" action="{{ route('badge') }}">
@@ -156,10 +237,6 @@
                 <!-- Rows -->
                 <div class="divide-y text-sm alldata">
                     @foreach($badges as $badge)
-                        @php 
-                            $modalId = 'edit-modal-' . $badge->id;
-                        @endphp
-
                         <div>
                             <div class="grid grid-cols-9 items-center hover:bg-gray-50 space-x-4">
                                 <div class="col-span-1 p-2"><img src="{{asset('uploads/badge-images/'. $badge->image)}}" alt="" class="w-24 h-20"></div>
@@ -170,24 +247,23 @@
                                 <div class="col-span-1">{{ $badge->special_badge }}</div>
                                 <div class="col-span-1">{{ $badge->users->count() }}</div>
                                 <div class="col-span-1 flex">
-                                        <label for="{{ $modalId }}" class="block text-sm font-normal text-blue-400 px-2 py-2 cursor-pointer">Edit</label>
-                                        <form action="{{route('badge.delete', $badge->id)}}" method="POST">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="block text-sm font-normal text-red-500 px-2 py-2">Delete</button>
-                                        </form>
+                                    <button onclick="openBadgeEditModal({{ $badge->id }})" class="text-blue-500">Edit</button>                                        
+                                    <form action="{{route('badge.delete', $badge->id)}}" method="POST">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="block text-sm font-normal text-red-500 px-2 py-2">Delete</button>
+                                    </form>
                                 </div>
                             </div>
 
                             <div>
-                                <!-- Hidden Checkbox to Toggle Modal -->
-                                <input type="checkbox" id="{{ $modalId }}" class="hidden peer" />
-
                                 <!-- Edit Modal -->
-                                <div class="fixed inset-0 bg-black bg-opacity-50 items-center justify-center z-50 hidden peer-checked:flex">
+                                <div id="edit-modal-{{ $badge->id }}" class="fixed inset-0 bg-black bg-opacity-50 items-center justify-center z-50 hidden">
                                     <div class="bg-white p-6 rounded-lg shadow-lg w-full max-w-md relative">
                                         <!-- Close Button -->
-                                        <label for="{{ $modalId }}" class="absolute top-2 right-2 text-gray-500 hover:text-black text-2xl cursor-pointer"><i class="fa-solid fa-xmark"></i></label>
+                                        <button onclick="closeBadgeEditModal({{ $badge->id }})" class="absolute top-2 right-2 text-gray-500 hover:text-black text-2xl">
+                                            <i class="fa-solid fa-xmark"></i>
+                                        </button>                                        
                                         <h2 class="text-xl font-bold mb-4">Edit Badge</h2>
                                         <form action="{{route('badge.update', $badge->id)}}" method="POST" enctype="multipart/form-data" class="mt-6 space-y-6">
                                             @csrf
@@ -257,6 +333,7 @@
             </div>
 
             <div class="divide-y text-sm searchdata" id="badge-content">
+                
             </div>
         @endif
     </div>

@@ -42,4 +42,26 @@ document.addEventListener("DOMContentLoaded", function () {
             },
         });
     });
+
+    $(document).on("keyup", "#searchtag", function () {
+        // alert("hello");
+        $value = $(this).val();
+        if ($value) {
+            $(".alldatatag").hide();
+            $(".searchdatatag").show();
+        } else {
+            $(".alldatatag").show();
+            $(".searchdatatag").hide();
+        }
+        $.ajax({
+            type: "GET",
+            url: "/search-tag",
+            data: { search: $value },
+
+            success: function (data) {
+                console.log(data);
+                $("#tag-content").html(data);
+            },
+        });
+    });
 });

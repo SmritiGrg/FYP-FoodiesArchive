@@ -127,21 +127,73 @@ class BadgesController extends Controller
 
         if ($badges->count() > 0) {
             foreach ($badges as $badge) {
-                $modalId = 'edit-modal-' . $badge->id;
+                $inputId = 'image-' . $badge->id;
+                $previewId = 'badgePreview-' . $badge->id;
 
                 $output .= '
-                    <div class="grid grid-cols-8 items-center hover:bg-gray-50 text-center">
+                    <div class="grid grid-cols-9 items-center hover:bg-gray-50 text-center">
                         <div class="col-span-1 font-medium"><img src="' . asset('uploads/badge-images/' . $badge->image) . '" alt="" class="w-28 h-28"></div>
                         <div class="col-span-1 font-medium">' . $badge->name . '</div>
                         <div class="col-span-2 font-medium">' . $badge->description . '</div>
                         <div class="col-span-1">' . $badge->streak_criteria . '</div>
                         <div class="col-span-1">' . $badge->contribution_required . '</div>
                         <div class="col-span-1">' . $badge->special_badge . '</div>
+                        <div class="col-span-1">' . $badge->users->count() . '</div>
                         <div class="col-span-1 flex space-x-2 justify-center">
-                            <label for="' . $modalId . '" class="block text-sm font-normal text-blue-400 px-2 py-2 cursor-pointer">Edit</label>
+                            <button onclick="openTagEditModal(' . $badge->id . ')" class="text-blue-500">Edit</button>
                             <form action="' . route('badge.delete', $badge->id) . '" method="POST">
                                 ' . csrf_field() . method_field('DELETE') . '
                                 <button type="submit" class="block text-sm font-normal text-red-500 px-2 py-2">Delete</button>
+                            </form>
+                        </div>
+                    </div>
+                    <div id="edit-modal-' . $badge->id . '" class="fixed inset-0 bg-black bg-opacity-50 items-center justify-center z-50 hidden">
+                        <div class="bg-white p-6 rounded-lg shadow-lg w-full max-w-md relative">
+                            <button onclick="closeBadgeEditModal(' . $badge->id . ')" class="absolute top-2 right-2 text-gray-500 hover:text-black text-2xl">
+                                <i class=\'fa-solid fa-xmark\'></i>
+                            </button>
+                            <h2 class="text-xl font-bold mb-4">Edit Badge</h2>
+                            <form action="' . route('badge.update', $badge->id) . '" method="POST" enctype="multipart/form-data" class="mt-6 space-y-6">
+                                ' . csrf_field() . method_field('PATCH') . '
+                                <div class="flex items-center justify-center text-center relative">
+                                    <div class="relative">
+                                        <img id="' . $previewId . '" src="' . asset('uploads/badge-images/' . $badge->image) . '" alt="badge" class="object-cover cursor-pointer" style="width: 100px; height: 100px;">
+                                        <input type="file" id="' . $inputId . '" name="badge_image" class="hidden" accept="image/*" onchange="previewImage(event, \'' . $previewId . '\')">
+                                        <label for="' . $inputId . '" class="absolute top-0 right-0 bg-gray-800 text-white p-1 rounded-full cursor-pointer hover:bg-gray-700 transition" style="width: 30px; height: 30px;">
+                                            <i class=\'fa-solid fa-pen\'></i>
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <label class="block font-medium text-sm text-slate-600">Badge Name</label>
+                                    <input type="text" name="badge_name" value="' . $badge->name . '" class="mt-1 block w-full border border-gray-300 rounded px-3 py-2">
+                                </div>
+
+                                <div>
+                                    <label class="block font-medium text-sm text-slate-600">Description</label>
+                                    <textarea name="badge_description" class="rounded text-sm border text-slate-400 resize-none w-full h-20 py-2 px-3">' . $badge->description . '</textarea>
+                                </div>
+
+                                <div class="flex space-x-2">
+                                    <div>
+                                        <label class="block font-medium text-sm text-slate-600">Streak Criteria</label>
+                                        <input type="text" name="badge_streak_criteria" value="' . $badge->streak_criteria . '" class="mt-1 block w-full border border-gray-300 rounded px-3 py-2">
+                                    </div>
+                                    <div>
+                                        <label class="block font-medium text-sm text-slate-600">Contribution Required</label>
+                                        <input type="text" name="badge_contribution_required" value="' . $badge->contribution_required . '" class="mt-1 block w-full border border-gray-300 rounded px-3 py-2">
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <label class="block font-medium text-sm text-slate-600">Special Badge</label>
+                                    <input type="text" name="badge_special" value="' . $badge->special_badge . '" class="mt-1 block w-full border border-gray-300 rounded px-3 py-2">
+                                </div>
+
+                                <div class="flex justify-end">
+                                    <button type="submit" class="bg-customYellow text-white px-4 py-2 rounded hover:bg-hovercustomYellow">Update</button>
+                                </div>
                             </form>
                         </div>
                     </div>

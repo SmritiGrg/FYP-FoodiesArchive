@@ -99,10 +99,11 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::patch('/badge/{id}', [BadgesController::class, 'update'])->name('badge.update');
     Route::get('/search-badge', [BadgesController::class, 'search']);
 
-    Route::get('/tag', [AdminController::class, 'tag']);
+    Route::get('/tag', [AdminController::class, 'tag'])->name('tag.index');
     Route::delete('/tag/{id}', [TagsController::class, 'destroy'])->name('tag.delete');
     Route::post('/tag', [TagsController::class, 'store'])->name('tag.store');
     Route::patch('/tag/{id}', [TagsController::class, 'update'])->name('tag.update');
+    Route::get('/search-tag', [TagsController::class, 'searchTag']);
 });
 
 require __DIR__ . '/auth.php';
