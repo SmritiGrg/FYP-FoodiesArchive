@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->integer('amount_paid');
             $table->string('payment_method');
-            $table->string('khalti_transaction_id');
+            $table->string('esewa_transaction_id')->unique();
             $table->enum('status', ['Paid', 'Pending', 'Failed']);
             $table->dateTime('payment_date');
             $table->foreignId('subscriber_id');

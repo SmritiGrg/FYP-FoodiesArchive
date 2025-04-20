@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('user_subscribers', function (Blueprint $table) {
             $table->id();
             $table->dateTime('start_date');
+            $table->dateTime('end_date')->nullable();
             $table->enum('status', ['Active', 'Inactive', 'Cancelled']);
             $table->foreignId('subscription_id');
             $table->foreign('subscription_id')->references('id')->on('subscription_plans')->onDelete('cascade');

@@ -18,7 +18,7 @@ class LikesFactory extends Factory
      */
     public function definition(): array
     {
-        $userId = User::pluck('id')->toArray(); // Fetch all user IDs
+        $userId = User::where('id', '!=', 1)->pluck('id')->toArray(); // Fetch all user IDs except 1-admin
         $foodPostId = FoodPost::pluck('id')->toArray(); // Fetch all food post IDs
 
         return [

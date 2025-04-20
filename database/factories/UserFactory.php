@@ -31,18 +31,19 @@ class UserFactory extends Factory
             'password' => static::$password ??= Hash::make('password'),
             'image' => $this->faker->imageUrl(),
             'role' => $this->assignRole(),
-            'streak_count' => $this->faker->numberBetween(0, 200),
-            'total_streak_points' => $this->faker->numberBetween(0, 1000),
+            'streak_count' => $this->faker->numberBetween(0, 65),
+            'total_streak_points' => $this->faker->numberBetween(0, 65),
             'last_activity_date' => $this->faker->optional()->dateTimeThisYear(),
             'email_verified_at' => now(),
             'remember_token' => Str::random(10),
+            'created_at' => now()->subMonths(2),
         ];
     }
 
     private function assignRole()
     {
         // Return one of the roles except 'admin'
-        return $this->faker->randomElement(['visitor', 'premium_user']);
+        return $this->faker->randomElement(['general', 'premium_user']);
     }
 
 

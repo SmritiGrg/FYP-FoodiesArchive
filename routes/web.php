@@ -81,6 +81,8 @@ Route::middleware('auth')->group(function () {
     Route::post('/bookmark/{foodPost}', [BookmarkController::class, 'store'])->name('bookmark.toggle');
 
     Route::post('/review/helpful/{review}', [ReviewsController::class, 'helpfulBtn']);
+
+    Route::get('/premium', [FrontendController::class, 'premium'])->name('premium');
 });
 
 

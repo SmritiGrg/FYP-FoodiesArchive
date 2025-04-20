@@ -18,7 +18,7 @@ class ReviewsFactory extends Factory
      */
     public function definition(): array
     {
-        $userId = User::pluck('id')->toArray(); // Fetch all user IDs
+        $userId = User::where('id', '!=', 1)->pluck('id')->toArray(); // Fetch all user IDs except 1-admin
         $foodPostId = FoodPost::pluck('id')->toArray(); // Fetch all food post IDs
 
         return [
@@ -26,6 +26,7 @@ class ReviewsFactory extends Factory
             'rating' => $this->faker->numberBetween(1, 5),
             'user_id' => $this->faker->randomElement($userId),
             'food_post_id' => $this->faker->randomElement($foodPostId),
+            'created_at' => now()->subMonths(2)
         ];
     }
 }

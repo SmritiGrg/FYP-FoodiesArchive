@@ -12,7 +12,12 @@ class SubscriptionPlan extends Model
     protected $fillable = [
         'amaount',
         'features',
+        'billing_time',
         'type'
+    ];
+
+    protected $casts = [
+        'features' => 'array',
     ];
 
     public function subscribers(): void

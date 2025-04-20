@@ -29,10 +29,11 @@ class UserTableSeeder extends Seeder
             'email' => 'gurungsm.10@gmail.com',
             'password' => Hash::make('customer123'),
             'image' => 'aries10-profile-1742961117.jpg',
-            'role' => 'visitor',
-            'streak_count' => 50,
+            'role' => 'general',
+            'streak_count' => 21,
             'last_activity_date' => now(),
-            'total_streak_points' =>50
+            'total_streak_points' => 21,
+            'created_at' => now()->subMonths(1)
         ]);
 
         User::create([
@@ -41,11 +42,25 @@ class UserTableSeeder extends Seeder
             'email' => 'aries10@gmail.com',
             'password' => Hash::make('Aries28#'),
             'image' => 'aries10-profile-1742961117.jpg',
-            'role' => 'visitor',
-            'streak_count' => 40,
+            'role' => 'general',
+            'streak_count' => 21,
             'last_activity_date' => now(),
-            'total_streak_points' =>40
+            'total_streak_points' => 21,
+            'created_at' => now()->subMonths(1)
         ]);
-        User::factory()->count(50)->create();
+
+        User::create([
+            'full_name' => 'Luffy San',
+            'username' => 'luffy10',
+            'email' => 'luffy5@gmail.com',
+            'password' => Hash::make('Luffy28#'),
+            'image' => 'aries10-profile-1742961117.jpg',
+            'role' => 'general',
+            'streak_count' => 21,
+            'last_activity_date' => now(),
+            'total_streak_points' => 21,
+            'created_at' => now()->subMonths(1)
+        ]);
+        User::factory()->count(42)->create();
     }
 }

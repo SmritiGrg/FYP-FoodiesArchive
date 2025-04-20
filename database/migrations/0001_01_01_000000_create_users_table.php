@@ -19,10 +19,11 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->string('image')->nullable();
-            $table->enum('role', ['admin', 'visitor', 'premium_user'])->default('visitor');
+            $table->enum('role', ['admin', 'general', 'premium_user'])->default('general');
             $table->integer('streak_count')->default(0);
             $table->date('last_activity_date')->nullable();
             $table->integer('total_streak_points')->default(0);
+            $table->json('badge_popup')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

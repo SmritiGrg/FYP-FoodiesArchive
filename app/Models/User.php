@@ -116,4 +116,9 @@ class User extends Authenticatable implements CanResetPassword
     {
         return $this->hasMany(Contribution::class);
     }
+
+    public function subscriptions()
+    {
+        return $this->hasMany(UserSubscriber::class);
+    }
 }

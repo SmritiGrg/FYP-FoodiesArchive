@@ -13,6 +13,6 @@ class LikeTableSeeder extends Seeder
      */
     public function run(): void
     {
-        Likes::factory()->count(50)->create();
+        Likes::factory()->count(230)->create();
     }
 }

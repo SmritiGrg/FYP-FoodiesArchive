@@ -13,10 +13,44 @@ class SubscriptionPlanTableSeeder extends Seeder
      */
     public function run(): void
     {
+        // Free Plan
         SubscriptionPlan::create([
-            'amount' => 1099, // Amount for the subscription (adjust accordingly)
-            'features' => 'Access to premium features such as posting food, badges, and more.', // Features description
-            'type' => 'lifetime', // Type of plan (since you have only one, set it to 'lifetime')
+            'amount' => 0,
+            'features' => [
+                'Explore food posts',
+                'Like and comment',
+                'Review and rating'
+            ],
+            'type' => 'Free',
+            'billing_time' => 'lifetime'
+        ]);
+
+        // Premium Plan (Monthly)
+        SubscriptionPlan::create([
+            'amount' => 199,
+            'features' => [
+                'Explore food posts',
+                'Like and comment',
+                'Review and rating',
+                'Premium badges',
+                'Daily login bonus: +2 Streak Points'
+            ],
+            'type' => 'Premium',
+            'billing_time' => 'monthly'
+        ]);
+
+        // Premium Plan (Yearly)
+        SubscriptionPlan::create([
+            'amount' => 2299,
+            'features' => [
+                'Explore food posts',
+                'Like and comment',
+                'Review and rating',
+                'Premium badges',
+                'Daily login bonus: +2 Streak Points'
+            ],
+            'type' => 'Premium',
+            'billing_time' => 'yearly'
         ]);
     }
 }

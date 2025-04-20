@@ -668,6 +668,134 @@
         </div>
     </section>
 
+    <section class="py-7">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-2xl font-semibold text-customYellow font-poppins mb-4">Choose Your Foodie Experience</h2>
+                <p class="text-lg text-gray-600 max-w-2xl mx-auto">Join our community of food enthusiasts and unlock premium features to enhance your culinary journey.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+                <!-- Basic Plan -->
+                <div class="bg-white rounded-2xl shadow-lg overflow-hidden transition-transform hover:scale-105">
+                    <div class="p-8 border-b border-gray-200">
+                        <h3 class="text-2xl font-bold text-gray-900 mb-2">Basic</h3>
+                        <p class="text-gray-600 mb-6">Perfect for casual foodies</p>
+                        <div class="flex items-baseline mb-6">
+                            <span class="text-5xl font-extrabold text-gray-900">Free</span>
+                        </div>
+                        <a href="/" class="w-full py-3 px-6 rounded-lg bg-gray-200 text-gray-800 font-medium hover:bg-gray-300 transition-colors">Get Started</a>
+                    </div>
+                    <div class="p-8">
+                        <ul class="space-y-4">
+                            <li class="flex items-start">
+                                <i class="fa-solid fa-check w-5 h-5 text-green-500 mr-2 mt-1 flex-shrink-0"></i>
+                                <span class="text-gray-700">Explore food posts</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fa-solid fa-check w-5 h-5 text-green-500 mr-2 mt-1 flex-shrink-0"></i>
+                                <span class="text-gray-700">Like and comment</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fa-solid fa-check w-5 h-5 text-green-500 mr-2 mt-1 flex-shrink-0"></i>
+                                <span class="text-gray-700">Review and Rating</span>
+                            </li>
+                            <li class="flex items-start text-gray-400">
+                                <i class="fa-solid fa-xmark w-5 h-5 text-gray-300 mr-2 mt-1 flex-shrink-0"></i>
+                                <span>Premium badges</span>
+                            </li>
+                            <li class="flex items-start text-gray-400">
+                                <i class="fa-solid fa-xmark w-5 h-5 text-gray-300 mr-2 mt-1 flex-shrink-0"></i>
+                                <span>Daily Login Bonus: +2 Streak Points!</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            
+                <!-- Premium Plan -->
+                <div class="bg-white rounded-2xl shadow-xl overflow-hidden transform scale-105 z-10 border-2 border-customYellow">
+                    <div class="absolute top-0 right-0">
+                        <div class="bg-customYellow text-white text-xs font-bold px-3 py-1 rounded-bl-lg">POPULAR</div>
+                    </div>
+                    <div class="p-8 border-b border-gray-200 bg-gradient-to-br from-orange-50 to-white">
+                        <h3 class="text-2xl font-bold text-gray-900 mb-2">Premium</h3>
+                        <p class="text-gray-600 mb-6">For the serious food enthusiast</p>
+                        <div class="flex items-baseline mb-6">
+                            <span class="text-5xl font-extrabold text-gray-900">NPR 199</span>
+                            <span class="text-gray-600 ml-2">/month</span>
+                        </div>
+                        <p class="text-sm text-gray-500 mb-6">or NPR 2299/year</p>
+                        <a href="/premium" class="w-full py-3 px-6 rounded-lg bg-customYellow text-white font-medium hover:bg-hovercustomYellow">Upgrade Now</a>
+                    </div>
+                    <div class="p-8">
+                        {{-- <ul class="space-y-4">
+                            <li class="flex items-start">
+                                <i class="fa-solid fa-check w-5 h-5 text-green-500 mr-2 mt-1 flex-shrink-0"></i>
+                                <span class="text-gray-700">Exclusive food guides</span>
+                            </li>
+                        </ul> --}}
+                        <ul class="space-y-4">
+                            <li class="flex items-start">
+                                <i class="fa-solid fa-check w-5 h-5 text-green-500 mr-2 mt-1 flex-shrink-0"></i>
+                                <span class="text-gray-700">Daily Login Bonus: +2 Streak Points!</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fa-solid fa-check w-5 h-5 text-green-500 mr-2 mt-1 flex-shrink-0"></i>
+                                <span class="text-gray-700">Premium Badges</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            
+                <!-- Business Plan -->
+                <div class="bg-white rounded-2xl shadow-lg overflow-hidden transition-transform hover:scale-105">
+                    <div class="p-8 border-b border-gray-200">
+                        <h3 class="text-2xl font-bold text-gray-900 mb-2">Business</h3>
+                        <p class="text-gray-600 mb-6">For restaurant partners</p>
+                        <div class="flex items-baseline mb-6">
+                            <span class="text-3xl font-extrabold text-gray-900">Custom</span>
+                        </div>
+                        <button class="w-full py-3 px-6 rounded-lg bg-gray-800 text-white font-medium hover:bg-gray-700 transition-colors">Contact Us</button>
+                    </div>
+                    <div class="p-8">
+                        <ul class="space-y-4">
+                            <li class="flex items-start">
+                                <svg class="w-5 h-5 text-green-500 mr-2 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                <span class="text-gray-700">All Premium features</span>
+                            </li>
+                            <li class="flex items-start">
+                                <svg class="w-5 h-5 text-green-500 mr-2 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                <span class="text-gray-700">Restaurant profile management</span>
+                            </li>
+                            <li class="flex items-start">
+                                <svg class="w-5 h-5 text-green-500 mr-2 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                <span class="text-gray-700">Customer insights & analytics</span>
+                            </li>
+                            <li class="flex items-start">
+                                <svg class="w-5 h-5 text-green-500 mr-2 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                <span class="text-gray-700">Featured restaurant placement</span>
+                            </li>
+                            <li class="flex items-start">
+                                <svg class="w-5 h-5 text-green-500 mr-2 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                <span class="text-gray-700">Promotional campaigns</span>
+                            </li>
+                            <li class="flex items-start">
+                                <svg class="w-5 h-5 text-green-500 mr-2 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                <span class="text-gray-700">Dedicated support</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-11 text-center">
+                <p class="text-gray-600 mb-2">Secure payment processing via</p>
+                <div class="flex justify-center space-x-6">
+                    <div><img src="{{asset('assets/img/esewa.png')}}" class="w-16 h-7 " alt=""></div>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <script>
         setTimeout(() => {

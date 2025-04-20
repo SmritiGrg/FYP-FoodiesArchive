@@ -14,7 +14,8 @@ return new class extends Migration
         Schema::create('subscription_plans', function (Blueprint $table) {
             $table->id();
             $table->integer('amount');
-            $table->text('features');
+            $table->enum('billing_time', ['monthly', 'yearly', 'lifetime']);
+            $table->json('features');
             $table->string('type');
             $table->timestamps();
         });

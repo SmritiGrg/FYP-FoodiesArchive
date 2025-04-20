@@ -26,37 +26,6 @@ class FrontendController extends Controller
 
         return view('FoodiesArchive.index', compact('topFoods', 'topContributors', 'mostLikedFoods', 'latestUploads'));
     }
-    // public function discover(Request $request)
-    // {
-    //     $user = auth()->user();
-    //     $foodTypes = FoodTypes::all();
-    //     $cuisineTypes = CuisineTypes::all();
-
-    //     if ($user) {
-    //         // Exclude the authenticated user's posts
-    //         $foods = FoodPost::where('user_id', '!=', $user->id)
-    //             ->orderBy('created_at', 'desc')
-    //             ->paginate(5);
-
-    //         // Exclude authenticated user's followings from top foodies
-    //         $topFoodies = User::whereNotIn('id', $user->followings->pluck('id'))
-    //             ->where('id', '!=', $user->id)
-    //             ->orderBy('streak_count', 'desc')
-    //             ->take(5)
-    //             ->get();
-    //     } else {
-    //         // Show all posts for guests
-    //         $foods = FoodPost::orderBy('created_at', 'desc')->paginate(5);
-
-    //         // Show top foodies for guests
-    //         $topFoodies = User::orderBy('streak_count', 'desc')->take(5)->get();
-    //     }
-
-    //     $scrollPosition = $request->input('scroll', 0);
-
-    //     return view('FoodiesArchive.discover', compact('foodTypes', 'cuisineTypes', 'foods', 'topFoodies', 'scrollPosition'));
-    // }
-
 
     public function discover(Request $request)
     {
@@ -158,11 +127,6 @@ class FrontendController extends Controller
         return view('FoodiesArchive.writeReview', compact('foods'));
     }
 
-    // public function postFood()
-    // {
-    //     return view('FoodiesArchive.postFood');
-    // }
-
     // public function about()
     // {
     //     return view('FoodiesArchive.about');
@@ -184,5 +148,10 @@ class FrontendController extends Controller
     {
         $user = User::findOrFail($id);
         return view('FoodiesArchive.otherProfile', compact('user'));
+    }
+
+    public function premium()
+    {
+        return view('FoodiesArchive.premium');
     }
 }

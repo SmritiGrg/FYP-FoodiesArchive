@@ -15,22 +15,32 @@ class FollowsTableSeeder extends Seeder
     public function run(): void
     {
         $follows = [];
+        $count = 0;
+        $maxFollows = 100;
 
-        for ($i = 0; $i < 100; $i++) { // Generate 100 follow relationships
-            $followerId = User::inRandomOrder()->value('id');
-            $followedId = User::inRandomOrder()->value('id');
+        // Get all user IDs except admin (ID = 1)
+        $userIds = User::where('id', '!=', 1)->pluck('id')->toArray();
 
-            if ($followerId !== $followedId) {
+        while ($count < $maxFollows) {
+            $followerId = collect($userIds)->random();
+            $followedId = collect($userIds)->random();
+
+            if (
+                $followerId !== $followedId &&
+                !collect($follows)->contains(fn($f) => $f['follower_id'] === $followerId && $f['followed_id'] === $followedId)
+            ) {
+
                 $follows[] = [
                     'follower_id' => $followerId,
                     'followed_id' => $followedId,
                     'created_at' => now(),
                     'updated_at' => now(),
                 ];
+
+                $count++;
             }
         }
 
-        // Insert or ignore duplicates
         Follows::upsert($follows, ['follower_id', 'followed_id']);
     }
 }

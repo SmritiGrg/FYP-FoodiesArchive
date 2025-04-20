@@ -35,8 +35,8 @@ class DatabaseSeeder extends Seeder
             QuestionTableSeeder::class,
             AnswersTableSeeder::class,
             UserBadgeTableSeeder::class,
-            UserSubscriberTableSeeder::class,
-            PaymentTableSeeder::class,
+            // UserSubscriberTableSeeder::class,
+            // PaymentTableSeeder::class,
         ]);
     }
 }
