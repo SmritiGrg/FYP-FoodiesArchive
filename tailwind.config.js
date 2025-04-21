@@ -31,6 +31,7 @@ export default {
                 calendarDarkYellow: "#FFD95F",
                 textBlack: "#212427",
             },
+            
         },
     },
 

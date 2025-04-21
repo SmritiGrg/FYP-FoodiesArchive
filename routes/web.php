@@ -23,7 +23,7 @@ Route::get('/', function () {
 Route::get('/', [FrontendController::class, 'index']);
 Route::get('/discover', [FrontendController::class, 'discover'])->name('food.discover');
 Route::get('/writeReview', [FrontendController::class, 'writeReview']);
-// Route::get('/about', [FrontendController::class, 'about']);
+Route::get('/aboutUs', [FrontendController::class, 'about']);
 
 
 Route::get('/search', [FoodPostController::class, 'search'])->name('search.food');

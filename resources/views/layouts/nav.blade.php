@@ -86,7 +86,7 @@
                         </div>
                     </div>
                 </div>
-                <a href="#" class="text-gray-900 hover:text-customYellow text-base font-bold lg:text-sm xl:text-base">About us</a>
+                <a href="/aboutUs" class="text-gray-900 hover:text-customYellow text-base font-bold lg:text-sm xl:text-base">About us</a>
             </div>
 
             <!-- Right Icons -->
@@ -162,7 +162,7 @@
             <a href="{{ route('foodpost.create') }}" class="block py-2 text-gray-900 hover:text-customYellow text-base font-poppins font-medium"
                 >Upload Post</a
             >
-            <a href="#" class="block py-2 text-gray-900 hover:text-customYellow text-base font-poppins font-medium"
+            <a href="/aboutUs" class="block py-2 text-gray-900 hover:text-customYellow text-base font-poppins font-medium"
                 >About us</a
             >
             <a href="bookmark" class="block py-2 text-gray-900 hover:text-customYellow text-base font-poppins font-medium"

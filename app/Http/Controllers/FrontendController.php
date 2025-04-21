@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\CuisineTypes;
 use App\Models\FoodPost;
 use App\Models\FoodTypes;
+use App\Models\Restaurants;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -127,10 +128,15 @@ class FrontendController extends Controller
         return view('FoodiesArchive.writeReview', compact('foods'));
     }
 
-    // public function about()
-    // {
-    //     return view('FoodiesArchive.about');
-    // }
+    public function about()
+    {
+        $foodPostCount = FoodPost::count();
+        $userCount = User::count();
+        $districtCount = Restaurants::distinct('location')->count('location');
+        $restaurantCount = Restaurants::count();
+
+        return view('FoodiesArchive.aboutUs', compact('foodPostCount', 'userCount', 'districtCount', 'restaurantCount'));
+    }
 
     public function bookmark()
     {
