@@ -19,6 +19,7 @@ return new class extends Migration
             $table->integer('streak_criteria')->nullable();
             $table->integer('contribution_required')->nullable();
             $table->string('special_badge')->nullable();
+            $table->boolean('is_premium')->default(false);
             $table->timestamps();
         });
     }

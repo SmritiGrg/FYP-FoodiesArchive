@@ -207,11 +207,17 @@
                 <!-- Achievements -->
                 <div class="w-full lg:w-1/4 p-4">
                     <h3 class="font-semibold text-lg mb-2 text-textBlack">Achievements</h3>
-                    <div class="flex lg:block justify-around border p-5 md:p-3 lg:space-y-3">
+                    <div class="flex lg:block justify-around border p-5 md:p-1 lg:space-y-3">
                         @if(Auth::user()->badges->count() > 0)
                             @foreach(Auth::user()->badges as $badge)
-                                <div class="flex items-center space-x-3">
-                                    <img src="{{asset('uploads/badge-images/'. $badge->image)}}" alt="img" class="w-14 h-14 sm:w-20 sm:h-20 rounded-full object-cover">
+                                <div class="relative flex items-center space-x-3 p-3">
+                                    <!-- Premium Ribbon -->
+                                    @if($badge->is_premium)
+                                        <div class="absolute top-0 left-3 bg-yellow-400 text-white text-[10px] font-bold px-2 py-1 rounded z-10">
+                                            Premium
+                                        </div>
+                                    @endif
+                                    <img src="{{asset('uploads/badge-images/'. $badge->image)}}" alt="img" class="w-14 h-14 sm:w-20 sm:h-20 rounded-full object-cover border-2 {{ $badge->is_premium ? 'border-yellow-400 shadow-lg shadow-yellow-200' : 'border-gray-200 shadow-lg shadow-gray-200' }}">
                                     <p class="text-sm text-textBlack">
                                         {{ $badge->name }} <br>
                                         <span class="text-gray-500 text-xs">{{ $badge->description }} streaks</span>

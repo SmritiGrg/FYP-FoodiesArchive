@@ -16,6 +16,7 @@ class Badge extends Model
         'image',
         'contribution_required',
         'special_badge',
+        'is_premium',
     ];
 
     public function users()

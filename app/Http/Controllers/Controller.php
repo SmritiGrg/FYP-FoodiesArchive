@@ -36,6 +36,12 @@ abstract class Controller
 
             if ($alreadyHas) continue;
 
+            // Premium badge check
+            if ($badge->is_premium && $user->role !== 'premium_user') {
+                continue; // skipping premium badges for non-premium users
+            }
+
+            //Checking criteria for each badge
             if (
                 ($badge->streak_criteria && $user->total_streak_points >= $badge->streak_criteria) ||
                 ($badge->contribution_required && ($user->reviews()->count() + $user->foodPosts()->count()) >= $badge->contribution_required)
@@ -62,9 +68,14 @@ abstract class Controller
             $alreadyHas = $user->badges()->where('badge_id', $badge->id)->exists();
             if ($alreadyHas) continue;
 
+            // Skipping premium badges if user is not premium
+            if ($badge->is_premium && $user->role !== 'premium_user') {
+                continue;
+            }
+
             // You can customize the value check here
-            if (($badge->special_badge === 'post_50_likes' && $totalLikes >= 50) ||
-                ($badge->special_badge === 'post_100_likes' && $totalLikes >= 100)
+            if (($badge->special_badge === 'post_50_likes' && $totalLikes >= 2) ||
+                ($badge->special_badge === 'post_100_likes' && $totalLikes >= 3)
             ) {
 
                 $user->badges()->attach($badge->id, ['awarded_date' => now()]);
