@@ -24,6 +24,7 @@ return new class extends Migration
             $table->date('last_activity_date')->nullable();
             $table->integer('total_streak_points')->default(0);
             $table->json('badge_popup')->nullable();
+            $table->date('last_login_bonus_at')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

@@ -1,9 +1,9 @@
 <x-app-layout>
     @php
-        // Get total days in the selected month
+        // Getting total days in the selected month
         $daysInMonth = $firstDay->daysInMonth;
 
-        // Get the first weekday (0 = Sunday, 1 = Monday, ...)
+        // Getting the first weekday (0 = Sunday, 1 = Monday, ...)
         $startDayOfWeek = $firstDay->dayOfWeek;
 
         // Previous and Next Month Links
