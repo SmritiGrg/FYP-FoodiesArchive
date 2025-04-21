@@ -16,4 +16,12 @@ export default defineConfig({
     //         host: "192.168.1.70", // Replace with your actual local IPv4 address
     //     },
     // },
+    // server: {
+    //     host: "0.0.0.0", // Allows access from other devices on the network
+    //     port: 5173, // Ensure it uses the correct port
+    //     strictPort: true, // Prevent Vite from changing the port automatically
+    //     hmr: {
+    //         host: "localhost", // Update this if accessing from a specific IP address or Docker container
+    //     },
+    // },
 });

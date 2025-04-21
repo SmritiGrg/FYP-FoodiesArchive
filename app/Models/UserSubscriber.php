@@ -11,23 +11,24 @@ class UserSubscriber extends Model
 
     protected $fillable = [
         'start_date',
+        'end_date',
         'status',
         'subscription_id',
         'user_id'
     ];
 
-    public function users(): void
+    public function user()
     {
-        $this->belongsTo(User::class, 'user_id', 'id');
+        return $this->belongsTo(User::class, 'user_id');
     }
 
-    public function subscription_plan(): void
+    public function subscriptionPlan()
     {
-        $this->belongsTo(SubscriptionPlan::class, 'subscription_id', 'id');
+        return $this->belongsTo(SubscriptionPlan::class, 'subscription_id');
     }
 
     public function payments()
     {
-        return $this->hasMany(Payment::class);
+        return $this->hasMany(Payment::class, 'subscriber_id');
     }
 }

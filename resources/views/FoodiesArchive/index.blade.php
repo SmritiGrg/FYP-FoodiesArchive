@@ -790,7 +790,7 @@
             
             <div class="mt-11 text-center">
                 <p class="text-gray-600 mb-2">Secure payment processing via</p>
-                <div class="flex justify-center space-x-6">
+                <div class="flex justify-center">
                     <div><img src="{{asset('assets/img/esewa.png')}}" class="w-16 h-7 " alt=""></div>
                 </div>
             </div>

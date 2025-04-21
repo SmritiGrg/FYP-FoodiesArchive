@@ -13,7 +13,7 @@ class Payment extends Model
     [
         'amount_paid',
         'payment_method',
-        'khalti_transaction_id',
+        'transaction_id',
         'status',
         'payment_date',
         'subscriber_id'

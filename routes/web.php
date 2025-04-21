@@ -8,6 +8,7 @@ use App\Http\Controllers\FollowsController;
 use App\Http\Controllers\FoodPostController;
 use App\Http\Controllers\FrontendController;
 use App\Http\Controllers\LikesController;
+use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RestaurantsController;
 use App\Http\Controllers\ReviewsController;
@@ -83,6 +84,17 @@ Route::middleware('auth')->group(function () {
     Route::post('/review/helpful/{review}', [ReviewsController::class, 'helpfulBtn']);
 
     Route::get('/premium', [FrontendController::class, 'premium'])->name('premium');
+
+    Route::post('esewa/pay', [PaymentController::class, 'pay'])->name('esewa.pay');
+    Route::get('esewa/check', [PaymentController::class, 'check'])->name('esewa.check');
+
+    Route::get('/payment-failed', function () {
+        return view('FoodiesArchive.paymentFailed');
+    })->name('payment-failed');
+
+    Route::get('/payment-successful', function () {
+        return view('FoodiesArchive.paymentSuccessful');
+    })->name('payment-successful');
 });
 
 

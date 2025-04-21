@@ -10,7 +10,7 @@ class SubscriptionPlan extends Model
     use HasFactory;
 
     protected $fillable = [
-        'amaount',
+        'amount',
         'features',
         'billing_time',
         'type'
