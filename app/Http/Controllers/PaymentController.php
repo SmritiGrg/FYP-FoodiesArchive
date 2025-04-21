@@ -8,6 +8,8 @@ use App\Models\UserSubscriber;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Xentixar\EsewaSdk\Esewa;
+use App\Mail\PaymentReceiptMail;
+use Illuminate\Support\Facades\Mail;
 
 class PaymentController extends Controller
 {
@@ -37,7 +39,6 @@ class PaymentController extends Controller
         }
     }
 
-
     public function check(Request $request)
     {
         $esewa = new Esewa();
@@ -65,7 +66,7 @@ class PaymentController extends Controller
 
                 //  Creating payment record
                 $amount = str_replace(',', '', $data['total_amount']); // Clean amount
-                Payment::create([
+                $payment = Payment::create([
                     'subscriber_id' => $subscription->id,
                     'amount_paid' => $amount,
                     'payment_method' => 'Esewa',
@@ -74,11 +75,11 @@ class PaymentController extends Controller
                     'payment_date' => now(),
                 ]);
 
-
                 // Updating user role to premium_user 
                 $user->role = 'premium_user';
                 $user->save();
                 session()->forget('billing_time');
+                Mail::to($user->email)->send(new PaymentReceiptMail($user, $subscription, $payment));
 
                 // Redirecting to success page with dynamic data
                 return view('FoodiesArchive.paymentSuccessful', [
