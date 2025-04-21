@@ -1,0 +1,39 @@
+version: "3.8"
+
+services:
+    app:
+        build:
+            context: .
+            dockerfile: Dockerfile
+        container_name: laravel-app
+        ports:
+            - "8000:8000"
+        volumes:
+            - .:/var/www
+        depends_on:
+            - db
+        networks:
+            - laravel-net
+        command: sh -c "npm run dev & php artisan serve --host=0.0.0.0 --port=8000"
+        environment:
+            CHOKIDAR_USEPOLLING: "true"
+
+    db:
+        image: mysql:8
+        container_name: mysql-db
+        restart: unless-stopped
+        ports:
+            - "3306:3306"
+        environment:
+            MYSQL_DATABASE: laravel
+            MYSQL_ROOT_PASSWORD: root
+        volumes:
+            - dbdata:/var/lib/mysql
+        networks:
+            - laravel-net
+
+volumes:
+    dbdata:
+
+networks:
+    laravel-net:
