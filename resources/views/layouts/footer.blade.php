@@ -123,7 +123,7 @@
             if (message) {
                 message.style.display = 'none';
             }
-        }, 3000); // Hide after 3 seconds
+        }, 5000); // Hide after 3 seconds
 
         ////// SEARCH BAR WHEN SCROLLING JS
         window.addEventListener("scroll", function () {

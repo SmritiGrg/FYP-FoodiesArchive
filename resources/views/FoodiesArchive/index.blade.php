@@ -35,6 +35,14 @@
         </div>
     @endif
 
+    @if(session('premium_expired'))
+        <div id="streak_message" class="fixed top-14 left-1/2 transform -translate-x-1/2 w-fit z-50">
+            <p class="text-base bg-yellow-100 border-l-4 border-yellow-400 text-yellow-800 px-6 py-4 rounded-lg shadow-md animate-bounce">
+                {{ session('premium_expired') }}
+            </p>
+        </div>
+    @endif
+
     @if(session('showProfileImageModal'))
         <!-- Modal Structure for Profile Image Upload -->
         <div class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">

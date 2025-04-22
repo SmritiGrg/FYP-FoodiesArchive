@@ -2,11 +2,14 @@
 
 namespace App\Models;
 
+use App\Mail\PremiumExpiredMail;
 use Illuminate\Contracts\Auth\CanResetPassword;
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Mail;
+
 
 class User extends Authenticatable implements CanResetPassword
 {
@@ -28,6 +31,7 @@ class User extends Authenticatable implements CanResetPassword
         'last_activity_date',
         'total_streak_points',
         'badge_popup',
+        'premium_activated_at',
         'last_login_bonus_at',
     ];
 
@@ -122,5 +126,26 @@ class User extends Authenticatable implements CanResetPassword
     public function subscriptions()
     {
         return $this->hasMany(UserSubscriber::class);
+    }
+
+    public function hasActivePremium()
+    {
+        // Get the most recent active subscription
+        $activeSubscription = $this->subscriptions()
+            ->where('status', 'Active')
+            ->latest('end_date')
+            ->first();
+
+        // If subscription exists but is expired
+        if ($activeSubscription && now()->greaterThan($activeSubscription->end_date)) {
+            $activeSubscription->update(['status' => 'Expired']);
+            $this->update(['role' => 'general']); // downgrading role
+
+            // Sending expiration email
+            Mail::to($this->email)->send(new PremiumExpiredMail($this));
+            return false;
+        }
+
+        return $this->role === 'premium_user' && $activeSubscription !== null;
     }
 }

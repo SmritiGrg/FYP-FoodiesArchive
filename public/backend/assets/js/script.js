@@ -21,6 +21,28 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     ////// SIDEBAR END
 
+    $(document).on("keyup", "#searchRestaurant", function () {
+        // alert("hello");
+        $value = $(this).val();
+        if ($value) {
+            $(".allrestaurantdata").hide();
+            $(".searchrestaurantdata").show();
+        } else {
+            $(".allrestaurantdata").show();
+            $(".searchrestaurantdata").hide();
+        }
+        $.ajax({
+            type: "GET",
+            url: "/search-restaurant",
+            data: { search: $value },
+
+            success: function (data) {
+                console.log(data);
+                $("#restaurant-content").html(data);
+            },
+        });
+    });
+
     $(document).on("keyup", "#search", function () {
         // alert("hello");
         $value = $(this).val();

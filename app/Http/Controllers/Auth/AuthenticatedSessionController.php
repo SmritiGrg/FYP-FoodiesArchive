@@ -40,12 +40,21 @@ class AuthenticatedSessionController extends Controller
         // Checking for badge popup in user's database record
         $user = Auth::user();
 
-        // Daily Login Bonus for Premium Users
-        if ($user->role === 'premium_user') {
-            $today = now()->toDateString();
+        // Checking premium status
+        $wasPremium = $user->role === 'premium_user';
+        $stillPremium = $user->hasActivePremium();
 
+        if ($wasPremium && !$stillPremium) {
+            // Refresh user from DB and flash message
+            Auth::loginUsingId($user->id);
+            session()->flash('premium_expired', 'Your premium subscription has expired.');
+        }
+
+        // Daily Login Bonus
+        if ($stillPremium) {
+            $today = now()->toDateString();
             if (!$user->last_login_bonus_at || $user->last_login_bonus_at->toDateString() !== $today) {
-                $this->updateStreak($user, 2); // adding +2 and updates activity date
+                $this->updateStreak($user, 2);
                 $user->update(['last_login_bonus_at' => $today]);
                 session()->flash('streak_message', '+2 Streak Points added for today!');
             }

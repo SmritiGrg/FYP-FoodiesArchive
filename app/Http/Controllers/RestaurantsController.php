@@ -98,7 +98,26 @@ class RestaurantsController extends Controller
         return redirect()->back()->with('message', 'Restaurant approved successfully!');
     }
 
+    public function searchRestaurant(Request $request)
+    {
+        $restaurants = Restaurants::where('name', 'LIKE', '%' . $request->search . '%')
+            ->orWhere('location', 'LIKE', '%' . $request->search . '%')
+            ->orWhere('status', 'LIKE', '%' . $request->search . '%')
+            ->get();
 
+        $output = '';
+
+        if ($restaurants->count() > 0) {
+            foreach ($restaurants as $restaurant) {
+                // Use Blade component and render it to a string
+                $output .= view('components.restaurant-row', compact('restaurant'))->render();
+            }
+        } else {
+            $output .= '<div class="p-4 text-gray-500 text-center">No restaurant found.</div>';
+        }
+
+        return response($output);
+    }
 
     /**
      * Remove the specified resource from storage.

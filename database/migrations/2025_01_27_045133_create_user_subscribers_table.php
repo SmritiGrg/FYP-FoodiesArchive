@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->dateTime('start_date');
             $table->dateTime('end_date')->nullable();
-            $table->enum('status', ['Active', 'Inactive', 'Cancelled']);
+            $table->enum('status', ['Active', 'Expired', 'Cancelled']);
             $table->foreignId('subscription_id');
             $table->foreign('subscription_id')->references('id')->on('subscription_plans')->onDelete('cascade');
 

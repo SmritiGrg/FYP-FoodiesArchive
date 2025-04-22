@@ -105,6 +105,8 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::patch('/restaurant/{id}', [RestaurantsController::class, 'update'])->name('restaurant.update');
     Route::delete('/restaurant/{id}', [RestaurantsController::class, 'destroy'])->name('restaurant.delete');
     Route::patch('/restaurant/{id}/approve', [RestaurantsController::class, 'approve'])->name('restaurant.approve');
+    Route::get('/search-restaurant', [RestaurantsController::class, 'searchRestaurant']);
+
 
 
     Route::get('/badge', [AdminController::class, 'badge'])->name('badge');

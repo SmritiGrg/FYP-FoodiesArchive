@@ -76,8 +76,11 @@ class PaymentController extends Controller
                 ]);
 
                 // Updating user role to premium_user 
-                $user->role = 'premium_user';
-                $user->save();
+                if ($user->role !== 'premium_user') {
+                    $user->role = 'premium_user';
+                    $user->premium_activated_at = now();
+                    $user->save();
+                }
                 session()->forget('billing_time');
                 Mail::to($user->email)->send(new PaymentReceiptMail($user, $subscription, $payment));
 
@@ -98,9 +101,9 @@ class PaymentController extends Controller
         ]);
     }
 
-    public function paymentFailed(Request $request)
-    {
-        // $errorMessage = $request->session()->get('error_message', 'Payment failed due to an unknown error.');
-        return view('FoodiesArchive.paymentFailed');
-    }
+    // public function paymentFailed(Request $request)
+    // {
+    //     // $errorMessage = $request->session()->get('error_message', 'Payment failed due to an unknown error.');
+    //     return view('FoodiesArchive.paymentFailed');
+    // }
 }
