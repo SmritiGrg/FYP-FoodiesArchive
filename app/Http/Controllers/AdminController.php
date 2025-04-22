@@ -87,17 +87,62 @@ class AdminController extends Controller
     public function restaurant(Request $request)
     {
         $locations = Restaurants::select('location')->distinct()->pluck('location');
-        $query = Restaurants::query();
+
+        $query = Restaurants::query()
+            ->with(['foodPosts.reviews'])
+            ->withCount(['foodPosts as total_reviews' => function ($q) {
+                $q->join('reviews', 'food_posts.id', '=', 'reviews.food_post_id');
+            }])
+            ->withAvg('foodPosts as avg_rating', 'rating');
 
         if ($request->filled('status') && $request->status !== 'all') {
             $query->where('status', $request->status);
         }
+
         if ($request->filled('location') && $request->location !== 'all') {
             $query->where('location', $request->location);
         }
 
+        if ($request->filled('rating_sort')) {
+            $query->orderBy('avg_rating', $request->rating_sort === 'high' ? 'desc' : 'asc');
+        }
+
+        if ($request->filled('review_sort')) {
+            $query->orderBy('total_reviews', $request->review_sort === 'high' ? 'desc' : 'asc');
+        }
+
         $restaurants = $query->paginate(5);
-        return view('admin.restaurant', compact('restaurants', 'locations'));
+
+        // Getting Top 10 Restaurants
+        $topRestaurants = Restaurants::withCount('foodPosts')
+            ->orderByDesc('food_posts_count')
+            ->take(10)
+            ->get(['name', 'food_posts_count']);
+
+        //Getting Average Rating By Restaurant
+        $avgRatings = Restaurants::withAvg('foodPosts as avg_rating', 'rating')
+            ->orderByDesc('avg_rating')
+            ->take(10)
+            ->get(['name', 'avg_rating']);
+
+        // Getting Restaurant Distribution by Location
+        $locationDistribution = Restaurants::select('location', DB::raw('count(*) as count'))
+            ->groupBy('location')->get();
+
+        // Getting Most Reviewed Restaurants
+        $mostReviewed = Restaurants::withCount(['foodPosts as total_reviews' => function ($q) {
+            $q->join('reviews', 'food_posts.id', '=', 'reviews.food_post_id');
+        }])->orderByDesc('total_reviews')->take(10)->get(['name', 'total_reviews']);
+
+        //Getting Monthly New Restaurants Added
+        $monthlyRestaurants = Restaurants::selectRaw('MONTH(created_at) as month, COUNT(*) as total')
+            ->groupBy('month')->orderBy('month')->get();
+
+        //Restaurant Status Breakdown
+        $statusBreakdown = Restaurants::select('status', DB::raw('count(*) as total'))
+            ->groupBy('status')->get();
+
+        return view('admin.restaurant', compact('restaurants', 'locations', 'topRestaurants', 'avgRatings', 'locationDistribution', 'mostReviewed', 'monthlyRestaurants', 'statusBreakdown'));
     }
 
     public function badge(Request $request)

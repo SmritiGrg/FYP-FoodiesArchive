@@ -6,11 +6,13 @@
 
 <!-- Scoped wrapper for each peer toggle + modal -->
 <div>
-    <div class="grid grid-cols-10 p-4 items-center hover:bg-gray-50">
+    <div class="grid grid-cols-12 p-4 items-center hover:bg-gray-50">
         <div class="col-span-3 text-sm">{{ $restaurant->name }}</div>
         <div class="col-span-2 text-sm">{{ $restaurant->location }}</div>
         <div class="col-span-2 text-sm">{{ $restaurant->addedByUser->full_name }}</div>
         <div class="col-span-1 text-sm">{{ $restaurant->foodPosts->count() }}</div>
+        <div class="col-span-1 text-sm">{{ number_format($restaurant->avg_rating, 1) ?? 'N/A' }}</div>
+        <div class="col-span-1 text-sm">{{ $restaurant->total_reviews }}</div>
         <div class="col-span-1">
             <span class="px-2 py-1 rounded text-sm
                 @if($restaurant->status == 'approved') bg-green-100 text-green-800
