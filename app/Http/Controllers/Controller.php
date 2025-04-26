@@ -73,12 +73,15 @@ abstract class Controller
                 continue;
             }
 
-            // You can customize the value check here
-            if (($badge->special_badge === 'post_50_likes' && $totalLikes >= 2) ||
-                ($badge->special_badge === 'post_100_likes' && $totalLikes >= 3)
-            ) {
-
-                $user->badges()->attach($badge->id, ['awarded_date' => now()]);
+            if ($badge->special_badge === 'post_100_likes' && $totalLikes >= 5) {
+                if (!$user->badges->contains($badge->id)) {
+                    $user->badges()->attach($badge->id, ['awarded_date' => now()]);
+                }
+                return $badge;
+            } elseif ($badge->special_badge === 'post_50_likes' && $totalLikes >= 2) {
+                if (!$user->badges->contains($badge->id)) {
+                    $user->badges()->attach($badge->id, ['awarded_date' => now()]);
+                }
                 return $badge;
             }
         }

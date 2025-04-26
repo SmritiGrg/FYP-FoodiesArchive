@@ -17,6 +17,11 @@ class UserSubscriber extends Model
         'user_id'
     ];
 
+    protected $casts = [
+        'start_date' => 'date',
+        'end_date' => 'date',
+    ];
+
     public function user()
     {
         return $this->belongsTo(User::class, 'user_id');

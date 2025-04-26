@@ -137,7 +137,8 @@
                     <div class="space-y-4">
                         @foreach($topFoodies as $user)
                             <div class="flex items-center gap-4">
-                                <img src="{{ asset('uploads/profile-images/' . $user->image) }}" alt="img" class="w-8 h-8 rounded-full object-cover">
+                                {{-- <img src="{{ asset('uploads/profile-images/' . $user->image) }}" alt="img" class="w-8 h-8 rounded-full object-cover"> --}}
+                                <img src="{{asset('assets/img/cartoon profile.jpeg')}}" alt="img" class="w-10 h-10 rounded-full object-cover" />
                                 <div class="w-full">
                                     {{-- <a href="{{ route('otherProfile', ['id' => $user->id]) }}" class="font-medium text-sm hover:text-gray-500">{{ $user->full_name }}</a> --}}
                                     <div class="relative group">

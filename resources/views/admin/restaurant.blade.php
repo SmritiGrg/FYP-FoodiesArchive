@@ -68,7 +68,7 @@
                 <div class="col-span-2 text-xs font-medium text-gray-500 uppercase">Submitted By</div>
                 <div class="col-span-1 text-xs font-medium text-gray-500 uppercase">Food Posts</div>
                 <div class="col-span-1 text-xs font-medium text-gray-500 uppercase">Average Rating</div>
-                <div class="col-span-2 text-xs font-medium text-gray-500 uppercase">Total Review</div>
+                <div class="col-span-1 text-xs font-medium text-gray-500 uppercase">Total Review</div>
                 <div class="col-span-1 text-xs font-medium text-gray-500 uppercase">Status</div>
                 <div class="col-span-1 text-xs font-medium text-gray-500 uppercase">Actions</div>
             </div>

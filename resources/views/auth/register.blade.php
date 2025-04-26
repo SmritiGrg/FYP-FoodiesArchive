@@ -1,7 +1,7 @@
 {{-- <x-guest-layout> --}}
 <x-app-layout>
     <div class="min-h-screen flex flex-col sm:justify-center items-center sm:pt-0 mb-10">
-        <div class="flex flex-col lg:flex-row sm:max-w-5xl bg-white mt-20 shadow-lg overflow-hidden sm:rounded-lg border border-gray-200 mx-4 sm:mx-auto">
+        <div class="flex flex-col lg:flex-row sm:max-w-5xl bg-white mt-20 shadow-lg overflow-hidden rounded-lg border border-gray-200 mx-4 sm:mx-auto">
             <div class="hidden lg:flex w-full lg:w-1/2 flex-col items-center justify-center bg-cover bg-center" style="background-image: url('{{ asset('assets/img/Breakfast2.png') }}');">
                 <h1 class="font-poppins text-4xl font-bold text-center tracking-wider text-white">Welcome</h1>
                 <div>
@@ -9,10 +9,10 @@
                 </div>
                 <div>
                     <a href="login"><button type="button"
-                            class="text-white bg-customYellow hover:bg-hovercustomYellow font-poppins font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2">LOGIN</button></a>
+                            class="text-white bg-customYellow hover:bg-hovercustomYellow font-poppins font-semibold rounded-lg text-sm px-5 py-2.5 me-2 mb-2">LOGIN</button></a>
                 </div>
             </div>
-            <div class="w-full lg:w-2/3 py-3 px-20 border-l shadow-lg bg-white">
+            <div class="w-full lg:w-2/3 py-3 px-3 sm:px-20 border-l shadow-lg bg-white">
                 {{-- <div class="flex justify-center mb-2">
                     <a href="/"> <img src="{{ asset('assets/img/secondary_FA-Logo-removebg-preview.png') }}" alt="Logo"
                             style="width: 60px; height: 40px;"></a>

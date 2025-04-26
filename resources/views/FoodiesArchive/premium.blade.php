@@ -55,10 +55,10 @@
                             <i class="fa-solid fa-check w-5 h-5 text-green-500 mr-3 mt-1"></i>
                             <span class="text-gray-700">Daily Login Bonus: +2 Streak Points!</span>
                         </li>
-                        <li class="flex items-start">
+                        {{-- <li class="flex items-start">
                             <i class="fa-solid fa-check w-5 h-5 text-green-500 mr-3 mt-1"></i>
                             <span class="text-gray-700">Exclusive food guides</span>
-                        </li>
+                        </li> --}}
                         <li class="flex items-start">
                             <i class="fa-solid fa-check w-5 h-5 text-green-500 mr-3 mt-1"></i>
                             <span class="text-gray-700">Premium badges</span>

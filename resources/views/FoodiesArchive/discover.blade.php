@@ -309,7 +309,8 @@
                     <div class="space-y-4">
                         @foreach($topFoodies as $user)
                             <div class="flex items-center gap-4">
-                                <img src="{{ asset('uploads/profile-images/' . $user->image) }}" alt="img" class="w-8 h-8 rounded-full object-cover">
+                                {{-- <img src="{{ asset('uploads/profile-images/' . $user->image) }}" alt="img" class="w-8 h-8 rounded-full object-cover"> --}}
+                                <img src="{{asset('assets/img/MomoProfile.jpeg')}}" alt="img" class="w-10 h-10 rounded-full object-cover" />
                                 <div class="w-full">
                                     <div class="relative group">
                                         <div class="flex items-center justify-between relative">

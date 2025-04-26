@@ -12,6 +12,7 @@ use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RestaurantsController;
 use App\Http\Controllers\ReviewsController;
+use App\Http\Controllers\SubscriptionPlanController;
 use App\Http\Controllers\TagsController;
 use App\Models\FoodPosts;
 use Illuminate\Support\Facades\Route;
@@ -107,8 +108,6 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::patch('/restaurant/{id}/approve', [RestaurantsController::class, 'approve'])->name('restaurant.approve');
     Route::get('/search-restaurant', [RestaurantsController::class, 'searchRestaurant']);
 
-
-
     Route::get('/badge', [AdminController::class, 'badge'])->name('badge');
     Route::delete('/badge/{id}', [BadgesController::class, 'destroy'])->name('badge.delete');
     Route::post('/badge', [BadgesController::class, 'store'])->name('badge.store');
@@ -120,6 +119,12 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::post('/tag', [TagsController::class, 'store'])->name('tag.store');
     Route::patch('/tag/{id}', [TagsController::class, 'update'])->name('tag.update');
     Route::get('/search-tag', [TagsController::class, 'searchTag']);
+
+    Route::get('/subscription', [AdminController::class, 'subscription'])->name('subscription.index');
+    Route::delete('/subscription/{id}', [SubscriptionPlanController::class, 'destroy'])->name('subscription.delete');
+    Route::post('/subscription', [SubscriptionPlanController::class, 'store'])->name('subscription.store');
+    Route::patch('/subscription/{id}', [SubscriptionPlanController::class, 'update'])->name('subscription.update');
+    Route::get('/search-subscription', [SubscriptionPlanController::class, 'searchSubscription']);
 });
 
 require __DIR__ . '/auth.php';

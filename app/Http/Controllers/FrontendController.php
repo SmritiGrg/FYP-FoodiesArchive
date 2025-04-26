@@ -124,7 +124,7 @@ class FrontendController extends Controller
 
     public function writeReview()
     {
-        $foods = FoodPost::take(4)->get();
+        $foods = FoodPost::take(2)->get();
         return view('FoodiesArchive.writeReview', compact('foods'));
     }
 

@@ -307,10 +307,12 @@ class FoodPostController extends Controller
     {
         $foodTypes = FoodTypes::all();
         $cuisineTypes = CuisineTypes::all();
+
         $mostLikedFoods = FoodPost::withCount('likes')
             ->orderBy('likes_count', 'desc')
             ->take(2)
             ->get();
+
         $latestUploads = FoodPost::orderBy('created_at', 'desc')
             ->take(2)
             ->get();
@@ -320,15 +322,15 @@ class FoodPostController extends Controller
         $result = FoodPost::where(function ($query) use ($search) {
             $query->where('name', 'like', "%$search%");
         })
-            ->orWhereHas('cuisineType', function ($query) use ($search) {
-                $query->where('name', 'like', "%$search%");
-            })
-            ->orWhereHas('foodType', function ($query) use ($search) {
-                $query->where('name', 'like', "%$search%");
-            })
-            ->orWhereHas('tag', function ($query) use ($search) {
-                $query->where('name', 'like', "%$search%");
-            })
+            // ->orWhereHas('cuisineType', function ($query) use ($search) {
+            //     $query->where('name', 'like', "%$search%");
+            // })
+            // ->orWhereHas('foodType', function ($query) use ($search) {
+            //     $query->where('name', 'like', "%$search%");
+            // })
+            // ->orWhereHas('tag', function ($query) use ($search) {
+            //     $query->where('name', 'like', "%$search%");
+            // })
             ->orWhereHas('restaurant', function ($query) use ($search) {
                 $query->where('name', 'like', "%$search%");
             })
@@ -362,47 +364,122 @@ class FoodPostController extends Controller
         return redirect()->route('foodpost.create')->with('message', 'Form data has been cleared.');
     }
 
+    // public function liveSearch(Request $request)
+    // {
+    //     if ($request->ajax()) {
+    //         $search = $request->input('query'); // Corrected variable name
+
+    //         $foods = FoodPost::where(function ($q) use ($search) {
+    //             $q->where('name', 'like', "%$search%")
+    //                 ->orWhereHas('cuisineType', function ($q) use ($search) {
+    //                     $q->where('name', 'like', "%$search%");
+    //                 })
+    //                 ->orWhereHas('foodType', function ($q) use ($search) {
+    //                     $q->where('name', 'like', "%$search%");
+    //                 })
+    //                 ->orWhereHas('tag', function ($q) use ($search) {
+    //                     $q->where('name', 'like', "%$search%");
+    //                 })
+    //                 ->orWhereHas('restaurant', function ($q) use ($search) {
+    //                     $q->where('name', 'like', "%$search%");
+    //                 });
+    //         })
+    //             ->limit(6)
+    //             ->get();
+
+    //         // Initialize output variable
+    //         $output = "";
+
+    //         if ($foods->count()) {
+    //             foreach ($foods as $food) {
+    //                 $output .= '
+    //                     <a href="' . route('food.details', $food->id) . '" class="block">
+    //                         <div class="flex items-center space-x-4 hover:bg-gray-100 p-3 cursor-pointer" onclick="event.stopPropagation();">
+    //                             <img src="' . asset($food->image) . '" alt="profile" class="w-16 h-16 object-cover object-center rounded-md">
+    //                             <div class="text-start">
+    //                                 <p class="font-light text-sm hover:text-gray-500">' . $food->name . '</p>
+    //                                 <p class="font-light text-sm text-gray-500">' . $food->restaurant->name . '</p>
+    //                             </div>
+    //                         </div>  
+    //                     </a>
+    //                 ';
+    //             }
+    //         } else {
+    //             $output = '<p class="text-gray-500 text-sm p-4">No results found.</p>';
+    //         }
+
+    //         return response()->json($output);
+    //     }
+
+    //     return view('FoodiesArchive.index');
+    // }
+
     public function liveSearch(Request $request)
     {
         if ($request->ajax()) {
-            $search = $request->input('query'); // Corrected variable name
+            $search = $request->input('query');
+            $output = '';
 
+            function highlightMatch($text, $search)
+            {
+                return preg_replace('/(' . preg_quote($search, '/') . ')/i', '<span class="highlight2">$1</span>', $text);
+            }
+
+            // Food search
             $foods = FoodPost::where(function ($q) use ($search) {
                 $q->where('name', 'like', "%$search%")
-                    ->orWhereHas('cuisineType', function ($q) use ($search) {
-                        $q->where('name', 'like', "%$search%");
-                    })
-                    ->orWhereHas('foodType', function ($q) use ($search) {
-                        $q->where('name', 'like', "%$search%");
-                    })
-                    ->orWhereHas('tag', function ($q) use ($search) {
-                        $q->where('name', 'like', "%$search%");
-                    })
                     ->orWhereHas('restaurant', function ($q) use ($search) {
                         $q->where('name', 'like', "%$search%");
                     });
             })
-                ->limit(6)
+                ->limit(4)
                 ->get();
 
-            // Initialize output variable
-            $output = "";
+            // User search
+            $users = User::where('full_name', 'like', "%$search%")
+                ->orWhere('username', 'like', "%$search%")
+                ->limit(2)
+                ->get();
 
             if ($foods->count()) {
+                $output .= '<div class="p-3 text-start"><h3 class="text-base font-medium text-gray-700 mb-2">Foods</h3>';
                 foreach ($foods as $food) {
+                    $foodName = highlightMatch($food->name, $search);
+                    $restaurantName = highlightMatch($food->restaurant->name, $search);
                     $output .= '
-                        <a href="' . route('food.details', $food->id) . '" class="block">
-                            <div class="flex items-center space-x-4 hover:bg-gray-100 p-3 cursor-pointer" onclick="event.stopPropagation();">
-                                <img src="' . asset($food->image) . '" alt="profile" class="w-16 h-16 object-cover object-center rounded-md">
-                                <div class="text-start">
-                                    <p class="font-light text-sm hover:text-gray-500">' . $food->name . '</p>
-                                    <p class="font-light text-sm text-gray-500">' . $food->restaurant->name . '</p>
-                                </div>
-                            </div>  
-                        </a>
-                    ';
+                    <a href="' . route('food.details', $food->id) . '" class="block">
+                        <div class="flex items-center space-x-4 hover:bg-gray-100 p-3 cursor-pointer" onclick="event.stopPropagation();">
+                            <img src="' . asset($food->image) . '" alt="food" class="w-16 h-16 object-cover object-center rounded-md">
+                            <div class="text-start">
+                                <p class="font-light text-sm hover:text-gray-500">' . $foodName . '</p>
+                                <p class="font-light text-sm text-gray-500">' . $restaurantName . '</p>
+                            </div>
+                        </div>
+                    </a>';
                 }
-            } else {
+                $output .= '</div>';
+            }
+
+            if ($users->count()) {
+                $output .= '<div class="p-3 text-start border-t border-gray-200"><h3 class="text-base font-medium text-gray-700 mb-2">Users</h3>';
+                foreach ($users as $user) {
+                    $fullName = highlightMatch($user->full_name, $search);
+                    $username = highlightMatch($user->username, $search);
+                    $output .= '
+                    <a href="' . route('otherProfile', $user->id) . '" class="block">
+                        <div class="flex items-center space-x-4 hover:bg-gray-100 p-3 cursor-pointer" onclick="event.stopPropagation();">
+                            <img src="' . asset('uploads/profile-images/' . ($user->image)) . '" alt="user" class="w-16 h-16 object-cover object-center rounded-full">
+                            <div class="text-start">
+                                <p class="font-light text-sm hover:text-gray-500">' . $fullName . '</p>
+                                <p class="font-light text-sm text-gray-500">' . $username . '</p>
+                            </div>
+                        </div>
+                    </a>';
+                }
+                $output .= '</div>';
+            }
+
+            if ($output == '') {
                 $output = '<p class="text-gray-500 text-sm p-4">No results found.</p>';
             }
 

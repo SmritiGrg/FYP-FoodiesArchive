@@ -103,6 +103,7 @@ class LikesController extends Controller
                         'name' => $badge->name,
                         'description' => $badge->description,
                         'image' => $badge->image,
+                        'is_premium' => $badge->is_premium,
                     ],
                 ]);
             }

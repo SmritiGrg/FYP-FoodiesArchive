@@ -41,7 +41,7 @@
 
                     <div class="pt-2">
                         <div class="flex items-center">
-                            <img src="{{asset('uploads/profile-images/' . $food->user->image) }}" alt="" class="w-12 h-12 rounded-full object-cover mr-3">
+                            <img src="{{asset('uploads/profile-images/' . $food->user->image) }}" alt="img" class="w-12 h-12 rounded-full object-cover mr-3">
                             <div>
                                 <p class="text-base text-darkPurple">Uploaded by {{$food->user->username}}</p>
                                 <a href="{{ route('otherProfile', ['id' => $food->user->id]) }}" class="text-sm text-gray-500 underline hover:text-gray-600">View Profile</a>
@@ -75,9 +75,9 @@
                     <p class="text-gray-500 mt-2 pb-4">{{$food->review}}</p>
 
                     <div class="mt-4 border-t-2 border-gray-100 pb-4 pt-2">
-                        <p class="text-xl text-darkPurple font-bold pb-2">Contribute</p>
+                        <p class="text-xl text-darkPurple font-bold pb-5">Contribute</p>
                         <a href="{{ route('writeReview', ['food_id' => $food->id]) }}" class="bg-darkPurple text-white px-4 py-2 rounded-md hover:bg-lightPurple">Write a Review</a>
-                        <button class="ml-2 border border-darkPurple text-darkPurple px-4 py-2 rounded-md hover:bg-darkPurple hover:text-white">Ask a Question</button>
+                        {{-- <button class="ml-2 border border-darkPurple text-darkPurple px-4 py-2 rounded-md hover:bg-darkPurple hover:text-white">Ask a Question</button> --}}
                     </div>
 
                     <h3 class="mt-4 text-lg font-medium">({{$food->reviews->count()}} reviews)</h3>
@@ -89,7 +89,7 @@
                                 <!-- Reviewer Info -->
                                 <div class="flex w-full justify-between">
                                     <a href="{{ route('otherProfile', ['id' => $review->user->id]) }}" class="flex items-center">
-                                        <img src="{{ asset('uploads/profile-images/' . $review->user->image) }}" alt="" class="w-10 h-10 rounded-full object-cover mr-3">
+                                        <img src="{{ asset('uploads/profile-images/' . $review->user->image) }}" alt="img" class="w-10 h-10 rounded-full object-cover mr-3">
                                         <div class="w-full">
                                             <div class="flex justify-between">
                                                 <div class="flex space-x-2 items-center">
@@ -329,8 +329,7 @@
                                             <i class="fa-regular fa-comment text-lg hover:text-gray-500 cursor-pointer"></i> {{$similarPost->reviews->count()}}
                                         </span>
                                     </div>
-                                    <i class="not-bookmarked fa-regular fa-bookmark text-lg hover:text-gray-500 cursor-pointer"></i>
-                                    <i class="bookmarked fa-solid fa-bookmark text-lg text-black hidden cursor-pointer"></i>
+                                    @include('components.bookmark-button', ['food' => $similarPost])
                                 </div>
                                 <span class="bg-green-100 text-green-700 text-xs font-medium py-1 px-2 rounded">{{$similarPost->tag->name}}</span>
                                 <div class="flex justify-between items-center mt-2">

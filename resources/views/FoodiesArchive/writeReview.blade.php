@@ -134,7 +134,7 @@
 
                                 <div class="w-full">
                                     <div class="flex justify-between items-center ">
-                                        <a href="{{route('food.details', $review->food_post->id)}}" class="text-base sm:text-lg font-medium">{{ $review->food_post->name }}</a>
+                                        <a href="{{route('food.details', $review->food_post->id)}}" class="text-sm sm:text-lg font-medium">{{ $review->food_post->name }}</a>
                                         <div class="flex">
                                             @include('components.helpful-button', ['review' => $review])
                                             <div class="relative group">

@@ -19,6 +19,10 @@ class Payment extends Model
         'subscriber_id'
     ];
 
+    protected $casts = [
+        'payment_date' => 'date',
+    ];
+
     public function subscribers(): void
     {
         $this->belongsTo(UserSubscriber::class, 'subscriber_id', 'id');

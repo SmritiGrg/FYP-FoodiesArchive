@@ -25,7 +25,9 @@
             <div class="bg-white text-center p-6 rounded-2xl shadow-2xl relative animate-bounce">
                 <div class="flex items-center justify-center mb-4">
                     <i class="ri-award-fill text-customYellow text-2xl pr-3"></i>
-                    <h2 class="text-2xl font-bold text-yellow-500">New Badge Earned!</h2>
+                    <h2 class="text-2xl font-bold text-yellow-500">
+                        {{ $badge['is_premium'] ? 'New Premium Badge Earned!' : 'New Badge Earned!' }}
+                    </h2>
                 </div>
                 <img src="{{ asset('uploads/badge-images/' . $badge['image']) }}" alt="img" class="w-28 h-28 mx-auto mb-2">
                 <p class="font-semibold">{{ $badge['name'] }}</p>

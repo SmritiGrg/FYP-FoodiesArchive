@@ -8,6 +8,7 @@ use App\Models\Restaurants;
 use App\Models\Reviews;
 use App\Models\Tags;
 use App\Models\User;
+use App\Models\UserSubscriber;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -274,5 +275,17 @@ class AdminController extends Controller
         }])->orderByDesc('food_posts_count')->take(5)->get();
 
         return view('admin.tag', compact('tags', 'topTags', 'unusedTags', 'weekTrending', 'monthTrending', 'filter'));
+    }
+
+    public function subscription()
+    {
+        $subscribers = UserSubscriber::with([
+            'user:id,full_name,email',
+            'subscriptionPlan:id,type,billing_time',
+            'payments' => function ($query) {
+                $query->latest('payment_date')->limit(1);
+            }
+        ])->paginate(5);
+        return view('admin.subscription', compact('subscribers'));
     }
 }
