@@ -13,6 +13,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RestaurantsController;
 use App\Http\Controllers\ReviewsController;
 use App\Http\Controllers\SubscriptionPlanController;
+use App\Http\Controllers\SubscriptionUserController;
 use App\Http\Controllers\TagsController;
 use App\Models\FoodPosts;
 use Illuminate\Support\Facades\Route;
@@ -123,8 +124,13 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::get('/subscription', [AdminController::class, 'subscription'])->name('subscription.index');
     Route::delete('/subscription/{id}', [SubscriptionPlanController::class, 'destroy'])->name('subscription.delete');
     Route::post('/subscription', [SubscriptionPlanController::class, 'store'])->name('subscription.store');
-    Route::patch('/subscription/{id}', [SubscriptionPlanController::class, 'update'])->name('subscription.update');
+    Route::patch('/subscription/update/{id}', [SubscriptionPlanController::class, 'update'])->name('subscription.update');
     Route::get('/search-subscription', [SubscriptionPlanController::class, 'searchSubscription']);
+
+    Route::get('/admin/subscribers/export', [SubscriptionUserController::class, 'exportSubscribersCsv'])->name('subscribers.export');
+    Route::get('/admin/payments/export', [PaymentController::class, 'exportPaymentsCsv'])->name('payments.export');
+
+    Route::patch('/subscription/{id}', [SubscriptionUserController::class, 'update'])->name('subscriptionUser.update');
 });
 
 require __DIR__ . '/auth.php';

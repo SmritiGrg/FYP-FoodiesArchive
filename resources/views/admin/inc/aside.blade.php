@@ -79,11 +79,5 @@
                 <span class="text-sm">Subscription Management</span>
             </a>
         </li>
-        <li class="mb-1">
-            <a href="" class="flex items-center py-3 px-4 text-gray-500 hover:bg-gray-700 hover:text-white rounded-md group-[.active]:bg-gray-700 group-[.active]:text-white">
-                <i class="fa-solid fa-credit-card mr-3 text-lg"></i>
-                <span class="text-sm">Payment Management</span>
-            </a>
-        </li>
     </ul>  
 </div>

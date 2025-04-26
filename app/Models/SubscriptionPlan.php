@@ -20,8 +20,8 @@ class SubscriptionPlan extends Model
         'features' => 'array',
     ];
 
-    public function subscribers(): void
+    public function subscribers()
     {
-        $this->hasMany(UserSubscriber::class, 'subscription_id', 'id');
+        return $this->hasMany(UserSubscriber::class, 'subscription_id', 'id');
     }
 }

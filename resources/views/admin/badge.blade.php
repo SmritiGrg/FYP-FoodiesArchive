@@ -194,7 +194,7 @@
                         }]
                     }
                 });
-                </script>
+            </script>
 
             @else
             <div class="mb-3">
@@ -399,7 +399,7 @@
                 const modal = document.getElementById('badgeModal');
                 if (modal) {
                     modal.classList.remove('hidden');
-                    modal.classList.add('flex'); // this ensures proper centering
+                    modal.classList.add('flex');
                 }
             });
         </script>

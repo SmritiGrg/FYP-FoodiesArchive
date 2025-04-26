@@ -10,6 +10,8 @@ use Illuminate\Support\Facades\Auth;
 use Xentixar\EsewaSdk\Esewa;
 use App\Mail\PaymentReceiptMail;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Response;
+
 
 class PaymentController extends Controller
 {
@@ -98,6 +100,60 @@ class PaymentController extends Controller
             'transactionId' => $data['transaction_code'] ?? 'N/A',
             'date' => now()->format('F d, Y'),
             'amount' => $data['total_amount'] ?? '0.00'
+        ]);
+    }
+
+    public function exportPaymentsCsv()
+    {
+        $subscribers = UserSubscriber::with([
+            'user:id,full_name',
+            'subscriptionPlan:id,type',
+            'payments'
+        ])->get();
+
+        $csvHeader = [
+            'Subscriber Name',
+            'Plan Type',
+            'Amount Paid',
+            'Payment Method',
+            'Payment Status',
+            'Payment Date',
+            'Transaction ID',
+            'Paid For Duration',
+        ];
+
+        $csvData = [];
+
+        foreach ($subscribers as $subscriber) {
+            foreach ($subscriber->payments as $payment) {
+                $csvData[] = [
+                    $subscriber->user->full_name ?? '',
+                    $subscriber->subscriptionPlan->type ?? '',
+                    $payment->amount_paid ?? '',
+                    $payment->payment_method ?? '',
+                    $payment->status ?? '',
+                    optional($payment->payment_date)->format('Y-m-d'),
+                    $payment->transaction_id ?? '',
+                    optional($subscriber->start_date)->format('Y-m-d') . ' - ' . optional($subscriber->end_date)->format('Y-m-d'),
+                ];
+            }
+        }
+
+        // Generate CSV
+        $handle = fopen('php://temp', 'r+');
+        fputcsv($handle, $csvHeader);
+
+        foreach ($csvData as $row) {
+            fputcsv($handle, $row);
+        }
+
+        rewind($handle);
+        $csvContent = stream_get_contents($handle);
+        fclose($handle);
+
+        return Response::make($csvContent, 200, [
+            'Content-Type' => 'text/csv',
+            'Content-Disposition' => 'attachment; filename="payment_history.csv"',
         ]);
     }
 

@@ -4,11 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Models\Badge;
 use App\Models\FoodPost;
+use App\Models\Payment;
 use App\Models\Restaurants;
 use App\Models\Reviews;
 use App\Models\Tags;
 use App\Models\User;
 use App\Models\UserSubscriber;
+use App\Models\SubscriptionPlan;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -277,15 +279,99 @@ class AdminController extends Controller
         return view('admin.tag', compact('tags', 'topTags', 'unusedTags', 'weekTrending', 'monthTrending', 'filter'));
     }
 
-    public function subscription()
+    public function subscription(Request $request)
     {
-        $subscribers = UserSubscriber::with([
+        $query = UserSubscriber::with([
             'user:id,full_name,email',
             'subscriptionPlan:id,type,billing_time',
             'payments' => function ($query) {
                 $query->latest('payment_date')->limit(1);
             }
-        ])->paginate(5);
-        return view('admin.subscription', compact('subscribers'));
+        ]);
+
+        // Apply filters for subscribers
+        if ($request->filled('billing_time')) {
+            $query->whereHas('subscriptionPlan', function ($q) use ($request) {
+                $q->where('billing_time', $request->billing_time);
+            });
+        }
+
+        if ($request->filled('status')) {
+            $query->where('status', $request->status);
+        }
+
+        if ($request->filled('date_filter')) {
+            if ($request->date_filter === 'this_month') {
+                $query->whereMonth('start_date', now()->month)
+                    ->whereYear('start_date', now()->year);
+            } elseif ($request->date_filter === 'last_month') {
+                $query->whereMonth('start_date', now()->subMonth()->month)
+                    ->whereYear('start_date', now()->subMonth()->year);
+            }
+        }
+
+        $subscribers = $query->paginate(5);
+
+        // Fetch subscription plans with subscriber count
+        $plansQuery = SubscriptionPlan::withCount('subscribers');
+
+        if ($request->filled('plan_filter') && $request->plan_filter === 'highly_used') {
+            $plansQuery->orderBy('subscribers_count', 'desc');
+        }
+
+        $plans = $plansQuery->paginate(5);
+
+        // Ensure features are decoded properly
+        $plans->transform(function ($plan) {
+            $plan->features = is_string($plan->features) ? json_decode($plan->features, true) : $plan->features;
+            return $plan;
+        });
+
+        // CHART RELATED CODE STARTS
+
+        // Active vs Expired Subscriptions
+        $activeCount = UserSubscriber::where('status', 'active')->count();
+        $expiredCount = UserSubscriber::where('status', 'expired')->count();
+        $cancelledCount = UserSubscriber::where('status', 'cancelled')->count();
+
+        // Monthly New Subscriptions
+        $monthlyNewSubscriptions = UserSubscriber::selectRaw('YEAR(start_date) as year, MONTH(start_date) as month, COUNT(*) as count')
+            ->groupBy('year', 'month')
+            ->orderBy('year')
+            ->orderBy('month')
+            ->get();
+
+        // Revenue from Subscriptions (Monthly)
+        $monthlyRevenue = Payment::selectRaw('YEAR(payment_date) as year, MONTH(payment_date) as month, SUM(amount_paid) as total')
+            ->where('status', 'Paid')
+            ->groupBy('year', 'month')
+            ->orderBy('year')
+            ->orderBy('month')
+            ->get();
+
+        // Top Subscription Plans by Popularity
+        $topPlans = SubscriptionPlan::withCount('subscribers')
+            ->orderBy('subscribers_count', 'desc')
+            ->get()
+            ->map(function ($plan) {
+                return [
+                    'label' => $plan->type . ' (' . $plan->billing_time . ')',
+                    'count' => $plan->subscribers_count
+                ];
+            });
+
+        // CHART RELATED CODE ENDS
+
+
+        return view('admin.subscription', compact(
+            'subscribers',
+            'plans',
+            'activeCount',
+            'expiredCount',
+            'cancelledCount',
+            'monthlyNewSubscriptions',
+            'monthlyRevenue',
+            'topPlans'
+        ));
     }
 }
