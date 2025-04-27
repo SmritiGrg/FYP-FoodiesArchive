@@ -30,12 +30,25 @@
                             <span class="text-textBlack text-lg font-medium hover:text-gray-500 cursor-pointer"><i class="fa-solid fa-ellipsis"></i></span>
                             <div class="absolute w-32 top-full right-0 rounded-lg mt-1 shadow-lg text-start scale-y-0 border-gray-200 group-hover:scale-y-100 origin-top duration-200 bg-white">
                                 <div class="hover:bg-gray-100 flex justify-center">
+                                    <button type="button" onclick="openDeleteModal({{ $post->id }})" class="block text-sm font-normal text-red-500 px-2 py-2">Delete</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Delete Confirmation Modal -->
+                        <div id="deleteModal-{{ $post->id }}" class="fixed inset-0 bg-black bg-opacity-40 z-50 hidden items-center justify-center">
+                            <div class="bg-white w-full max-w-md rounded-lg shadow-lg p-6 relative">
+                                <h3 class="text-xl font-bold text-gray-800 mb-2">Confirm Deletion</h3>
+                                <p class="text-sm text-gray-600">Are you sure you want to delete this food post?</p>
+                                <div class="flex justify-end mt-4 space-x-2">
+                                    <button type="button" onclick="closeDeleteModal({{ $post->id }})" class="px-4 py-2 bg-gray-300 text-gray-700 rounded hover:bg-gray-400">Cancel</button>
                                     <form action="{{ route('foodpost.delete', $post->id) }}" method="POST">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="block text-sm font-normal text-red-500 px-2 py-2">Delete</button>
+                                        <button type="submit" class="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600">Delete</button>
                                     </form>
                                 </div>
+                                <button onclick="closeDeleteModal({{ $post->id }})" class="absolute top-2 right-2 text-gray-500 hover:text-gray-800 text-xl"><i class="fa-solid fa-xmark"></i></button>
                             </div>
                         </div>
                     </div>
@@ -75,7 +88,7 @@
                         </p>
                         <div class="flex flex-col space-y-6 w-full pt-3">
                             @foreach($post->reviews as $review)
-                                <div class="flex w-full justify-between">
+                                <div class="flex w-full justify-between items-start">
                                     <div class="flex">
                                         <a href="">
                                             <img src="{{ asset('uploads/profile-images/' . $review->user->image) }}" alt="img" class="w-8 h-8 rounded-full object-cover" />
@@ -298,5 +311,15 @@
         } else {
             replyForm.classList.add("hidden");
         }
+    }
+
+    function openDeleteModal(postId) {
+        document.getElementById(`deleteModal-${postId}`).classList.remove('hidden');
+        document.getElementById(`deleteModal-${postId}`).classList.add('flex');
+    }
+
+    function closeDeleteModal(postId) {
+        document.getElementById(`deleteModal-${postId}`).classList.add('hidden');
+        document.getElementById(`deleteModal-${postId}`).classList.remove('flex');
     }
 </script>

@@ -104,7 +104,7 @@
 
                         <div class="flex flex-col space-y-6 w-full pt-3">
                             @foreach($post->reviews as $review)
-                                <div class="flex w-full justify-between">
+                                <div class="flex w-full justify-between items-start">
                                     <div class="flex">
                                         <a href="">
                                             <img src="{{ asset('uploads/profile-images/' . $review->user->image) }}" alt="img" class="w-8 h-8 rounded-full object-cover" />
@@ -211,7 +211,7 @@
                                     </div>
 
                                     {{-- HELPFUL BUTTON AND THREE BUTTON  --}}
-                                    <div class="flex space-x-2">
+                                    <div class="flex space-x-2 items-center">
                                         <div>
                                             @include('components.helpful-button', ['review' => $review])
                                         </div>

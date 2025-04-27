@@ -62,8 +62,13 @@
                                     {{-- Displaying food post images as background --}}
                                     @if (isset($posts[$formattedDay]))
                                         @foreach ($posts[$formattedDay] as $post)
-                                            <div class="absolute inset-0 bg-cover bg-center rounded-xl" 
+                                            <div class="absolute inset-0 bg-cover bg-center rounded-xl group" 
                                                 style="background-image: url('{{ asset($post->image) }}');">
+                                                <div class="absolute inset-0 bg-black bg-opacity-50 flex items-center rounded-xl justify-center opacity-0 group-hover:opacity-90 transition duration-300 ease-in-out">
+                                                    <p class="text-white text-lg font-semibold">
+                                                        <i class="fa-solid fa-heart text-white pr-2"></i>{{ $post->likes->count() }}
+                                                    </p>
+                                                </div>
                                             </div>
                                         @endforeach
                                     @else

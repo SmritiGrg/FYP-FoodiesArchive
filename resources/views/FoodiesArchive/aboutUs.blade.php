@@ -35,8 +35,8 @@
 
             <div class="flex flex-col md:flex-row gap-8 items-center mb-16">
                 <div class="md:w-1/2">
-                    <div class="relative h-[400px] w-full rounded-xl overflow-hidden shadow-xl">
-                        <img src="{{asset('assets/img/Nepal-Food.png')}}" alt="" class="object-cover h-full w-full">
+                    <div class="relative h-[600px] w-full rounded-xl overflow-hidden shadow-xl">
+                        <img src="{{asset('assets/img/aboutusImage.jpeg')}}" alt="" class="object-cover h-full w-full">
                     </div>
                 </div>
                 <div class="md:w-1/2">
@@ -91,10 +91,10 @@
                         $features = [
                         ['icon' => '<img width="32" height="32" src="https://img.icons8.com/3d-fluency/94/marker.png" alt="marker"/>', 'title' => 'Interactive Food Map', 'desc' => 'Locate restaurants, street food stalls, and famous food spots across Nepal.'],
                         ['icon' => '<img width="32" height="32" src="https://img.icons8.com/3d-fluency/94/christmas-star.png" alt="christmas-star"/>', 'title' => 'Reviews & Ratings', 'desc' => 'Share your dining experiences and help others discover great food.'],
-                        ['icon' => 'hi', 'title' => 'Q&A Community', 'desc' => 'Ask questions and get answers from fellow food enthusiasts.'],
+                        // ['icon' => 'hi', 'title' => 'Q&A Community', 'desc' => 'Ask questions and get answers from fellow food enthusiasts.'],
                         ['icon' => '<img width="32" height="32" src="https://img.icons8.com/3d-fluency/94/fire--v2.png" alt="fire--v2"/>', 'title' => 'Streaks & Achievements', 'desc' => 'Earn badges like "Best Food Traveler" or "Top Foodie".'],
                         ['icon' => '<img width="32" height="32" src="https://img.icons8.com/3d-fluency/100/membership-card.png" alt="membership-card"/>', 'title' => 'Premium Membership', 'desc' => 'Unlock exclusive features and become a premium user.'],
-                        ['icon' => 'hi', 'title' => 'Food Events', 'desc' => 'Discover and participate in food festivals and culinary events.'],
+                        // ['icon' => 'hi', 'title' => 'Food Events', 'desc' => 'Discover and participate in food festivals and culinary events.'],
                         ['icon' => '<img width="32" height="32" src="https://img.icons8.com/3d-fluency/100/bookmark-ribbon.png" alt="bookmark-ribbon"/>', 'title' => 'Bookmarking', 'desc' => 'Save your favorite foods.'],
                         ['icon' => '<img width="32" height="32" src="https://img.icons8.com/3d-fluency/100/upload.png" alt="upload"/>', 'title' => 'Food Posts', 'desc' => 'Create and share detailed food posts with images.'],
                         ];

@@ -55,10 +55,9 @@
 
             <!-- Navigation Links (Hidden on md and smaller screens) -->
             <div id="nav-links" class="hidden lg:flex space-x-4 lg:space-x-6 xl:space-x-12">
-                {{-- <a href="/discover" class="text-gray-900 hover:text-customYellow text-base font-bold lg:text-sm xl:text-base">Discover</a> --}}
                 <div class="relative group">
                     <button
-                        class="text-gray-900 hover:text-customYellow text-base font-bold"
+                        class="text-base font-bold {{ Request::is(['discover', 'following']) ? 'text-customYellow' : ' hover:text-customYellow' }}"
                     >
                         Discover
                     </button>
@@ -73,7 +72,7 @@
                 </div>
                 <div class="relative group">
                     <button
-                        class="text-gray-900 hover:text-customYellow text-base font-bold"
+                        class="text-base font-bold {{ Request::is('writeReview') ? 'text-customYellow' : ' hover:text-customYellow' }}" 
                     >
                         Review
                     </button>
@@ -86,7 +85,7 @@
                         </div>
                     </div>
                 </div>
-                <a href="/aboutUs" class="text-gray-900 hover:text-customYellow text-base font-bold lg:text-sm xl:text-base">About us</a>
+                <a href="/aboutUs" class="text-base font-bold lg:text-sm xl:text-base {{ Request::is('aboutUs') ? 'text-customYellow' : ' hover:text-customYellow' }}">About us</a>
             </div>
 
             <!-- Right Icons -->

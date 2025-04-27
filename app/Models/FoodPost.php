@@ -40,12 +40,6 @@ class FoodPost extends Model
         return $this->hasMany(Likes::class, 'food_post_id', 'id');
     }
 
-    // A food post can have many questions
-    public function questions()
-    {
-        return $this->hasMany(Questions::class, 'food_post_id', 'id');
-    }
-
     // A food post belongs to a food type
     public function foodType()
     {

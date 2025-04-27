@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Badge;
+use App\Models\CuisineTypes;
 use App\Models\FoodPost;
+use App\Models\FoodTypes;
 use App\Models\Payment;
 use App\Models\Restaurants;
 use App\Models\Reviews;
@@ -12,6 +14,7 @@ use App\Models\User;
 use App\Models\UserSubscriber;
 use App\Models\SubscriptionPlan;
 use Carbon\Carbon;
+use Carbon\CarbonPeriod;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Pagination\LengthAwarePaginator;
@@ -20,71 +23,103 @@ class AdminController extends Controller
 {
     public function index()
     {
-        $thisMonth = Carbon::now()->startOfMonth();
-        $lastMonth = Carbon::now()->subMonth()->startOfMonth();
-
-        // Total users excluding admin
-        $totalUsers = User::where('role', '!=', 'admin')->count();
-        $usersThisMonth = User::where('role', '!=', 'admin')
-            ->where('created_at', '>=', $thisMonth)
-            ->count();
-        $usersLastMonth = User::where('role', '!=', 'admin')
-            ->whereBetween('created_at', [$lastMonth, $thisMonth])
-            ->count();
-        $userGrowth = $this->calculateGrowth($usersThisMonth, $usersLastMonth);
-
-        // Premium users
-        $premiumUsers = User::where('role', 'premium_user')->count();
-        $premiumThisMonth = User::where('role', 'premium_user')
-            ->where('created_at', '>=', $thisMonth)
-            ->count();
-        $premiumLastMonth = User::where('role', 'premium_user')
-            ->whereBetween('created_at', [$lastMonth, $thisMonth])
-            ->count();
-        $premiumGrowth = $this->calculateGrowth($premiumThisMonth, $premiumLastMonth);
-
-        // Food posts
         $totalFoodPosts = FoodPost::count();
-        $postsThisMonth = FoodPost::where('created_at', '>=', $thisMonth)->count();
-        $postsLastMonth = FoodPost::whereBetween('created_at', [$lastMonth, $thisMonth])->count();
-        $postGrowth = $this->calculateGrowth($postsThisMonth, $postsLastMonth);
+        $totalUsers = User::count();
+        $totalRestaurants = Restaurants::count();
+        $totalReviews = Reviews::whereNull('parent_id')->count();
+        $totalSubscriptions = UserSubscriber::count();
+        $totalRevenue = Payment::where('status', 'Paid')->sum('amount_paid');
 
-        // Reviews (main only)
-        $totalMainReviews = Reviews::whereNull('parent_id')->count();
-        $reviewsThisMonth = Reviews::whereNull('parent_id')
-            ->where('created_at', '>=', $thisMonth)
-            ->count();
-        $reviewsLastMonth = Reviews::whereNull('parent_id')
-            ->whereBetween('created_at', [$lastMonth, $thisMonth])
-            ->count();
-        $reviewGrowth = $this->calculateGrowth($reviewsThisMonth, $reviewsLastMonth);
+        $last30Days = collect(CarbonPeriod::create(now()->subDays(29), now()))
+            ->map(function ($date) {
+                return $date->format('Y-m-d');
+            });
+
+        // Daily Active Users (last 30 days)
+        $dailyActiveUsers = User::where('last_activity_date', '>=', now()->subDays(30))
+            ->selectRaw('DATE(last_activity_date) as date, COUNT(*) as active_users')
+            ->groupByRaw('DATE(last_activity_date)')
+            ->orderBy('date')
+            ->get();
+
+        // Monthly Registrations (Users created in last 30 days)
+        $monthlyRegistrations = User::where('created_at', '>=', now()->subDays(30))
+            ->selectRaw('DATE(created_at) as date, COUNT(*) as count')
+            ->groupByRaw('DATE(created_at)')
+            ->pluck('count', 'date'); // pluck to get [date => count]
+
+        // Monthly Food Posts (Users created in last 30 days)
+        $monthlyFoodPosts = FoodPost::where('created_at', '>=', now()->subDays(30))
+            ->selectRaw('DATE(created_at) as date, COUNT(*) as count')
+            ->groupByRaw('DATE(created_at)')
+            ->pluck('count', 'date');
+
+        // Monthly Reviews (Users created in last 30 days)
+        $monthlyReviews = Reviews::where('created_at', '>=', now()->subDays(30))
+            ->selectRaw('DATE(created_at) as date, COUNT(*) as count')
+            ->groupByRaw('DATE(created_at)')
+            ->pluck('count', 'date');
+
+        $registrationsData = $last30Days->map(function ($date) use ($monthlyRegistrations) {
+            return $monthlyRegistrations[$date] ?? 0;
+        });
+
+        $foodPostsData = $last30Days->map(function ($date) use ($monthlyFoodPosts) {
+            return $monthlyFoodPosts[$date] ?? 0;
+        });
+
+        $reviewsData = $last30Days->map(function ($date) use ($monthlyReviews) {
+            return $monthlyReviews[$date] ?? 0;
+        });
+
+        // Getting Top 4 Food Posts
+        $topFoodPosts = FoodPost::with([
+            'user:id,username',
+            'likes',
+            'reviews'
+        ])
+            ->withCount('likes')
+            ->withAvg('reviews', 'rating')
+            ->orderBy('likes_count', 'desc')
+            ->take(4)
+            ->get(['id', 'name', 'rating', 'image', 'user_id']);
+
+        // Getting Top 4 Users with most food posts
+        $topUsers = User::withCount(['foodPosts', 'followers'])
+            ->orderByDesc('food_posts_count')
+            ->take(4)
+            ->get(['id', 'full_name', 'username', 'role', 'image']);
+
+        // Get Cuisine Types usage (with count of food posts)
+        $cuisineTypes = CuisineTypes::withCount('foodPosts')
+            ->orderByDesc('food_posts_count')
+            ->get(['id', 'name']);
+
+        // Get Food Types usage (with count of food posts)
+        $foodTypes = FoodTypes::withCount('foodPosts')
+            ->orderByDesc('food_posts_count')
+            ->get(['id', 'name']);
 
         return view('admin.index', compact(
-            'totalUsers',
-            'premiumUsers',
             'totalFoodPosts',
-            'totalMainReviews',
-            'userGrowth',
-            'premiumGrowth',
-            'postGrowth',
-            'reviewGrowth',
-            'usersLastMonth',
-            'usersThisMonth',
-            'premiumLastMonth',
-            'premiumThisMonth',
-            'postsLastMonth',
-            'postsThisMonth',
-            'reviewsLastMonth',
-            'reviewsThisMonth',
+            'totalUsers',
+            'totalSubscriptions',
+            'totalRevenue',
+            'totalRestaurants',
+            'totalReviews',
+            'dailyActiveUsers',
+            'monthlyRegistrations',
+            'monthlyFoodPosts',
+            'monthlyReviews',
+            'last30Days',
+            'registrationsData',
+            'foodPostsData',
+            'reviewsData',
+            'topFoodPosts',
+            'topUsers',
+            'cuisineTypes',
+            'foodTypes'
         ));
-    }
-
-    private function calculateGrowth($current, $previous)
-    {
-        if ($previous == 0) {
-            return $current > 0 ? 100 : 0;
-        }
-        return (($current - $previous) / $previous) * 100;
     }
 
     public function restaurant(Request $request)
@@ -289,7 +324,7 @@ class AdminController extends Controller
             }
         ]);
 
-        // Apply filters for subscribers
+        // Applying filters for subscribers
         if ($request->filled('billing_time')) {
             $query->whereHas('subscriptionPlan', function ($q) use ($request) {
                 $q->where('billing_time', $request->billing_time);
@@ -312,7 +347,7 @@ class AdminController extends Controller
 
         $subscribers = $query->paginate(5);
 
-        // Fetch subscription plans with subscriber count
+        // Fetching subscription plans with subscriber count
         $plansQuery = SubscriptionPlan::withCount('subscribers');
 
         if ($request->filled('plan_filter') && $request->plan_filter === 'highly_used') {
@@ -321,7 +356,7 @@ class AdminController extends Controller
 
         $plans = $plansQuery->paginate(5);
 
-        // Ensure features are decoded properly
+        // Ensuring features are decoded properly
         $plans->transform(function ($plan) {
             $plan->features = is_string($plan->features) ? json_decode($plan->features, true) : $plan->features;
             return $plan;

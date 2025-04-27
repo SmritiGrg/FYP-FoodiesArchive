@@ -6,7 +6,7 @@
     <span class="pr-2 text-gray-600 text-base helpful-count">{{ $review->helpfuls->count() }}</span>
 </span> --}}
 
-<span class="hover:bg-gray-200 rounded-xl cursor-pointer">
+<span class="hover:bg-gray-200 rounded-xl cursor-pointer flex items-center">
     @php
         $userHasMarkedHelpful = $review->helpfuls->contains('user_id', auth()->id());
     @endphp

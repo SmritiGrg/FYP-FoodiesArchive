@@ -78,7 +78,7 @@ abstract class Controller
                     $user->badges()->attach($badge->id, ['awarded_date' => now()]);
                 }
                 return $badge;
-            } elseif ($badge->special_badge === 'post_50_likes' && $totalLikes >= 2) {
+            } elseif ($badge->special_badge === 'post_50_likes' && $totalLikes >= 1) {
                 if (!$user->badges->contains($badge->id)) {
                     $user->badges()->attach($badge->id, ['awarded_date' => now()]);
                 }

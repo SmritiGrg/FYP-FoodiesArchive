@@ -242,9 +242,9 @@
                                 <div class="col-span-1 p-2"><img src="{{asset('uploads/badge-images/'. $badge->image)}}" alt="" class="w-24 h-20"></div>
                                 <div class="col-span-1">{{ $badge->name }}</div>
                                 <div class="col-span-2">{{ $badge->description }}</div>
-                                <div class="col-span-1">{{ $badge->streak_criteria }}</div>
-                                <div class="col-span-1">{{ $badge->contribution_required }}</div>
-                                <div class="col-span-1">{{ $badge->special_badge }}</div>
+                                <div class="col-span-1">{{ $badge->streak_criteria ?? '-' }}</div>
+                                <div class="col-span-1">{{ $badge->contribution_required ?? '-' }}</div>
+                                <div class="col-span-1">{{ $badge->special_badge ?? '-' }}</div>
                                 <div class="col-span-1">{{ $badge->users->count() }}</div>
                                 <div class="col-span-1 flex">
                                     <button onclick="openBadgeEditModal({{ $badge->id }})" class="text-blue-500">Edit</button>                                        

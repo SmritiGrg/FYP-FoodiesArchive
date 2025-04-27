@@ -16,6 +16,6 @@ class FoodTypes extends Model
 
     public function foodPosts()
     {
-        return $this->hasMany(FoodPosts::class, 'food_type_id');
+        return $this->hasMany(FoodPost::class, 'food_type_id');
     }
 }

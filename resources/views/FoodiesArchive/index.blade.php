@@ -114,13 +114,13 @@
                     </form>
 
                     <!-- Modal -->
-                    <div id="search-modal" class="livepost absolute left-0 mt-2 w-full z-50 bg-white rounded-2xl shadow-md hidden">
-                        <div class="p-3 flex items-center">
+                    <div id="search-modal" class="livepost absolute left-0 mt-2 w-full z-50 bg-white rounded-2xl shadow-2xl hidden">
+                        {{-- <div class="p-3 flex items-center">
                             <i class="fa-solid fa-location-arrow text-base"></i>
                             <span class="pl-3">Nearby</span>
-                        </div>
-                        <div id="pre-search">
-                            <div class="p-3 border-t border-gray-200 text-start">
+                        </div> --}}
+                        <div id="pre-search" class="rounded-2xl">
+                            <div class="p-3 text-start">
                                 <h3 class="text-base font-medium text-gray-700 mb-2">Most Liked</h3>
                                 <ul class="space-y-2">
                                     @foreach ($mostLikedFoods as $mostLikedFood)

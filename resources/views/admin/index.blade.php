@@ -1,134 +1,318 @@
 @extends('admin.inc.main')
 @section('container')
 <main class="w-[calc(100%-260px)] ml-64 bg-gray-50 min-h-screen pt-16">
-    <div class="p-8">
-        <!-- Tab Navigation -->
-        <div class="flex justify-between items-center mb-6">
-            <div class="space-x-2">
-                <button class="px-4 py-2 text-sm font-medium bg-white rounded shadow hover:bg-gray-100">Overview</button>   
+    <div class="flex-1 overflow-auto bg-gray-100 px-8">
+        <div class="container px-4 py-6 mx-auto">
+            <h2 class="text-2xl font-semibold text-gray-800">Dashboard Overview</h2>
+            <p class="mt-1 text-sm text-gray-600">Welcome to Foodie's Archive admin panel</p>
+
+            {{-- CARDS --}}
+            <div class="grid grid-cols-1 gap-4 mt-6 sm:grid-cols-2 lg:grid-cols-4">
+                <div class="p-4 bg-white rounded-lg shadow">
+                    <div class="flex items-center">
+                        <div class="flex-shrink-0 p-3 bg-indigo-100 rounded-md">
+                            <svg class="w-6 h-6 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                            </svg>
+                        </div>
+                        <div class="ml-4">
+                            <h3 class="text-sm font-medium text-gray-500">Total Food Posts</h3>
+                            <p class="text-2xl font-semibold text-gray-800">{{ $totalFoodPosts }}</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="p-4 bg-white rounded-lg shadow">
+                    <div class="flex items-center">
+                        <div class="flex-shrink-0 p-3 bg-green-100 rounded-md">
+                            <i class="ri-group-line w-6 h-6 text-green-600"></i>
+                        </div>
+                        <div class="ml-4">
+                            <h3 class="text-sm font-medium text-gray-500">Total Users</h3>
+                            <p class="text-2xl font-semibold text-gray-800">{{ $totalUsers }}</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="p-4 bg-white rounded-lg shadow">
+                    <div class="flex items-center">
+                        <div class="flex-shrink-0 p-3 bg-yellow-100 rounded-md">
+                            <i class="ri-arrow-up-long-fill w-6 h-6 text-yellow-600"></i>
+                        </div>
+                        <div class="ml-4">
+                            <h3 class="text-sm font-medium text-gray-500">Total Premium Users</h3>
+                            <p class="text-2xl font-semibold text-gray-800">{{ $totalSubscriptions }}</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="p-4 bg-white rounded-lg shadow">
+                    <div class="flex items-center">
+                        <div class="flex-shrink-0 p-3 bg-green-100 rounded-md">
+                            <i class="fa-solid fa-money-bills w-6 h-6 text-green-600"></i>
+                        </div>
+                        <div class="ml-4">
+                            <h3 class="text-sm font-medium text-gray-500">Total Revenue</h3>
+                            <p class="text-2xl font-semibold text-gray-800">Rs. {{ $totalRevenue }}</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="p-4 bg-white rounded-lg shadow">
+                    <div class="flex items-center">
+                        <div class="flex-shrink-0 p-3 bg-purple-100 rounded-md">
+                            <i class="ri-restaurant-2-line w-6 h-6 text-purple-600"></i>
+                        </div>
+                        <div class="ml-4">
+                            <h3 class="text-sm font-medium text-gray-500">Total Restaurants</h3>
+                            <p class="text-2xl font-semibold text-gray-800">{{ $totalRestaurants }}</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="p-4 bg-white rounded-lg shadow">
+                    <div class="flex items-center">
+                        <div class="flex-shrink-0 p-3 bg-red-100 rounded-md">
+                            <i class="fa-regular fa-comment w-6 h-6 text-red-600" title="Write Review"></i>
+                        </div>
+                        <div class="ml-4">
+                            <h3 class="text-sm font-medium text-gray-500">Total Reviews</h3>
+                            <p class="text-2xl font-semibold text-gray-800">{{ $totalReviews }}</p>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <button class="px-4 py-2 bg-customYellow text-white rounded hover:bg-hovercustomYellow">Export Data</button>
         </div>
 
-        <!-- Stats Cards -->
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
-            <div class="bg-white p-4 rounded shadow">
-                <p class="text-sm text-gray-500">Total Users</p>
-                <div class="text-2xl font-bold">{{ $totalUsers }}</div>
-                <p class="text-xs mt-1 {{ $userGrowth < 0 ? 'text-red-600' : 'text-green-600' }}">
-                    {{ $userGrowth < 0 ? '-' : '+' }}{{ min(abs(round($userGrowth, 2)), 100)}}% from last month ({{ $usersLastMonth }} → {{ $usersThisMonth }})
-                </p>
+        {{-- CHARTS --}}
+        <div class="grid grid-cols-1 gap-4 mt-8 lg:grid-cols-2">
+            <!-- User Activity Chart -->
+            <div class="p-4 bg-white rounded-lg shadow">
+                <h3 class="text-lg font-medium text-gray-800">User Activity</h3>
+                <p class="text-sm text-gray-500">Daily active users over the last 30 days</p>
+                <div class="mt-4 h-72">
+                    <canvas id="dailyActiveUsersChart"></canvas>
+                </div>
             </div>
-            <div class="bg-white p-4 rounded shadow">
-                <p class="text-sm text-gray-500">Premium Users</p>
-                <div class="text-2xl font-bold">{{ $premiumUsers }}</div>
-                <p class="text-xs mt-1 {{ $premiumGrowth < 0 ? 'text-red-600' : 'text-green-600' }}">
-                    {{ $premiumGrowth < 0 ? '-' : '+' }}{{ min(abs(round($premiumGrowth, 2)), 100)}}% from last month ({{ $premiumLastMonth }} → {{ $premiumThisMonth }})
-                </p>
-            </div>
-            <div class="bg-white p-4 rounded shadow">
-                <p class="text-sm text-gray-500">Food Posts</p>
-                <div class="text-2xl font-bold">{{ $totalFoodPosts }}</div>
-                <p class="text-xs mt-1 {{ $postGrowth < 0 ? 'text-red-600' : 'text-green-600' }}">
-                    {{ $postGrowth < 0 ? '-' : '+' }}{{ min(abs(round($postGrowth, 2)), 100)}}% from last month ({{ $postsLastMonth }} → {{ $postsThisMonth }})
-                </p>
-            </div>
-            <div class="bg-white p-4 rounded shadow">
-                <p class="text-sm text-gray-500">Reviews</p>
-                <div class="text-2xl font-bold">{{ $totalMainReviews }}</div>
-                <p class="text-xs mt-1 {{ $reviewGrowth < 0 ? 'text-red-600' : 'text-green-600' }}">
-                    {{ $reviewGrowth < 0 ? '-' : '+' }}{{ min(abs(round($reviewGrowth, 2)), 100)}}% from last month ({{ $reviewsLastMonth }} → {{ $reviewsThisMonth }})
-                </p>
-            </div>
-        </div>
 
-        <!-- Recent Activity -->
-        <div class="bg-white rounded shadow p-6 mb-6">
-            <h2 class="text-lg font-semibold mb-2">Recent Activity</h2>
-            <p class="text-sm text-gray-500 mb-4">Latest actions across the platform</p>
-
-            <div class="space-y-4">
-                <div class="flex gap-4 items-start">
-                    <div class="h-10 w-10 rounded-full bg-gray-200 flex items-center justify-center">JD</div>
-                    <div>
-                        <p class="text-sm font-medium">John Doe added a new food post</p>
-                        <p class="text-sm text-gray-500">Authentic Newari Cuisine at Bhojan Griha</p>
-                        <p class="text-xs text-gray-400">2 hours ago</p>
-                    </div>
-                </div>
-                <div class="flex gap-4 items-start">
-                    <div class="h-10 w-10 rounded-full bg-gray-200 flex items-center justify-center">SM</div>
-                    <div>
-                        <p class="text-sm font-medium">Sarah Miller left a review</p>
-                        <p class="text-sm text-gray-500">5-star review for Thakali Kitchen</p>
-                        <p class="text-xs text-gray-400">4 hours ago</p>
-                    </div>
-                </div>
-                <div class="flex gap-4 items-start">
-                    <div class="h-10 w-10 rounded-full bg-gray-200 flex items-center justify-center">RK</div>
-                    <div>
-                        <p class="text-sm font-medium">Rajesh Kumar upgraded to premium</p>
-                        <p class="text-sm text-gray-500">Annual subscription plan</p>
-                        <p class="text-xs text-gray-400">Yesterday</p>
-                    </div>
-                </div>
-                <div class="flex gap-4 items-start">
-                    <div class="h-10 w-10 rounded-full bg-gray-200 flex items-center justify-center">AP</div>
-                    <div>
-                        <p class="text-sm font-medium">Aakriti Pradhan asked a question</p>
-                        <p class="text-sm text-gray-500">About Sel Roti preparation techniques</p>
-                        <p class="text-xs text-gray-400">Yesterday</p>
-                    </div>
+            <!-- Monthly Growth Chart -->
+            <div class="p-4 bg-white rounded-lg shadow">
+                <h3 class="text-lg font-medium text-gray-800">Monthly Growth</h3>
+                <p class="text-sm text-gray-500">New registrations, food posts, and reviews</p>
+                <div class="mt-4 h-72">
+                    <canvas id="monthlyGrowthChart"></canvas>
                 </div>
             </div>
         </div>
 
-        <!-- Food Posts Table -->
-        <div class="bg-white rounded shadow p-6 mb-6">
-            <div class="flex justify-between items-center mb-4">
-                <h2 class="text-lg font-semibold">Food Posts Management</h2>
-                <button class="px-4 py-2 bg-orange-600 text-white rounded hover:bg-orange-700">Add New Post</button>
+        <div class="grid grid-cols-1 gap-4 mt-8 lg:grid-cols-3">
+            {{-- TOP FOOD POSTS --}}
+            <div class="p-4 bg-white rounded-lg shadow">
+                <h3 class="text-lg font-medium text-gray-800">Top Food Posts</h3>
+                <div class="mt-4 space-y-4">
+                    @forelse($topFoodPosts as $post)
+                        <div class="flex items-start p-2 rounded-lg hover:bg-gray-50">
+                            <div class="flex-shrink-0 w-14 h-14 overflow-hidden rounded-lg">
+                                <img src="{{ asset($post->image) }}" alt="Food" class="object-cover w-full h-full" />
+                            </div>
+                            <div class="ml-4 flex flex-col justify-between">
+                                <h4 class="text-sm font-medium text-gray-800">{{ $post->name }}</h4>
+                                <div class="flex items-center mt-1">
+                                    <img src="{{ asset('assets/img/cutlery (1).png') }}" class="bg-customYellow p-1 rounded-md"
+                                        style="height: 22px; width: 22px" alt="">
+                                    <span class="ml-1 text-xs text-gray-500">{{ number_format($post->reviews_avg_rating, 1) }}({{ $post->likes_count }} likes)</span>
+                                </div>
+                                <div class="mt-1 text-xs font-medium text-gray-600">{{ $post->user->username }}</div>
+                            </div>
+                        </div>
+                    @empty
+                        <p class="text-sm text-gray-500">No food posts available.</p>
+                    @endforelse
+                </div>
             </div>
-            <p class="text-sm text-gray-500 mb-4">Manage all food posts across the platform</p>
 
-            <div class="overflow-x-auto">
-                <table class="w-full text-sm text-left">
-                <thead class="bg-gray-100">
-                    <tr>
-                    <th class="p-3">Post Title</th>
-                    <th class="p-3">Author</th>
-                    <th class="p-3">Rating</th>
-                    <th class="p-3">Date</th>
-                    <th class="p-3">Status</th>
-                    </tr>
-                </thead>
-                <tbody class="divide-y">
-                    <tr>
-                        <td class="p-3 font-medium">Authentic Momo Experience in Thamel</td>
-                        <td class="p-3">Binod Sharma</td>
-                        <td class="p-3">4.8</td>
-                        <td class="p-3 text-gray-500">Apr 2, 2023</td>
-                        <td class="p-3"><span class="px-2 py-1 bg-green-100 text-green-800 text-xs rounded">Published</span></td>
-                    </tr>
-                    <tr>
-                        <td class="p-3 font-medium">Street Food Tour of Patan</td>
-                        <td class="p-3">Anita Gurung</td>
-                        <td class="p-3">4.2</td>
-                        <td class="p-3 text-gray-500">Apr 1, 2023</td>
-                        <td class="p-3"><span class="px-2 py-1 bg-yellow-100 text-yellow-800 text-xs rounded">Under Review</span></td>
-                    </tr>
-                    <tr>
-                        <td class="p-3 font-medium">Hidden Gem: Newari Feast in Kirtipur</td>
-                        <td class="p-3">Suraj Maharjan</td>
-                        <td class="p-3">4.9</td>
-                        <td class="p-3 text-gray-500">Mar 30, 2023</td>
-                        <td class="p-3"><span class="px-2 py-1 bg-red-100 text-red-800 text-xs rounded">Flagged</span></td>
-                    </tr>
-                </tbody>
-                </table>
+            {{-- Top Users --}}
+            <div class="p-4 bg-white rounded-lg shadow">
+                <h3 class="text-lg font-medium text-gray-800">Top Performing Users</h3>
+                <div class="mt-4 space-y-4">
+                    @forelse($topUsers as $user)
+                        <div class="flex items-center p-2 rounded-lg hover:bg-gray-50">
+                            <div class="flex-shrink-0 w-10 h-10 overflow-hidden rounded-full">
+                                <img src="{{asset('uploads/profile-images/'. $user->image)}}" alt="User" class="object-cover w-full h-full" />
+                            </div>
+                            <div class="ml-4">
+                                <h4 class="text-sm font-medium text-gray-800">{{ $user->full_name }}</h4>
+                                <div class="flex items-center mt-1">
+                                    <span class="text-xs text-gray-500">
+                                        {{ $user->food_posts_count }} posts - {{$user->followers_count }} followers
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="ml-auto">
+                                @if($user->role === 'premium_user')
+                                    <span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-blue-100 text-blue-800">
+                                        Premium
+                                    </span>
+                                @elseif($user->role === 'general')
+                                    <span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-green-100 text-green-800">
+                                        General
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+                    @empty
+                        <p class="text-sm text-gray-500">No top users available.</p>
+                    @endforelse
+                </div>
+            </div>
+        </div>
+
+        {{-- CHARTS --}}
+        <div class="grid grid-cols-1 gap-4 mt-8 lg:grid-cols-2">
+            {{-- Most Used Cuisine Types  --}}
+            <div class="p-4 bg-white rounded-lg shadow">
+                <h3 class="text-lg font-medium text-gray-800">Most Used Cuisine Types</h3>
+                <div class="mt-4 h-72">
+                    <canvas id="cuisineTypeChart"></canvas>
+                </div>
+            </div>
+
+            {{-- Most Used Food Types  --}}
+            <div class="p-4 bg-white rounded-lg shadow">
+                <h3 class="text-lg font-medium text-gray-800">Most Used Food Types</h3>
+                <div class="mt-4 h-72">
+                    <canvas id="foodTypeChart"></canvas>
+                </div>
             </div>
         </div>
     </div>
 </main>
-    {{-- END MAIN --}}
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    // User Activity Chart
+    const dailyActiveLabels = @json($dailyActiveUsers->pluck('date'));
+    const dailyActiveData = @json($dailyActiveUsers->pluck('active_users'));
+
+    const dailyActiveUsersCtx = document.getElementById('dailyActiveUsersChart').getContext('2d');
+    new Chart(dailyActiveUsersCtx, {
+        type: 'line',
+        data: {
+            labels: dailyActiveLabels,
+            datasets: [{
+                label: 'Active Users',
+                data: dailyActiveData,
+                fill: true,
+                borderColor: 'rgb(255, 144, 187)',
+                backgroundColor: 'rgba(255, 237, 250, 1)',
+                tension: 0.4
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+        }
+    });
+
+    // Chart for showing Monthly Growth
+    const monthlyLabels = @json($last30Days);
+    const registrations = @json($registrationsData);
+    const foodPosts = @json($foodPostsData);
+    const reviews = @json($reviewsData);
+
+    const monthlyGrowthCtx = document.getElementById('monthlyGrowthChart').getContext('2d');
+    new Chart(monthlyGrowthCtx, {
+        type: 'bar',
+        data: {
+            labels: monthlyLabels,
+            datasets: [
+                {
+                    label: 'Registrations',
+                    data: registrations,
+                    backgroundColor: 'rgba(247, 90, 90, 1)'
+                },
+                {
+                    label: 'Food Posts',
+                    data: foodPosts,
+                    backgroundColor: 'rgba(255, 169, 85, 1)'
+                },
+                {
+                    label: 'Reviews',
+                    data: reviews,
+                    backgroundColor: 'rgba(255, 214, 58, 1)'
+                }
+            ]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+                x: {
+                    stacked: true,
+                    ticks: {
+                        maxRotation: 90,
+                        minRotation: 45,
+                        autoSkip: true,
+                        maxTicksLimit: 10,
+                    }
+                },
+                y: {
+                    stacked: true
+                }
+            }
+        }
+    });
+
+    const cuisineTypeLabels = @json($cuisineTypes->pluck('name'));
+    const cuisineTypeCounts = @json($cuisineTypes->pluck('food_posts_count'));
+
+    const foodTypeLabels = @json($foodTypes->pluck('name'));
+    const foodTypeCounts = @json($foodTypes->pluck('food_posts_count'));
+
+    // Cuisine Type Chart
+    const cuisineCtx = document.getElementById('cuisineTypeChart').getContext('2d');
+    new Chart(cuisineCtx, {
+        type: 'bar',
+        data: {
+            labels: cuisineTypeLabels,
+            datasets: [{
+                label: 'Number of Food Posts',
+                data: cuisineTypeCounts,
+                backgroundColor: 'rgba(72, 166, 167, 1)'
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+
+    // Food Type Chart
+    const foodCtx = document.getElementById('foodTypeChart').getContext('2d');
+    new Chart(foodCtx, {
+        type: 'bar',
+        data: {
+            labels: foodTypeLabels,
+            datasets: [{
+                label: 'Number of Food Posts',
+                data: foodTypeCounts,
+                backgroundColor: 'rgba(198, 142, 253, 1)'
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+</script>
 @endsection

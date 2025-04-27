@@ -44,7 +44,7 @@
             <!-- Profile Header -->
             <div class="p-6 relative">
                 <div class="flex flex-row space-y-4 sm:space-y-0 sm:space-x-4">
-                    <img src="{{ asset('uploads/profile-images/' . Auth::user()->image) }}" class="w-32 h-32 lg:w-48 lg:h-48 object-cover rounded-full cursor-pointer" alt="Profile Img" onclick="openModal()" id="profilePreview">
+                    <img src="{{ asset('uploads/profile-images/' . Auth::user()->image) }}" class="w-32 h-32 lg:w-48 lg:h-48 object-cover rounded-full cursor-pointer" title="View Photo" alt="Profile Img" onclick="openModal()" id="profilePreview">
                     
                     <div class="pt-2 pl-5">
                         <h2 class="text-lg sm:text-xl font-medium text-textBlack">{{ Auth::user()->full_name }}</h2>

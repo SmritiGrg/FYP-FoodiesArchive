@@ -82,16 +82,6 @@ class User extends Authenticatable implements CanResetPassword
         return $this->hasMany(FoodPost::class, 'user_id', 'id');
     }
 
-    public function questions()
-    {
-        return $this->hasMany(Questions::class, 'user_id', 'id');
-    }
-
-    public function answers()
-    {
-        return $this->hasMany(Answers::class, 'user_id', 'id');
-    }
-
     public function reviews()
     {
         return $this->hasMany(Reviews::class, 'user_id', 'id');

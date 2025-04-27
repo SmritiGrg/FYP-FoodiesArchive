@@ -7,20 +7,22 @@
             </li>
         </ul> --}}
         <ul class="ml-auto flex items-center">
-            <li>
+            {{-- <li>
                 <button class="text-gray-400 w-8 h-8 mr-3 rounded-full flex items-center justify-center hover:bg-gray-100 hover:text-gray-600">
                     <i class="fa-regular fa-bell text-xl"></i>
                 </button>
-            </li>
+            </li> --}}
             <li>
                 <div class="relative group inline-block border-l-2 border-gray-300 pl-4">
                     <button class="flex text-sm bg-gray-800 rounded-full md:me-0 border-4 border-gray-300 ">
-                        <img class="w-10 h-10 rounded-full object-cover" src="{{ asset('uploads/profile-images/' . auth()->user()->image) }}" alt="user photo"/>
+                        {{-- <img class="w-10 h-10 rounded-full object-cover" src="{{ asset('uploads/profile-images/' . auth()->user()->image) }}" alt="user photo"/> --}}
+                        <img class="w-10 h-10 rounded-full object-cover" src="{{ asset('uploads/profile-images/admin.jpeg') }}" alt="user photo"/>
                     </button>
                     <div class="absolute w-56 top-full right-0 rounded-lg mt-1 shadow-lg p-3 text-start scale-y-0 group-hover:scale-y-100 origin-top duration-200 bg-white">
                         <div class="hover:bg-gray-100 py-3 px-2">
                             <a href="/PersonalProfile" class="flex items-center">
-                                <img src="{{asset('uploads/profile-images/' . Auth::user()->image) }}" alt="" class="w-16 h-16 rounded-full object-cover mr-3">
+                                {{-- <img src="{{asset('uploads/profile-images/' . Auth::user()->image) }}" alt="" class="w-16 h-16 rounded-full object-cover mr-3"> --}}
+                                <img class="w-16 h-16 rounded-full object-cover mr-3" src="{{ asset('uploads/profile-images/admin.jpeg') }}" alt="user photo"/>
                                 <div>
                                     <span class="block text-sm text-gray-900">{{ Auth::user()->full_name }}</span>
                                     <span class="block text-sm text-gray-500"
