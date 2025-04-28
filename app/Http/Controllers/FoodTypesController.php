@@ -28,7 +28,14 @@ class FoodTypesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // dd($request);
+        $foodtype = new FoodTypes();
+        $request->validate([
+            'foodtypeadd_name' => 'required|max:100',
+        ]);
+        $foodtype->name = $request->foodtypeadd_name;
+        $foodtype->save();
+        return redirect()->back()->with('message', 'Foodtype Created Succesfully');
     }
 
     /**
@@ -50,16 +57,25 @@ class FoodTypesController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, FoodTypes $foodTypes)
+    public function update(Request $request, $id)
     {
-        //
+        // dd($request);
+        $foodtype = FoodTypes::findOrFail($id);
+        $request->validate([
+            'foodtype_name' => 'required|max:100',
+        ]);
+        $foodtype->name = $request->foodtype_name;
+        $foodtype->update();
+        return redirect()->back()->with('message', 'Foodtype Updated Succesfully');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(FoodTypes $foodTypes)
+    public function destroy($id)
     {
-        //
+        $foodtype = FoodTypes::query()->where('id', $id)->get()->first();
+        $foodtype->delete();
+        return redirect()->back()->with('message', 'Food Type Deleted Successfully');
     }
 }

@@ -409,4 +409,22 @@ class AdminController extends Controller
             'topPlans'
         ));
     }
+
+    public function cuisine()
+    {
+        $cuisines = CuisineTypes::withCount('foodPosts')
+            ->orderBy('name')
+            ->get(['id', 'name']);
+
+        return view('admin.cuisine', compact('cuisines'));
+    }
+
+    public function foodType()
+    {
+        $foodtypes = FoodTypes::withCount('foodPosts')
+            ->orderBy('name')
+            ->get(['id', 'name']);
+
+        return view('admin.foodtype', compact('foodtypes'));
+    }
 }

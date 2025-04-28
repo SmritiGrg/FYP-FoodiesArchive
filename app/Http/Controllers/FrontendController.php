@@ -91,7 +91,7 @@ class FrontendController extends Controller
             $query->orderByDesc('created_at');
         }
 
-        $foods = $query->paginate(5)->appends($request->query());
+        $foods = $query->paginate(4)->appends($request->query());
 
         $topFoodies = $user
             ? User::whereNotIn('id', $user->followings->pluck('id'))

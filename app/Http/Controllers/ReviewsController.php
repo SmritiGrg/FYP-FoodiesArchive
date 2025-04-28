@@ -29,7 +29,7 @@ class ReviewsController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'review' => 'required|string|min:1|max:100',
+            'review' => 'required|string|min:1|max:200',
             'food_post_id' => 'required|exists:food_posts,id',
             'parent_id' => 'nullable|exists:reviews,id', // Ensures the parent review exists
             'rating' => 'nullable|integer|min:1|max:5', // Rating is now optional

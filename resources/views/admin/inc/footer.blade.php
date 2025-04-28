@@ -7,7 +7,7 @@
             if (message) {
                 message.style.display = 'none';
             }
-        }, 3000); // Hiding after 2 seconds
+        }, 50000); // Hiding after  seconds
 
         // FOR RESTAURANT ADD MODAL FORM
         function openRestaurantModal() {
@@ -88,7 +88,30 @@
             document.getElementById(`view-modal-${id}`).classList.remove('flex');
             document.getElementById(`view-modal-${id}`).classList.add('hidden');
         }
-        ///// END - FOR VIEW MODAL OF RESTAURANT
+
+        ///// START - FOR EDIT MODAL OF CUISINE
+        function openCuisineEditModal(id) {
+            document.getElementById(`edit-modal-${id}`).classList.remove('hidden');
+            document.getElementById(`edit-modal-${id}`).classList.add('flex');
+        }
+
+        function closeCuisineEditModal(id) {
+            document.getElementById(`edit-modal-${id}`).classList.remove('flex');
+            document.getElementById(`edit-modal-${id}`).classList.add('hidden');
+        }
+        ///// END - FOR EDIT MODAL OF CUISINE
+
+        ///// START - FOR EDIT MODAL OF FOOD TYPE
+        function openFoodTypeEditModal(id) {
+            document.getElementById(`foodtype-edit-modal-${id}`).classList.remove('hidden');
+            document.getElementById(`foodtype-edit-modal-${id}`).classList.add('flex');
+        }
+
+        function closeFoodTypeEditModal(id) {
+            document.getElementById(`foodtype-edit-modal-${id}`).classList.remove('flex');
+            document.getElementById(`foodtype-edit-modal-${id}`).classList.add('hidden');
+        }
+        ///// END - FOR EDIT MODAL OF FOOD TYPE
     </script>
 </body>
 </html>

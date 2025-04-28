@@ -116,7 +116,7 @@
             if (message) {
                 message.style.display = 'none';
             }
-        }, 3000); // Hide after 3 seconds
+        }, 30000); // Hide after 3 seconds
 
         setTimeout(function() {
             let message = document.getElementById('streak_message');

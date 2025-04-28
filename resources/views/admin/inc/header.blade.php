@@ -8,9 +8,9 @@
 
     <title>{{ config('app.name', 'Laravel') }}</title>
 
-    <link rel="stylesheet" href="{{asset('assets/css/style.css')}}">
-    <link rel="stylesheet" href="{{asset('assets/css/hover-min.css')}}">
-    <link rel="stylesheet" href="{{asset('assets/css/hover.css')}}">
+    <link rel="stylesheet" href="{{asset('backend/assets/css/style.css')}}">
+    <link rel="stylesheet" href="{{asset('backend/assets/css/hover-min.css')}}">
+    <link rel="stylesheet" href="{{asset('backend/assets/css/hover.css')}}">
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
@@ -19,6 +19,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.0/css/all.min.css" integrity="sha512-9xKTRVabjVeZmc+GUW8GgSmcREDunMM+Dt/GrzchfN8tkwHizc5RP4Ok/MXFFy5rIjJjzhndFScTceq5e6GvVQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+    
 
     <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
@@ -29,3 +30,17 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.css" integrity="sha512-kJlvECunwXftkPwyvHbclArO8wszgBGisiLeuDFwNM8ws+wKIw0sv1os3ClWZOcrEB2eRXULYUsm8OVRGJKwGA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body class="font-poppins">
+    @if ($errors->any())
+    <style>
+        /* This will force modal to open immediately without waiting for JS */
+        @if(session('form') == 'add')
+            #cuisineModal {
+                display: flex !important;
+            }
+        @elseif(session('form') == 'edit')
+            #edit-modal-{{ session('edit_id') }} {
+                display: flex !important;
+            }
+        @endif
+    </style>
+@endif

@@ -4,8 +4,10 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\BadgesController;
 use App\Http\Controllers\BookmarkController;
+use App\Http\Controllers\CuisineTypesController;
 use App\Http\Controllers\FollowsController;
 use App\Http\Controllers\FoodPostController;
+use App\Http\Controllers\FoodTypesController;
 use App\Http\Controllers\FrontendController;
 use App\Http\Controllers\LikesController;
 use App\Http\Controllers\PaymentController;
@@ -120,6 +122,16 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::post('/tag', [TagsController::class, 'store'])->name('tag.store');
     Route::patch('/tag/{id}', [TagsController::class, 'update'])->name('tag.update');
     Route::get('/search-tag', [TagsController::class, 'searchTag']);
+
+    Route::get('/cuisine', [AdminController::class, 'cuisine'])->name('cuisine.index');
+    Route::delete('/cuisine/{id}', [CuisineTypesController::class, 'destroy'])->name('cuisine.delete');
+    Route::post('/cuisine', [CuisineTypesController::class, 'store'])->name('cuisine.store');
+    Route::patch('/cuisine/{id}', [CuisineTypesController::class, 'update'])->name('cuisine.update');
+
+    Route::get('/foodType', [AdminController::class, 'foodType'])->name('foodType.index');
+    Route::delete('/foodType/{id}', [FoodTypesController::class, 'destroy'])->name('foodType.delete');
+    Route::post('/foodType', [FoodTypesController::class, 'store'])->name('foodType.store');
+    Route::patch('/foodType/{id}', [FoodTypesController::class, 'update'])->name('foodType.update');
 
     Route::get('/subscription', [AdminController::class, 'subscription'])->name('subscription.index');
     Route::delete('/subscription/{id}', [SubscriptionPlanController::class, 'destroy'])->name('subscription.delete');

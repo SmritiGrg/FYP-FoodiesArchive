@@ -111,7 +111,7 @@
                                 rows="5" 
                                 placeholder="This is a very tasty food..."
                                 value="{{ old('review') }}"></textarea>
-                            <div class="text-right text-gray-500 text-sm mt-1">0-100 characters</div>
+                            <div class="text-right text-gray-500 text-sm mt-1">0-200 characters</div>
                             @error('review')
                                 <p class="text-sm text-red-600 space-y-1 font-poppins">{{$message}}</p>
                             @enderror

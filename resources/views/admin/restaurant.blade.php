@@ -262,7 +262,7 @@
             const modal = document.getElementById('restaurantModal');
             if (modal) {
                 modal.classList.remove('hidden');
-                modal.classList.add('flex'); // this ensures proper centering
+                modal.classList.add('flex');
             }
         });
     </script>

@@ -47,9 +47,15 @@
             </a>
         </li>
         <li class="mb-1">
-            <a href="" class="flex items-center py-3 px-4 text-gray-500 rounded-md {{ Request::is('') ? 'bg-hovercustomYellow text-white' : 'text-gray-500 hover:bg-hovercustomYellow hover:text-white' }}"">
+            <a href="/cuisine" class="flex items-center py-3 px-4 text-gray-500 rounded-md {{ Request::is('cuisine') ? 'bg-hovercustomYellow text-white' : 'text-gray-500 hover:bg-hovercustomYellow hover:text-white' }}"">
                 <i class="fa-solid fa-utensils mr-3 text-lg"></i>
-                <span class="text-sm">Types Management</span>
+                <span class="text-sm">Cuisine</span>
+            </a>
+        </li>
+        <li class="mb-1">
+            <a href="/foodType" class="flex items-center py-3 px-4 text-gray-500 rounded-md {{ Request::is('foodType') ? 'bg-hovercustomYellow text-white' : 'text-gray-500 hover:bg-hovercustomYellow hover:text-white' }}"">
+                <i class="fa-solid fa-utensils mr-3 text-lg"></i>
+                <span class="text-sm">Food Type</span>
             </a>
         </li>
         <li class="mb-1">

@@ -234,7 +234,8 @@
                 <h3 class="text-xl font-semibold">Location</h3>
                 <p class="text-gray-600 text-sm"><i class="fa-solid fa-location-dot pr-1"></i> Street no 18, Pokhara 33700</p>
                 <div class="w-full h-96 bg-gray-300 mt-2 rounded-md">
-                    <iframe class="w-full h-full object-cover rounded-md" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d219.73573546818173!2d83.95905542858723!3d28.21424598805742!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39959558ac66c7af%3A0x963bdee9ff7501dd!2sKafe%C3%AC%20Joy%20(Cafe)!5e0!3m2!1sen!2snp!4v1741682197379!5m2!1sen!2snp" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    {{-- <iframe class="w-full h-full object-cover rounded-md" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d219.73573546818173!2d83.95905542858723!3d28.21424598805742!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39959558ac66c7af%3A0x963bdee9ff7501dd!2sKafe%C3%AC%20Joy%20(Cafe)!5e0!3m2!1sen!2snp!4v1741682197379!5m2!1sen!2snp" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe> --}}
+                    <iframe class="w-full h-full object-cover rounded-md" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d904215.5030183786!2d84.09059757812501!3d27.714451500000013!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39eb18fcf1043c2b%3A0xf80d0a9fe4bccee6!2sThird%20Eye%20Restaurant!5e0!3m2!1sen!2snp!4v1745813861002!5m2!1sen!2snp" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                 </div>
             </div>
         </div>

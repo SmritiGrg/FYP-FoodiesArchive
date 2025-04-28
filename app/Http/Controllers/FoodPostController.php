@@ -13,6 +13,7 @@ use Illuminate\Contracts\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Session;
 
 class FoodPostController extends Controller
@@ -253,12 +254,14 @@ class FoodPostController extends Controller
 
         if ($request->has('scroll')) {
             session(['scroll_position' => $request->scroll]);
-        }
+        } 
 
         // Fetch only top-level reviews (parent_id = NULL)
-        $reviewsPaginate = $food->reviews()->paginate(3);
+        $reviewsPaginate = $food->reviews()
+            ->orderBy('created_at', 'desc')
+            ->paginate(3);
 
-        $reviewsPaginate->load(['replies.user:id,full_name']);
+        $reviewsPaginate->load(['replies.user:id,full_name,image']);
 
         // dd($food, $reviewsPaginate->toArray());
 
@@ -299,6 +302,10 @@ class FoodPostController extends Controller
     public function destroy($id)
     {
         $post = FoodPost::query()->where('id', $id)->get()->first();
+        // Deletinng the image file if it exists
+        if ($post->image && File::exists(public_path($post->image))) {
+            File::delete(public_path($post->image));
+        }
         $post->delete();
         return redirect()->route('personalProfile')->with('delete', 'Post deleted successfully!');
     }

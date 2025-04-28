@@ -32,7 +32,7 @@ class RegisteredUserController extends Controller
     {
         $request->validate([
             'full_name' => ['required', 'string', 'max:50', 'regex:/^[a-zA-Z\s\-\'\.]+$/'],
-            'username' => ['required', 'string', 'max:20', 'regex:/^(?=.*[a-zA-Z])[\w\-.]*$/', 'unique:' . User::class],
+            'username' => ['required', 'string', 'max:20', 'regex:/^(?=.*[a-zA-Z])[\w\-.]*$/', 'unique:users,username'],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:' . User::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
@@ -49,10 +49,10 @@ class RegisteredUserController extends Controller
 
         Auth::login($user);
 
-        session()->flash('showProfileImageModal', true);
+        // session()->flash('showProfileImageModal', true);
 
         // return redirect(route('dashboard', absolute: false));
-        return redirect('/')->with('status', 'Registration successful! You are now logged in.');
+        return redirect('/')->with('message', 'Registration successful! You are now logged in.');
     }
 
     public function storeProfileImage(Request $request)

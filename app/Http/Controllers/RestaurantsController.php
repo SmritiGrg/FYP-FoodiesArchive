@@ -42,7 +42,7 @@ class RestaurantsController extends Controller
         $restaurant->location = $request->location;
         $restaurant->latitude = $request->latitude;
         $restaurant->longitude = $request->longitude;
-        $restaurant->status = $request->status;
+        $restaurant->status = $request->status ?? 'pending';
         $restaurant->added_by_user_id = $request->added_by_user_id;
         $restaurant->save();
         return redirect()->back()->with('message', 'Restaurant Added Succesfully');

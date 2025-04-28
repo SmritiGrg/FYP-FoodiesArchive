@@ -56,28 +56,32 @@
                             @endphp
 
                             <td class="h-14 sm:h-24 relative text-center">
-                                @if ($isToday)
-                                    <a href="{{ route('foodpost.create') }}" class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-xl font-bold rounded-full bg-calendarDarkYellow w-7 h-7 hover:bg-yellow-400"><i class="fa-solid fa-plus text-white"></i></a>
-                                @else
-                                    {{-- Displaying food post images as background --}}
-                                    @if (isset($posts[$formattedDay]))
-                                        @foreach ($posts[$formattedDay] as $post)
-                                            <div class="absolute inset-0 bg-cover bg-center rounded-xl group" 
-                                                style="background-image: url('{{ asset($post->image) }}');">
-                                                <div class="absolute inset-0 bg-black bg-opacity-50 flex items-center rounded-xl justify-center opacity-0 group-hover:opacity-90 transition duration-300 ease-in-out">
-                                                    <p class="text-white text-lg font-semibold">
-                                                        <i class="fa-solid fa-heart text-white pr-2"></i>{{ $post->likes->count() }}
-                                                    </p>
-                                                </div>
+                                {{-- Display post if it exists --}}
+                                @if (isset($posts[$formattedDay]))
+                                    @foreach ($posts[$formattedDay] as $post)
+                                        <div class="absolute inset-0 bg-cover bg-center rounded-xl group" 
+                                            style="background-image: url('{{ asset($post->image) }}');">
+                                            <div class="absolute inset-0 bg-black bg-opacity-50 flex items-center rounded-xl justify-center opacity-0 group-hover:opacity-90 transition duration-300 ease-in-out">
+                                                <p class="text-white text-lg font-semibold">
+                                                    <i class="fa-solid fa-heart text-white pr-2"></i>{{ $post->likes->count() }}
+                                                </p>
                                             </div>
-                                        @endforeach
-                                    @else
-                                        <div class="flex justify-center items-center">
-                                            <p class="bg-gray-300 w-3 h-3 rounded-full"> </p>
                                         </div>
-                                    @endif
+                                    @endforeach
+                                @else
+                                    <div class="flex justify-center items-center">
+                                        <p class="bg-gray-300 w-3 h-3 rounded-full"> </p>
+                                    </div>
+                                @endif
+
+                                {{-- Plus Button (showing only for today) --}}
+                                @if ($isToday)
+                                    <a href="{{ route('foodpost.create') }}" class="absolute bottom-2 right-2 text-xl font-bold rounded-full bg-calendarDarkYellow w-7 h-7 hover:bg-yellow-400">
+                                        <i class="fa-solid fa-plus text-white"></i>
+                                    </a>
                                 @endif
                             </td>
+
                             {{-- Start new row after Saturday --}}
                             @if (($day + $startDayOfWeek) % 7 == 0)
                                 </tr><tr>

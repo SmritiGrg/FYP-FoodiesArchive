@@ -444,7 +444,7 @@
             if (message) {
                 message.style.display = 'none';
             }
-        }, 3000);
+        }, 10000);
 
         // FOR RATING
         const stars = document.querySelectorAll(".rating-icon");
