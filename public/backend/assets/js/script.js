@@ -86,4 +86,26 @@ document.addEventListener("DOMContentLoaded", function () {
             },
         });
     });
+
+    $(document).on("keyup", "#searchUser", function () {
+        // alert("hello");
+        $value = $(this).val();
+        if ($value) {
+            $(".alluserdata").hide();
+            $(".searchuserdata").show();
+        } else {
+            $(".alluserdata").show();
+            $(".searchuserdata").hide();
+        }
+        $.ajax({
+            type: "GET",
+            url: "/search-user",
+            data: { search: $value },
+
+            success: function (data) {
+                console.log(data);
+                $("#user-content").html(data);
+            },
+        });
+    });
 });

@@ -32,26 +32,27 @@
                         </div>
                     </div>
                 </div>
-                <div class="space-y-4">
-                    <div class="rounded-md overflow-hidden border h-[200px] bg-gray-100 flex items-center justify-center">
-                        <div class="text-center p-4">
-                            <svg class="h-8 w-8 text-gray-400 mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path d="M..." />
-                            </svg>
-                            <p class="text-xs text-gray-500">Map Preview</p>
-                        </div>
+                
+            </div>
+            <div class="space-y-4">
+                <div class="rounded-md overflow-hidden border h-[200px] bg-gray-100 flex items-center justify-center">
+                    <div class="text-center p-4 w-full">
+                        @if(!empty($restaurant->map_embed_url))
+                            <iframe
+                                src="{{ $restaurant->map_embed_url }}"
+                                width="100%"
+                                height="200"
+                                style="border: 0; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1);"
+                                loading="lazy"
+                                allowfullscreen
+                                aria-label="Map location for {{ $restaurant->name }}"
+                                title="Map location of {{ $restaurant->name }}"
+                                referrerpolicy="no-referrer-when-downgrade"
+                                class="transition-all duration-300 ease-in-out hover:scale-[1.01]"></iframe>
+                        @else
+                            <p class="text-gray-500 text-sm">Map not available.</p>
+                        @endif
                     </div>
-                    <div class="text-sm">
-                        <p class="font-medium">Coordinates</p>
-                        <p>Lat: {{ $restaurant->latitude }}</p>
-                        <p>Lng: {{ $restaurant->longitude }}</p>
-                    </div>
-                    <button class="w-full text-sm border rounded-md py-2 flex items-center justify-center gap-2 hover:bg-gray-100">
-                        <svg class="h-4 w-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path d="M..." />
-                        </svg>
-                        View on Map
-                    </button>
                 </div>
             </div>
         </div>
@@ -91,14 +92,9 @@
                 <x-input-error class="mt-2" :messages="$errors->get('rest_location')" />
             </div>
             <div>
-                <label for="latitude" class="block font-medium text-sm text-slate-600">Latitude</label>
-                <x-text-input id="latitude" name="rest_latitude" type="text" class="mt-1 block w-full" :value="old('rest_latitude', $restaurant->latitude)" autofocus />
-                <x-input-error class="mt-2" :messages="$errors->get('rest_latitude')" />
-            </div>
-            <div>
-                <label for="longitude" class="block font-medium text-sm text-slate-600">Longitude</label>
-                <x-text-input id="longitude" name="rest_longitude" type="text" class="mt-1 block w-full" :value="old('rest_longitude', $restaurant->longitude)" autofocus />
-                <x-input-error class="mt-2" :messages="$errors->get('rest_longitude')" />
+                <label for="map_embed_url" class="block font-medium text-sm text-slate-600">Google Map Embed URL:</label>
+                <x-text-input id="map_embed_url" name="map_embed_url" type="text" class="mt-1 block w-full" :value="old('map_embed_url', $restaurant->map_embed_url)" autofocus />
+                <x-input-error class="mt-2" :messages="$errors->get('map_embed_url')" />
             </div>
             <input type="hidden" name="added_by_user_id" value="{{ $restaurant->added_by_user_id }}">
             <div>

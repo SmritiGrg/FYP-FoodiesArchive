@@ -9,17 +9,6 @@
             }
         }, 50000); // Hiding after  seconds
 
-        // FOR RESTAURANT ADD MODAL FORM
-        function openRestaurantModal() {
-            document.getElementById('restaurantModal').classList.remove('hidden');
-            document.getElementById('restaurantModal').classList.add('flex');
-        }
-
-        function closeRestaurantModal() {
-            document.getElementById('restaurantModal').classList.remove('flex');
-            document.getElementById('restaurantModal').classList.add('hidden');
-        }
-
         // FOR BADGE ADD MODAL FORM
         function openTagModal() {
             document.getElementById('tagModal').classList.remove('hidden');

@@ -20,7 +20,7 @@ class RestaurantsController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.create');
     }
 
     /**
@@ -33,17 +33,15 @@ class RestaurantsController extends Controller
         $request->validate([
             'name' => 'required|max:100',
             'location' => 'required',
-            'longitude' => 'numeric|nullable',
-            'latitude' => 'numeric|nullable',
             'status' => 'nullable',
             'added_by_user_id' => 'required',
+            'map_embed_url' => 'nullable',
         ]);
         $restaurant->name = $request->name;
         $restaurant->location = $request->location;
-        $restaurant->latitude = $request->latitude;
-        $restaurant->longitude = $request->longitude;
         $restaurant->status = $request->status ?? 'pending';
         $restaurant->added_by_user_id = $request->added_by_user_id;
+        $restaurant->map_embed_url = $request->map_embed_url;
         $restaurant->save();
         return redirect()->back()->with('message', 'Restaurant Added Succesfully');
     }
@@ -74,17 +72,15 @@ class RestaurantsController extends Controller
         $request->validate([
             'rest_name' => 'required|max:100',
             'rest_location' => 'required',
-            'rest_longitude' => 'nullable',
-            'rest_latitude' => 'nullable',
             'rest_status' => 'required',
             'added_by_user_id' => 'required',
+            'map_embed_url' => 'required',
         ]);
         $restaurant->name = $request->rest_name;
         $restaurant->location = $request->rest_location;
-        $restaurant->latitude = $request->rest_latitude;
-        $restaurant->longitude = $request->rest_longitude;
         $restaurant->status = $request->rest_status;
         $restaurant->added_by_user_id = $request->added_by_user_id;
+        $restaurant->map_embed_url = $request->map_embed_url;
         $restaurant->update();
         return redirect()->back()->with('message', 'Restaurant Updated Succesfully');
     }

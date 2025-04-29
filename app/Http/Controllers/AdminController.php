@@ -427,4 +427,63 @@ class AdminController extends Controller
 
         return view('admin.foodtype', compact('foodtypes'));
     }
+
+    public function users(Request $request)
+    {
+        $query = User::query();
+
+        // Excluding admin users
+        $query->where('role', '!=', 'admin');
+
+        // Filtering by role (premium_user or general)
+        if ($request->has('role') && in_array($request->role, ['premium_user', 'general'])) {
+            $query->where('role', $request->role);
+        }
+
+        // Fetching users with total contributions (posts + reviews)
+        $users = $query->withCount(['foodPosts', 'reviews'])
+            ->paginate(6);
+
+        // Adding total contributions to each paginated user
+        $users->getCollection()->transform(function ($user) {
+            $user->total_contributions = $user->food_posts_count + $user->reviews_count;
+            return $user;
+        });
+
+        return view('admin.user', compact('users'));
+    }
+
+
+    public function search(Request $request)
+    {
+        $users = User::where('full_name', 'LIKE', '%' . $request->search . '%')
+            ->orWhere('email', 'LIKE', '%' . $request->search . '%')
+            ->get();
+
+        $output = '';
+
+        if ($users->count() > 0) {
+            foreach ($users as $user) {
+                $output .= '
+                    <div class="grid grid-cols-6 items-center hover:bg-gray-50 text-center">
+                        <div class="col-span-1 font-medium"><img src="' . asset('uploads/profile-images/' . $user->image) . '" alt="" class="w-12 h-12 rounded-full object-cover"></div>
+                        <div class="col-span-1 font-medium">' . $user->full_name . '</div>
+                        <div class="col-span-1 font-medium">' . $user->email . '</div>
+                        <div class="col-span-1">' . $user->role . '</div>
+                        <div class="col-span-1">' . $user->total_contributions . '</div>
+                        <div class="col-span-1 flex space-x-2 justify-center">
+                            <form action="' . route('user.delete', $user->id) . '" method="POST">
+                                ' . csrf_field() . method_field('DELETE') . '
+                                <button type="submit" class="block text-sm font-normal text-red-500 px-2 py-2">Delete</button>
+                            </form>
+                        </div>
+                    </div>
+                ';
+            }
+        } else {
+            $output .= '<div class="p-4 text-gray-500 text-center">No user found.</div>';
+        }
+
+        return response($output);
+    }
 }

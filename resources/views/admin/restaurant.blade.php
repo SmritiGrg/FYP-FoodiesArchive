@@ -7,14 +7,7 @@
         </p>
     @endif
     <div class="flex-1 px-8 py-2 bg-gray-100">
-        <div class="flex items-center justify-between mb-2 border-b border-gray-200 pb-2 pt-5">
-            <p class="text-customYellow font-semibold text-2xl">Restaurants</p>
-            <button type="button" onclick="openRestaurantModal()" class="bg-customYellow hover:bg-hovercustomYellow text-white px-4 py-2 rounded-md text-sm flex items-center">
-                + Add Restaurant
-            </button>
-        </div>
-
-        <div class="mb-6">
+        <div class="mb-6 pt-5">
             <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
                 <div class="flex flex-col md:flex-row gap-4 md:items-center">
                     <div class="relative">
@@ -197,75 +190,5 @@
             }
         });
     </script>
-
-    <!-- Restaurant Add Form Modal -->
-    <div id="restaurantModal" class="fixed inset-0 bg-black bg-opacity-40 z-50 hidden items-center justify-center">
-        <div class="bg-white w-full max-w-md rounded-lg shadow-lg p-6 relative">
-            <h3 class="text-xl font-bold text-gray-800 mb-2">Add New Restaurant</h3>
-            <form method="POST" action="{{ route('restaurant.store') }}">
-                @csrf
-                <input type="hidden" name="added_by_user_id" value="{{ auth()->id() }}">
-
-                <div class="mt-4">
-                    <x-input-label for="rest_name" value="Restaurant Name" />
-                    <x-text-input id="rest_name" class="block mt-1 w-full" type="text" name="name"
-                        :error="$errors->has('name')" :value="old('name')" autofocus />
-                    <x-input-error :messages="$errors->get('name')" class="mt-2" />
-                </div>
-
-                <div class="mt-4">
-                    <x-input-label for="location" value="Location" />
-                    <input id="location" class="block mt-1 w-full text-slate-400 bg-white border rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring-indigo-300 {{ $errors->has('name') ? 'border-red-500 focus:border-red-500 focus:ring-red-500' : 'border-gray-300' }}"
-                        type="text" name="location" placeholder="Eg: Pokhara, Nepal"
-                        value="{{ old('location') }}" autofocus>
-                    <x-input-error :messages="$errors->get('location')" class="mt-2" />
-                </div>
-
-                <div class="mt-4">
-                    <label for="latitude" class="block font-medium text-sm text-slate-600">Latitude</label>
-                    <x-text-input id="latitude" class="block mt-1 w-full" type="text" name="latitude"
-                        :error="$errors->has('latitude')" :value="old('latitude')" autofocus />
-                    <x-input-error :messages="$errors->get('latitude')" class="mt-2" />
-                </div>
-
-                <div class="mt-4">
-                    <label for="longitude" class="block font-medium text-sm text-slate-600">Longitude</label>
-                    <x-text-input id="longitude" class="block mt-1 w-full" type="text" name="longitude"
-                        :error="$errors->has('longitude')" :value="old('longitude')" autofocus />
-                    <x-input-error :messages="$errors->get('longitude')" class="mt-2" />
-                </div>
-
-                <div class="mt-4">
-                    <label for="status" class="block font-medium text-sm text-slate-600">Status</label>
-                    <select name="status" id="status" class="mt-1 block w-full text-slate-400 bg-white border rounded-md shadow-sm">
-                        <option value="approved">approved</option>
-                        <option value="pending">pending</option>
-                        <option value="rejected">rejected</option>
-                    </select>
-                    <x-input-error class="mt-2" :messages="$errors->get('status')" />
-                </div>
-
-                <div class="flex justify-end mt-4 space-x-2">
-                    <button type="submit" class="px-4 py-2 bg-customYellow text-white rounded hover:bg-hovercustomYellow">Add</button>
-                </div>
-            </form>
-            <!-- Close button (X) -->
-            <button onclick="closeRestaurantModal()" class="absolute top-2 right-2 text-gray-500 hover:text-gray-800 text-xl"><i class="fa-solid fa-xmark"></i></button>
-        </div>
-    </div>
-    
 </main>
-{{-- END MAIN --}}
-@if ($errors->any())
-    <script>
-        window.addEventListener('DOMContentLoaded', () => {
-            const modal = document.getElementById('restaurantModal');
-            if (modal) {
-                modal.classList.remove('hidden');
-                modal.classList.add('flex');
-            }
-        });
-    </script>
-@endif
-
 @endsection

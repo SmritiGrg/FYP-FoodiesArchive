@@ -106,10 +106,17 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::get('/admin', [AdminController::class, 'index'])->name('admin.index');
 
     Route::get('/restaurant', [AdminController::class, 'restaurant'])->name('restautant.index');
+    Route::get('/restaurant/create', [RestaurantsController::class, 'create'])->name('restaurant.create');
     Route::patch('/restaurant/{id}', [RestaurantsController::class, 'update'])->name('restaurant.update');
     Route::delete('/restaurant/{id}', [RestaurantsController::class, 'destroy'])->name('restaurant.delete');
     Route::patch('/restaurant/{id}/approve', [RestaurantsController::class, 'approve'])->name('restaurant.approve');
     Route::get('/search-restaurant', [RestaurantsController::class, 'searchRestaurant']);
+
+    Route::get('/user', [AdminController::class, 'users'])->name('user.index');
+    Route::delete('/user/{id}', [ProfileController::class, 'destroy'])->name('user.delete');
+    Route::patch('/user/{id}', [ProfileController::class, 'update'])->name('user.update');
+    Route::get('/search-user', [AdminController::class, 'search']);
+
 
     Route::get('/badge', [AdminController::class, 'badge'])->name('badge');
     Route::delete('/badge/{id}', [BadgesController::class, 'destroy'])->name('badge.delete');

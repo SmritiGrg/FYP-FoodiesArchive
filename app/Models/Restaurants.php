@@ -12,10 +12,9 @@ class Restaurants extends Model
     protected $fillable = [
         'name',
         'location',
-        'longitude',
-        'latitude',
         'added_by_user_id',
         'status',
+        'map_embed_url',
     ];
 
     public function addedByUser()

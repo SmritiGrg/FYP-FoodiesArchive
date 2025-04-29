@@ -256,7 +256,7 @@
                         <!-- Posts Section (Default) -->
                         @if($user->foodPosts->count() > 0)
                             <div class="grid grid-cols-3 gap-2">
-                                @foreach($user->foodPosts()->orderBy('created_at', 'desc')->get() as $post)
+                                @foreach($user->foodPosts()->whereHas('restaurant', function ($query) {$query->where('status', 'approved');})->orderBy('created_at', 'desc')->get() as $post)
                                     <a href="#modal-{{ $post->id }}" class="relative group overflow-hidden border">                                        
                                         <img src="{{ asset($post->image) }}" alt="Food" class="w-full h-48 sm:h-72 md:h-96 object-cover">
                                         <div class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center opacity-0 group-hover:opacity-90 transition duration-300 ease-in-out">

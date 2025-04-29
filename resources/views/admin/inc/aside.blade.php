@@ -11,17 +11,35 @@
             </a>
         </li>
         <li class="mb-1">
-            <a href="" class="flex items-center py-3 px-4 text-gray-500 rounded-md {{ Request::is('') ? 'bg-hovercustomYellow text-white' : 'text-gray-500 hover:bg-hovercustomYellow hover:text-white' }}">
+            <a href="/user" class="flex items-center py-3 px-4 text-gray-500 rounded-md {{ Request::is('') ? 'bg-hovercustomYellow text-white' : 'text-gray-500 hover:bg-hovercustomYellow hover:text-white' }}">
                 <i class="ri-group-fill mr-3 text-lg"></i>
                 <span class="text-sm">User Management</span>
             </a>
         </li>
         <li class="mb-1">
-            <a href="/restaurant" class="flex items-center py-3 px-4 text-gray-500 rounded-md {{ Request::is('restaurant') ? 'bg-hovercustomYellow text-white' : 'text-gray-500 hover:bg-hovercustomYellow hover:text-white' }}"">
-                <i class="ri-restaurant-2-line mr-3 text-lg"></i>
-                <span class="text-sm">Restaurant Management</span>
-            </a>
+            <div class="flex flex-col">
+                {{-- Main menu item --}}
+                <a href="" class="flex items-center py-3 px-4 text-gray-500 rounded-md">
+                    <i class="ri-restaurant-2-line mr-3 text-lg"></i>
+                    <span class="text-sm">Restaurant Management</span>
+                </a>
+
+                {{-- Submenu links --}}
+                <div class="ml-8 mt-1 space-y-1">
+                    <a href="/restaurant/create" 
+                        class="block text-sm px-2 py-1 rounded-md 
+                        {{ Request::is('restaurant/create') ? 'bg-hovercustomYellow text-white' : 'text-gray-500 hover:bg-hovercustomYellow hover:text-white' }}">
+                        <i class="fa-solid fa-chevron-right text-xs mr-1"></i> Add Restaurant
+                    </a>
+                    <a href="/restaurant" 
+                        class="block text-sm px-2 py-1 rounded-md 
+                        {{ Request::is('restaurant') && !Request::is('restaurant/create') ? 'bg-hovercustomYellow text-white' : 'text-gray-500 hover:bg-hovercustomYellow hover:text-white' }}">
+                        <i class="fa-solid fa-chevron-right text-xs mr-1"></i> View All
+                    </a>
+                </div>
+            </div>
         </li>
+
         <li class="mb-1">
             <a href="" class="flex items-center py-3 px-4 text-gray-500 rounded-md {{ Request::is('') ? 'bg-hovercustomYellow text-white' : 'text-gray-500 hover:bg-hovercustomYellow hover:text-white' }}"">
                 <i class="fa-solid fa-grip mr-3 text-lg"></i>
